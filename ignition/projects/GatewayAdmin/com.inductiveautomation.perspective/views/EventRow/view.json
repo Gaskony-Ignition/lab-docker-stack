@@ -1,0 +1,158 @@
+{
+ "custom": {},
+ "params": {
+  "ago": "",
+  "at": "",
+  "level": "",
+  "text": ""
+ },
+ "propConfig": {
+  "params.ago": {
+   "paramDirection": "input"
+  },
+  "params.at": {
+   "paramDirection": "input"
+  },
+  "params.level": {
+   "paramDirection": "input"
+  },
+  "params.text": {
+   "paramDirection": "input"
+  }
+ },
+ "props": {
+  "defaultSize": {
+   "height": 26,
+   "width": 640
+  }
+ },
+ "root": {
+  "children": [
+   {
+    "meta": {
+     "name": "at"
+    },
+    "position": {
+     "shrink": 0
+    },
+    "propConfig": {
+     "props.style.classes": {
+      "binding": {
+       "config": {
+        "expression": "{session.custom.style} + '/text/muted'"
+       },
+       "type": "expr"
+      }
+     },
+     "props.text": {
+      "binding": {
+       "config": {
+        "expression": "{view.params.at}"
+       },
+       "type": "expr"
+      }
+     }
+    },
+    "props": {
+     "style": {
+      "fontFamily": "monospace",
+      "fontSize": "11px",
+      "width": "62px"
+     },
+     "text": ""
+    },
+    "type": "ia.display.label"
+   },
+   {
+    "meta": {
+     "name": "what"
+    },
+    "position": {
+     "basis": "0px",
+     "grow": 1,
+     "shrink": 1
+    },
+    "propConfig": {
+     "props.style.color": {
+      "binding": {
+       "config": {
+        "expression": "if({view.params.level} = 'bad', '#ef4444', if({view.params.level} = 'warn', '#f59e0b', ''))"
+       },
+       "type": "expr"
+      }
+     },
+     "props.text": {
+      "binding": {
+       "config": {
+        "expression": "{view.params.text}"
+       },
+       "type": "expr"
+      }
+     }
+    },
+    "props": {
+     "style": {
+      "fontSize": "11px",
+      "minWidth": "0",
+      "overflow": "hidden",
+      "textOverflow": "ellipsis",
+      "whiteSpace": "nowrap"
+     },
+     "text": ""
+    },
+    "type": "ia.display.label"
+   },
+   {
+    "meta": {
+     "name": "ago"
+    },
+    "position": {
+     "shrink": 0
+    },
+    "propConfig": {
+     "props.style.classes": {
+      "binding": {
+       "config": {
+        "expression": "{session.custom.style} + '/text/muted'"
+       },
+       "type": "expr"
+      }
+     },
+     "props.text": {
+      "binding": {
+       "config": {
+        "expression": "{view.params.ago}"
+       },
+       "type": "expr"
+      }
+     }
+    },
+    "props": {
+     "style": {
+      "fontSize": "10px",
+      "textAlign": "right",
+      "width": "40px"
+     },
+     "text": ""
+    },
+    "type": "ia.display.label"
+   }
+  ],
+  "meta": {
+   "name": "root"
+  },
+  "position": {
+   "shrink": 0
+  },
+  "props": {
+   "alignItems": "center",
+   "direction": "row",
+   "style": {
+    "gap": "8px",
+    "width": "100%",
+    "overflow": "hidden"
+   }
+  },
+  "type": "ia.container.flex"
+ }
+}

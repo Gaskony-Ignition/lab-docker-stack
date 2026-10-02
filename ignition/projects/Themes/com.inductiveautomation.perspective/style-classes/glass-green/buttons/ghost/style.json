@@ -1,0 +1,26 @@
+{
+  "base": {
+    "style": {
+      "backgroundColor": "rgba(255,255,255,0.06)",
+      "color": "#f5f3ff",
+      "borderWidth": "1px",
+      "borderStyle": "solid",
+      "borderColor": "rgba(255,255,255,0.22)",
+      "borderRadius": "8px",
+      "padding": "8px 16px",
+      "fontFamily": "ui-sans-serif, Inter, system-ui, \"Segoe UI\", sans-serif",
+      "fontSize": "13px",
+      "fontWeight": "600",
+      "whiteSpace": "nowrap",
+      "cursor": "pointer"
+    }
+  },
+  "variants": [
+    {
+      "pseudo": "hover",
+      "style": {
+        "backgroundColor": "rgba(255,255,255,0.12)"
+      }
+    }
+  ]
+}

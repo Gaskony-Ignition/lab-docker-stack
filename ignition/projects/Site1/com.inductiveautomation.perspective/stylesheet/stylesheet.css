@@ -1,0 +1,103 @@
+/* Site1's own stylesheet -- a11y fixes only, on top of the leather-dark theme.
+ *
+ * StyleDemo places two generic theme classes inside the priority-tinted alarm
+ * rows: `alarms/text` (#ece0cb, designed for the dark card background) and
+ * `buttons/ghost` (a transparent button whose #ab9578 text is also tuned for
+ * that dark background). Nested inside a bright row-* wash both fall well
+ * under 4.5:1 -- e.g. the ghost Acknowledge button measured 1.1:1 on
+ * row-urgent's coral. That is this project's combination, not a theme defect:
+ * the fix is a text colour for each row tint, scoped so it never touches
+ * `alarms/text` used anywhere else.
+ */
+/* `> *` as well as the class itself: the button and the priority chip both
+ * carry their own colour one level further in (`.text`, `> span`), which
+ * inherits nothing and otherwise keeps showing through underneath. */
+.psc-leather-dark\/alarms\/row-urgent .psc-leather-dark\/alarms\/text,
+.psc-leather-dark\/alarms\/row-urgent .psc-leather-dark\/alarms\/time,
+.psc-leather-dark\/alarms\/row-urgent .psc-leather-dark\/buttons\/ghost,
+.psc-leather-dark\/alarms\/row-urgent .psc-leather-dark\/buttons\/ghost *,
+.psc-leather-dark\/alarms\/pri-urgent,
+.psc-leather-dark\/alarms\/pri-urgent * {
+  color: #3a0705 !important;
+}
+.psc-leather-dark\/alarms\/row-high .psc-leather-dark\/alarms\/text,
+.psc-leather-dark\/alarms\/row-high .psc-leather-dark\/alarms\/time,
+.psc-leather-dark\/alarms\/row-high .psc-leather-dark\/buttons\/ghost,
+.psc-leather-dark\/alarms\/row-high .psc-leather-dark\/buttons\/ghost *,
+.psc-leather-dark\/alarms\/pri-high,
+.psc-leather-dark\/alarms\/pri-high * {
+  color: #3a1c02 !important;
+}
+.psc-leather-dark\/alarms\/row-med .psc-leather-dark\/alarms\/text,
+.psc-leather-dark\/alarms\/row-med .psc-leather-dark\/alarms\/time,
+.psc-leather-dark\/alarms\/row-med .psc-leather-dark\/buttons\/ghost,
+.psc-leather-dark\/alarms\/row-med .psc-leather-dark\/buttons\/ghost *,
+.psc-leather-dark\/alarms\/pri-med,
+.psc-leather-dark\/alarms\/pri-med * {
+  color: #3a2a02 !important;
+}
+.psc-leather-dark\/alarms\/row-low .psc-leather-dark\/alarms\/text,
+.psc-leather-dark\/alarms\/row-low .psc-leather-dark\/alarms\/time,
+.psc-leather-dark\/alarms\/row-low .psc-leather-dark\/buttons\/ghost,
+.psc-leather-dark\/alarms\/row-low .psc-leather-dark\/buttons\/ghost *,
+.psc-leather-dark\/alarms\/pri-low,
+.psc-leather-dark\/alarms\/pri-low * {
+  color: #eef2f8 !important;
+}
+/* row-low is the one row-* class with its own `opacity: .5` (a deliberate
+ * "low priority is faded" look) -- opacity fades the whole subtree as one
+ * flattened group, so the colour above still rendered at 50% (measured
+ * #898686, 1.73:1). Reproduce the same on-screen wash and border as a solid
+ * colour instead of an alpha, and cancel the opacity, so the text above is
+ * no longer diluted by it. */
+.psc-leather-dark\/alarms\/row-low {
+  opacity: 1 !important;
+  background-color: #526275 !important;
+  border-left-color: #3e6089 !important;
+}
+
+/* The Acknowledge button lives in the alarm BANNER (a single summary strip,
+ * its own `containers/alarm-banner` class, background #e08a7a), not inside
+ * a row-* card as first assumed -- `buttons/ghost`'s own #ab9578 measured
+ * 1.1:1 there. */
+.psc-leather-dark\/containers\/alarm-banner .psc-leather-dark\/buttons\/ghost,
+.psc-leather-dark\/containers\/alarm-banner .psc-leather-dark\/buttons\/ghost * {
+  color: #3a0705 !important;
+}
+
+/* nav-group section headings ("Operations", "Quality", "System"): the
+ * theme's #82705a on the page background #120d09 measures 4.06:1. Lightened
+ * one step, same hue, to clear 4.5:1 (8.27:1 here). The platform's own rule
+ * for this class outranks a plain class selector, hence !important -- same
+ * reason the focus rings below need it. */
+.psc-leather-dark\/text\/nav-group {
+  color: #b8a888 !important;
+}
+
+/* kpi/unit and readouts/unit (the small unit label beside a KPI number, e.g.
+ * "°C"): the theme's #6b5b49 on its own card background #241a13 measures
+ * 2.61:1 -- this is the pairing the theme itself ships, not a combination
+ * this project chose. */
+.psc-leather-dark\/kpi\/unit,
+.psc-leather-dark\/readouts\/unit {
+  color: #a89478 !important;
+}
+
+/* Button and toggle-switch focus rings measured 1.08:1 / 1.25:1 here -- the
+ * theme's ring colour does not hold up against these rows' bright tints.
+ * The adaptive UA ring (`outline-style: auto`) is what the check itself
+ * treats as always-passing, and it actually is: unlike a fixed colour it
+ * works against every row tint on this page, not just the ones measured. */
+[data-component="ia.input.button"]:focus-visible,
+[data-component="ia.input.button"] :focus-visible,
+[data-component="ia.input.toggle-switch"]:focus-visible,
+[data-component="ia.input.toggle-switch"] :focus-visible {
+  outline-style: auto !important;
+  outline-width: 2px !important;
+}
+
+/* The nav sidebar and the equipment-line "Overview" cards use `cursor:
+ * pointer` from the theme's own nav/item and card classes to show what a
+ * clickable one would look like, but StyleDemo wires none of them to an
+ * action -- there is nothing to navigate to. Reachable by Tab like the
+ * class's live use elsewhere, with no keyboard trap and no invented click. */

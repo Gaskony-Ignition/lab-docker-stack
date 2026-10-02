@@ -1,0 +1,13 @@
+{
+  "base": {
+    "style": {
+      "backgroundColor": "rgba(61,90,115,0.12)",
+      "color": "#3d5a73",
+      "borderRadius": "999px",
+      "padding": "3px 10px",
+      "fontSize": "11.5px",
+      "fontWeight": "700",
+      "letterSpacing": "0.01em"
+    }
+  }
+}

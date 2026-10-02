@@ -1,0 +1,408 @@
+{
+  "custom": {},
+  "params": {
+    "topic": "styling"
+  },
+  "propConfig": {
+    "params.topic": {
+      "paramDirection": "input"
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 640,
+      "width": 640
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "title"
+                },
+                "position": {
+                  "basis": "auto",
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "{session.custom.style} + '/text/h1'"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "expression": "{view.params.topic}"
+                      },
+                      "transforms": [
+                        {
+                          "code": "\timport demo_guide\n\treturn demo_guide.get(value)['title']\n",
+                          "type": "script"
+                        }
+                      ],
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "fontSize": "21px",
+                    "fontWeight": "700",
+                    "lineHeight": "1.4",
+                    "whiteSpace": "pre-wrap"
+                  },
+                  "text": ""
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "where"
+                },
+                "position": {
+                  "basis": "auto",
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "{session.custom.style} + '/text/muted'"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "expression": "{view.params.topic}"
+                      },
+                      "transforms": [
+                        {
+                          "code": "\timport demo_guide\n\treturn demo_guide.get(value)['where']\n",
+                          "type": "script"
+                        }
+                      ],
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "fontSize": "12px",
+                    "letterSpacing": "0.05em",
+                    "lineHeight": "1.4",
+                    "textTransform": "uppercase",
+                    "whiteSpace": "pre-wrap"
+                  },
+                  "text": ""
+                },
+                "type": "ia.display.label"
+              }
+            ],
+            "meta": {
+              "name": "head"
+            },
+            "position": {
+              "basis": "auto",
+              "shrink": 0
+            },
+            "props": {
+              "direction": "column",
+              "gap": "4px",
+              "style": {
+                "width": "100%"
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "meta": {
+              "name": "lead"
+            },
+            "position": {
+              "basis": "auto",
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "{view.params.topic}"
+                  },
+                  "transforms": [
+                    {
+                      "code": "\timport demo_guide\n\treturn demo_guide.get(value)['lead']\n",
+                      "type": "script"
+                    }
+                  ],
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "fontSize": "14px",
+                "lineHeight": "1.4",
+                "whiteSpace": "pre-wrap"
+              },
+              "text": ""
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "steps"
+            },
+            "position": {
+              "basis": "auto",
+              "grow": 0,
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.instances": {
+                "binding": {
+                  "config": {
+                    "expression": "{view.params.topic}"
+                  },
+                  "transforms": [
+                    {
+                      "code": "\timport demo_guide\n\treturn demo_guide.steps(value)\n",
+                      "type": "script"
+                    }
+                  ],
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "direction": "column",
+              "elementPosition": {
+                "basis": "auto",
+                "grow": 0,
+                "shrink": 0
+              },
+              "instances": [],
+              "path": "Guide/Step",
+              "style": {
+                "gap": "16px",
+                "width": "100%"
+              },
+              "useDefaultViewHeight": false,
+              "useDefaultViewWidth": false
+            },
+            "type": "ia.display.flex-repeater"
+          },
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "eye"
+                },
+                "position": {
+                  "basis": "50px",
+                  "grow": 0,
+                  "shrink": 0
+                },
+                "props": {
+                  "style": {
+                    "fontSize": "11px",
+                    "fontWeight": "700",
+                    "letterSpacing": "0.08em",
+                    "lineHeight": "1.4",
+                    "opacity": "0.75",
+                    "whiteSpace": "pre-wrap"
+                  },
+                  "text": "WATCH"
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "watchText"
+                },
+                "position": {
+                  "basis": "auto",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "expression": "{view.params.topic}"
+                      },
+                      "transforms": [
+                        {
+                          "code": "\timport demo_guide\n\treturn demo_guide.get(value)['watch']\n",
+                          "type": "script"
+                        }
+                      ],
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "fontSize": "13px",
+                    "lineHeight": "1.4",
+                    "whiteSpace": "pre-wrap"
+                  },
+                  "text": ""
+                },
+                "type": "ia.display.label"
+              }
+            ],
+            "meta": {
+              "name": "watch"
+            },
+            "position": {
+              "basis": "auto",
+              "shrink": 0
+            },
+            "propConfig": {
+              "meta.visible": {
+                "binding": {
+                  "config": {
+                    "expression": "{view.params.topic}"
+                  },
+                  "transforms": [
+                    {
+                      "code": "\timport demo_guide\n\treturn demo_guide.get(value)['watch'] != ''\n",
+                      "type": "script"
+                    }
+                  ],
+                  "type": "expr"
+                }
+              },
+              "props.style.classes": {
+                "binding": {
+                  "config": {
+                    "expression": "{session.custom.style} + '/containers/card'"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "alignItems": "start",
+              "direction": "row",
+              "gap": "12px",
+              "style": {
+                "width": "100%"
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "meta": {
+              "name": "note"
+            },
+            "position": {
+              "basis": "auto",
+              "shrink": 0
+            },
+            "propConfig": {
+              "meta.visible": {
+                "binding": {
+                  "config": {
+                    "expression": "{view.params.topic}"
+                  },
+                  "transforms": [
+                    {
+                      "code": "\timport demo_guide\n\treturn demo_guide.get(value)['note'] != ''\n",
+                      "type": "script"
+                    }
+                  ],
+                  "type": "expr"
+                }
+              },
+              "props.style.classes": {
+                "binding": {
+                  "config": {
+                    "expression": "{session.custom.style} + '/text/muted'"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "{view.params.topic}"
+                  },
+                  "transforms": [
+                    {
+                      "code": "\timport demo_guide\n\treturn demo_guide.get(value)['note']\n",
+                      "type": "script"
+                    }
+                  ],
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "fontSize": "12px",
+                "fontStyle": "italic",
+                "lineHeight": "1.4",
+                "whiteSpace": "pre-wrap"
+              },
+              "text": ""
+            },
+            "type": "ia.display.label"
+          }
+        ],
+        "meta": {
+          "name": "shell"
+        },
+        "position": {
+          "basis": "auto",
+          "grow": 1,
+          "shrink": 1
+        },
+        "propConfig": {
+          "props.style.classes": {
+            "binding": {
+              "config": {
+                "expression": "{session.custom.style} + '/containers/page'"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "direction": "column",
+          "gap": "14px",
+          "style": {
+            "height": "100%",
+            "minHeight": "0",
+            "overflow": "auto",
+            "padding": "18px 20px",
+            "width": "100%"
+          }
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "height": "100%",
+        "minHeight": "0",
+        "width": "100%"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

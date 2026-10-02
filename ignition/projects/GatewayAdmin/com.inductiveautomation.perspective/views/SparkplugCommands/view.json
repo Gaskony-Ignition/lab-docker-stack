@@ -1,0 +1,1091 @@
+{
+  "custom": {
+    "d": {
+      "e0": {
+        "spEdge": "—",
+        "spCloud": "—",
+        "modeEdge": "—",
+        "modeCloud": "—",
+        "askedSp": "—",
+        "askedMode": "—"
+      },
+      "e1": {
+        "spEdge": "—",
+        "spCloud": "—",
+        "modeEdge": "—",
+        "modeCloud": "—",
+        "askedSp": "—",
+        "askedMode": "—"
+      },
+      "ready": false
+    }
+  },
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "width": 1200,
+      "height": 400
+    }
+  },
+  "root": {
+    "type": "ia.container.flex",
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "height": "100%",
+        "width": "100%",
+        "gap": "8px",
+        "overflow": "hidden",
+        "paddingBottom": "4px",
+        "boxSizing": "border-box"
+      }
+    },
+    "position": {
+      "basis": "auto",
+      "shrink": 0
+    },
+    "children": [
+      {
+        "type": "ia.container.flex",
+        "meta": {
+          "name": "tryWatch"
+        },
+        "props": {
+          "direction": "row",
+          "style": {
+            "gap": "8px",
+            "classes": "sp-try"
+          },
+          "alignItems": "center"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "children": [
+          {
+            "type": "ia.display.label",
+            "meta": {
+              "name": "tryText",
+              "tooltip": {
+                "enabled": true
+              }
+            },
+            "props": {
+              "text": "Send a setpoint or mode from the rail; the edge follows about a second later.",
+              "style": {
+                "lineHeight": "1.35",
+                "whiteSpace": "nowrap",
+                "minWidth": "0",
+                "classes": "sp-ellipsis"
+              }
+            },
+            "position": {
+              "basis": "0px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "propConfig": {
+              "meta.tooltip.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "'Send a setpoint or mode from the rail; the edge follows about a second later.'"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "type": "ia.container.flex",
+        "meta": {
+          "name": "edge3"
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "gap": "6px",
+            "minWidth": "0",
+            "overflow": "hidden",
+            "padding": "8px 14px",
+            "classes": "sp-card"
+          }
+        },
+        "position": {
+          "shrink": 0
+        },
+        "children": [
+          {
+            "type": "ia.container.flex",
+            "meta": {
+              "name": "head"
+            },
+            "props": {
+              "direction": "row",
+              "style": {
+                "gap": "10px"
+              },
+              "alignItems": "center"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "children": [
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "title"
+                },
+                "props": {
+                  "text": "Edge 3",
+                  "style": {
+                    "lineHeight": "1.35",
+                    "whiteSpace": "nowrap"
+                  }
+                },
+                "position": {
+                  "basis": "150px",
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{session.custom.style} + '/text/card-title'"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "asked",
+                  "tooltip": {
+                    "enabled": true
+                  }
+                },
+                "props": {
+                  "text": "Last sent",
+                  "style": {
+                    "lineHeight": "1.35",
+                    "whiteSpace": "nowrap",
+                    "minWidth": "0",
+                    "classes": "sp-th sp-ellipsis"
+                  }
+                },
+                "position": {
+                  "basis": "0px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "propConfig": {
+                  "meta.tooltip.text": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "'Last sent'"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "cloud",
+                  "tooltip": {
+                    "enabled": true
+                  }
+                },
+                "props": {
+                  "text": "In the cloud",
+                  "style": {
+                    "lineHeight": "1.35",
+                    "whiteSpace": "nowrap",
+                    "minWidth": "0",
+                    "classes": "sp-th sp-ellipsis"
+                  }
+                },
+                "position": {
+                  "basis": "0px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "propConfig": {
+                  "meta.tooltip.text": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "'In the cloud'"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "edge",
+                  "tooltip": {
+                    "enabled": true
+                  }
+                },
+                "props": {
+                  "text": "At the edge",
+                  "style": {
+                    "lineHeight": "1.35",
+                    "whiteSpace": "nowrap",
+                    "minWidth": "0",
+                    "classes": "sp-th sp-ellipsis"
+                  }
+                },
+                "position": {
+                  "basis": "0px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "propConfig": {
+                  "meta.tooltip.text": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "'At the edge'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "type": "ia.container.flex",
+            "meta": {
+              "name": "spRow"
+            },
+            "props": {
+              "direction": "row",
+              "style": {
+                "gap": "10px",
+                "height": "30px"
+              },
+              "alignItems": "center"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "children": [
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "caption"
+                },
+                "props": {
+                  "text": "Level setpoint",
+                  "style": {
+                    "lineHeight": "1.35",
+                    "whiteSpace": "nowrap",
+                    "classes": "sp-cell"
+                  }
+                },
+                "position": {
+                  "basis": "150px",
+                  "shrink": 0
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "asked",
+                  "tooltip": {
+                    "enabled": true
+                  }
+                },
+                "props": {
+                  "text": "",
+                  "style": {
+                    "lineHeight": "1.35",
+                    "whiteSpace": "nowrap",
+                    "minWidth": "0",
+                    "classes": "sp-value sp-ellipsis"
+                  }
+                },
+                "position": {
+                  "basis": "0px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{view.custom.d.e0.askedSp}"
+                      }
+                    }
+                  },
+                  "meta.tooltip.text": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{view.custom.d.e0.askedSp}"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "cloud",
+                  "tooltip": {
+                    "enabled": true
+                  }
+                },
+                "props": {
+                  "text": "",
+                  "style": {
+                    "lineHeight": "1.35",
+                    "whiteSpace": "nowrap",
+                    "minWidth": "0",
+                    "classes": "sp-value sp-ellipsis"
+                  }
+                },
+                "position": {
+                  "basis": "0px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{view.custom.d.e0.spCloud}"
+                      }
+                    }
+                  },
+                  "meta.tooltip.text": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{view.custom.d.e0.spCloud}"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "edge",
+                  "tooltip": {
+                    "enabled": true
+                  }
+                },
+                "props": {
+                  "text": "",
+                  "style": {
+                    "lineHeight": "1.35",
+                    "whiteSpace": "nowrap",
+                    "minWidth": "0",
+                    "classes": "sp-value sp-ellipsis"
+                  }
+                },
+                "position": {
+                  "basis": "0px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{view.custom.d.e0.spEdge}"
+                      }
+                    }
+                  },
+                  "meta.tooltip.text": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{view.custom.d.e0.spEdge}"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "type": "ia.container.flex",
+            "meta": {
+              "name": "modeRow"
+            },
+            "props": {
+              "direction": "row",
+              "style": {
+                "gap": "10px",
+                "height": "30px"
+              },
+              "alignItems": "center"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "children": [
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "caption"
+                },
+                "props": {
+                  "text": "Mode",
+                  "style": {
+                    "lineHeight": "1.35",
+                    "whiteSpace": "nowrap",
+                    "classes": "sp-cell"
+                  }
+                },
+                "position": {
+                  "basis": "150px",
+                  "shrink": 0
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "asked",
+                  "tooltip": {
+                    "enabled": true
+                  }
+                },
+                "props": {
+                  "text": "",
+                  "style": {
+                    "lineHeight": "1.35",
+                    "whiteSpace": "nowrap",
+                    "minWidth": "0",
+                    "classes": "sp-value sp-ellipsis"
+                  }
+                },
+                "position": {
+                  "basis": "0px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{view.custom.d.e0.askedMode}"
+                      }
+                    }
+                  },
+                  "meta.tooltip.text": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{view.custom.d.e0.askedMode}"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "cloud",
+                  "tooltip": {
+                    "enabled": true
+                  }
+                },
+                "props": {
+                  "text": "",
+                  "style": {
+                    "lineHeight": "1.35",
+                    "whiteSpace": "nowrap",
+                    "minWidth": "0",
+                    "classes": "sp-value sp-ellipsis"
+                  }
+                },
+                "position": {
+                  "basis": "0px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{view.custom.d.e0.modeCloud}"
+                      }
+                    }
+                  },
+                  "meta.tooltip.text": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{view.custom.d.e0.modeCloud}"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "edge",
+                  "tooltip": {
+                    "enabled": true
+                  }
+                },
+                "props": {
+                  "text": "",
+                  "style": {
+                    "lineHeight": "1.35",
+                    "whiteSpace": "nowrap",
+                    "minWidth": "0",
+                    "classes": "sp-value sp-ellipsis"
+                  }
+                },
+                "position": {
+                  "basis": "0px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{view.custom.d.e0.modeEdge}"
+                      }
+                    }
+                  },
+                  "meta.tooltip.text": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{view.custom.d.e0.modeEdge}"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "ia.container.flex",
+        "meta": {
+          "name": "edge4"
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "gap": "6px",
+            "minWidth": "0",
+            "overflow": "hidden",
+            "padding": "8px 14px",
+            "classes": "sp-card"
+          }
+        },
+        "position": {
+          "shrink": 0
+        },
+        "children": [
+          {
+            "type": "ia.container.flex",
+            "meta": {
+              "name": "head"
+            },
+            "props": {
+              "direction": "row",
+              "style": {
+                "gap": "10px"
+              },
+              "alignItems": "center"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "children": [
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "title"
+                },
+                "props": {
+                  "text": "Edge 4",
+                  "style": {
+                    "lineHeight": "1.35",
+                    "whiteSpace": "nowrap"
+                  }
+                },
+                "position": {
+                  "basis": "150px",
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{session.custom.style} + '/text/card-title'"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "asked",
+                  "tooltip": {
+                    "enabled": true
+                  }
+                },
+                "props": {
+                  "text": "Last sent",
+                  "style": {
+                    "lineHeight": "1.35",
+                    "whiteSpace": "nowrap",
+                    "minWidth": "0",
+                    "classes": "sp-th sp-ellipsis"
+                  }
+                },
+                "position": {
+                  "basis": "0px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "propConfig": {
+                  "meta.tooltip.text": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "'Last sent'"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "cloud",
+                  "tooltip": {
+                    "enabled": true
+                  }
+                },
+                "props": {
+                  "text": "In the cloud",
+                  "style": {
+                    "lineHeight": "1.35",
+                    "whiteSpace": "nowrap",
+                    "minWidth": "0",
+                    "classes": "sp-th sp-ellipsis"
+                  }
+                },
+                "position": {
+                  "basis": "0px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "propConfig": {
+                  "meta.tooltip.text": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "'In the cloud'"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "edge",
+                  "tooltip": {
+                    "enabled": true
+                  }
+                },
+                "props": {
+                  "text": "At the edge",
+                  "style": {
+                    "lineHeight": "1.35",
+                    "whiteSpace": "nowrap",
+                    "minWidth": "0",
+                    "classes": "sp-th sp-ellipsis"
+                  }
+                },
+                "position": {
+                  "basis": "0px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "propConfig": {
+                  "meta.tooltip.text": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "'At the edge'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "type": "ia.container.flex",
+            "meta": {
+              "name": "spRow"
+            },
+            "props": {
+              "direction": "row",
+              "style": {
+                "gap": "10px",
+                "height": "30px"
+              },
+              "alignItems": "center"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "children": [
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "caption"
+                },
+                "props": {
+                  "text": "Level setpoint",
+                  "style": {
+                    "lineHeight": "1.35",
+                    "whiteSpace": "nowrap",
+                    "classes": "sp-cell"
+                  }
+                },
+                "position": {
+                  "basis": "150px",
+                  "shrink": 0
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "asked",
+                  "tooltip": {
+                    "enabled": true
+                  }
+                },
+                "props": {
+                  "text": "",
+                  "style": {
+                    "lineHeight": "1.35",
+                    "whiteSpace": "nowrap",
+                    "minWidth": "0",
+                    "classes": "sp-value sp-ellipsis"
+                  }
+                },
+                "position": {
+                  "basis": "0px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{view.custom.d.e1.askedSp}"
+                      }
+                    }
+                  },
+                  "meta.tooltip.text": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{view.custom.d.e1.askedSp}"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "cloud",
+                  "tooltip": {
+                    "enabled": true
+                  }
+                },
+                "props": {
+                  "text": "",
+                  "style": {
+                    "lineHeight": "1.35",
+                    "whiteSpace": "nowrap",
+                    "minWidth": "0",
+                    "classes": "sp-value sp-ellipsis"
+                  }
+                },
+                "position": {
+                  "basis": "0px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{view.custom.d.e1.spCloud}"
+                      }
+                    }
+                  },
+                  "meta.tooltip.text": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{view.custom.d.e1.spCloud}"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "edge",
+                  "tooltip": {
+                    "enabled": true
+                  }
+                },
+                "props": {
+                  "text": "",
+                  "style": {
+                    "lineHeight": "1.35",
+                    "whiteSpace": "nowrap",
+                    "minWidth": "0",
+                    "classes": "sp-value sp-ellipsis"
+                  }
+                },
+                "position": {
+                  "basis": "0px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{view.custom.d.e1.spEdge}"
+                      }
+                    }
+                  },
+                  "meta.tooltip.text": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{view.custom.d.e1.spEdge}"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "type": "ia.container.flex",
+            "meta": {
+              "name": "modeRow"
+            },
+            "props": {
+              "direction": "row",
+              "style": {
+                "gap": "10px",
+                "height": "30px"
+              },
+              "alignItems": "center"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "children": [
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "caption"
+                },
+                "props": {
+                  "text": "Mode",
+                  "style": {
+                    "lineHeight": "1.35",
+                    "whiteSpace": "nowrap",
+                    "classes": "sp-cell"
+                  }
+                },
+                "position": {
+                  "basis": "150px",
+                  "shrink": 0
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "asked",
+                  "tooltip": {
+                    "enabled": true
+                  }
+                },
+                "props": {
+                  "text": "",
+                  "style": {
+                    "lineHeight": "1.35",
+                    "whiteSpace": "nowrap",
+                    "minWidth": "0",
+                    "classes": "sp-value sp-ellipsis"
+                  }
+                },
+                "position": {
+                  "basis": "0px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{view.custom.d.e1.askedMode}"
+                      }
+                    }
+                  },
+                  "meta.tooltip.text": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{view.custom.d.e1.askedMode}"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "cloud",
+                  "tooltip": {
+                    "enabled": true
+                  }
+                },
+                "props": {
+                  "text": "",
+                  "style": {
+                    "lineHeight": "1.35",
+                    "whiteSpace": "nowrap",
+                    "minWidth": "0",
+                    "classes": "sp-value sp-ellipsis"
+                  }
+                },
+                "position": {
+                  "basis": "0px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{view.custom.d.e1.modeCloud}"
+                      }
+                    }
+                  },
+                  "meta.tooltip.text": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{view.custom.d.e1.modeCloud}"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "edge",
+                  "tooltip": {
+                    "enabled": true
+                  }
+                },
+                "props": {
+                  "text": "",
+                  "style": {
+                    "lineHeight": "1.35",
+                    "whiteSpace": "nowrap",
+                    "minWidth": "0",
+                    "classes": "sp-value sp-ellipsis"
+                  }
+                },
+                "position": {
+                  "basis": "0px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{view.custom.d.e1.modeEdge}"
+                      }
+                    }
+                  },
+                  "meta.tooltip.text": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{view.custom.d.e1.modeEdge}"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "propConfig": {
+    "custom.d": {
+      "binding": {
+        "type": "expr",
+        "config": {
+          "expression": "now(2000)"
+        },
+        "transforms": [
+          {
+            "type": "script",
+            "code": "\timport sparkplug_demo\n\treturn sparkplug_demo.page_commands()\n"
+          }
+        ]
+      }
+    }
+  }
+}

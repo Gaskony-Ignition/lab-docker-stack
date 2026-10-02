@@ -1,0 +1,9 @@
+{
+  "pages": {
+    "/": {
+      "title": "Pump Station",
+      "viewPath": "Station"
+    }
+  },
+  "sharedDocks": {}
+}

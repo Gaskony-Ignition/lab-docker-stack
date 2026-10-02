@@ -1,0 +1,1189 @@
+{
+  "custom": {
+    "d": {
+      "cut": {
+        "text": "",
+        "badge": "badge-neutral"
+      },
+      "engine": {
+        "text": "",
+        "badge": "badge-neutral"
+      },
+      "wire": {
+        "text": "",
+        "badge": "badge-neutral"
+      },
+      "edge": {
+        "text": "",
+        "badge": "badge-neutral"
+      },
+      "history": [],
+      "historyCount": 0,
+      "alarms": [],
+      "alarmsTitle": "Alarms during the outage"
+    }
+  },
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "width": 1200,
+      "height": 400
+    }
+  },
+  "root": {
+    "type": "ia.container.flex",
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "height": "100%",
+        "width": "100%",
+        "gap": "8px",
+        "overflow": "hidden",
+        "paddingBottom": "4px",
+        "boxSizing": "border-box"
+      }
+    },
+    "position": {
+      "basis": "auto",
+      "shrink": 0
+    },
+    "children": [
+      {
+        "type": "ia.container.flex",
+        "meta": {
+          "name": "tryWatch"
+        },
+        "props": {
+          "direction": "row",
+          "style": {
+            "gap": "8px",
+            "classes": "sp-try"
+          },
+          "alignItems": "center"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "children": [
+          {
+            "type": "ia.display.label",
+            "meta": {
+              "name": "tryText",
+              "tooltip": {
+                "enabled": true
+              }
+            },
+            "props": {
+              "text": "Cut Edge 3: the cloud says Offline ~15 s later; Restore fills the gap. Rebirth: ~3 s gap, 0 values lost.",
+              "style": {
+                "lineHeight": "1.35",
+                "whiteSpace": "nowrap",
+                "minWidth": "0",
+                "classes": "sp-ellipsis"
+              }
+            },
+            "position": {
+              "basis": "0px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "propConfig": {
+              "meta.tooltip.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "'Cut Edge 3: the cloud says Offline ~15 s later; Restore fills the gap. Rebirth: ~3 s gap, 0 values lost.'"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "type": "ia.container.flex",
+        "meta": {
+          "name": "body"
+        },
+        "props": {
+          "direction": "row",
+          "style": {
+            "gap": "12px",
+            "minHeight": "0"
+          },
+          "alignItems": "stretch"
+        },
+        "position": {
+          "basis": "0px",
+          "grow": 1,
+          "shrink": 1
+        },
+        "children": [
+          {
+            "type": "ia.container.flex",
+            "meta": {
+              "name": "left"
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "gap": "8px",
+                "minWidth": "0",
+                "maxWidth": "760px"
+              }
+            },
+            "position": {
+              "basis": "48%",
+              "shrink": 0
+            },
+            "children": [
+              {
+                "type": "ia.container.flex",
+                "meta": {
+                  "name": "link"
+                },
+                "props": {
+                  "direction": "column",
+                  "style": {
+                    "gap": "4px",
+                    "minWidth": "0",
+                    "overflow": "hidden",
+                    "padding": "8px 14px",
+                    "classes": "sp-card"
+                  }
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "children": [
+                  {
+                    "type": "ia.display.label",
+                    "meta": {
+                      "name": "title"
+                    },
+                    "props": {
+                      "text": "Edge 3 link",
+                      "style": {
+                        "lineHeight": "1.35",
+                        "whiteSpace": "nowrap"
+                      }
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.style.classes": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{session.custom.style} + '/text/card-title'"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type": "ia.container.flex",
+                    "meta": {
+                      "name": "cutState"
+                    },
+                    "props": {
+                      "direction": "row",
+                      "style": {
+                        "gap": "10px",
+                        "height": "30px",
+                        "classes": "sp-tr"
+                      },
+                      "alignItems": "center"
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "children": [
+                      {
+                        "type": "ia.display.label",
+                        "meta": {
+                          "name": "caption"
+                        },
+                        "props": {
+                          "text": "Link",
+                          "style": {
+                            "lineHeight": "1.35",
+                            "whiteSpace": "nowrap",
+                            "fontSize": "13px"
+                          }
+                        },
+                        "position": {
+                          "basis": "140px",
+                          "shrink": 0
+                        }
+                      },
+                      {
+                        "type": "ia.display.label",
+                        "meta": {
+                          "name": "value"
+                        },
+                        "props": {
+                          "text": "",
+                          "style": {
+                            "lineHeight": "1.35",
+                            "whiteSpace": "nowrap"
+                          }
+                        },
+                        "position": {
+                          "shrink": 0
+                        },
+                        "propConfig": {
+                          "props.style.classes": {
+                            "binding": {
+                              "type": "expr",
+                              "config": {
+                                "expression": "{session.custom.style} + '/status/' + {view.custom.d.cut.badge}"
+                              }
+                            }
+                          },
+                          "props.text": {
+                            "binding": {
+                              "type": "expr",
+                              "config": {
+                                "expression": "{view.custom.d.cut.text}"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "ia.container.flex",
+                    "meta": {
+                      "name": "engine"
+                    },
+                    "props": {
+                      "direction": "row",
+                      "style": {
+                        "gap": "10px",
+                        "height": "30px",
+                        "classes": "sp-tr"
+                      },
+                      "alignItems": "center"
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "children": [
+                      {
+                        "type": "ia.display.label",
+                        "meta": {
+                          "name": "caption"
+                        },
+                        "props": {
+                          "text": "Cloud (MQTT Engine)",
+                          "style": {
+                            "lineHeight": "1.35",
+                            "whiteSpace": "nowrap",
+                            "fontSize": "13px"
+                          }
+                        },
+                        "position": {
+                          "basis": "140px",
+                          "shrink": 0
+                        }
+                      },
+                      {
+                        "type": "ia.display.label",
+                        "meta": {
+                          "name": "value"
+                        },
+                        "props": {
+                          "text": "",
+                          "style": {
+                            "lineHeight": "1.35",
+                            "whiteSpace": "nowrap"
+                          }
+                        },
+                        "position": {
+                          "shrink": 0
+                        },
+                        "propConfig": {
+                          "props.style.classes": {
+                            "binding": {
+                              "type": "expr",
+                              "config": {
+                                "expression": "{session.custom.style} + '/status/' + {view.custom.d.engine.badge}"
+                              }
+                            }
+                          },
+                          "props.text": {
+                            "binding": {
+                              "type": "expr",
+                              "config": {
+                                "expression": "{view.custom.d.engine.text}"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "ia.container.flex",
+                    "meta": {
+                      "name": "wire"
+                    },
+                    "props": {
+                      "direction": "row",
+                      "style": {
+                        "gap": "10px",
+                        "height": "30px",
+                        "classes": "sp-tr"
+                      },
+                      "alignItems": "center"
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "children": [
+                      {
+                        "type": "ia.display.label",
+                        "meta": {
+                          "name": "caption"
+                        },
+                        "props": {
+                          "text": "Broker messages",
+                          "style": {
+                            "lineHeight": "1.35",
+                            "whiteSpace": "nowrap",
+                            "fontSize": "13px"
+                          }
+                        },
+                        "position": {
+                          "basis": "140px",
+                          "shrink": 0
+                        }
+                      },
+                      {
+                        "type": "ia.display.label",
+                        "meta": {
+                          "name": "value"
+                        },
+                        "props": {
+                          "text": "",
+                          "style": {
+                            "lineHeight": "1.35",
+                            "whiteSpace": "nowrap"
+                          }
+                        },
+                        "position": {
+                          "shrink": 0
+                        },
+                        "propConfig": {
+                          "props.style.classes": {
+                            "binding": {
+                              "type": "expr",
+                              "config": {
+                                "expression": "{session.custom.style} + '/status/' + {view.custom.d.wire.badge}"
+                              }
+                            }
+                          },
+                          "props.text": {
+                            "binding": {
+                              "type": "expr",
+                              "config": {
+                                "expression": "{view.custom.d.wire.text}"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "ia.container.flex",
+                    "meta": {
+                      "name": "edge"
+                    },
+                    "props": {
+                      "direction": "row",
+                      "style": {
+                        "gap": "10px",
+                        "height": "30px",
+                        "classes": "sp-tr"
+                      },
+                      "alignItems": "center"
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "children": [
+                      {
+                        "type": "ia.display.label",
+                        "meta": {
+                          "name": "caption"
+                        },
+                        "props": {
+                          "text": "Edge 3 itself",
+                          "style": {
+                            "lineHeight": "1.35",
+                            "whiteSpace": "nowrap",
+                            "fontSize": "13px"
+                          }
+                        },
+                        "position": {
+                          "basis": "140px",
+                          "shrink": 0
+                        }
+                      },
+                      {
+                        "type": "ia.display.label",
+                        "meta": {
+                          "name": "value"
+                        },
+                        "props": {
+                          "text": "",
+                          "style": {
+                            "lineHeight": "1.35",
+                            "whiteSpace": "nowrap"
+                          }
+                        },
+                        "position": {
+                          "shrink": 0
+                        },
+                        "propConfig": {
+                          "props.style.classes": {
+                            "binding": {
+                              "type": "expr",
+                              "config": {
+                                "expression": "{session.custom.style} + '/status/' + {view.custom.d.edge.badge}"
+                              }
+                            }
+                          },
+                          "props.text": {
+                            "binding": {
+                              "type": "expr",
+                              "config": {
+                                "expression": "{view.custom.d.edge.text}"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "ia.container.flex",
+                "meta": {
+                  "name": "history"
+                },
+                "props": {
+                  "direction": "column",
+                  "style": {
+                    "gap": "4px",
+                    "minWidth": "0",
+                    "overflow": "hidden",
+                    "padding": "8px 14px",
+                    "classes": "sp-card"
+                  }
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "children": [
+                  {
+                    "type": "ia.display.label",
+                    "meta": {
+                      "name": "historyTitle"
+                    },
+                    "props": {
+                      "text": "Link history",
+                      "style": {
+                        "lineHeight": "1.35",
+                        "whiteSpace": "nowrap",
+                        "classes": "sp-th"
+                      }
+                    },
+                    "position": {
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "type": "ia.display.table",
+                    "meta": {
+                      "name": "rows"
+                    },
+                    "props": {
+                      "data": [],
+                      "columns": [
+                        {
+                          "field": "ts",
+                          "header": {
+                            "title": "Time",
+                            "justify": "left",
+                            "align": "center",
+                            "style": {}
+                          },
+                          "width": 116,
+                          "strictWidth": true,
+                          "justify": "left",
+                          "align": "center",
+                          "render": "string",
+                          "sortable": false,
+                          "resizable": false,
+                          "editable": false,
+                          "visible": true,
+                          "style": {
+                            "whiteSpace": "nowrap",
+                            "overflow": "hidden",
+                            "textOverflow": "ellipsis",
+                            "padding": "0 8px"
+                          }
+                        },
+                        {
+                          "field": "what",
+                          "header": {
+                            "title": "What happened",
+                            "justify": "left",
+                            "align": "center",
+                            "style": {}
+                          },
+                          "width": 1,
+                          "strictWidth": false,
+                          "justify": "left",
+                          "align": "center",
+                          "render": "string",
+                          "sortable": false,
+                          "resizable": false,
+                          "editable": false,
+                          "visible": true,
+                          "style": {
+                            "whiteSpace": "nowrap",
+                            "overflow": "hidden",
+                            "textOverflow": "ellipsis",
+                            "padding": "0 8px"
+                          }
+                        }
+                      ],
+                      "virtualized": true,
+                      "pager": {
+                        "top": false,
+                        "bottom": false
+                      },
+                      "selection": {
+                        "enableRowSelection": false,
+                        "enableColumnSelection": false
+                      },
+                      "rows": {
+                        "height": 22,
+                        "striped": {
+                          "enabled": false
+                        },
+                        "highlight": {
+                          "enabled": false
+                        }
+                      },
+                      "emptyMessage": {
+                        "noData": {
+                          "text": "Nothing yet"
+                        }
+                      },
+                      "enableHeader": false,
+                      "headerStyle": {
+                        "paddingLeft": "8px"
+                      },
+                      "style": {
+                        "classes": "sp-table"
+                      }
+                    },
+                    "position": {
+                      "basis": "68px",
+                      "grow": 0,
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.data": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{view.custom.d.history}"
+                          }
+                        }
+                      },
+                      "position.basis": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "toStr(2 + 22 * max(3, min(max(3, {view.custom.d.historyCount}), floor(({page.props.dimensions.viewport.height} - 481) / 22)))) + 'px'"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "ia.container.flex",
+            "meta": {
+              "name": "right"
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "gap": "8px",
+                "minWidth": "0",
+                "minHeight": "0"
+              }
+            },
+            "position": {
+              "basis": "0px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "children": [
+              {
+                "type": "ia.container.flex",
+                "meta": {
+                  "name": "trendCard"
+                },
+                "props": {
+                  "direction": "column",
+                  "style": {
+                    "gap": "0px",
+                    "minWidth": "0",
+                    "overflow": "hidden",
+                    "minHeight": "0",
+                    "padding": "6px 14px 4px",
+                    "classes": "sp-card"
+                  }
+                },
+                "position": {
+                  "basis": "0px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "type": "ia.display.label",
+                    "meta": {
+                      "name": "title"
+                    },
+                    "props": {
+                      "text": "Tank level in the cloud, last 10 minutes",
+                      "style": {
+                        "lineHeight": "1.35",
+                        "whiteSpace": "nowrap"
+                      }
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.style.classes": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{session.custom.style} + '/text/muted'"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "trend"
+                    },
+                    "position": {
+                      "basis": "0px",
+                      "grow": 1,
+                      "shrink": 1
+                    },
+                    "propConfig": {
+                      "props.dataSources": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "now(5000)"
+                          },
+                          "transforms": [
+                            {
+                              "type": "script",
+                              "code": "\timport sparkplug_demo\n\treturn sparkplug_demo.page_trend()\n"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "props": {
+                      "background": {
+                        "color": "transparent",
+                        "gradient": {
+                          "colors": [],
+                          "direction": "linear",
+                          "rotation": 0
+                        },
+                        "opacity": 0,
+                        "render": "color"
+                      },
+                      "cursor": {
+                        "enabled": true,
+                        "lineY": {
+                          "disabled": true
+                        }
+                      },
+                      "dataSources": {
+                        "edge1": [],
+                        "edge2": []
+                      },
+                      "legend": {
+                        "enabled": true,
+                        "labels": {
+                          "font": {
+                            "color": "#9ca3af",
+                            "size": 12,
+                            "weight": 400
+                          },
+                          "text": "{name}"
+                        },
+                        "markers": {
+                          "enabled": true,
+                          "height": 8,
+                          "mirrorLookOfSeries": true,
+                          "width": 8
+                        },
+                        "position": "right"
+                      },
+                      "series": [
+                        {
+                          "data": {
+                            "source": "edge1",
+                            "x": "t",
+                            "y": "v"
+                          },
+                          "hiddenInLegend": false,
+                          "label": {
+                            "text": ""
+                          },
+                          "line": {
+                            "appearance": {
+                              "connect": false,
+                              "fill": {
+                                "color": "#60a5fa",
+                                "opacity": 0
+                              },
+                              "stroke": {
+                                "color": "#60a5fa",
+                                "dashArray": "",
+                                "opacity": 1,
+                                "width": 2
+                              },
+                              "tensionX": 1,
+                              "tensionY": 1
+                            }
+                          },
+                          "name": "Edge 3",
+                          "render": "line",
+                          "tooltip": {
+                            "cornerRadius": 3,
+                            "enabled": true,
+                            "pointerLength": 4,
+                            "text": "{name}: [bold]{valueY}[/]%"
+                          },
+                          "visible": true,
+                          "xAxis": "t",
+                          "yAxis": "level",
+                          "zIndex": 0
+                        },
+                        {
+                          "data": {
+                            "source": "edge2",
+                            "x": "t",
+                            "y": "v"
+                          },
+                          "hiddenInLegend": false,
+                          "label": {
+                            "text": ""
+                          },
+                          "line": {
+                            "appearance": {
+                              "connect": false,
+                              "fill": {
+                                "color": "#fb923c",
+                                "opacity": 0
+                              },
+                              "stroke": {
+                                "color": "#fb923c",
+                                "dashArray": "7 5",
+                                "opacity": 1,
+                                "width": 2
+                              },
+                              "tensionX": 1,
+                              "tensionY": 1
+                            }
+                          },
+                          "name": "Edge 4",
+                          "render": "line",
+                          "tooltip": {
+                            "cornerRadius": 3,
+                            "enabled": true,
+                            "pointerLength": 4,
+                            "text": "{name}: [bold]{valueY}[/]%"
+                          },
+                          "visible": true,
+                          "xAxis": "t",
+                          "yAxis": "level",
+                          "zIndex": 0
+                        }
+                      ],
+                      "style": {
+                        "minHeight": "0",
+                        "width": "100%"
+                      },
+                      "title": {
+                        "text": ""
+                      },
+                      "xAxes": [
+                        {
+                          "appearance": {
+                            "font": {
+                              "size": "12px",
+                              "weight": 500
+                            },
+                            "grid": {
+                              "color": "#374151",
+                              "dashArray": "3 3",
+                              "minDistance": 230,
+                              "opacity": 1
+                            },
+                            "inside": false,
+                            "labels": {
+                              "color": "#9ca3af",
+                              "opacity": 1,
+                              "rotation": 0
+                            },
+                            "opposite": false
+                          },
+                          "date": {
+                            "baseInterval": {
+                              "enabled": true,
+                              "count": 5,
+                              "timeUnit": "second",
+                              "skipEmptyPeriods": false
+                            },
+                            "break": {
+                              "enabled": false,
+                              "endDate": "",
+                              "size": 0.05,
+                              "startDate": ""
+                            },
+                            "format": "HH:mm",
+                            "inputFormat": "yyyy-MM-dd HH:mm:ss",
+                            "range": {
+                              "max": "",
+                              "min": "",
+                              "useStrict": false
+                            }
+                          },
+                          "label": {
+                            "color": "",
+                            "enabled": false,
+                            "text": ""
+                          },
+                          "name": "t",
+                          "render": "date",
+                          "visible": true
+                        }
+                      ],
+                      "yAxes": [
+                        {
+                          "appearance": {
+                            "font": {
+                              "size": "12px",
+                              "weight": 500
+                            },
+                            "grid": {
+                              "color": "#374151",
+                              "dashArray": "3 3",
+                              "minDistance": 40,
+                              "opacity": 1
+                            },
+                            "inside": false,
+                            "labels": {
+                              "color": "#9ca3af",
+                              "opacity": 1,
+                              "rotation": 0
+                            },
+                            "opposite": false
+                          },
+                          "label": {
+                            "color": "",
+                            "enabled": false,
+                            "text": ""
+                          },
+                          "name": "level",
+                          "render": "value",
+                          "value": {
+                            "break": {
+                              "enabled": false,
+                              "endValue": 0,
+                              "size": 0.05,
+                              "startValue": 0
+                            },
+                            "format": "#,###",
+                            "logarithmic": false,
+                            "range": {
+                              "min": 0,
+                              "max": 100,
+                              "useStrict": true
+                            }
+                          },
+                          "visible": true
+                        }
+                      ]
+                    },
+                    "type": "ia.chart.xy"
+                  }
+                ]
+              },
+              {
+                "type": "ia.container.flex",
+                "meta": {
+                  "name": "alarmsCard"
+                },
+                "props": {
+                  "direction": "column",
+                  "style": {
+                    "gap": "4px",
+                    "minWidth": "0",
+                    "overflow": "hidden",
+                    "padding": "8px 14px",
+                    "classes": "sp-card"
+                  }
+                },
+                "position": {
+                  "basis": "auto",
+                  "grow": 0,
+                  "shrink": 0
+                },
+                "children": [
+                  {
+                    "type": "ia.display.label",
+                    "meta": {
+                      "name": "alarmsTitle",
+                      "tooltip": {
+                        "enabled": true
+                      }
+                    },
+                    "props": {
+                      "text": "Alarms during the outage",
+                      "style": {
+                        "lineHeight": "1.35",
+                        "whiteSpace": "nowrap",
+                        "minWidth": "0",
+                        "classes": "sp-th sp-ellipsis"
+                      }
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{view.custom.d.alarmsTitle}"
+                          }
+                        }
+                      },
+                      "meta.tooltip.text": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{view.custom.d.alarmsTitle}"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type": "ia.display.table",
+                    "meta": {
+                      "name": "alarms"
+                    },
+                    "props": {
+                      "data": [],
+                      "columns": [
+                        {
+                          "field": "alarm",
+                          "header": {
+                            "title": "Alarm",
+                            "justify": "left",
+                            "align": "center",
+                            "style": {}
+                          },
+                          "width": 100,
+                          "strictWidth": true,
+                          "justify": "left",
+                          "align": "center",
+                          "render": "string",
+                          "sortable": false,
+                          "resizable": false,
+                          "editable": false,
+                          "visible": true,
+                          "style": {
+                            "whiteSpace": "nowrap",
+                            "overflow": "hidden",
+                            "textOverflow": "ellipsis",
+                            "padding": "0 8px"
+                          }
+                        },
+                        {
+                          "field": "edge",
+                          "header": {
+                            "title": "At the edge",
+                            "justify": "left",
+                            "align": "center",
+                            "style": {}
+                          },
+                          "width": 1,
+                          "strictWidth": false,
+                          "justify": "left",
+                          "align": "center",
+                          "render": "string",
+                          "sortable": false,
+                          "resizable": false,
+                          "editable": false,
+                          "visible": true,
+                          "style": {
+                            "whiteSpace": "nowrap",
+                            "overflow": "hidden",
+                            "textOverflow": "ellipsis",
+                            "padding": "0 8px"
+                          }
+                        },
+                        {
+                          "field": "cloud",
+                          "header": {
+                            "title": "In the cloud",
+                            "justify": "left",
+                            "align": "center",
+                            "style": {}
+                          },
+                          "width": 1,
+                          "strictWidth": false,
+                          "justify": "left",
+                          "align": "center",
+                          "render": "string",
+                          "sortable": false,
+                          "resizable": false,
+                          "editable": false,
+                          "visible": true,
+                          "style": {
+                            "whiteSpace": "nowrap",
+                            "overflow": "hidden",
+                            "textOverflow": "ellipsis",
+                            "padding": "0 8px"
+                          }
+                        },
+                        {
+                          "field": "quality",
+                          "header": {
+                            "title": "Tag quality",
+                            "justify": "left",
+                            "align": "center",
+                            "style": {}
+                          },
+                          "width": 104,
+                          "strictWidth": true,
+                          "justify": "left",
+                          "align": "center",
+                          "render": "string",
+                          "sortable": false,
+                          "resizable": false,
+                          "editable": false,
+                          "visible": true,
+                          "style": {
+                            "whiteSpace": "nowrap",
+                            "overflow": "hidden",
+                            "textOverflow": "ellipsis",
+                            "padding": "0 8px"
+                          }
+                        }
+                      ],
+                      "virtualized": true,
+                      "pager": {
+                        "top": false,
+                        "bottom": false
+                      },
+                      "selection": {
+                        "enableRowSelection": false,
+                        "enableColumnSelection": false
+                      },
+                      "rows": {
+                        "height": 22,
+                        "striped": {
+                          "enabled": false
+                        },
+                        "highlight": {
+                          "enabled": false
+                        }
+                      },
+                      "emptyMessage": {
+                        "noData": {
+                          "text": "Nothing yet"
+                        }
+                      },
+                      "enableHeader": true,
+                      "headerStyle": {
+                        "paddingLeft": "8px"
+                      },
+                      "style": {
+                        "classes": "sp-table"
+                      }
+                    },
+                    "position": {
+                      "basis": "122px",
+                      "grow": 0,
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.data": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{view.custom.d.alarms}"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "propConfig": {
+    "custom.d": {
+      "binding": {
+        "type": "expr",
+        "config": {
+          "expression": "now(2000)"
+        },
+        "transforms": [
+          {
+            "type": "script",
+            "code": "\timport sparkplug_demo\n\treturn sparkplug_demo.page_outage()\n"
+          }
+        ]
+      }
+    }
+  }
+}

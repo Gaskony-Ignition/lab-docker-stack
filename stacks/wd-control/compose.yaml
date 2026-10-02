@@ -1,0 +1,89 @@
+name: wd-control
+
+# The demo console's control plane.
+#
+# It runs the TOOLBOX image, which is where every other command in this repo
+# already runs -- docker CLI, compose, bash, python3 -- and it drives the repo's
+# own scripts/stack.sh. So "start a demo" from the page and `make up` from a
+# terminal are the same code path, and cannot drift apart.
+#
+# It is core: the Demos page cannot stop it, because a page that can stop the
+# thing serving it will, once, in front of somebody. `make down` still can.
+
+services:
+  wd-control:
+    # The image the `wd` launcher builds. `build:` is here so `make up` works on
+    # a machine that has never run ./wd -- keep the tag in step with TAG in the
+    # wd launcher.
+    build: ../../tools/toolbox
+    image: wd-toolbox:2
+    container_name: wd-control
+    restart: "no"
+    # `--` is the toolbox's documented escape hatch: run this verbatim instead
+    # of treating the words as a make target.
+    command: ["--", "python3", "/work/control/service.py"]
+    environment:
+      TZ: ${TZ}
+      PYTHONUNBUFFERED: "1"
+      # So the service can tell OUR containers from a stranger's -- compose
+      # labels every container with a HOST path, and in here the repo is /work.
+      WD_REPO_HOST: ${WD_REPO_HOST:?}
+      # THE WIRE's MQTT listener (control/wire.py, docs/DEMO-CONSOLE.md). The
+      # brokers are tried in order and the first that accepts wins: the hub
+      # pair's standby runs no broker, so listing both follows a failover.
+      # Credentials: MQTT_PASSWORD (and MQTT_USER, default ignition) in
+      # WD_WIRE_CREDS, the root .secrets.env, read at connect.
+      WD_WIRE: ${WD_WIRE:-on}
+      WD_WIRE_BROKERS: ${WD_WIRE_BROKERS:-ignition:8883,ignition-backup:8883}
+      WD_WIRE_TOPICS: ${WD_WIRE_TOPICS:-spBv1.0/AlarmDemo/#,spBv1.0/STATE/#,notify/#}
+      WD_WIRE_CREDS: ${WD_WIRE_CREDS:-/work/.secrets.env}
+      WD_WIRE_CA: ${WD_WIRE_CA:-/work/stacks/npm/certs/rootCA.pem}
+      WD_WIRE_POST_URL: ${WD_WIRE_POST_URL:-}
+      # MQTT cuts (control/mqttcut.py): the edges POST /mqtt/cut may take off
+      # wd-mqtt. Its token, WD_CONTROL_TOKEN, is read from .secrets.env per
+      # request, never from here, so it is not in `docker inspect`.
+      WD_MQTT_CUTTABLE: ${WD_MQTT_CUTTABLE:-ignition-edge2,ignition-edge3,ignition-edge4}
+      WD_MQTT_CUT_SECONDS: ${WD_MQTT_CUT_SECONDS:-60}
+    volumes:
+      # THE REPO, AT THE PATH THE DAEMON KNOWS. Not a relative path and not a
+      # seeded copy: this container runs the repo's scripts and reads its
+      # compose files, and a copy taken at start would be a second source of
+      # truth that goes stale the moment somebody edits a stack.
+      #
+      # WD_REPO_HOST is computed by scripts/lib.sh:host_repo_path and exported
+      # by stack.sh, because inside the toolbox the repo is /work -- a path the
+      # daemon has never heard of. `:?` so this fails loudly rather than
+      # mounting an empty directory, which is what Docker does silently.
+      - ${WD_REPO_HOST:?run this through make/stack.sh, which computes it}:/work:ro
+      # THE ONE WRITABLE CORNER, mounted over the read-only repo above. The
+      # console's version picker has to record which Ignition build to run
+      # somewhere the TERMINAL reads too, or `make up` and the page end up on
+      # different versions with nothing to say so. Everything else stays :ro --
+      # this container already holds the socket below, and the less of the repo
+      # it can rewrite the better.
+      - ${WD_REPO_HOST:?run this through make/stack.sh, which computes it}/.wd-local:/work/.wd-local:rw
+      # The host's Docker daemon. This is root on the machine -- see the note in
+      # control/service.py. It is why this container does nothing else.
+      - /var/run/docker.sock:/var/run/docker.sock
+      # Which demos you asked for, so a restart does not lose the shape you had.
+      - state:/state
+    ports:
+      - "${WD_CONTROL_HTTP_HOST_PORT:-29485}:8080"
+    healthcheck:
+      test: ["CMD-SHELL", "python3 -c \"import urllib.request;urllib.request.urlopen('http://127.0.0.1:8080/healthz')\""]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    # backbone is enough for THE WIRE too: the hub's Distributor listens on
+    # every interface the gateway has, so wd-control needn't join wd-mqtt.
+    networks: [backbone]
+    labels:
+      au.gaskony.wd.stack: "wd-control"
+
+volumes:
+  state:
+
+networks:
+  backbone:
+    external: true

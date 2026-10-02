@@ -1,0 +1,246 @@
+{
+  "custom": {},
+  "params": {
+    "name": "",
+    "priority": "",
+    "edgeText": "",
+    "edgeBadge": "badge-neutral",
+    "cloudText": "",
+    "cloudBadge": "badge-neutral",
+    "cloudStale": false,
+    "tip": ""
+  },
+  "props": {
+    "defaultSize": {
+      "width": 600,
+      "height": 26
+    }
+  },
+  "root": {
+    "type": "ia.container.flex",
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "row",
+      "style": {
+        "gap": "10px",
+        "height": "100%",
+        "width": "100%",
+        "padding": "0 4px",
+        "classes": "sp-tr"
+      },
+      "alignItems": "center"
+    },
+    "position": {
+      "shrink": 0
+    },
+    "children": [
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "name",
+          "tooltip": {
+            "enabled": true
+          }
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "lineHeight": "1.35",
+            "whiteSpace": "nowrap",
+            "classes": "sp-cell sp-strong"
+          }
+        },
+        "position": {
+          "basis": "18%",
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.params.name}"
+              }
+            }
+          },
+          "meta.tooltip.text": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.params.tip}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.container.flex",
+        "meta": {
+          "name": "edgeCell"
+        },
+        "props": {
+          "direction": "row",
+          "style": {
+            "minWidth": "0",
+            "overflow": "hidden"
+          },
+          "alignItems": "center"
+        },
+        "position": {
+          "basis": "0px",
+          "grow": 1,
+          "shrink": 1
+        },
+        "children": [
+          {
+            "type": "ia.display.label",
+            "meta": {
+              "name": "edge",
+              "tooltip": {
+                "enabled": true
+              }
+            },
+            "props": {
+              "text": "",
+              "style": {
+                "lineHeight": "1.35",
+                "whiteSpace": "nowrap",
+                "minWidth": "0",
+                "justifyContent": "flex-start"
+              }
+            },
+            "position": {
+              "basis": "0px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "propConfig": {
+              "props.style.classes": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{session.custom.style} + '/status/' + {view.params.edgeBadge}"
+                  }
+                }
+              },
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{view.params.edgeText}"
+                  }
+                }
+              },
+              "meta.tooltip.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{view.params.tip}"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "type": "ia.container.flex",
+        "meta": {
+          "name": "cloudCell"
+        },
+        "props": {
+          "direction": "row",
+          "style": {
+            "minWidth": "0",
+            "overflow": "hidden"
+          },
+          "alignItems": "center"
+        },
+        "position": {
+          "basis": "0px",
+          "grow": 1,
+          "shrink": 1
+        },
+        "children": [
+          {
+            "type": "ia.display.label",
+            "meta": {
+              "name": "cloud",
+              "tooltip": {
+                "enabled": true
+              }
+            },
+            "props": {
+              "text": "",
+              "style": {
+                "lineHeight": "1.35",
+                "whiteSpace": "nowrap",
+                "minWidth": "0",
+                "justifyContent": "flex-start"
+              }
+            },
+            "position": {
+              "basis": "0px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "propConfig": {
+              "props.style.classes": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{session.custom.style} + '/status/' + {view.params.cloudBadge} + if({view.params.cloudStale}, ' sp-stale', '')"
+                  }
+                }
+              },
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{view.params.cloudText}"
+                  }
+                }
+              },
+              "meta.tooltip.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{view.params.tip}"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "propConfig": {
+    "params.name": {
+      "paramDirection": "input"
+    },
+    "params.priority": {
+      "paramDirection": "input"
+    },
+    "params.edgeText": {
+      "paramDirection": "input"
+    },
+    "params.edgeBadge": {
+      "paramDirection": "input"
+    },
+    "params.cloudText": {
+      "paramDirection": "input"
+    },
+    "params.cloudBadge": {
+      "paramDirection": "input"
+    },
+    "params.cloudStale": {
+      "paramDirection": "input"
+    },
+    "params.tip": {
+      "paramDirection": "input"
+    }
+  }
+}

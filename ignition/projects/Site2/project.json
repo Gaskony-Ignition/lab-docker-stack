@@ -1,0 +1,7 @@
+{
+  "title": "Site 2 - Southern Plant",
+  "description": "Site project, pushed to Edge2 by EAM. Inherits the dashboard and every style class from Themes; owns nothing but the two pins in session-props -- style 'aurora-violet' and line 'Line 2'.",
+  "enabled": true,
+  "inheritable": false,
+  "parent": "Themes"
+}

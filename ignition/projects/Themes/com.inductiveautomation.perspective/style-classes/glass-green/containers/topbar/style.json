@@ -1,0 +1,11 @@
+{
+  "base": {
+    "style": {
+      "backgroundColor": "rgba(255,255,255,0.05)",
+      "borderBottomWidth": "1px",
+      "borderBottomStyle": "solid",
+      "borderBottomColor": "rgba(255,255,255,0.22)",
+      "padding": "12px 24px"
+    }
+  }
+}

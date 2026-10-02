@@ -1,0 +1,17 @@
+{
+  "attributes": {
+    "lastModification": {
+      "actor": "external",
+      "timestamp": "1970-01-01T00:00:00Z"
+    }
+  },
+  "files": [
+    "config.json",
+    "doGet.py",
+    "doPost.py"
+  ],
+  "overridable": true,
+  "restricted": false,
+  "scope": "G",
+  "version": 1
+}

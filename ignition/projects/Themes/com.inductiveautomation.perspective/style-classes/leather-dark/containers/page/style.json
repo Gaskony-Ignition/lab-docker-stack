@@ -1,0 +1,12 @@
+{
+  "base": {
+    "style": {
+      "backgroundColor": "#1c1410",
+      "backgroundImage": "radial-gradient(880px 620px at 88% -10%, rgba(255, 186, 96, 0.20) 0%, transparent 62%), repeating-linear-gradient(to bottom, transparent 0 30px, rgba(214, 178, 120, 0.055) 30px 31px)",
+      "color": "#ece0cb",
+      "fontFamily": "Inter, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+      "fontSize": "14px",
+      "overflow": "hidden"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "base": {
+    "style": {
+      "color": "#5f9e6f",
+      "fontSize": "12px",
+      "fontWeight": "700"
+    }
+  }
+}

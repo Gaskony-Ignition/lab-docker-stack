@@ -1,0 +1,32 @@
+# See stacks/postgres/stack.meta for what this file is and who reads it.
+# No MQTT_MODULE, and that is a decision, not an omission: the backup's MQTT
+# Engine settings are config resources, and redundancy synchronises those from
+# the master. Configuring it directly would write the same values the next sync
+# overwrites, and any drift between the two would look like a broken module
+# rather than a fight over who owns the setting. (This retires the old
+# MQTT_GATEWAYS list in lib.sh, which said the same thing and was read by
+# nothing.) No TEST_HOST for the same reason as the hub -- see
+# stacks/ignition/stack.meta.
+ORDER=50
+KIND=gateway
+ROLE=backup
+STANZA=local-backup
+PORT_VAR=BACKUP_HTTP_HOST_PORT
+PORT_DEFAULT=29388
+STATUS_NOTE="redundant backup, standard"
+
+# The backup has a name of its own on purpose. It serves no Perspective
+# session, so the only reason to reach it is its CONFIG UI -- and that is
+# exactly when it matters: a standby runs no project scripts, so it cannot
+# maintain its own trial, and checking it before a redundancy demonstration is
+# the difference between finding out now and finding out in front of someone.
+TEST_HOST=backup.test
+TEST_FORWARD_PORT=8088
+
+# The address this gateway tells a BROWSER to use -- what the gateway home
+# page's Launch Perspective button is built from, and what a redundant peer
+# redirects to. With auto-detect on, a gateway advertises the address it sees
+# itself at, which in a container is a docker-internal one no browser can
+# reach: the button then leads to an error rather than to a session.
+# Here: same origin as the master, deliberately -- see the hub's manifest.
+PUBLIC_HOST=ignition.test

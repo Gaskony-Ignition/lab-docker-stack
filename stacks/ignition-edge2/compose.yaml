@@ -1,0 +1,99 @@
+name: ignition-edge2
+
+# SPOKE 2 of the hub-and-spoke Gateway Network.
+# Identical to ignition-edge1 apart from the name, the host port block and the
+# data volume. The hub is the `ignition` stack, reached as `ignition:8060`.
+
+services:
+  ignition-edge2:
+    # The version is a VARIABLE with the repo's declared version as its default,
+    # and the default is what `make validate` and `scripts/watch-upstream.sh`
+    # both read -- so bumping it here is what "this repo runs 8.3.x" means.
+    # Override per machine in this stack's gitignored .env, which is what
+    # `make ignition-version SET=<v>` writes to all four gateways at once.
+    # THEY MUST MATCH: a redundant pair on two versions does not sync, and an
+    # EAM push to a mismatched edge is a gamble. ign-version.sh writes all four
+    # together, and validate refuses a set that disagrees.
+    image: inductiveautomation/ignition:${IGNITION_VERSION:-8.3.9}
+    container_name: ignition-edge2
+    # "no", quoted -- bare no is YAML false. A DEMO stack must never come back on
+    # its own: unless-stopped resurrects whatever was running when the daemon
+    # restarts, which on 07/08/2026 silently returned all eleven stacks for three
+    # days. Start with `make up`, stop with `make down`.
+    restart: "no"
+    environment:
+      TZ: ${TZ}
+      # Unattended commissioning. Applies only on an empty data volume; once
+      # data/commissioning.json exists these are ignored. IGNITION_EDITION in
+      # particular CANNOT be changed after the fact -- switching a gateway
+      # between edge and standard means `docker compose down -v` and rebuild.
+      ACCEPT_IGNITION_EULA: "Y"
+      IGNITION_EDITION: edge
+      GATEWAY_ADMIN_USERNAME: ${GATEWAY_ADMIN_USERNAME}
+      GATEWAY_ADMIN_PASSWORD: ${GATEWAY_ADMIN_PASSWORD}
+      GATEWAY_HTTP_PORT: 8088
+      GATEWAY_HTTPS_PORT: 8043
+      GATEWAY_GAN_PORT: 8060
+      # glibc gives a process up to 8 x cores malloc arenas (128 on a 16-core
+      # host) and Ignition's ~220 threads spread allocations across all of them.
+      # Capping it is where the RSS saving is -- NOT in -Xmx, which controls the
+      # heap, and the heap was never the bulk. See docs/ARCHITECTURE.md.
+      MALLOC_ARENA_MAX: "2"
+    # Args after `--` land in data/gateway.xml on every start. The forwarded
+    # header setting is what makes this gateway usable through Nginx Proxy
+    # Manager -- see the ignition stack for the full explanation.
+    # -n re-applies on EVERY container start, not just commissioning -- an API
+    # rename of a running gateway is overwritten on its next boot unless this
+    # arg matches. Verified 03/08/2026 when a docker restart quietly reverted
+    # both edges to their old names. Compose is the source of truth for the
+    # system name; change it here and RECREATE (up -d), not restart.
+    command: >
+      -n Ignition-Edge2
+      -m 512
+      --
+      -XX:ParallelGCThreads=2
+      -XX:ConcGCThreads=1
+      -XX:G1PeriodicGCInterval=300000
+      -XX:G1PeriodicGCSystemLoadThreshold=0
+      gateway.useProxyForwardedHeader=true
+    ports:
+      - "${EDGE2_HTTP_HOST_PORT:-29288}:8088"   # HTTP  - http://localhost:29288
+      - "${EDGE2_HTTPS_HOST_PORT:-29243}:8043"   # HTTPS - https://localhost:29243
+      - "${EDGE2_OPCUA_HOST_PORT:-29241}:62541"   # OPC UA server - opc.tcp://localhost:29241
+    volumes:
+      - edge2_data:/usr/local/bin/ignition/data
+    networks:
+      backbone: {}
+      # wd-mqtt: this edge's Transmission dials the hub pair's Distributor as
+      # mqtt-master / mqtt-backup, names that exist only on it -- so
+      # `docker network disconnect wd-mqtt <edge>` is the cut, and backbone stays.
+      mqtt: {}
+    stop_grace_period: 30s
+    healthcheck:
+      test: ["CMD", "/usr/local/bin/health-check.sh", "-s", "RUNNING",
+             "http://localhost:8088/StatusPing"]
+      interval: 15s
+      timeout: 10s
+      # 20 and 180s, not 10 and 120s. A gateway's start is CPU-bound
+      # (classloading, then the project scan), so on the 2-core machines this
+      # stack is meant to run on it routinely needs longer than two minutes --
+      # and a gateway marked unhealthy is not a cosmetic wrong answer: the
+      # console's reconcile loop waits on health before starting the next
+      # stack, so a window that is too tight starts two JVMs at once on the
+      # machine that could least afford one. The cost is that a genuinely dead
+      # gateway takes longer to be called dead, which is the right way round.
+      retries: 20
+      start_period: 180s
+    labels:
+      au.gaskony.wd.stack: "ignition-edge2"
+
+volumes:
+  edge2_data:
+
+networks:
+  backbone:
+    external: true
+  # wd-mqtt: created by scripts/lib.sh:ensure_mqtt_net, like backbone.
+  mqtt:
+    name: wd-mqtt
+    external: true

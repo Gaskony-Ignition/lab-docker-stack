@@ -1,0 +1,38 @@
+# See stacks/postgres/stack.meta for what this file is and who reads it.
+#
+# `ignition.test` IS NOT THIS STACK and must never be pointed here: the name
+# means the redundant PAIR, so it belongs to stacks/ignition-ha -- the
+# active-passive proxy -- not to either half. Point it here and the failover
+# front door silently dies while everything still renders.
+#
+# `console.test` is this half, and it exists because the demo console changed
+# what "normally running" means. Every .test name belonged to an optional demo,
+# so on a core-only machine all ten of them 502 -- including ignition.test,
+# because ignition-ha is part of the redundancy demo. The one gateway that is
+# always up, and the one hosting the page you start demos FROM, was the only
+# one reachable solely by a raw host port.
+#
+# Named `console`, not `hub`: it must not read like a shortcut to the pair.
+# Anyone who bookmarks it, runs the redundancy demo and fails over would see
+# nothing change, because they are looking at one half directly -- which is the
+# same trap the paragraph above is about.
+ORDER=40
+KIND=gateway
+ROLE=hub
+STANZA=local
+PORT_VAR=IGNITION_HTTP_HOST_PORT
+PORT_DEFAULT=29088
+STATUS_NOTE="hub, standard -- https://console.test"
+MQTT_MODULE=engine
+TEST_HOST=console.test
+TEST_FORWARD_PORT=8088
+
+# The address this gateway tells a BROWSER to use -- what the gateway home
+# page's Launch Perspective button is built from, and what a redundant peer
+# redirects to. With auto-detect on, a gateway advertises the address it sees
+# itself at, which in a container is a docker-internal one no browser can
+# reach: the button then leads to an error rather than to a session.
+# Here: the PAIR's front door, not console.test: a standby redirects a
+# session to the ACTIVE half's public address, so both halves must advertise one
+# origin or the browser blocks the redirect and the session hangs at Connecting.
+PUBLIC_HOST=ignition.test

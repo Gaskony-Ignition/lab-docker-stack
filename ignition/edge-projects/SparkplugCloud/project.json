@@ -1,0 +1,7 @@
+{
+  "title": "Sparkplug Cloud",
+  "description": "The Sparkplug alarms demo's HUB half of the notification question: one alarm pipeline, CloudNotify, whose Script block calls sp_cloud.notify and answers the edge through an Engine tag (DCMD). Deployed to the hub BY NAME by scripts/sparkplug-setup.sh -- it sits beside SparkplugEdge so that ign-deploy.sh --all never sweeps it onto another gateway.",
+  "enabled": true,
+  "inheritable": false,
+  "parent": ""
+}

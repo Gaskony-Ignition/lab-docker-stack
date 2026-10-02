@@ -1,0 +1,17 @@
+{
+  "base": {
+    "style": {
+      "backgroundColor": "#17202B",
+      "backgroundImage": "linear-gradient(90deg, rgba(255, 46, 46, .18), rgba(255, 46, 46, .04))",
+      "color": "#FFD9D9",
+      "borderWidth": "1px",
+      "borderStyle": "solid",
+      "borderColor": "#FF4D4D",
+      "borderBottomWidth": "1px",
+      "borderBottomStyle": "solid",
+      "borderBottomColor": "rgba(255, 77, 77, .5)",
+      "padding": "10px 18px",
+      "fontSize": "14px"
+    }
+  }
+}

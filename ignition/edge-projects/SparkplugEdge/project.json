@@ -1,0 +1,7 @@
+{
+  "title": "Sparkplug Edge",
+  "description": "The Sparkplug alarms demo's edge project. Deployed by scripts/sparkplug-setup.sh to every ROLE=edge-isolated gateway AS that gateway's one project, named Edge -- never over EAM, because these edges have no Gateway Network. Runs one pump station, serves the read-only observer endpoint the console reads, and a local operator page.",
+  "enabled": true,
+  "inheritable": false,
+  "parent": ""
+}

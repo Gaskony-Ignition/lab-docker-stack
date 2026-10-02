@@ -1,0 +1,412 @@
+/* GatewayAdmin's own stylesheet -- HAND-MAINTAINED, no generator.
+ *
+ * It used to be generated, and had to be: a child project's stylesheet REPLACES
+ * its parent's rather than merging with it, so this file had to carry the whole
+ * of Styles_Template2's 4,346-line sheet ahead of its own rules or it silently
+ * discarded ~780 shared declarations. Screenshots looked perfect either way,
+ * which is what made that trap expensive.
+ *
+ * With the token layer moved into gateway THEMES there is no parent stylesheet
+ * to concatenate -- a theme is not a project resource and cannot be replaced by
+ * one. That is the single biggest win of the cutover: this file is 218 lines
+ * instead of 4,589, and every project gets its stylesheet back.
+ *
+ * The --neutral-00..100 block went too. It existed to redefine Ignition's own
+ * neutrals per pack so the Architecture Builder's internals -- which carry no
+ * class names at all and paint themselves from those variables -- picked up our
+ * colours. The theme now sets --neutral-10..100 on :root gateway-wide, so that
+ * happens by construction rather than by a rule we maintain.
+ *
+ * What is left cannot come from a theme: rules targeting classes drawn by
+ * bundled third-party libraries (React Flow's zoom controls, its screenshot
+ * icon with a hard-coded #555), Perspective's own internal component classes,
+ * and the demo grid's dotted slots. Values are read from the theme's variables
+ * so they follow whatever theme is on screen.
+ */
+
+
+/* ---- rules, written once and driven by those variables ---- */
+[class*="psc-"] .react-flow__controls-button {
+  background: var(--container);
+  border-bottom: 1px solid var(--containerBorder);
+  fill: var(--label);
+  color: var(--label);
+}
+[class*="psc-"] .react-flow__controls-button[title="Download Full Screenshot"] svg {
+  stroke: var(--label);
+  color: var(--label);
+}
+[class*="psc-"] .react-flow__controls-button:hover { background: var(--containerNested); }
+[class*="psc-"] .react-flow__controls {
+  border: 1px solid var(--containerBorder);
+  box-shadow: 0 4px 16px rgba(0,0,0,.35);
+}
+[class*="psc-"] .react-flow__attribution { background: transparent; }
+[class*="psc-"] .react-flow__attribution a { color: var(--label--disabled); }
+[class*="psc-"] .ia_horizontalMenuComponent__item {
+  background: transparent !important;
+  color: var(--label) !important;
+}
+[class*="psc-"] .ia_horizontalMenuComponent__item.active,
+[class*="psc-"] .ia_horizontalMenuComponent__item:hover {
+  background: var(--containerNested) !important;
+  color: var(--label) !important;
+}
+[class*="psc-"] .ia_horizontalMenuComponent__menu,
+[class*="psc-"] .ia_horizontalMenuComponent__subMenu {
+  background: var(--container) !important;
+  border: 1px solid var(--containerBorder) !important;
+  color: var(--label) !important;
+}
+[class*="psc-"] .ia_horizontalMenuComponent__sideNav__iconContainer {
+  background: transparent !important;
+}
+[class*="psc-"] .tab-menu.menu-modern {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  align-items: stretch !important;
+}
+[class*="psc-"] .ia_tabContainerComponent__tab--modern {
+  flex: 0 0 auto !important;
+  width: auto !important;
+  min-width: 0 !important;
+  height: auto !important;
+  padding: 0 22px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  border-bottom: 2px solid transparent !important;
+  color: var(--label--disabled);
+  white-space: nowrap;
+}
+[class*="psc-"] .ia_tabContainerComponent__tab--modern--active {
+  color: var(--label);
+  font-weight: 700;
+  border-bottom: 2px solid var(--callToAction) !important;
+}
+[class*="psc-"] .ia_tabContainerComponent__tabMenuRight--modern {
+  border-bottom: 0 !important;
+}
+[class*="psc-"] .psc-wd-conn-chip {
+  background-color: var(--container);
+  box-shadow: 0 2px 10px rgba(0,0,0,.35);
+}
+[class*="psc-"] .psc-wd-conn-sub {
+  color: var(--label--disabled);
+}
+/* One box on a demo tab's architecture strip (views/StripNode, shared by the
+ * MQTT and Store & Forward tabs). A theme's containers/card pads by 16px, which
+ * leaves a 44px strip box no room for its two lines -- hence a class of its own
+ * rather than that one with the padding fought back out. */
+[class*="psc-"] .psc-wd-node {
+  background-color: var(--container);
+  border: 1px solid var(--containerBorder);
+  border-radius: 6px;
+  box-sizing: border-box;
+  padding: 4px 12px;
+}
+[class*="psc-"] .psc-wd-slot {
+  background-color: transparent !important;
+  border: 2px dotted var(--containerBorder) !important;
+  box-shadow: none !important;
+}
+[class*="psc-"] .psc-wd-slot-plus {
+  color: var(--label--disabled);
+  opacity: .75;
+}
+[class*="psc-"] .psc-wd-slot-caption {
+  color: var(--label--disabled);
+  opacity: .75;
+}
+
+/* Main supplies its own header, so the tab container's native strip is
+ * hidden. Two things the strip could not do: a tab renders `text` only, so
+ * no icons, and it is one left-aligned row, so it cannot separate the three
+ * demonstrations from the Architecture Builder -- which is a tool to use
+ * live with a customer rather than a demo, and belongs on the right beside
+ * Appearance.
+ *
+ * The CONTAINER stays and still holds all four views. That is the point:
+ * runWhileHidden keeps each tab's view mounted, and unmounting Architecture
+ * wipes its canvas and undo stack (e6bce78). The header buttons drive it by
+ * writing view.custom.tab, which currentTabIndex is bound to.
+ */
+.tab-menu {
+  display: none !important;
+}
+
+/* The connector between the hub and an edge IS the road, so it carries
+ * the road's identity: colour by transport, and a gradient that travels
+ * down it only while data is actually moving. Stated as text on the
+ * cards, the one thing that differs between the two edges was the one
+ * thing you had to read rather than see.
+ *
+ * Pack-independent on purpose. These two hues have to stay distinct from
+ * each other on all 19 packs, light and dark, which no single pack's
+ * palette guarantees -- and the meaning (which road) does not change with
+ * the theme. The stalled grey is the same slate the tree lines already
+ * used.
+ *
+ * The selectors carry the psc- prefix because that is what Perspective
+ * actually emits: a props.style.classes value of "wd-conn" lands in the
+ * DOM as class="psc-wd-conn". Written without it the rules match nothing,
+ * the lines render 0px wide and the page looks like the view failed to
+ * load rather than like a stylesheet that missed.
+ *
+ * The animation moves the BACKGROUND, not the element, so it costs no
+ * layout and cannot shift anything around it.
+ */
+@keyframes wd-conn-flow {
+  from { background-position: 0 0; }
+  to   { background-position: 0 18px; }
+}
+.psc-wd-conn {
+  width: 3px;
+  border-radius: 2px;
+  background-color: rgba(148, 163, 184, 0.35);
+}
+.psc-wd-conn--stalled {
+  background-color: rgba(148, 163, 184, 0.30);
+}
+.psc-wd-conn--flowing {
+  background-size: 3px 18px;
+  animation: wd-conn-flow 1.1s linear infinite;
+}
+.psc-wd-conn--gan.psc-wd-conn--flowing {
+  background-color: rgba(56, 189, 248, 0.55);
+  background-image: repeating-linear-gradient(180deg,
+    #38bdf8 0 7px, rgba(56, 189, 248, 0) 7px 18px);
+}
+.psc-wd-conn--mqtt.psc-wd-conn--flowing {
+  background-color: rgba(232, 121, 249, 0.55);
+  background-image: repeating-linear-gradient(180deg,
+    #e879f9 0 7px, rgba(232, 121, 249, 0) 7px 18px);
+}
+
+/* The label sits IN the line -- the chip's own background breaks it, the
+ * way a legend breaks a rule on a diagram. Needs a solid background, so
+ * it inherits the card surface rather than picking a colour.
+ */
+.psc-wd-conn-chip {
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  background-color: var(--neutral-20, rgba(15, 23, 42, 0.92));
+  text-align: center;
+}
+.psc-wd-conn-chip--gan {
+  border-color: rgba(56, 189, 248, 0.55);
+  color: #38bdf8;
+}
+.psc-wd-conn-chip--mqtt {
+  border-color: rgba(232, 121, 249, 0.55);
+  color: #e879f9;
+}
+
+/* The redundant pair sits side by side, so its link is HORIZONTAL and
+ * its animation runs along x rather than y. Green because it is neither
+ * of the two edge roads -- it is the pair keeping itself in step, and a
+ * viewer should never have to work out whether a cyan line means an edge
+ * or a backup.
+ */
+@keyframes wd-conn-flow-h {
+  from { background-position: 0 0; }
+  to   { background-position: 18px 0; }
+}
+.psc-wd-conn-h {
+  height: 3px;
+  border-radius: 2px;
+  background-color: rgba(148, 163, 184, 0.35);
+}
+.psc-wd-conn-h--stalled {
+  background-color: rgba(148, 163, 184, 0.30);
+}
+/* The leg that drops from the pair bubble to meet the line coming up
+ * from the edges. Same colour as the pair link, but it runs vertically,
+ * so it takes the y animation.
+ */
+.psc-wd-conn-h.psc-wd-conn-h--sync[style*="width: 3px"] {
+  background-size: 3px 18px;
+  background-image: repeating-linear-gradient(180deg,
+    #34d399 0 7px, rgba(52, 211, 153, 0) 7px 18px);
+  animation: wd-conn-flow 1.1s linear infinite;
+}
+.psc-wd-conn-h--sync {
+  background-color: rgba(52, 211, 153, 0.55);
+  background-image: repeating-linear-gradient(90deg,
+    #34d399 0 7px, rgba(52, 211, 153, 0) 7px 18px);
+  background-size: 18px 3px;
+  animation: wd-conn-flow-h 1.1s linear infinite;
+}
+.psc-wd-conn-chip--sync {
+  border-color: rgba(52, 211, 153, 0.55);
+  color: #34d399;
+}
+.psc-wd-conn-chip--stalled {
+  border-color: rgba(148, 163, 184, 0.40);
+  color: #94a3b8;
+}
+
+/* The Sparkplug tab's flow diagram, same wd-conn-h mechanics as the pair's
+ * link above -- horizontal because the picture reads left to right (edges ->
+ * broker -> hub), not top to bottom. Two more colours because this tab has
+ * two roads to tell apart on sight: DATA (amber) is Sparkplug travelling
+ * edge -> broker -> hub, the direction that carries tags and alarms; COMMAND
+ * (blue) is the return lane -- a setpoint, a mode, an ack -- travelling back.
+ * Neither is gan/mqtt/sync from the demos above: reusing one of those hues
+ * here would say "this is the same road as Store & Forward's MQTT site",
+ * which it is not -- different edges, different group, no shared history.
+ */
+.psc-wd-conn-h--data.psc-wd-conn-h--flowing {
+  background-color: rgba(245, 158, 11, 0.55);
+  background-image: repeating-linear-gradient(90deg,
+    #f59e0b 0 7px, rgba(245, 158, 11, 0) 7px 18px);
+  background-size: 18px 3px;
+  animation: wd-conn-flow-h 1.1s linear infinite;
+}
+.psc-wd-conn-h--command.psc-wd-conn-h--flowing {
+  background-color: rgba(96, 165, 250, 0.55);
+  background-image: repeating-linear-gradient(90deg,
+    #60a5fa 0 7px, rgba(96, 165, 250, 0) 7px 18px);
+  background-size: 18px 3px;
+  animation: wd-conn-flow-h 1.1s linear infinite;
+}
+.psc-wd-conn-chip--data {
+  border-color: rgba(245, 158, 11, 0.55);
+  color: #f59e0b;
+}
+.psc-wd-conn-chip--command {
+  border-color: rgba(96, 165, 250, 0.55);
+  color: #60a5fa;
+}
+
+/* Perspective's own per-component QUALITY OVERLAY anchors a SIBLING overlay
+ * div over a label -- confirmed by inspecting document.elementsFromPoint,
+ * both times a plain <span> of text with no border of its OWN underneath.
+ * Two variants seen on this tab, not one:
+ *   ia_qualityOverlay__icon...   a small red/green/yellow dot (Phase 4,
+ *                                 11/09/2026) -- "Engin[dot]: N ms".
+ *   ia_qualityOverlay--error     a solid border BOX the same size as the
+ *                                 label, seen once this label ALSO carries a
+ *                                 tooltip binding (Phase 5, latencyNote) --
+ *                                 same feature, a different rendering for
+ *                                 the same "error" quality state, and the
+ *                                 icon-only selector below did not catch it.
+ * Neither reflects anything this page means by "quality" -- every value
+ * here is a Python-computed string, not a live tag read, and the console
+ * already shows real tag quality as TEXT on this tab's Tags/UDT tables
+ * ("Good 18:53:16" under every value).
+ *
+ * SCOPED TO THE SPARKPLUG TAB ONLY, on purpose -- a bare selector here is a
+ * SHARED CLAIM across every tab this stylesheet serves (EAM, Store &
+ * Forward, Architecture, Redundancy, Demos all live in this one project and
+ * share this one stylesheet resource); nothing says the overlay would be
+ * redundant, wrong, or even present anywhere else. `.psc-sparkplug-scope` is
+ * a plain (non-theme) class Sparkplug/view.json's own root carries in its
+ * style.classes specifically so rules like this one can be confined to it --
+ * see docs/PERSPECTIVE-LAYOUT.md on the "psc-" prefix Perspective stamps
+ * onto every token in props.style.classes, themed or not.
+ */
+.psc-sparkplug-scope [class*="ia_qualityOverlay"] {
+  display: none !important;
+}
+
+/* ---- The Sparkplug tab's guided scenarios (generated by scripts/gen-sparkplug-views.py) ----
+ * Scoped to .psc-sparkplug-scope, which the tab's root, its popups and its
+ * drawer carry: this stylesheet serves every tab. Colours come from theme
+ * variables so the page follows the session theme. Selectors are doubled up
+ * with the scope because a theme class on the same element is otherwise an
+ * equal-specificity race decided by load order.
+ */
+.psc-sparkplug-scope *::-webkit-scrollbar { width: 10px; height: 10px; }
+.psc-sparkplug-scope *::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); }
+.psc-sparkplug-scope *::-webkit-scrollbar-thumb {
+  background: var(--callToAction); border-radius: 5px;
+  border: 2px solid transparent; background-clip: padding-box;
+}
+.psc-sparkplug-scope .psc-sp-card {
+  background-color: var(--container);
+  border: 1px solid var(--containerBorder);
+  border-radius: 6px;
+  padding: 10px 14px;
+  box-sizing: border-box;
+}
+.psc-sparkplug-scope .psc-sp-try {
+  background-color: var(--containerNested);
+  border-left: 3px solid var(--callToAction);
+  border-radius: 4px;
+  padding: 5px 12px;
+  font-size: 13px;
+}
+.psc-sparkplug-scope .psc-sp-key { font-weight: 700; color: var(--callToAction); font-size: 13px; }
+.psc-sparkplug-scope .psc-sp-th {
+  font-size: 12px; font-weight: 600; letter-spacing: .04em;
+  text-transform: uppercase; color: var(--label--disabled);
+}
+.psc-sparkplug-scope .psc-sp-cell { font-size: 13px; }
+.psc-sparkplug-scope .psc-sp-value { font-size: 14px; }
+.psc-sparkplug-scope .psc-sp-th-plain { font-size: 12px; font-weight: 600; color: var(--label--disabled); }
+.psc-sparkplug-scope .psc-sp-tr-soft { border-bottom: 1px dotted var(--containerBorder); box-sizing: border-box; }
+.psc-sparkplug-scope .psc-sp-strong { font-weight: 600; }
+.psc-sparkplug-scope .psc-sp-value { font-weight: 600; color: var(--label); }
+.psc-sparkplug-scope .psc-sp-tr { border-bottom: 1px solid var(--containerBorder); box-sizing: border-box; }
+.psc-sparkplug-scope .psc-sp-tr--active { background-color: rgba(245, 158, 11, 0.10); }
+.psc-sparkplug-scope .psc-sp-alarm-on { color: #f87171; font-weight: 600; }
+/* A cloud cell whose edge is offline: the last state that crossed the broker,
+ * not the state now. Dimmed and grey on top of badge-neutral, which a live
+ * "Cleared" also wears, so the whole block changes and not just its actives. */
+.psc-sparkplug-scope .psc-sp-stale { opacity: .45; filter: grayscale(1); }
+/* Table-row pills pad less than the theme's 12px: an alarm cell is 167px wide
+ * at 1366x640 and "Cleared, unacknowledged (2)" has to fit it whole. */
+.psc-sparkplug-scope .psc-sp-tr [class*="/status/badge-"] { padding-left: 8px !important; padding-right: 8px !important; }
+.psc-sparkplug-scope .psc-sp-ellipsis > span {
+  min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+/* The demo is not running. Warm, not alarming: nothing is broken, it has
+ * simply not been started -- and the sentence says where to start it. Colour
+ * and weight only: this replaces the blurb on the header's second line, so a
+ * box or padding here would move the whole page down. */
+.psc-sparkplug-scope .psc-sp-notready,
+.psc-sparkplug-scope .psc-sp-notready > span {
+  color: #f59e0b !important;
+  font-weight: 600;
+}
+.psc-sparkplug-scope .psc-sp-banner {
+  border-left: 4px solid var(--containerBorder);
+  background-color: var(--containerNested);
+  border-radius: 4px;
+  padding: 6px 12px;
+}
+.psc-sparkplug-scope .psc-sp-banner--good { border-left-color: #35d39a; }
+.psc-sparkplug-scope .psc-sp-banner--warn { border-left-color: #f59e0b; }
+.psc-sparkplug-scope .psc-sp-step-n {
+  align-items: center; justify-content: center; font-weight: 700; font-size: 13px;
+  border-radius: 50%; background-color: var(--containerNested); color: var(--callToAction);
+  border: 1px solid var(--callToAction); box-sizing: border-box;
+}
+.psc-sparkplug-scope .psc-sp-step-n > span { line-height: 1; }
+.psc-sparkplug-scope.psc-sp-drawer {
+  border-top: 2px solid var(--callToAction);
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.45);
+}
+.psc-sparkplug-scope .psc-sp-table { background-color: transparent; font-size: 13px; }
+/* The Store & Forward evidence tables: the same transparent ground as the
+ * MQTT tables, unscoped because that page has no scope class of its own. */
+.psc-sf-table { background-color: transparent; font-size: 13px; }
+/* Theme badges shout in 11px capitals; one-word states read calmer at 12px. */
+.psc-sparkplug-scope [class*="/status/badge-"] {
+  font-size: 13px !important; text-transform: none !important; letter-spacing: .02em !important;
+}
+
+/* A label's root is display:flex, set inline by the component and re-applied
+ * over props.style, and text-overflow never applies to a flex box -- so a long
+ * wire metrics line was hard-cut mid-word. The ellipsis goes on the span. */
+.psc-wire-metrics > span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

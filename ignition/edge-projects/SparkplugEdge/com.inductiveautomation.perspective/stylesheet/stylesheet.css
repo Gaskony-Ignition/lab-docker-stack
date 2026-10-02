@@ -1,0 +1,45 @@
+/* Edge's own stylesheet -- a11y fixes for the alarm status table, on top of
+ * the industrial-dark theme. No row-style/priority prop is configured on
+ * this ia.display.alarmstatustable (verified in Station/view.json), so
+ * these are the component's own stock colours, not this project's choice.
+ */
+
+/* The table stripes rows by INLINE style (alternating #7198d6 / #507abf,
+ * by row index, unrelated to alarm priority) -- white text (#fafafb)
+ * measured 2.8:1 / 4.12:1 on them. !important is what beats an inline
+ * style; black passes 4.5:1 on both stripes (7.16:1 / 4.88:1). */
+.alarmTableBodyRow {
+  color: #000000 !important;
+}
+
+/* Toolbar tab label (inactive), #6a6f75 on #0f161e measured 3.59:1. */
+.ia_alarmTableComponent__toolbar__tab {
+  color: #9aa0a6 !important;
+}
+
+/* Focus ring: the table grid and its filter input turn their own outline
+ * off internally (same gap ignition-themes and toolbox/alarms both hit on
+ * this component) -- !important and an inset offset are what beat that.
+ */
+:focus-visible, .ia_dropdown.ia_dropdown--focused {
+  outline: 2px solid var(--a11y-focus-ring, var(--neutral-100));
+  outline-offset: 1px;
+}
+.ReactVirtualized__Grid:focus-visible {
+  outline: 2px solid var(--a11y-focus-ring, var(--neutral-100)) !important;
+  outline-offset: -2px;
+}
+.ia_alarmTableComponent__toolbar__activeFilterInput:focus-visible {
+  outline: 2px solid var(--a11y-focus-ring, var(--neutral-100)) !important;
+  outline-offset: 1px;
+}
+/* Every focusable inside the table (grid, filter, and each row's own select
+ * checkbox) sits on the striped row backgrounds above, where
+ * var(--a11y-focus-ring, --neutral-100) measured 2.53:1 -- short of 3:1.
+ * The adaptive UA ring passes against any background, same fix as
+ * Site1/Site2's toggle-switch, and wins here as the later, more specific
+ * rule over the two above. */
+[data-component="ia.display.alarmstatustable"] :focus-visible {
+  outline-style: auto !important;
+  outline-width: 2px !important;
+}

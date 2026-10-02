@@ -1,0 +1,99 @@
+{
+  "_comment": [
+    "Which demonstrations exist, and what each one needs running.",
+    "",
+    "The stack grew to twelve stacks and about 10 GB, and almost none of it",
+    "is needed for any ONE demonstration. So the core stays up and everything",
+    "else is started on demand -- from the Demos page in GatewayAdmin, or from",
+    "`make demo-start`, both of which go through the same control plane.",
+    "",
+    "A stack may appear in several demos, and that is the point: the edges",
+    "carry the EAM push and the store-and-forward road.",
+    "Nothing here reference-counts by hand -- the control plane reconciles",
+    "against the set of demos you have asked for, so stopping one demo cannot",
+    "take a stack out from under another one that is still running.",
+    "",
+    "The CORE is not a demo and the page cannot stop it: the gateway serving",
+    "the button is in it, and a page that can kill its own gateway will, once,",
+    "in front of somebody. `make down` still stops everything, as always --",
+    "the command line keeps the big hammer, the page does not get one.",
+    "",
+    "Each demo is titled after its own tab, and that pairing is the whole",
+    "navigation. `tab` names the tab a demo is shown on: the tab is DISABLED",
+    "until that demo is running, because a tab whose stacks are down renders",
+    "cards full of dashes and reads as broken rather than un-started. The key",
+    "is the vocabulary demo_guide.TAB_TOPICS uses and deliberately NOT a tab",
+    "index -- an index would couple this file to the order of Main's children,",
+    "which ia.container.tab keys by POSITION and which nothing would re-check",
+    "if it changed.",
+    "",
+    "The ORDER of this list is the order the cards are drawn in, and it must",
+    "match the order of the tabs along the top -- a card third from the left",
+    "whose tab is first reads as two different navigations, and the eye tries",
+    "to pair them by position before it reads either label. That order lives",
+    "in demo_control.TAB_KEYS, and `make validate` cross-checks the two, since",
+    "either can be reordered on its own and the page still renders perfectly.",
+    "",
+    "The page draws ONE ROW of demo_control.ACROSS (4) tiles: demos fill it",
+    "from the left, the rest are inert dotted slots with a '+', which is how",
+    "the page says more demonstrations are coming rather than implying the",
+    "current count is the product. Adding a demo here consumes a slot and",
+    "needs no layout change until the row is exactly full (it is, at four:",
+    "eam, store-forward, redundancy, sparkplug). A FIFTH needs both",
+    "demo_control.ACROSS and the repeater's basis in Demos/view.json moved",
+    "together, and validate fails until they are."
+  ],
+  "core": {
+    "stacks": [
+      "npm",
+      "ignition",
+      "wd-control"
+    ],
+    "why": "The front door, the gateway that hosts the console (and, on its redundant pair, the MQTT broker), and the control plane itself."
+  },
+  "demos": [
+    {
+      "id": "eam",
+      "title": "EAM Demo",
+      "blurb": "Push a project from the hub to both edges and watch it land, without touching either of them.",
+      "stacks": [
+        "ignition-edge1",
+        "ignition-edge2"
+      ],
+      "tab": "eam"
+    },
+    {
+      "id": "store-forward",
+      "title": "Store & Forward Demo",
+      "blurb": "An edge that keeps its data through an outage and hands it over afterwards -- over the Gateway Network and over MQTT.",
+      "stacks": [
+        "postgres",
+        "ignition-edge1",
+        "ignition-edge2"
+      ],
+      "tab": "storeforward"
+    },
+    {
+      "id": "redundancy",
+      "title": "Redundancy Demo",
+      "blurb": "Two gateways behind one name. Fail the active half and watch the front door follow it.",
+      "stacks": [
+        "postgres",
+        "ignition-backup",
+        "ignition-ha"
+      ],
+      "tab": "redundancy"
+    },
+    {
+      "id": "sparkplug",
+      "title": "MQTT Demo",
+      "blurb": "Two Edge gateways with no Gateway Network: tags, alarms, acknowledgements and notifications reach the cloud over MQTT (Sparkplug B), and commands come back.",
+      "stacks": [
+        "postgres",
+        "ignition-edge3",
+        "ignition-edge4"
+      ],
+      "tab": "sparkplug"
+    }
+  ]
+}

@@ -1,0 +1,227 @@
+{
+  "custom": {
+    "cursor": 0,
+    "history": [
+      {
+        "edges": {},
+        "key": "{}|{}",
+        "nodes": {}
+      }
+    ],
+    "lastEditMillis": 0,
+    "status": "empty canvas"
+  },
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "height": 800,
+      "width": 1280
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "config": {
+                        "script": "\tview = self.view\n\thistory = list(view.custom.history)\n\ttarget = view.custom.cursor + (-1)\n\tif target < 0 or target >= len(history):\n\t\tview.custom.status = 'nothing to undo'\n\t\treturn\n\n\tentry = history[target]\n\tbuilder = self.parent.getSibling('builder')\n\tbuilder.props.nodes = entry['nodes']\n\tbuilder.props.edges = entry['edges']\n\tview.custom.cursor = target\n\t# Zero this so the next real edit is never collapsed into the restore.\n\tview.custom.lastEditMillis = 0\n\tview.custom.status = 'step ' + str(target + 1) + ' of ' + str(len(history))\n"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                },
+                "meta": {
+                  "name": "undo"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "props": {
+                  "style": {
+                    "marginRight": "8px"
+                  },
+                  "text": "↶ Undo"
+                },
+                "type": "ia.input.button"
+              },
+              {
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "config": {
+                        "script": "\tview = self.view\n\thistory = list(view.custom.history)\n\ttarget = view.custom.cursor + (1)\n\tif target < 0 or target >= len(history):\n\t\tview.custom.status = 'nothing to redo'\n\t\treturn\n\n\tentry = history[target]\n\tbuilder = self.parent.getSibling('builder')\n\tbuilder.props.nodes = entry['nodes']\n\tbuilder.props.edges = entry['edges']\n\tview.custom.cursor = target\n\t# Zero this so the next real edit is never collapsed into the restore.\n\tview.custom.lastEditMillis = 0\n\tview.custom.status = 'step ' + str(target + 1) + ' of ' + str(len(history))\n"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                },
+                "meta": {
+                  "name": "redo"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "props": {
+                  "style": {
+                    "marginRight": "8px"
+                  },
+                  "text": "↷ Redo"
+                },
+                "type": "ia.input.button"
+              },
+              {
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "config": {
+                        "script": "\tview = self.view\n\tbuilder = self.parent.getSibling('builder')\n\tbuilder.props.nodes = {}\n\tbuilder.props.edges = {}\n\t# Re-seed with the empty canvas rather than an empty list: if the first\n\t# entry recorded is the state AFTER an edit, undo has nowhere to go and\n\t# reports 'nothing to undo', which looks like the change script never fired.\n\tview.custom.history = [{'key': '{}|{}', 'nodes': {}, 'edges': {}}]\n\tview.custom.cursor = 0\n\tview.custom.lastEditMillis = 0\n\tview.custom.status = 'empty canvas'\n"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                },
+                "meta": {
+                  "name": "clear"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "props": {
+                  "style": {
+                    "marginRight": "8px"
+                  },
+                  "text": "Clear canvas"
+                },
+                "type": "ia.input.button"
+              },
+              {
+                "meta": {
+                  "name": "status"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "expression": "{view.custom.status}"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "fontSize": "12px",
+                    "marginLeft": "auto",
+                    "opacity": "0.7"
+                  }
+                },
+                "type": "ia.display.label"
+              }
+            ],
+            "meta": {
+              "name": "toolbar"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "props": {
+              "direction": "row",
+              "style": {
+                "alignItems": "center",
+                "gap": "8px"
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "meta": {
+              "name": "builder"
+            },
+            "position": {
+              "basis": "0px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.nodes": {
+                "onChange": {
+                  "enabled": true,
+                  "script": "\t# Property change script on the builder's props.nodes.\n\t# Snapshots the canvas onto a history stack, unless this change IS the restore\n\t# we just performed.\n\t#\n\t# self.props.nodes is a Perspective property tree (a Java-backed wrapper), NOT\n\t# a dict -- json.dumps() raises on it. system.util.jsonEncode handles Ignition's\n\t# own types, and decoding it back gives plain Python to store.\n\tfrom java.lang import System as JSystem\n\n\tDEBOUNCE_MS = 500\n\tLIMIT = 60\n\n\tview = self.view\n\tnodesJson = system.util.jsonEncode(self.props.nodes)\n\tedgesJson = system.util.jsonEncode(self.props.edges)\n\tkey = nodesJson + '|' + edgesJson\n\n\thistory = list(view.custom.history)\n\tcursor = view.custom.cursor\n\n\t# Idempotence guard. Restoring writes the props, which fires this script again;\n\t# a \"restoring\" boolean races because the change arrives after the flag clears.\n\t# Comparing state is idempotent, so the restore can fire this as often as it likes.\n\tif 0 <= cursor < len(history) and history[cursor]['key'] == key:\n\t\treturn\n\n\tentry = {'key': key,\n\t         'nodes': system.util.jsonDecode(nodesJson),\n\t         'edges': system.util.jsonDecode(edgesJson)}\n\n\t# A new edit invalidates anything ahead of the cursor.\n\thistory = history[:cursor + 1]\n\n\t# A drag emits a stream of prop writes. Without this, one undo step is one\n\t# pixel of movement.\n\tnow = JSystem.currentTimeMillis()\n\tlast = view.custom.lastEditMillis\n\tif history and last and (now - last) < DEBOUNCE_MS:\n\t\thistory[-1] = entry\n\telse:\n\t\thistory.append(entry)\n\n\tif len(history) > LIMIT:\n\t\thistory = history[-LIMIT:]\n\n\tview.custom.history = history\n\tview.custom.cursor = len(history) - 1\n\tview.custom.lastEditMillis = now\n\tview.custom.status = 'step ' + str(len(history)) + ' of ' + str(len(history))\n"
+                }
+              }
+            },
+            "props": {
+              "edgeWidth": 2,
+              "edges": {},
+              "enableOnClickEvents": true,
+              "enabled": true,
+              "handleCount": 1,
+              "hideHandles": false,
+              "nodes": {},
+              "showGrid": true,
+              "snapEnabled": true,
+              "snapPixels": 16,
+              "style": {
+                "height": "100%",
+                "width": "100%"
+              }
+            },
+            "type": "com.wargoetz.reactflow.architecturebuilder"
+          }
+        ],
+        "events": {
+          "dom": {
+            "onKeyDown": {
+              "config": {
+                "script": "\t# Ctrl+Z / Ctrl+Y / Ctrl+Shift+Z. self is the content container; the builder\n\t# is its child, and keydown bubbles from wherever focus sits inside the view,\n\t# so this fires with the canvas or a palette item focused.\n\t#\n\t# Note: a freshly loaded page has focus on the document, not the view, so the\n\t# first keystroke lands only after one click anywhere on the page.\n\tif not (event.ctrlKey or event.metaKey):\n\t\treturn\n\tkey = (event.key or '').lower()\n\tif key == 'z' and not event.shiftKey:\n\t\tdelta = -1\n\telif key == 'y' or (key == 'z' and event.shiftKey):\n\t\tdelta = 1\n\telse:\n\t\treturn\n\n\tview = self.view\n\thistory = list(view.custom.history)\n\ttarget = view.custom.cursor + delta\n\tif target < 0 or target >= len(history):\n\t\tview.custom.status = 'nothing to undo' if delta < 0 else 'nothing to redo'\n\t\treturn\n\n\tentry = history[target]\n\tbuilder = self.getChild('builder')\n\tbuilder.props.nodes = entry['nodes']\n\tbuilder.props.edges = entry['edges']\n\tview.custom.cursor = target\n\tview.custom.lastEditMillis = 0\n\tview.custom.status = 'step ' + str(target + 1) + ' of ' + str(len(history))\n"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "content"
+        },
+        "position": {
+          "basis": "0px",
+          "grow": 1
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "gap": "10px",
+            "minHeight": "0",
+            "padding": "12px"
+          }
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "position": {
+      "basis": "auto",
+      "shrink": 0
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "height": "100%",
+        "width": "100%"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

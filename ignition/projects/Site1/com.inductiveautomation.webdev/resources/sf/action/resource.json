@@ -1,0 +1,23 @@
+{
+  "scope": "G",
+  "version": 1,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "config.json",
+    "doDelete.py",
+    "doGet.py",
+    "doHead.py",
+    "doOptions.py",
+    "doPatch.py",
+    "doPost.py",
+    "doPut.py",
+    "doTrace.py"
+  ],
+  "attributes": {
+    "lastModification": {
+      "actor": "external",
+      "timestamp": "1970-01-01T00:00:00Z"
+    }
+  }
+}

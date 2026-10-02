@@ -1,0 +1,350 @@
+{
+  "custom": {},
+  "params": {
+    "e3edge": "",
+    "e3cloud": "",
+    "e3delay": "",
+    "e4edge": "",
+    "e4cloud": "",
+    "e4delay": "",
+    "name": "",
+    "tip": ""
+  },
+  "props": {
+    "defaultSize": {
+      "width": 700,
+      "height": 20
+    }
+  },
+  "root": {
+    "type": "ia.container.flex",
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "row",
+      "style": {
+        "gap": "10px",
+        "height": "100%",
+        "width": "100%",
+        "padding": "0 4px",
+        "classes": "sp-tr"
+      },
+      "alignItems": "center"
+    },
+    "position": {
+      "shrink": 0
+    },
+    "children": [
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "name",
+          "tooltip": {
+            "enabled": true
+          }
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "lineHeight": "1.35",
+            "whiteSpace": "nowrap",
+            "classes": "sp-cell sp-strong"
+          }
+        },
+        "position": {
+          "basis": "160px",
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.params.name}"
+              }
+            }
+          },
+          "meta.tooltip.text": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.params.tip}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "e3edge",
+          "tooltip": {
+            "enabled": true
+          }
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "lineHeight": "1.35",
+            "whiteSpace": "nowrap",
+            "minWidth": "0",
+            "classes": "sp-cell sp-ellipsis"
+          }
+        },
+        "position": {
+          "basis": "0px",
+          "grow": 1,
+          "shrink": 1
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.params.e3edge}"
+              }
+            }
+          },
+          "meta.tooltip.text": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.params.tip}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "e3cloud",
+          "tooltip": {
+            "enabled": true
+          }
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "lineHeight": "1.35",
+            "whiteSpace": "nowrap",
+            "minWidth": "0",
+            "classes": "sp-cell sp-ellipsis"
+          }
+        },
+        "position": {
+          "basis": "0px",
+          "grow": 1,
+          "shrink": 1
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.params.e3cloud}"
+              }
+            }
+          },
+          "meta.tooltip.text": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.params.tip}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "e3delay",
+          "tooltip": {
+            "enabled": true
+          }
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "lineHeight": "1.35",
+            "whiteSpace": "nowrap",
+            "minWidth": "0",
+            "classes": "sp-cell sp-ellipsis"
+          }
+        },
+        "position": {
+          "basis": "78px",
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.params.e3delay}"
+              }
+            }
+          },
+          "meta.tooltip.text": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.params.tip}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "e4edge",
+          "tooltip": {
+            "enabled": true
+          }
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "lineHeight": "1.35",
+            "whiteSpace": "nowrap",
+            "minWidth": "0",
+            "classes": "sp-cell sp-ellipsis"
+          }
+        },
+        "position": {
+          "basis": "0px",
+          "grow": 1,
+          "shrink": 1
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.params.e4edge}"
+              }
+            }
+          },
+          "meta.tooltip.text": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.params.tip}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "e4cloud",
+          "tooltip": {
+            "enabled": true
+          }
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "lineHeight": "1.35",
+            "whiteSpace": "nowrap",
+            "minWidth": "0",
+            "classes": "sp-cell sp-ellipsis"
+          }
+        },
+        "position": {
+          "basis": "0px",
+          "grow": 1,
+          "shrink": 1
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.params.e4cloud}"
+              }
+            }
+          },
+          "meta.tooltip.text": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.params.tip}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "e4delay",
+          "tooltip": {
+            "enabled": true
+          }
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "lineHeight": "1.35",
+            "whiteSpace": "nowrap",
+            "minWidth": "0",
+            "classes": "sp-cell sp-ellipsis"
+          }
+        },
+        "position": {
+          "basis": "78px",
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.params.e4delay}"
+              }
+            }
+          },
+          "meta.tooltip.text": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.params.tip}"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "propConfig": {
+    "params.e3edge": {
+      "paramDirection": "input"
+    },
+    "params.e3cloud": {
+      "paramDirection": "input"
+    },
+    "params.e3delay": {
+      "paramDirection": "input"
+    },
+    "params.e4edge": {
+      "paramDirection": "input"
+    },
+    "params.e4cloud": {
+      "paramDirection": "input"
+    },
+    "params.e4delay": {
+      "paramDirection": "input"
+    },
+    "params.name": {
+      "paramDirection": "input"
+    },
+    "params.tip": {
+      "paramDirection": "input"
+    }
+  }
+}

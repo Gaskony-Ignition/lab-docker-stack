@@ -1,0 +1,54 @@
+name: ignition-ha
+
+# Active-passive front door for the redundant pair, so a Perspective session
+# survives a failover. See conf/haproxy.cfg for why this is a separate container
+# rather than a few lines added to the Nginx Proxy Manager already here.
+#
+# It sits on `backbone` and reaches both halves by container name on their
+# INTERNAL port 8088 -- not the 8090/8388 host ports, which do not exist from
+# in here. NPM points ignition.test at this container, so the routing table
+# stays in one place.
+
+services:
+  ignition-ha:
+    image: haproxy:3.0.7-alpine
+    container_name: ignition-ha
+    # "no", quoted -- bare no is YAML false. A DEMO stack must never come back on
+    # its own: unless-stopped resurrects whatever was running when the daemon
+    # restarts, which on 07/08/2026 silently returned all eleven stacks for three
+    # days. Start with `make up`, stop with `make down`.
+    restart: "no"
+    environment:
+      TZ: ${TZ}
+    ports:
+      # The stats page only. The proxied traffic arrives from NPM over the
+      # backbone network and needs no host port of its own.
+      - "${HA_STATS_HOST_PORT:-29404}:8404"
+    volumes:
+      # A named volume seeded from conf/, not a bind mount: a relative bind
+      # source is resolved by whoever runs `docker compose`, which from inside
+      # the toolbox is a path the daemon has never heard of -- and Docker does
+      # not fail on a missing bind source, it silently creates an empty
+      # directory. HAProxy would then start with no configuration at all.
+      - wd-ha-conf:/usr/local/etc/haproxy:ro
+    networks:
+      - backbone
+    healthcheck:
+      # Ask HAProxy to re-parse its own config. `-c` exits non-zero on a bad
+      # file, so a config that would not load shows as an unhealthy container
+      # instead of as a front door that is up and serving nothing.
+      test: ["CMD", "haproxy", "-c", "-f", "/usr/local/etc/haproxy/haproxy.cfg"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    labels:
+      au.gaskony.wd.stack: "ignition-ha"
+
+volumes:
+  wd-ha-conf:
+    external: true
+
+networks:
+  backbone:
+    external: true

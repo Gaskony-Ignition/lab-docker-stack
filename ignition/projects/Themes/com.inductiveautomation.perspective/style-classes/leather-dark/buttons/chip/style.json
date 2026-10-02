@@ -1,0 +1,16 @@
+{
+  "base": {
+    "style": {
+      "backgroundColor": "rgba(192, 138, 74, 0.08)",
+      "color": "#c08a4a",
+      "borderWidth": "1px",
+      "borderStyle": "solid",
+      "borderColor": "rgba(192, 138, 74, 0.5)",
+      "borderRadius": "999px",
+      "padding": "5px 12px",
+      "fontSize": "12px",
+      "fontWeight": "600",
+      "whiteSpace": "nowrap"
+    }
+  }
+}

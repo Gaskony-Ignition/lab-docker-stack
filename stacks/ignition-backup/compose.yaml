@@ -1,0 +1,129 @@
+name: ignition-backup
+
+# The redundant BACKUP of the hub gateway.
+#
+# This is a second Standard gateway that mirrors `ignition` and takes over if it
+# stops. It is NOT a Gateway Network spoke like the two edges: redundancy is its
+# own link on the same port 8060, negotiated by the pair themselves, and the two
+# halves are deliberately identical rather than parent/child. Everything below
+# that differs from ../ignition/compose.yaml is either an identity (name, ports,
+# volume) or a consequence of being the backup.
+#
+# The master/backup ROLES are not set here. They live in each gateway's
+# data/redundancy.xml and are applied over the REST API by
+# scripts/ign-redundancy.sh, because a role is gateway state (CLAUDE.md rule 4)
+# and putting it in compose would make every `up -d` fight whatever the demo
+# just did.
+
+services:
+  ignition-backup:
+    # The version is a VARIABLE with the repo's declared version as its default,
+    # and the default is what `make validate` and `scripts/watch-upstream.sh`
+    # both read -- so bumping it here is what "this repo runs 8.3.x" means.
+    # Override per machine in this stack's gitignored .env, which is what
+    # `make ignition-version SET=<v>` writes to all four gateways at once.
+    # THEY MUST MATCH: a redundant pair on two versions does not sync, and an
+    # EAM push to a mismatched edge is a gamble. ign-version.sh writes all four
+    # together, and validate refuses a set that disagrees.
+    image: inductiveautomation/ignition:${IGNITION_VERSION:-8.3.9}
+    container_name: ignition-backup
+    # `unless-stopped`, and that is load-bearing for the demonstration: the
+    # hard-failover demo shuts this pair's MASTER down from inside the JVM, and
+    # this policy is what brings it back ~60s later with no host command to run
+    # and nothing to clean up. `no` would leave the master down for good after a
+    # demo, which is exactly the state a customer must never be shown.
+    # "no", quoted -- bare no is YAML false. A DEMO stack must never come back on
+    # its own: unless-stopped resurrects whatever was running when the daemon
+    # restarts, which on 07/08/2026 silently returned all eleven stacks for three
+    # days. Start with `make up`, stop with `make down`.
+    restart: "no"
+    environment:
+      TZ: ${TZ}
+      # Commissioning, consumed only while the data volume is empty. The admin
+      # password is the SAME generated value the hub gets -- both read
+      # GATEWAY_ADMIN_PASSWORD out of the shared .secrets.env. That matters
+      # beyond convenience: redundancy synchronises the user source from master
+      # to backup, so a backup commissioned with a different password silently
+      # changes credentials the first time it syncs. Same value, no surprise.
+      ACCEPT_IGNITION_EULA: "Y"
+      IGNITION_EDITION: standard
+      GATEWAY_ADMIN_USERNAME: ${GATEWAY_ADMIN_USERNAME}
+      GATEWAY_ADMIN_PASSWORD: ${GATEWAY_ADMIN_PASSWORD}
+      GATEWAY_HTTP_PORT: 8088
+      GATEWAY_HTTPS_PORT: 8043
+      # Redundancy rides the Gateway Network port. Not published to the host:
+      # the master reaches this gateway as `ignition-backup:8060` over backbone.
+      GATEWAY_GAN_PORT: 8060
+      # glibc gives a process up to 8 x cores malloc arenas (128 on a 16-core
+      # host) and Ignition's ~220 threads spread allocations across all of them.
+      # Capping it is where the RSS saving is -- NOT in -Xmx, which controls the
+      # heap, and the heap was never the bulk. Measured -33% on an edge, with no
+      # cost through a real store-and-forward outage. See docs/ARCHITECTURE.md.
+      MALLOC_ARENA_MAX: "2"
+    # No `-n` here, and that is the one place this file deliberately breaks the
+    # pattern every other gateway in the repo follows.
+    #
+    # Redundancy makes the pair ONE logical gateway, and part of that is the
+    # system name: on the first sync the backup takes the master's name and
+    # appends its role, so `-n Ignition-Backup` became `Ignition-Standard-Backup`
+    # within seconds of pairing (verified 04/08/2026). `-n` re-applies on EVERY
+    # container start, so keeping it would mean compose renaming the gateway on
+    # each boot and redundancy renaming it back on each sync -- a fight with no
+    # winner, visible to a customer as a name that changes while they watch.
+    # Compose owns the name for an independent gateway; the master owns it here.
+    # --add-opens is the Sparkplug alarms demo's -- see stacks/ignition's
+    # compose.yaml for the full explanation. This backup carries it too because
+    # it inherits MQTT Engine (and every other master module) on failover, and
+    # the vendor requires the flag wherever Engine propagates alarms.
+    command: >
+      -m 768
+      --
+      -XX:ParallelGCThreads=2
+      -XX:ConcGCThreads=1
+      -XX:G1PeriodicGCInterval=300000
+      -XX:G1PeriodicGCSystemLoadThreshold=0
+      --add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED
+      gateway.useProxyForwardedHeader=true
+    ports:
+      - "${BACKUP_HTTP_HOST_PORT:-29388}:8088"   # HTTP  - http://localhost:29388
+      - "${BACKUP_HTTPS_HOST_PORT:-29343}:8043"   # HTTPS - https://localhost:29343
+      - "${BACKUP_OPCUA_HOST_PORT:-29341}:62541"   # OPC UA server - opc.tcp://localhost:29341
+    volumes:
+      - backup_data:/usr/local/bin/ignition/data
+    networks:
+      backbone: {}
+      # wd-mqtt carries MQTT only. On it this half's MQTT Distributor answers as
+      # mqtt-backup, a name no other network has, so an edge cut off wd-mqtt is
+      # cut off the broker while backbone still reaches it (docs/MQTT-DISTRIBUTOR.md).
+      mqtt:
+        aliases:
+          - mqtt-backup
+    stop_grace_period: 30s
+    healthcheck:
+      test: ["CMD", "/usr/local/bin/health-check.sh", "-s", "RUNNING",
+             "http://localhost:8088/StatusPing"]
+      interval: 15s
+      timeout: 10s
+      # 20 and 180s, not 10 and 120s. A gateway's start is CPU-bound
+      # (classloading, then the project scan), so on the 2-core machines this
+      # stack is meant to run on it routinely needs longer than two minutes --
+      # and a gateway marked unhealthy is not a cosmetic wrong answer: the
+      # console's reconcile loop waits on health before starting the next
+      # stack, so a window that is too tight starts two JVMs at once on the
+      # machine that could least afford one. The cost is that a genuinely dead
+      # gateway takes longer to be called dead, which is the right way round.
+      retries: 20
+      start_period: 180s
+    labels:
+      au.gaskony.wd.stack: "ignition-backup"
+
+volumes:
+  backup_data:
+
+networks:
+  backbone:
+    external: true
+  # wd-mqtt: created by scripts/lib.sh:ensure_mqtt_net, like backbone.
+  mqtt:
+    name: wd-mqtt
+    external: true

@@ -1,0 +1,427 @@
+{
+  "custom": {
+    "pick": {}
+  },
+  "params": {},
+  "propConfig": {
+    "custom.pick": {
+      "binding": {
+        "config": {
+          "expression": "runScript('demo_control.version_picker()', 3000)"
+        },
+        "type": "expr"
+      }
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 400,
+      "width": 460
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "head"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "'Ignition ' + {view.custom.pick.current} + if({view.custom.pick.running} = '' || {view.custom.pick.running} = {view.custom.pick.current}, '', '   (running ' + {view.custom.pick.running} + ')')"
+              },
+              "type": "expr"
+            }
+          },
+          "props.style.classes": {
+            "binding": {
+              "config": {
+                "expression": "{session.custom.style} + '/text/card-title'"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "fontSize": "16px",
+            "lineHeight": 1.4
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "note"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "config": {
+                "expression": "{view.custom.pick.note} != ''"
+              },
+              "type": "expr"
+            }
+          },
+          "props.style.classes": {
+            "binding": {
+              "config": {
+                "expression": "{session.custom.style} + '/text/muted'"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "{view.custom.pick.note}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "fontSize": "12px",
+            "lineHeight": 1.4
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "rows"
+        },
+        "position": {
+          "basis": "0px",
+          "grow": 1,
+          "shrink": 1
+        },
+        "propConfig": {
+          "props.instances": {
+            "binding": {
+              "config": {
+                "expression": "{view.custom.pick.rows}"
+              },
+              "transforms": [
+                {
+                  "code": "\treturn [{'row': r} for r in (value or [])]\n",
+                  "type": "script"
+                }
+              ],
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "direction": "column",
+          "elementPosition": {
+            "basis": "34px",
+            "grow": 0,
+            "shrink": 0
+          },
+          "instances": [],
+          "path": "IgnRow",
+          "style": {
+            "gap": "6px",
+            "overflow": "auto"
+          },
+          "useDefaultViewHeight": true,
+          "useDefaultViewWidth": false
+        },
+        "type": "ia.display.flex-repeater"
+      },
+      {
+        "meta": {
+          "name": "backup"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.style.classes": {
+            "binding": {
+              "config": {
+                "expression": "{session.custom.style} + '/text/muted'"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "{view.custom.pick.backup} + '   --   ./wd gwbk takes one'"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "fontSize": "11px",
+            "lineHeight": 1.4
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "warn"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.style.classes": {
+            "binding": {
+              "config": {
+                "expression": "{session.custom.style} + '/text/muted'"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "{view.custom.pick.warn}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "fontSize": "11px",
+            "lineHeight": 1.45
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "applyNote"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "config": {
+                "expression": "{view.custom.pick.can.apply.why} != ''"
+              },
+              "type": "expr"
+            }
+          },
+          "props.style.classes": {
+            "binding": {
+              "config": {
+                "expression": "{session.custom.style} + '/text/muted'"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "{view.custom.pick.can.apply.why}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "fontSize": "11px",
+            "lineHeight": 1.35,
+            "whiteSpace": "normal"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "children": [
+          {
+            "events": {
+              "component": {
+                "onActionPerformed": {
+                  "config": {
+                    "script": "\tsystem.perspective.closePopup('ignver')\n"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "cancel"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.style.classes": {
+                "binding": {
+                  "config": {
+                    "expression": "{session.custom.style} + '/buttons/ghost'"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "height": "32px",
+                "minHeight": "32px",
+                "lineHeight": 1.35
+              },
+              "text": "Close"
+            },
+            "type": "ia.input.button"
+          },
+          {
+            "meta": {
+              "name": "gap"
+            },
+            "position": {
+              "basis": "0px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "props": {
+              "text": ""
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "events": {
+              "component": {
+                "onActionPerformed": {
+                  "config": {
+                    "script": "\timport demo_control\n\tself.session.custom.demoBusy = demo_control.set_version(self.session.custom.ignPick)\n\tsystem.perspective.closePopup('ignver')\n"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "apply",
+              "tooltip": {
+                "enabled": true,
+                "text": ""
+              }
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "meta.visible": {
+                "binding": {
+                  "config": {
+                    "expression": "{session.custom.ignPick} != '' && {session.custom.ignPick} != {view.custom.pick.current}"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.style.classes": {
+                "binding": {
+                  "config": {
+                    "expression": "{session.custom.style} + '/buttons/danger'"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "'Switch to ' + {session.custom.ignPick} + ' and restart'"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.enabled": {
+                "binding": {
+                  "config": {
+                    "expression": "{session.custom.acting} = '' && {view.custom.pick.can.apply.ok}"
+                  },
+                  "type": "expr"
+                }
+              },
+              "meta.tooltip.text": {
+                "binding": {
+                  "config": {
+                    "expression": "{view.custom.pick.can.apply.why}"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.style.cursor": {
+                "binding": {
+                  "config": {
+                    "expression": "if({session.custom.acting} = '' && {view.custom.pick.can.apply.ok}, 'pointer', 'not-allowed')"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.style.opacity": {
+                "binding": {
+                  "config": {
+                    "expression": "if({session.custom.acting} = '' && {view.custom.pick.can.apply.ok}, 1, 0.45)"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "height": "32px",
+                "minHeight": "32px",
+                "whiteSpace": "nowrap",
+                "lineHeight": 1.35
+              },
+              "tooltip": {
+                "enabled": true
+              }
+            },
+            "type": "ia.input.button"
+          }
+        ],
+        "meta": {
+          "name": "actions"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "props": {
+          "alignItems": "center",
+          "direction": "row",
+          "style": {
+            "gap": "8px"
+          }
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "gap": "10px",
+        "height": "100%",
+        "minHeight": "0px",
+        "padding": "14px"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

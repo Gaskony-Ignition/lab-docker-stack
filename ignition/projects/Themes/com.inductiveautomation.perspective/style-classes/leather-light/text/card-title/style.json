@@ -1,0 +1,10 @@
+{
+  "base": {
+    "style": {
+      "color": "#2b2620",
+      "fontFamily": "\"Crimson Pro\", Georgia, \"Times New Roman\", serif",
+      "fontSize": "16px",
+      "fontWeight": "700"
+    }
+  }
+}

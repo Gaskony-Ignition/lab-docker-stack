@@ -1,0 +1,10 @@
+{
+  "base": {
+    "style": {
+      "color": "#1F2937",
+      "fontFamily": "\"Roboto\", \"Segoe UI\", Arial, sans-serif",
+      "fontSize": "19px",
+      "fontWeight": "500"
+    }
+  }
+}

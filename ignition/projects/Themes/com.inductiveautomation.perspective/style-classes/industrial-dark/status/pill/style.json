@@ -1,0 +1,17 @@
+{
+  "base": {
+    "style": {
+      "backgroundColor": "rgba(53, 211, 154, .12)",
+      "color": "#35D39A",
+      "borderWidth": "1px",
+      "borderStyle": "solid",
+      "borderColor": "rgba(53, 211, 154, .55)",
+      "borderRadius": "12px",
+      "padding": "0 11px",
+      "fontSize": "11px",
+      "fontWeight": "700",
+      "letterSpacing": ".08em",
+      "textTransform": "uppercase"
+    }
+  }
+}

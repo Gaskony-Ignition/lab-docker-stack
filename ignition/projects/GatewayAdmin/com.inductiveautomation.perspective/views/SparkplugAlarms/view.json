@@ -1,0 +1,755 @@
+{
+  "custom": {
+    "d": {
+      "e0": [],
+      "e1": [],
+      "recent": [],
+      "recentCount": 0,
+      "ready": false,
+      "asOf0": {
+        "current": true,
+        "asOf": "",
+        "tail": "",
+        "note": ""
+      },
+      "asOf1": {
+        "current": true,
+        "asOf": "",
+        "tail": "",
+        "note": ""
+      }
+    }
+  },
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "width": 1200,
+      "height": 400
+    }
+  },
+  "root": {
+    "type": "ia.container.flex",
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "height": "100%",
+        "width": "100%",
+        "gap": "8px",
+        "overflow": "hidden",
+        "paddingBottom": "4px",
+        "boxSizing": "border-box"
+      }
+    },
+    "position": {
+      "basis": "auto",
+      "shrink": 0
+    },
+    "children": [
+      {
+        "type": "ia.container.flex",
+        "meta": {
+          "name": "tryWatch"
+        },
+        "props": {
+          "direction": "row",
+          "style": {
+            "gap": "8px",
+            "classes": "sp-try"
+          },
+          "alignItems": "center"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "children": [
+          {
+            "type": "ia.display.label",
+            "meta": {
+              "name": "tryText",
+              "tooltip": {
+                "enabled": true
+              }
+            },
+            "props": {
+              "text": "Trip a fault on one edge: it goes active at both ends. Acknowledge it at either end.",
+              "style": {
+                "lineHeight": "1.35",
+                "whiteSpace": "nowrap",
+                "minWidth": "0",
+                "classes": "sp-ellipsis"
+              }
+            },
+            "position": {
+              "basis": "0px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "propConfig": {
+              "meta.tooltip.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "'Trip a fault on one edge: it goes active at both ends. Acknowledge it at either end.'"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "type": "ia.container.flex",
+        "meta": {
+          "name": "blocks"
+        },
+        "props": {
+          "direction": "row",
+          "style": {
+            "gap": "12px"
+          },
+          "alignItems": "flex-start"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "children": [
+          {
+            "type": "ia.container.flex",
+            "meta": {
+              "name": "edge3"
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "gap": "6px",
+                "minWidth": "0",
+                "overflow": "hidden",
+                "padding": "8px 14px",
+                "classes": "sp-card"
+              }
+            },
+            "position": {
+              "basis": "0px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "children": [
+              {
+                "type": "ia.container.flex",
+                "meta": {
+                  "name": "actions"
+                },
+                "props": {
+                  "direction": "row",
+                  "style": {
+                    "gap": "8px",
+                    "height": "24px"
+                  },
+                  "alignItems": "center"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "children": [
+                  {
+                    "type": "ia.display.label",
+                    "meta": {
+                      "name": "title"
+                    },
+                    "props": {
+                      "text": "Edge 3",
+                      "style": {
+                        "lineHeight": "1.35",
+                        "whiteSpace": "nowrap",
+                        "marginRight": "4px"
+                      }
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.style.classes": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{session.custom.style} + '/text/card-title'"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type": "ia.display.label",
+                    "meta": {
+                      "name": "asOf",
+                      "tooltip": {
+                        "enabled": true
+                      }
+                    },
+                    "props": {
+                      "text": "",
+                      "style": {
+                        "lineHeight": "1.35",
+                        "whiteSpace": "nowrap",
+                        "minWidth": "0",
+                        "fontSize": "12px"
+                      }
+                    },
+                    "position": {
+                      "basis": "0px",
+                      "grow": 1,
+                      "shrink": 1
+                    },
+                    "propConfig": {
+                      "props.style.classes": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{session.custom.style} + '/text/muted' + ' sp-ellipsis'"
+                          }
+                        }
+                      },
+                      "props.text": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{view.custom.d.asOf0.note}"
+                          }
+                        }
+                      },
+                      "meta.tooltip.text": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{view.custom.d.asOf0.note}"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "ia.container.flex",
+                "meta": {
+                  "name": "thead"
+                },
+                "props": {
+                  "direction": "row",
+                  "style": {
+                    "gap": "10px",
+                    "padding": "0 4px"
+                  },
+                  "alignItems": "center"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "children": [
+                  {
+                    "type": "ia.display.label",
+                    "meta": {
+                      "name": "h0"
+                    },
+                    "props": {
+                      "text": "Alarm",
+                      "style": {
+                        "lineHeight": "1.35",
+                        "whiteSpace": "nowrap",
+                        "classes": "sp-th"
+                      }
+                    },
+                    "position": {
+                      "basis": "18%",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "type": "ia.display.label",
+                    "meta": {
+                      "name": "h1"
+                    },
+                    "props": {
+                      "text": "At the edge",
+                      "style": {
+                        "lineHeight": "1.35",
+                        "whiteSpace": "nowrap",
+                        "classes": "sp-th"
+                      }
+                    },
+                    "position": {
+                      "basis": "0px",
+                      "grow": 1,
+                      "shrink": 1
+                    }
+                  },
+                  {
+                    "type": "ia.display.label",
+                    "meta": {
+                      "name": "h2"
+                    },
+                    "props": {
+                      "text": "In the cloud",
+                      "style": {
+                        "lineHeight": "1.35",
+                        "whiteSpace": "nowrap",
+                        "classes": "sp-th"
+                      }
+                    },
+                    "position": {
+                      "basis": "0px",
+                      "grow": 1,
+                      "shrink": 1
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "ia.display.flex-repeater",
+                "meta": {
+                  "name": "rows"
+                },
+                "props": {
+                  "path": "SparkplugAlarmRow",
+                  "direction": "column",
+                  "instances": [],
+                  "useDefaultViewHeight": true,
+                  "useDefaultViewWidth": false,
+                  "elementPosition": {
+                    "basis": "26px",
+                    "grow": 0,
+                    "shrink": 0
+                  },
+                  "style": {
+                    "width": "100%",
+                    "gap": "0px"
+                  }
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.instances": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{view.custom.d.e0}"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "type": "ia.container.flex",
+            "meta": {
+              "name": "edge4"
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "gap": "6px",
+                "minWidth": "0",
+                "overflow": "hidden",
+                "padding": "8px 14px",
+                "classes": "sp-card"
+              }
+            },
+            "position": {
+              "basis": "0px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "children": [
+              {
+                "type": "ia.container.flex",
+                "meta": {
+                  "name": "actions"
+                },
+                "props": {
+                  "direction": "row",
+                  "style": {
+                    "gap": "8px",
+                    "height": "24px"
+                  },
+                  "alignItems": "center"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "children": [
+                  {
+                    "type": "ia.display.label",
+                    "meta": {
+                      "name": "title"
+                    },
+                    "props": {
+                      "text": "Edge 4",
+                      "style": {
+                        "lineHeight": "1.35",
+                        "whiteSpace": "nowrap",
+                        "marginRight": "4px"
+                      }
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.style.classes": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{session.custom.style} + '/text/card-title'"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type": "ia.display.label",
+                    "meta": {
+                      "name": "asOf",
+                      "tooltip": {
+                        "enabled": true
+                      }
+                    },
+                    "props": {
+                      "text": "",
+                      "style": {
+                        "lineHeight": "1.35",
+                        "whiteSpace": "nowrap",
+                        "minWidth": "0",
+                        "fontSize": "12px"
+                      }
+                    },
+                    "position": {
+                      "basis": "0px",
+                      "grow": 1,
+                      "shrink": 1
+                    },
+                    "propConfig": {
+                      "props.style.classes": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{session.custom.style} + '/text/muted' + ' sp-ellipsis'"
+                          }
+                        }
+                      },
+                      "props.text": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{view.custom.d.asOf1.note}"
+                          }
+                        }
+                      },
+                      "meta.tooltip.text": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{view.custom.d.asOf1.note}"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "ia.container.flex",
+                "meta": {
+                  "name": "thead"
+                },
+                "props": {
+                  "direction": "row",
+                  "style": {
+                    "gap": "10px",
+                    "padding": "0 4px"
+                  },
+                  "alignItems": "center"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "children": [
+                  {
+                    "type": "ia.display.label",
+                    "meta": {
+                      "name": "h0"
+                    },
+                    "props": {
+                      "text": "Alarm",
+                      "style": {
+                        "lineHeight": "1.35",
+                        "whiteSpace": "nowrap",
+                        "classes": "sp-th"
+                      }
+                    },
+                    "position": {
+                      "basis": "18%",
+                      "shrink": 0
+                    }
+                  },
+                  {
+                    "type": "ia.display.label",
+                    "meta": {
+                      "name": "h1"
+                    },
+                    "props": {
+                      "text": "At the edge",
+                      "style": {
+                        "lineHeight": "1.35",
+                        "whiteSpace": "nowrap",
+                        "classes": "sp-th"
+                      }
+                    },
+                    "position": {
+                      "basis": "0px",
+                      "grow": 1,
+                      "shrink": 1
+                    }
+                  },
+                  {
+                    "type": "ia.display.label",
+                    "meta": {
+                      "name": "h2"
+                    },
+                    "props": {
+                      "text": "In the cloud",
+                      "style": {
+                        "lineHeight": "1.35",
+                        "whiteSpace": "nowrap",
+                        "classes": "sp-th"
+                      }
+                    },
+                    "position": {
+                      "basis": "0px",
+                      "grow": 1,
+                      "shrink": 1
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "ia.display.flex-repeater",
+                "meta": {
+                  "name": "rows"
+                },
+                "props": {
+                  "path": "SparkplugAlarmRow",
+                  "direction": "column",
+                  "instances": [],
+                  "useDefaultViewHeight": true,
+                  "useDefaultViewWidth": false,
+                  "elementPosition": {
+                    "basis": "26px",
+                    "grow": 0,
+                    "shrink": 0
+                  },
+                  "style": {
+                    "width": "100%",
+                    "gap": "0px"
+                  }
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.instances": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{view.custom.d.e1}"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "ia.container.flex",
+        "meta": {
+          "name": "recentCard"
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "gap": "4px",
+            "minWidth": "0",
+            "overflow": "hidden",
+            "padding": "8px 14px",
+            "minHeight": "0",
+            "classes": "sp-card"
+          }
+        },
+        "position": {
+          "basis": "auto",
+          "grow": 0,
+          "shrink": 0
+        },
+        "children": [
+          {
+            "type": "ia.display.table",
+            "meta": {
+              "name": "recent"
+            },
+            "props": {
+              "data": [],
+              "columns": [
+                {
+                  "field": "ts",
+                  "header": {
+                    "title": "Time",
+                    "justify": "left",
+                    "align": "center",
+                    "style": {}
+                  },
+                  "width": 130,
+                  "strictWidth": true,
+                  "justify": "left",
+                  "align": "center",
+                  "render": "string",
+                  "sortable": false,
+                  "resizable": false,
+                  "editable": false,
+                  "visible": true,
+                  "style": {
+                    "whiteSpace": "nowrap",
+                    "overflow": "hidden",
+                    "textOverflow": "ellipsis",
+                    "padding": "0 8px"
+                  }
+                },
+                {
+                  "field": "who",
+                  "header": {
+                    "title": "Edge",
+                    "justify": "left",
+                    "align": "center",
+                    "style": {}
+                  },
+                  "width": 110,
+                  "strictWidth": true,
+                  "justify": "left",
+                  "align": "center",
+                  "render": "string",
+                  "sortable": false,
+                  "resizable": false,
+                  "editable": false,
+                  "visible": true,
+                  "style": {
+                    "whiteSpace": "nowrap",
+                    "overflow": "hidden",
+                    "textOverflow": "ellipsis",
+                    "padding": "0 8px"
+                  }
+                },
+                {
+                  "field": "what",
+                  "header": {
+                    "title": "What happened",
+                    "justify": "left",
+                    "align": "center",
+                    "style": {}
+                  },
+                  "width": 1,
+                  "strictWidth": false,
+                  "justify": "left",
+                  "align": "center",
+                  "render": "string",
+                  "sortable": false,
+                  "resizable": false,
+                  "editable": false,
+                  "visible": true,
+                  "style": {
+                    "whiteSpace": "nowrap",
+                    "overflow": "hidden",
+                    "textOverflow": "ellipsis",
+                    "padding": "0 8px"
+                  }
+                }
+              ],
+              "virtualized": true,
+              "pager": {
+                "top": false,
+                "bottom": false
+              },
+              "selection": {
+                "enableRowSelection": false,
+                "enableColumnSelection": false
+              },
+              "rows": {
+                "height": 26,
+                "striped": {
+                  "enabled": false
+                },
+                "highlight": {
+                  "enabled": false
+                }
+              },
+              "emptyMessage": {
+                "noData": {
+                  "text": "Nothing yet"
+                }
+              },
+              "enableHeader": true,
+              "headerStyle": {
+                "paddingLeft": "8px"
+              },
+              "style": {
+                "classes": "sp-table"
+              }
+            },
+            "position": {
+              "basis": "112px",
+              "grow": 0,
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.data": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{view.custom.d.recent}"
+                  }
+                }
+              },
+              "position.basis": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "toStr(34 + 26 * max(3, min(max(3, {view.custom.d.recentCount}), floor(({page.props.dimensions.viewport.height} - 518) / 26)))) + 'px'"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "propConfig": {
+    "custom.d": {
+      "binding": {
+        "type": "expr",
+        "config": {
+          "expression": "now(2000)"
+        },
+        "transforms": [
+          {
+            "type": "script",
+            "code": "\timport sparkplug_demo\n\treturn sparkplug_demo.page_alarms()\n"
+          }
+        ]
+      }
+    }
+  }
+}

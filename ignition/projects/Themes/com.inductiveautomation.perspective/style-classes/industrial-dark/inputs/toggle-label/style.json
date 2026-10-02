@@ -1,0 +1,9 @@
+{
+  "base": {
+    "style": {
+      "color": "#B7C6D3",
+      "fontSize": "13px",
+      "cursor": "pointer"
+    }
+  }
+}

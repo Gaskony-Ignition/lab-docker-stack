@@ -1,0 +1,27 @@
+# See stacks/postgres/stack.meta for what this file is and who reads it.
+# THIS stack owns ignition.test, not the hub: the name means "the redundant
+# pair", and this proxy is the only thing that can keep it pointing at
+# whichever half is active. TEST_FORWARD_PORT is 8088 -- HAProxy's listener --
+# while PORT_VAR/PORT_DEFAULT describe the stats page, the only port published
+# to the host.
+ORDER=60
+KIND=service
+PORT_VAR=HA_STATS_HOST_PORT
+PORT_DEFAULT=29404
+STATUS_NOTE="pair front door -- https://ignition.test"
+TEST_HOST=ignition.test
+TEST_FORWARD_PORT=8088
+# While this proxy is not running -- the Redundancy demo stopped, which is most
+# of the time -- the proxy serves the hub instead of a 502. The hub is core and
+# is the master, so it is the right half whenever there is no pair to follow.
+TEST_FALLBACK=ignition
+SEED_VOLUME=wd-ha-conf
+SEED_SRC=conf
+
+# The pair's front door is an Ignition config UI like any other, so it gets the
+# console's sign-in door too -- but the stack is the PROXY, not a gateway, so
+# KIND cannot carry that. SIGNIN_STANZA says "sign in to this host using these
+# credentials". `local` and not `local-backup`: redundancy synchronises the user
+# source from the master, so the master's admin is the admin on whichever half
+# the proxy is currently serving -- which is the whole point of the name.
+SIGNIN_STANZA=local

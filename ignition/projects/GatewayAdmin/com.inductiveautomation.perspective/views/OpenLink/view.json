@@ -1,0 +1,169 @@
+{
+  "custom": {},
+  "params": {
+    "link": {}
+  },
+  "propConfig": {
+    "params.link": {
+      "paramDirection": "input"
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 34,
+      "width": 170
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "open"
+        },
+        "position": {
+          "basis": "auto",
+          "grow": 0,
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.style.classes": {
+            "binding": {
+              "config": {
+                "expression": "{session.custom.style} + '/buttons/chip'"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.link.label} + '  ↗'"
+              },
+              "type": "expr"
+            }
+          },
+          "props.url": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.link.url}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "rel": "noopener",
+          "style": {
+            "alignItems": "center",
+            "display": "flex",
+            "height": "30px",
+            "marginRight": "4px",
+            "minHeight": "30px",
+            "padding": "0 12px",
+            "textDecoration": "none",
+            "whiteSpace": "nowrap"
+          },
+          "target": "blank"
+        },
+        "type": "ia.navigation.link"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": {
+              "config": {
+                "script": "\t# One popup id for all of them, so opening a second credential\n\t# replaces the first rather than stacking windows nobody closes.\n\tsystem.perspective.openPopup(\n\t\t'wd-creds', 'Credentials',\n\t\tparams={'stack': self.view.params.link['stack']},\n\t\ttitle='Sign-in details', draggable=True, modal=True,\n\t\tresizable=False, showCloseIcon=True)\n"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "key"
+        },
+        "position": {
+          "basis": "auto",
+          "grow": 0,
+          "shrink": 0
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.link.creds}"
+              },
+              "type": "expr"
+            }
+          },
+          "props.enabled": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.link.up}"
+              },
+              "type": "expr"
+            }
+          },
+          "props.style.classes": {
+            "binding": {
+              "config": {
+                "expression": "{session.custom.style} + '/buttons/chip'"
+              },
+              "type": "expr"
+            }
+          },
+          "props.style.minWidth": {
+            "binding": {
+              "config": {
+                "expression": "if({view.params.link.creds}, 'auto', '0px')"
+              },
+              "type": "expr"
+            }
+          },
+          "props.style.padding": {
+            "binding": {
+              "config": {
+                "expression": "if({view.params.link.creds}, '0 8px', '0px')"
+              },
+              "type": "expr"
+            }
+          },
+          "props.style.width": {
+            "binding": {
+              "config": {
+                "expression": "if({view.params.link.creds}, 'auto', '0px')"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "height": "30px",
+            "minHeight": "30px",
+            "overflow": "hidden",
+            "whiteSpace": "nowrap"
+          },
+          "text": "key",
+          "tooltip": {
+            "enabled": true,
+            "text": "show the stored sign-in for this UI"
+          }
+        },
+        "type": "ia.input.button"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "alignItems": "stretch",
+      "direction": "row",
+      "justify": "flex-start",
+      "style": {
+        "gap": "0px"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

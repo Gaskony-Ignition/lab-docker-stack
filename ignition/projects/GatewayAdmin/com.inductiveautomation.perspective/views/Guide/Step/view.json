@@ -1,0 +1,160 @@
+{
+  "custom": {},
+  "params": {
+    "do": "",
+    "n": "",
+    "then": ""
+  },
+  "propConfig": {
+    "params.do": {
+      "paramDirection": "input"
+    },
+    "params.n": {
+      "paramDirection": "input"
+    },
+    "params.then": {
+      "paramDirection": "input"
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 96,
+      "width": 520
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "n"
+        },
+        "position": {
+          "basis": "22px",
+          "grow": 0,
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.n}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "fontSize": "18px",
+            "fontWeight": "700",
+            "lineHeight": "1.4",
+            "minWidth": "22px",
+            "opacity": "0.55",
+            "textAlign": "right",
+            "whiteSpace": "pre-wrap"
+          },
+          "text": ""
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "do"
+            },
+            "position": {
+              "basis": "auto",
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "{view.params.do}"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "fontSize": "14px",
+                "fontWeight": "600",
+                "lineHeight": "1.4",
+                "whiteSpace": "pre-wrap"
+              },
+              "text": ""
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "then"
+            },
+            "position": {
+              "basis": "auto",
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.style.classes": {
+                "binding": {
+                  "config": {
+                    "expression": "{session.custom.style} + '/text/muted'"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "{view.params.then}"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "fontSize": "13px",
+                "lineHeight": "1.4",
+                "whiteSpace": "pre-wrap"
+              },
+              "text": ""
+            },
+            "type": "ia.display.label"
+          }
+        ],
+        "meta": {
+          "name": "text"
+        },
+        "position": {
+          "basis": "auto",
+          "grow": 1,
+          "shrink": 1
+        },
+        "props": {
+          "direction": "column",
+          "gap": "3px",
+          "style": {
+            "width": "100%"
+          }
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "alignItems": "start",
+      "direction": "row",
+      "gap": "12px",
+      "style": {
+        "padding": "2px 0",
+        "width": "100%"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

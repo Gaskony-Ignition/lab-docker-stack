@@ -1,0 +1,17 @@
+{
+  "base": {
+    "style": {
+      "backgroundColor": "#332f29",
+      "color": "#e8e2d6",
+      "borderRadius": "0",
+      "marginBottom": "0",
+      "padding": "6px 8px",
+      "paddingLeft": "10px",
+      "fontSize": "13px",
+      "fontWeight": "700",
+      "textDecoration": "none",
+      "boxShadow": "inset 2px 0 0 #c23b3b",
+      "cursor": "pointer"
+    }
+  }
+}

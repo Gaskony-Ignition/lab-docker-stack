@@ -1,0 +1,915 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "height": 800,
+      "width": 1280
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "l_16773"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.style.classes": {
+                "binding": {
+                  "config": {
+                    "expression": "{session.custom.style} + '/text/h1'"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "text": "Template \u2014 theme & distribution"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "l_0"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.style.classes": {
+                "binding": {
+                  "config": {
+                    "expression": "{session.custom.style} + '/text/muted'"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "'Committed pack: ' + runScript('demo_styles.chosen_pack()')"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "text": ""
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "spacer"
+            },
+            "position": {
+              "basis": "0px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "props": {},
+            "type": "ia.container.flex"
+          },
+          {
+            "events": {
+              "component": {
+                "onActionPerformed": {
+                  "config": {
+                    "script": "\timport demo_styles\n\tpack = self.session.custom.style\n\tself.session.custom.styleOverride = ''\n\tself.session.custom.status = demo_styles.commit_pack(pack)\n"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "applyTheme"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "meta.visible": {
+                "binding": {
+                  "config": {
+                    "expression": "runScript('demo_styles.preview_pack', 5000, {session.custom.styleOverride}) != ''"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.style.classes": {
+                "binding": {
+                  "config": {
+                    "expression": "{session.custom.style} + '/status/badge-warn'"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.style.padding": {
+                "binding": {
+                  "config": {
+                    "expression": "if(runScript('demo_styles.preview_pack', 5000, {session.custom.styleOverride}) != '', '0 12px', '0px')"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.style.width": {
+                "binding": {
+                  "config": {
+                    "expression": "if(runScript('demo_styles.preview_pack', 5000, {session.custom.styleOverride}) != '', 'auto', '0px')"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "'Apply ' + runScript('demo_styles.preview_pack', 5000, {session.custom.styleOverride}) + ' everywhere'"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.tooltip.text": {
+                "binding": {
+                  "config": {
+                    "expression": "runScript('demo_styles.preview_warning', 5000, {session.custom.styleOverride})"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "fontSize": "12px",
+                "height": "30px",
+                "minHeight": "30px",
+                "overflow": "hidden",
+                "whiteSpace": "nowrap"
+              }
+            },
+            "type": "ia.input.button"
+          },
+          {
+            "events": {
+              "component": {
+                "onActionPerformed": {
+                  "config": {
+                    "script": "\timport demo_guide\n\tsystem.perspective.openPopup(\n\t\t'demo-guide', 'Guide/Panel',\n\t\tparams={'topic': 'styling'},\n\t\tposition=demo_guide.popup_size('styling'),\n\t\ttitle='How to show this', modal=True, draggable=True,\n\t\tresizable=True, overlayDismiss=True, viewportBound=True)\n"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "guide"
+            },
+            "position": {
+              "basis": "auto",
+              "grow": 0,
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.style.classes": {
+                "binding": {
+                  "config": {
+                    "expression": "{session.custom.style} + '/buttons/chip'"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "image": {
+                "height": 16,
+                "icon": {
+                  "color": "currentColor",
+                  "path": "material/help_outline"
+                },
+                "position": "left",
+                "width": 16
+              },
+              "style": {
+                "height": "30px",
+                "lineHeight": "1",
+                "minHeight": "30px",
+                "padding": "0 14px",
+                "whiteSpace": "nowrap"
+              },
+              "text": "Guide"
+            },
+            "type": "ia.input.button"
+          }
+        ],
+        "meta": {
+          "name": "topbar"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.style.classes": {
+            "binding": {
+              "config": {
+                "expression": "{session.custom.style} + '/containers/topbar'"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "direction": "row",
+          "style": {
+            "alignItems": "baseline",
+            "gap": "14px",
+            "padding": "0 4px"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "l_34227"
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.style.classes": {
+                        "binding": {
+                          "config": {
+                            "expression": "{session.custom.style} + '/text/card-title'"
+                          },
+                          "type": "expr"
+                        }
+                      }
+                    },
+                    "props": {
+                      "text": "Committed theme"
+                    },
+                    "type": "ia.display.label"
+                  }
+                ],
+                "meta": {
+                  "name": "themeCard_h"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "{session.custom.style} + '/containers/card-header'"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "direction": "row",
+                  "style": {
+                    "alignItems": "center"
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "l_0"
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.style.classes": {
+                        "binding": {
+                          "config": {
+                            "expression": "{session.custom.style} + '/kpi/value'"
+                          },
+                          "type": "expr"
+                        }
+                      },
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "expression": "runScript('demo_styles.chosen_pack()')"
+                          },
+                          "type": "expr"
+                        }
+                      }
+                    },
+                    "props": {
+                      "text": ""
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "l_10449"
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.style.classes": {
+                        "binding": {
+                          "config": {
+                            "expression": "{session.custom.style} + '/text/muted'"
+                          },
+                          "type": "expr"
+                        }
+                      }
+                    },
+                    "props": {
+                      "style": {
+                        "whiteSpace": "normal"
+                      },
+                      "text": "Theme opens the theme switcher and previews a theme in this session only. Commit writes it into every project on this gateway that carries demo_styles and rescans, so BOTH sites re-theme within about five seconds \u2014 and because it is a project resource, \"Push\" then carries the same theme to the edges. The repo is one line behind afterwards: make pull-project PROJECT=Site1 (and Site2)."
+                    },
+                    "type": "ia.display.label"
+                  }
+                ],
+                "meta": {
+                  "name": "themeCard_b"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "props": {
+                  "direction": "column",
+                  "style": {
+                    "gap": "12px",
+                    "padding": "14px"
+                  }
+                },
+                "type": "ia.container.flex"
+              }
+            ],
+            "meta": {
+              "name": "themeCard"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.style.classes": {
+                "binding": {
+                  "config": {
+                    "expression": "{session.custom.style} + '/containers/card'"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "minWidth": "0"
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "l_9314"
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.style.classes": {
+                        "binding": {
+                          "config": {
+                            "expression": "{session.custom.style} + '/text/card-title'"
+                          },
+                          "type": "expr"
+                        }
+                      }
+                    },
+                    "props": {
+                      "text": "Theme"
+                    },
+                    "type": "ia.display.label"
+                  }
+                ],
+                "meta": {
+                  "name": "previewCard_h"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "{session.custom.style} + '/containers/card-header'"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "direction": "row",
+                  "style": {
+                    "alignItems": "center"
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "children": [
+                          {
+                            "events": {
+                              "component": {
+                                "onActionPerformed": {
+                                  "config": {
+                                    "script": "\tsystem.perspective.openPopup(\n\t\t'styles-template-switcher',\n\t\t'Appearance/Switcher',\n\t\t# THIS REPO'S OWN VIEW, generated by scripts/gen-themes.py. It was\n\t\t# upstream's inherited switcher until the themes cutover; the comment\n\t\t# that used to sit here still said so, and said the size came from\n\t\t# upstream's own min() sizing, months after both stopped being true.\n\t\t#\n\t\t# It writes session.custom.styleOverride rather than\n\t\t# session.custom.style, because style is BOUND (it prefers the override,\n\t\t# else the committed theme, on a 5s poll) and a bound property swallows\n\t\t# a write in silence. Committing to every project -- the only form that\n\t\t# travels over EAM -- is the separate 'Apply everywhere' button.\n\t\t#\n\t\t# SIZE COMES FROM THE VIEW'S OWN props.defaultSize (560x460), not from\n\t\t# here. openPopup HAS NO width OR height ARGUMENT -- see\n\t\t# gen-themes.py:gen_switcher for the reflection and the measurements.\n\t\t# Unknown kwargs are swallowed in silence, so a size passed here reads\n\t\t# as working and does nothing at all. A per-call override is\n\t\t# position={'width': N, 'height': N} -- integers, pixels, no CSS.\n\t\ttitle='Theme',\n\t\tmodal=True,\n\t\tdraggable=True,\n\t\tresizable=False,\n\t\toverlayDismiss=True,\n\t\tviewportBound=True)\n"
+                                  },
+                                  "scope": "G",
+                                  "type": "script"
+                                }
+                              }
+                            },
+                            "meta": {
+                              "name": "appearance"
+                            },
+                            "position": {
+                              "shrink": 0
+                            },
+                            "propConfig": {
+                              "props.style.classes": {
+                                "binding": {
+                                  "config": {
+                                    "expression": "{session.custom.style} + '/buttons/primary'"
+                                  },
+                                  "type": "expr"
+                                }
+                              }
+                            },
+                            "props": {
+                              "text": "Theme"
+                            },
+                            "type": "ia.input.button"
+                          },
+                          {
+                            "events": {
+                              "component": {
+                                "onActionPerformed": {
+                                  "config": {
+                                    "script": "\timport demo_styles\n\t# The commit is the only part of theming this repo owns. The template's\n\t# switcher themes a SESSION, and a session does not travel; commit_pack\n\t# rewrites CHOSEN_PACK in every project on this gateway carrying\n\t# demo_styles, which is a project RESOURCE and therefore the only form\n\t# of the choice EAM's Send Project can carry to an edge.\n\t#\n\t# Read the effective pack BEFORE clearing the override. Clearing first\n\t# makes session.custom.style fall back to the committed pack, so you\n\t# would commit the very thing you were replacing.\n\tpack = self.session.custom.style\n\tself.session.custom.styleOverride = ''\n\tself.session.custom.pushStatus = demo_styles.commit_pack(pack)\n"
+                                  },
+                                  "scope": "G",
+                                  "type": "script"
+                                }
+                              }
+                            },
+                            "meta": {
+                              "name": "commit"
+                            },
+                            "position": {
+                              "shrink": 0
+                            },
+                            "propConfig": {
+                              "props.style.classes": {
+                                "binding": {
+                                  "config": {
+                                    "expression": "{session.custom.style} + '/buttons/ghost'"
+                                  },
+                                  "type": "expr"
+                                }
+                              }
+                            },
+                            "props": {
+                              "text": "Commit to every project"
+                            },
+                            "type": "ia.input.button"
+                          }
+                        ],
+                        "meta": {
+                          "name": "themeActions"
+                        },
+                        "position": {
+                          "shrink": 0
+                        },
+                        "props": {
+                          "alignItems": "center",
+                          "direction": "row",
+                          "style": {
+                            "gap": "8px"
+                          },
+                          "wrap": "wrap"
+                        },
+                        "type": "ia.container.flex"
+                      },
+                      {
+                        "meta": {
+                          "name": "note"
+                        },
+                        "position": {
+                          "shrink": 0
+                        },
+                        "propConfig": {
+                          "props.style.classes": {
+                            "binding": {
+                              "config": {
+                                "expression": "{session.custom.style} + '/text/muted'"
+                              },
+                              "type": "expr"
+                            }
+                          },
+                          "props.text": {
+                            "binding": {
+                              "config": {
+                                "expression": "if({session.custom.styleOverride} = '', 'Showing the committed theme. Open Theme to try another -- this session only, nothing is written.', 'Previewing ' + {session.custom.styleOverride} + ' -- Commit writes it into every project on this gateway.')"
+                              },
+                              "type": "expr"
+                            }
+                          }
+                        },
+                        "props": {
+                          "style": {
+                            "fontSize": "12px",
+                            "lineHeight": "1.4"
+                          }
+                        },
+                        "type": "ia.display.label"
+                      }
+                    ],
+                    "meta": {
+                      "name": "swatches"
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "props": {
+                      "direction": "column",
+                      "style": {
+                        "alignItems": "flex-start",
+                        "gap": "10px"
+                      }
+                    },
+                    "type": "ia.container.flex"
+                  }
+                ],
+                "meta": {
+                  "name": "previewCard_b"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "props": {
+                  "direction": "column",
+                  "style": {
+                    "gap": "12px",
+                    "padding": "14px"
+                  }
+                },
+                "type": "ia.container.flex"
+              }
+            ],
+            "meta": {
+              "name": "previewCard"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.style.classes": {
+                "binding": {
+                  "config": {
+                    "expression": "{session.custom.style} + '/containers/card'"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "minWidth": "0"
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "l_39024"
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.style.classes": {
+                        "binding": {
+                          "config": {
+                            "expression": "{session.custom.style} + '/text/card-title'"
+                          },
+                          "type": "expr"
+                        }
+                      }
+                    },
+                    "props": {
+                      "text": "Distribute to the edges"
+                    },
+                    "type": "ia.display.label"
+                  }
+                ],
+                "meta": {
+                  "name": "pushCard_h"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "{session.custom.style} + '/containers/card-header'"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "direction": "row",
+                  "style": {
+                    "alignItems": "center"
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "events": {
+                          "component": {
+                            "onActionPerformed": {
+                              "config": {
+                                "script": "\tdef run(names):\n\t\tdone = []\n\t\tfor n in names:\n\t\t\ttry:\n\t\t\t\tsystem.eam.runTask(n, 'eam', True)\n\t\t\t\tdone.append(n.split(' to ')[0].replace('Send ', '') + ' sent')\n\t\t\texcept Exception, e:\n\t\t\t\tdone.append('FAILED ' + n + ': ' + str(e))\n\t\treturn ' | '.join(done)\n\tself.session.custom.pushStatus = run([\"Send Site1 to Ignition-Edge1\", \"Send Site2 to Ignition-Edge2\"])\n"
+                              },
+                              "scope": "G",
+                              "type": "script"
+                            }
+                          }
+                        },
+                        "meta": {
+                          "name": "pushBoth"
+                        },
+                        "position": {
+                          "shrink": 0
+                        },
+                        "propConfig": {
+                          "props.style.classes": {
+                            "binding": {
+                              "config": {
+                                "expression": "{session.custom.style} + '/buttons/primary'"
+                              },
+                              "type": "expr"
+                            }
+                          }
+                        },
+                        "props": {
+                          "text": "Push BOTH edges"
+                        },
+                        "type": "ia.input.button"
+                      },
+                      {
+                        "events": {
+                          "component": {
+                            "onActionPerformed": {
+                              "config": {
+                                "script": "\tdef run(names):\n\t\tdone = []\n\t\tfor n in names:\n\t\t\ttry:\n\t\t\t\tsystem.eam.runTask(n, 'eam', True)\n\t\t\t\tdone.append(n.split(' to ')[0].replace('Send ', '') + ' sent')\n\t\t\texcept Exception, e:\n\t\t\t\tdone.append('FAILED ' + n + ': ' + str(e))\n\t\treturn ' | '.join(done)\n\tself.session.custom.pushStatus = run([\"Send Site1 to Ignition-Edge1\"])\n"
+                              },
+                              "scope": "G",
+                              "type": "script"
+                            }
+                          }
+                        },
+                        "meta": {
+                          "name": "pushSite1"
+                        },
+                        "position": {
+                          "shrink": 0
+                        },
+                        "propConfig": {
+                          "props.style.classes": {
+                            "binding": {
+                              "config": {
+                                "expression": "{session.custom.style} + '/buttons/chip'"
+                              },
+                              "type": "expr"
+                            }
+                          }
+                        },
+                        "props": {
+                          "text": "Push Site 1 \u2192 Edge 1"
+                        },
+                        "type": "ia.input.button"
+                      },
+                      {
+                        "events": {
+                          "component": {
+                            "onActionPerformed": {
+                              "config": {
+                                "script": "\tdef run(names):\n\t\tdone = []\n\t\tfor n in names:\n\t\t\ttry:\n\t\t\t\tsystem.eam.runTask(n, 'eam', True)\n\t\t\t\tdone.append(n.split(' to ')[0].replace('Send ', '') + ' sent')\n\t\t\texcept Exception, e:\n\t\t\t\tdone.append('FAILED ' + n + ': ' + str(e))\n\t\treturn ' | '.join(done)\n\tself.session.custom.pushStatus = run([\"Send Site2 to Ignition-Edge2\"])\n"
+                              },
+                              "scope": "G",
+                              "type": "script"
+                            }
+                          }
+                        },
+                        "meta": {
+                          "name": "pushSite2"
+                        },
+                        "position": {
+                          "shrink": 0
+                        },
+                        "propConfig": {
+                          "props.style.classes": {
+                            "binding": {
+                              "config": {
+                                "expression": "{session.custom.style} + '/buttons/chip'"
+                              },
+                              "type": "expr"
+                            }
+                          }
+                        },
+                        "props": {
+                          "text": "Push Site 2 \u2192 Edge 2"
+                        },
+                        "type": "ia.input.button"
+                      }
+                    ],
+                    "meta": {
+                      "name": "pushRow"
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "props": {
+                      "direction": "row",
+                      "style": {
+                        "gap": "10px"
+                      }
+                    },
+                    "type": "ia.container.flex"
+                  },
+                  {
+                    "meta": {
+                      "name": "l_0"
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.style.classes": {
+                        "binding": {
+                          "config": {
+                            "expression": "{session.custom.style} + '/text/muted'"
+                          },
+                          "type": "expr"
+                        }
+                      },
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "expression": "{session.custom.pushStatus}"
+                          },
+                          "type": "expr"
+                        }
+                      }
+                    },
+                    "props": {
+                      "style": {
+                        "whiteSpace": "normal"
+                      },
+                      "text": ""
+                    },
+                    "type": "ia.display.label"
+                  }
+                ],
+                "meta": {
+                  "name": "pushCard_b"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "props": {
+                  "direction": "column",
+                  "style": {
+                    "gap": "12px",
+                    "padding": "14px"
+                  }
+                },
+                "type": "ia.container.flex"
+              }
+            ],
+            "meta": {
+              "name": "pushCard"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.style.classes": {
+                "binding": {
+                  "config": {
+                    "expression": "{session.custom.style} + '/containers/card'"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "minWidth": "0"
+              }
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "content"
+        },
+        "position": {
+          "basis": "0px",
+          "grow": 1
+        },
+        "propConfig": {
+          "props.style.classes": {
+            "binding": {
+              "config": {
+                "expression": "{session.custom.style} + '/containers/content'"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "gap": "14px",
+            "minHeight": "0",
+            "overflow": "auto",
+            "padding": "14px"
+          }
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "position": {
+      "basis": "auto",
+      "shrink": 0
+    },
+    "propConfig": {
+      "props.style.classes": {
+        "binding": {
+          "config": {
+            "expression": "{session.custom.style} + '/containers/page'"
+          },
+          "type": "expr"
+        }
+      }
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "height": "100%",
+        "width": "100%"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

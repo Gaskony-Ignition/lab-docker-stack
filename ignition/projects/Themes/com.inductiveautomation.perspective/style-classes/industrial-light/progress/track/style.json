@@ -1,0 +1,12 @@
+{
+  "base": {
+    "style": {
+      "backgroundColor": "#DDE1E7",
+      "borderWidth": "1px",
+      "borderStyle": "solid",
+      "borderColor": "#D1D5DB",
+      "borderRadius": "2px",
+      "overflow": "hidden"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "base": {
+    "style": {
+      "color": "#16232e",
+      "borderBottomWidth": "1px",
+      "borderBottomStyle": "solid",
+      "borderBottomColor": "#d3dbd8",
+      "padding": "5px 9px",
+      "fontVariantNumeric": "tabular-nums"
+    }
+  }
+}

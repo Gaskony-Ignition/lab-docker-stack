@@ -1,0 +1,26 @@
+{
+  "base": {
+    "style": {
+      "backgroundColor": "transparent",
+      "color": "#33556E",
+      "borderWidth": "1px",
+      "borderStyle": "solid",
+      "borderColor": "transparent",
+      "borderRadius": "2px",
+      "padding": "0 12px",
+      "fontFamily": "\"Roboto\", \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+      "fontSize": "13px",
+      "fontWeight": "500",
+      "whiteSpace": "nowrap",
+      "cursor": "pointer"
+    }
+  },
+  "variants": [
+    {
+      "pseudo": "hover",
+      "style": {
+        "backgroundColor": "#E7EAEF"
+      }
+    }
+  ]
+}

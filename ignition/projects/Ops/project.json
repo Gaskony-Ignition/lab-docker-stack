@@ -1,0 +1,7 @@
+{
+  "title": "Ops",
+  "description": "Platform plumbing, not a demonstration. Hosts the AutoScan gateway timer that lets scripts/ign-scan.sh apply file deploys without a Designer or a gateway restart.",
+  "enabled": true,
+  "inheritable": false,
+  "parent": ""
+}

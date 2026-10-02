@@ -1,0 +1,51 @@
+# Line endings, and why this file has to exist.
+#
+# Git on Windows defaults to core.autocrlf=true, which rewrites every text file
+# to CRLF on checkout. A shell script with CRLF line endings fails inside a
+# Linux container with:
+#
+#     /usr/local/bin/wd-entrypoint: line 2: $'\r': command not found
+#
+# or, worse and more often, `bad interpreter: /usr/bin/env bash^M: no such file
+# or directory` -- which reads as a missing interpreter and is a missing
+# interpreter, just not the one named. The same applies to anything the gateway
+# reads: a Jython timer script with CRLF raises a PySyntaxError on every tick.
+#
+# So: everything in this repo is LF, on every platform, regardless of what the
+# person cloning it has configured. `* text=auto eol=lf` is the whole rule; the
+# explicit lines after it exist because the guess is not worth relying on for
+# the files that would break loudest.
+* text=auto eol=lf
+
+*.sh      text eol=lf
+*.py      text eol=lf
+*.js      text eol=lf
+*.json    text eol=lf
+*.yaml    text eol=lf
+*.yml     text eol=lf
+*.md      text eol=lf
+*.css     text eol=lf
+Makefile  text eol=lf
+Dockerfile text eol=lf
+wd        text eol=lf
+.env.example text eol=lf
+
+# The Windows launcher is the one exception. cmd.exe tolerates LF for simple
+# scripts but not reliably for multi-line constructs -- a `for` or an `if (`
+# block with LF endings can be parsed a line short, and the error it prints
+# names the wrong line. Batch files are CRLF everywhere; keep it that way.
+*.cmd     text eol=crlf
+*.bat     text eol=crlf
+
+# Binaries: never touched, never diffed as text.
+*.modl    binary
+*.png     binary
+*.jpg     binary
+*.gz      binary
+*.zip     binary
+*.gwbk    binary
+*.mp4     binary
+
+# Manifests are parsed by a line regex on two platforms; a CRLF line would
+# land a broken entry in a hosts file silently. LF everywhere, enforced.
+stacks/*/stack.meta text eol=lf

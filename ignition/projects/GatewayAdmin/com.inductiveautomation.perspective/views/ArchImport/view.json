@@ -1,0 +1,114 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "height": 300,
+      "width": 460
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "hint"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.style.classes": {
+                "binding": {
+                  "config": {
+                    "expression": "{session.custom.style} + '/text/muted'"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "whiteSpace": "normal"
+              },
+              "text": "Drop an architecture.json exported from File → Export JSON."
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "events": {
+              "component": {
+                "onFileReceived": {
+                  "config": {
+                    "script": "\t# The Architecture view watches this prop and\n\t# applies it -- a popup cannot reach a\n\t# component in another view.\n\tself.session.custom.archImport = event.file.getString()\n\tsystem.perspective.closePopup('arch-import')\n"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "up"
+            },
+            "position": {
+              "basis": "0px",
+              "grow": 1
+            },
+            "props": {
+              "maxUploads": 1,
+              "style": {
+                "width": "100%"
+              },
+              "supportedFileTypes": [
+                "json"
+              ]
+            },
+            "type": "ia.input.fileupload"
+          }
+        ],
+        "meta": {
+          "name": "shell"
+        },
+        "position": {
+          "basis": "0px",
+          "grow": 1
+        },
+        "propConfig": {
+          "props.style.classes": {
+            "binding": {
+              "config": {
+                "expression": "{session.custom.style} + '/containers/page'"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "gap": "12px",
+            "height": "100%",
+            "padding": "18px"
+          }
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "position": {
+      "basis": "auto",
+      "shrink": 0
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "height": "100%",
+        "width": "100%"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

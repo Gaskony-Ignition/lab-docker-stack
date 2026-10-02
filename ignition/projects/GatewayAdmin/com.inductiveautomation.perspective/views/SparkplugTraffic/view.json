@@ -1,0 +1,702 @@
+{
+  "custom": {
+    "d": {
+      "rate": "",
+      "stats": {
+        "data": "",
+        "cmd": "",
+        "life": "",
+        "rate0": "",
+        "rate1": ""
+      },
+      "events": []
+    }
+  },
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "width": 1366,
+      "height": 350
+    }
+  },
+  "root": {
+    "type": "ia.container.flex",
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "gap": "8px",
+        "padding": "10px 16px 14px",
+        "height": "100%",
+        "width": "100%",
+        "boxSizing": "border-box",
+        "overflow": "hidden"
+      }
+    },
+    "position": {
+      "shrink": 0
+    },
+    "propConfig": {
+      "props.style.classes": {
+        "binding": {
+          "type": "expr",
+          "config": {
+            "expression": "{session.custom.style} + '/containers/content' + ' sparkplug-scope sp-drawer'"
+          }
+        }
+      }
+    },
+    "children": [
+      {
+        "type": "ia.container.flex",
+        "meta": {
+          "name": "head"
+        },
+        "props": {
+          "direction": "row",
+          "style": {
+            "gap": "12px",
+            "height": "30px"
+          },
+          "alignItems": "center"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "children": [
+          {
+            "type": "ia.display.label",
+            "meta": {
+              "name": "title"
+            },
+            "props": {
+              "text": "MQTT traffic",
+              "style": {
+                "lineHeight": "1.35",
+                "whiteSpace": "nowrap"
+              }
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.style.classes": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{session.custom.style} + '/text/card-title'"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "ia.display.label",
+            "meta": {
+              "name": "what"
+            },
+            "props": {
+              "text": "A live copy of the messages crossing the broker, for viewing only. Repeats are folded into one row with a count.",
+              "style": {
+                "lineHeight": "1.35",
+                "whiteSpace": "nowrap",
+                "minWidth": "0"
+              }
+            },
+            "position": {
+              "basis": "0px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "propConfig": {
+              "props.style.classes": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{session.custom.style} + '/text/muted' + ' sp-ellipsis'"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "ia.input.button",
+            "meta": {
+              "name": "close"
+            },
+            "props": {
+              "text": "Close",
+              "style": {
+                "height": "30px",
+                "minHeight": "30px",
+                "padding": "0 14px",
+                "whiteSpace": "nowrap",
+                "lineHeight": "1"
+              }
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.style.classes": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{session.custom.style} + '/buttons/chip'"
+                  }
+                }
+              }
+            },
+            "events": {
+              "component": {
+                "onActionPerformed": {
+                  "type": "script",
+                  "scope": "G",
+                  "config": {
+                    "script": "\tsystem.perspective.closeDock('sp-traffic')\n"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "type": "ia.container.flex",
+        "meta": {
+          "name": "stats"
+        },
+        "props": {
+          "direction": "row",
+          "style": {
+            "height": "40px",
+            "overflow": "hidden"
+          },
+          "alignItems": "center"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "children": [
+          {
+            "type": "ia.container.flex",
+            "meta": {
+              "name": "rate0"
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "gap": "0px",
+                "paddingRight": "18px"
+              }
+            },
+            "position": {
+              "basis": "auto",
+              "shrink": 0
+            },
+            "children": [
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "caption"
+                },
+                "props": {
+                  "text": "Edge 3",
+                  "style": {
+                    "lineHeight": "1.35",
+                    "whiteSpace": "nowrap",
+                    "classes": "sp-th-plain"
+                  }
+                },
+                "position": {
+                  "shrink": 0
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "value"
+                },
+                "props": {
+                  "text": "",
+                  "style": {
+                    "lineHeight": "1.35",
+                    "whiteSpace": "nowrap",
+                    "classes": "sp-value"
+                  }
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{view.custom.d.stats.rate0}"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "type": "ia.container.flex",
+            "meta": {
+              "name": "rate1"
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "gap": "0px",
+                "paddingRight": "18px"
+              }
+            },
+            "position": {
+              "basis": "auto",
+              "shrink": 0
+            },
+            "children": [
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "caption"
+                },
+                "props": {
+                  "text": "Edge 4",
+                  "style": {
+                    "lineHeight": "1.35",
+                    "whiteSpace": "nowrap",
+                    "classes": "sp-th-plain"
+                  }
+                },
+                "position": {
+                  "shrink": 0
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "value"
+                },
+                "props": {
+                  "text": "",
+                  "style": {
+                    "lineHeight": "1.35",
+                    "whiteSpace": "nowrap",
+                    "classes": "sp-value"
+                  }
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{view.custom.d.stats.rate1}"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "type": "ia.container.flex",
+            "meta": {
+              "name": "data"
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "gap": "0px",
+                "paddingRight": "18px"
+              }
+            },
+            "position": {
+              "basis": "auto",
+              "shrink": 0
+            },
+            "children": [
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "caption"
+                },
+                "props": {
+                  "text": "Value updates (data)",
+                  "style": {
+                    "lineHeight": "1.35",
+                    "whiteSpace": "nowrap",
+                    "classes": "sp-th-plain"
+                  }
+                },
+                "position": {
+                  "shrink": 0
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "value"
+                },
+                "props": {
+                  "text": "",
+                  "style": {
+                    "lineHeight": "1.35",
+                    "whiteSpace": "nowrap",
+                    "classes": "sp-value"
+                  }
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{view.custom.d.stats.data}"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "type": "ia.container.flex",
+            "meta": {
+              "name": "cmd"
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "gap": "0px",
+                "paddingRight": "18px"
+              }
+            },
+            "position": {
+              "basis": "auto",
+              "shrink": 0
+            },
+            "children": [
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "caption"
+                },
+                "props": {
+                  "text": "Commands (cmd)",
+                  "style": {
+                    "lineHeight": "1.35",
+                    "whiteSpace": "nowrap",
+                    "classes": "sp-th-plain"
+                  }
+                },
+                "position": {
+                  "shrink": 0
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "value"
+                },
+                "props": {
+                  "text": "",
+                  "style": {
+                    "lineHeight": "1.35",
+                    "whiteSpace": "nowrap",
+                    "classes": "sp-value"
+                  }
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{view.custom.d.stats.cmd}"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "type": "ia.container.flex",
+            "meta": {
+              "name": "life"
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "gap": "0px",
+                "paddingRight": "18px"
+              }
+            },
+            "position": {
+              "basis": "auto",
+              "shrink": 0
+            },
+            "children": [
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "caption"
+                },
+                "props": {
+                  "text": "Startups and shutdowns",
+                  "style": {
+                    "lineHeight": "1.35",
+                    "whiteSpace": "nowrap",
+                    "classes": "sp-th-plain"
+                  }
+                },
+                "position": {
+                  "shrink": 0
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "value"
+                },
+                "props": {
+                  "text": "",
+                  "style": {
+                    "lineHeight": "1.35",
+                    "whiteSpace": "nowrap",
+                    "classes": "sp-value"
+                  }
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{view.custom.d.stats.life}"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "ia.display.table",
+        "meta": {
+          "name": "events"
+        },
+        "props": {
+          "data": [],
+          "columns": [
+            {
+              "field": "when",
+              "header": {
+                "title": "When",
+                "justify": "left",
+                "align": "center",
+                "style": {}
+              },
+              "width": 90,
+              "strictWidth": true,
+              "justify": "left",
+              "align": "center",
+              "render": "string",
+              "sortable": false,
+              "resizable": false,
+              "editable": false,
+              "visible": true,
+              "style": {
+                "whiteSpace": "nowrap",
+                "overflow": "hidden",
+                "textOverflow": "ellipsis",
+                "padding": "0 8px"
+              }
+            },
+            {
+              "field": "kind",
+              "header": {
+                "title": "Kind",
+                "justify": "left",
+                "align": "center",
+                "style": {}
+              },
+              "width": 170,
+              "strictWidth": true,
+              "justify": "left",
+              "align": "center",
+              "render": "string",
+              "sortable": false,
+              "resizable": false,
+              "editable": false,
+              "visible": true,
+              "style": {
+                "whiteSpace": "nowrap",
+                "overflow": "hidden",
+                "textOverflow": "ellipsis",
+                "padding": "0 8px"
+              }
+            },
+            {
+              "field": "dir",
+              "header": {
+                "title": "Direction",
+                "justify": "left",
+                "align": "center",
+                "style": {}
+              },
+              "width": 120,
+              "strictWidth": true,
+              "justify": "left",
+              "align": "center",
+              "render": "string",
+              "sortable": false,
+              "resizable": false,
+              "editable": false,
+              "visible": true,
+              "style": {
+                "whiteSpace": "nowrap",
+                "overflow": "hidden",
+                "textOverflow": "ellipsis",
+                "padding": "0 8px"
+              }
+            },
+            {
+              "field": "what",
+              "header": {
+                "title": "What happened",
+                "justify": "left",
+                "align": "center",
+                "style": {}
+              },
+              "width": 1,
+              "strictWidth": false,
+              "justify": "left",
+              "align": "center",
+              "render": "string",
+              "sortable": false,
+              "resizable": false,
+              "editable": false,
+              "visible": true,
+              "style": {
+                "whiteSpace": "nowrap",
+                "overflow": "hidden",
+                "textOverflow": "ellipsis",
+                "padding": "0 8px"
+              }
+            },
+            {
+              "field": "topic",
+              "header": {
+                "title": "Topic",
+                "justify": "left",
+                "align": "center",
+                "style": {}
+              },
+              "width": 280,
+              "strictWidth": true,
+              "justify": "left",
+              "align": "center",
+              "render": "string",
+              "sortable": false,
+              "resizable": false,
+              "editable": false,
+              "visible": true,
+              "style": {
+                "whiteSpace": "nowrap",
+                "overflow": "hidden",
+                "textOverflow": "ellipsis",
+                "padding": "0 8px"
+              }
+            }
+          ],
+          "virtualized": true,
+          "pager": {
+            "top": false,
+            "bottom": false
+          },
+          "selection": {
+            "enableRowSelection": false,
+            "enableColumnSelection": false
+          },
+          "rows": {
+            "height": 28,
+            "striped": {
+              "enabled": false
+            },
+            "highlight": {
+              "enabled": false
+            }
+          },
+          "emptyMessage": {
+            "noData": {
+              "text": "No messages yet"
+            }
+          },
+          "enableHeader": true,
+          "headerStyle": {
+            "paddingLeft": "8px"
+          },
+          "style": {
+            "classes": "sp-table"
+          }
+        },
+        "position": {
+          "basis": "200px",
+          "grow": 0,
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.data": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.custom.d.events}"
+              }
+            }
+          },
+          "position.basis": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "toStr(32 + 28 * max(3, floor(({page.props.dimensions.viewport.height} - 236 - 110 - 32) / 28))) + 'px'"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "propConfig": {
+    "custom.d": {
+      "binding": {
+        "type": "expr",
+        "config": {
+          "expression": "now(1500)"
+        },
+        "transforms": [
+          {
+            "type": "script",
+            "code": "\timport sparkplug_demo\n\treturn sparkplug_demo.page_traffic()\n"
+          }
+        ]
+      }
+    }
+  }
+}

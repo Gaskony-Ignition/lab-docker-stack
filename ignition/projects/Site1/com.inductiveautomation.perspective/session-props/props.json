@@ -1,0 +1,233 @@
+{
+  "custom": {
+    "alarms": {
+      "a1": {
+        "cls": "pri-urgent",
+        "pri": "URGENT",
+        "row": "row-urgent",
+        "text": "Filler CIP temperature high \u2014 81.5 \u00b0C",
+        "time": "14:29"
+      },
+      "a2": {
+        "cls": "pri-high",
+        "pri": "HIGH",
+        "row": "row-high",
+        "text": "Packer infeed jam \u2014 lane 2",
+        "time": "14:31"
+      },
+      "a3": {
+        "cls": "pri-med",
+        "pri": "MED",
+        "row": "row-med",
+        "text": "Labeller ribbon low",
+        "time": "13:58"
+      },
+      "a4": {
+        "cls": "pri-low",
+        "pri": "LOW",
+        "row": "row-low",
+        "text": "Palletizer door open (ack)",
+        "time": "13:12"
+      },
+      "count": "4"
+    },
+    "banner": {
+      "count": "2 ACTIVE",
+      "text": "Filler CIP temperature high \u00b7 Packer infeed jam"
+    },
+    "batches": [
+      [
+        "2216-B",
+        "Cola 330 ml",
+        "18,420",
+        "99.1%",
+        "Running",
+        "badge-ok"
+      ],
+      [
+        "2216-A",
+        "Cola 330 ml",
+        "24,000",
+        "98.7%",
+        "Complete",
+        "badge-ok"
+      ],
+      [
+        "2215-C",
+        "Lemon 500 ml",
+        "21,300",
+        "97.2%",
+        "Short",
+        "badge-warn"
+      ],
+      [
+        "2215-B",
+        "Lemon 500 ml",
+        "24,000",
+        "98.9%",
+        "Complete",
+        "badge-ok"
+      ],
+      [
+        "2215-A",
+        "Orange 330 ml",
+        "12,050",
+        "91.4%",
+        "Aborted",
+        "badge-alarm"
+      ]
+    ],
+    "filler": {
+      "batch": "Batch 2216-B \u00b7 64% complete",
+      "buffer": "54",
+      "cipTemp": "81.5",
+      "headPressure": "3.2",
+      "pct": 72,
+      "progress": "64%",
+      "speed": "612",
+      "state": "Running"
+    },
+    "kpi": {
+      "downtime": "12",
+      "downtimeDelta": "\u25bc 4",
+      "oee": "86.4%",
+      "oeeDelta": "\u25b2 2.1%",
+      "rejects": "0.8%",
+      "rejectsDelta": "\u25bc 0.3%",
+      "throughput": "1,240",
+      "throughputDelta": "\u25b2 60"
+    },
+    "line": "Line 1",
+    "pushStatus": "Ready.",
+    "site": "Site 1 - Northern Plant",
+    "styleOverride": "",
+    "trend": {
+      "max": 1300,
+      "min": 1120,
+      "points": [
+        {
+          "t": "07:00",
+          "v": 1180
+        },
+        {
+          "t": "08:00",
+          "v": 1215
+        },
+        {
+          "t": "09:00",
+          "v": 1194
+        },
+        {
+          "t": "10:00",
+          "v": 1246
+        },
+        {
+          "t": "11:00",
+          "v": 1228
+        },
+        {
+          "t": "12:00",
+          "v": 1262
+        },
+        {
+          "t": "13:00",
+          "v": 1240
+        },
+        {
+          "t": "14:00",
+          "v": 1255
+        }
+      ],
+      "target": 1200
+    }
+  },
+  "propConfig": {
+    "custom.style": {
+      "binding": {
+        "config": {
+          "expression": "if({session.custom.styleOverride} = '', runScript('demo_styles.chosen_pack()', 5000), {session.custom.styleOverride})"
+        },
+        "type": "expr"
+      }
+    },
+    "props.auth": {
+      "access": "PRIVATE",
+      "persistent": false
+    },
+    "props.device.accelerometer": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.device.identifier": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.device.timezone": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.device.type": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.device.userAgent": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.gateway": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.geolocation.data": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.geolocation.permissionGranted": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.host": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.id": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.lastActivity": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.offline.capable": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.offline.enabled": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.offline.lastSynced": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.theme": {
+      "binding": {
+        "config": {
+          "expression": "{session.custom.style}"
+        },
+        "type": "expr"
+      }
+    }
+  },
+  "props": {
+    "address": "172.17.0.1",
+    "appBar": {
+      "togglePosition": "hidden"
+    },
+    "device": {},
+    "geolocation": {},
+    "locale": "en-US",
+    "offline": {},
+    "timeZoneId": "Etc/UTC"
+  }
+}

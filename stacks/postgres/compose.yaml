@@ -1,0 +1,56 @@
+name: postgres
+
+services:
+  postgres:
+    image: postgres:18.4
+    container_name: postgres
+    # "no", quoted -- bare no is YAML false. A DEMO stack must never come back on
+    # its own: unless-stopped resurrects whatever was running when the daemon
+    # restarts, which on 07/08/2026 silently returned all eleven stacks for three
+    # days. Start with `make up`, stop with `make down`.
+    restart: "no"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      # Consumed by initdb/01-ignition.sh on first boot
+      IGNITION_DB_NAME: ${IGNITION_DB_NAME}
+      IGNITION_DB_USER: ${IGNITION_DB_USER}
+      IGNITION_DB_PASSWORD: ${IGNITION_DB_PASSWORD}
+    ports:
+      # Bound to loopback only: reachable from your Mac (TablePlus, psql, etc.)
+      # but not from other machines on the network.
+      - "127.0.0.1:${POSTGRES_HOST_PORT:-29432}:5432"
+    volumes:
+      # Postgres 18 declares its VOLUME at /var/lib/postgresql, with the actual
+      # PGDATA at /var/lib/postgresql/18/docker. Mount the parent, not the old
+      # /var/lib/postgresql/data path used by Postgres 17 and earlier.
+      - postgres_data:/var/lib/postgresql
+      # Named, not `./initdb` -- see scripts/lib.sh:seed_volume. This one fails
+      # SILENTLY: with an empty init directory Postgres starts, reports healthy,
+      # and simply has none of the databases, which is only noticed later when
+      # the gateway cannot connect.
+      - postgres_initdb:/docker-entrypoint-initdb.d:ro
+    networks:
+      - backbone
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    labels:
+      au.gaskony.wd.stack: "postgres"
+
+volumes:
+  postgres_data:
+  # Seeded by scripts/lib.sh:seed_all before the container starts; external so
+  # that a missing volume is an error rather than an empty init directory, which
+  # Postgres would accept and then come up healthy with none of its databases.
+  postgres_initdb:
+    name: wd-postgres-initdb
+    external: true
+
+networks:
+  backbone:
+    external: true

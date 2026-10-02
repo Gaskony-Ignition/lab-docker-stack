@@ -1,0 +1,25 @@
+{
+  "pages": {
+    "/": {
+      "viewPath": "Main",
+      "docks": {
+        "bottom": [
+          {
+            "id": "sp-traffic",
+            "viewPath": "SparkplugTraffic",
+            "size": 400,
+            "show": "onDemand",
+            "content": "cover",
+            "handle": "hide",
+            "anchor": "fixed",
+            "modal": false,
+            "resizable": false,
+            "iconUrl": "",
+            "autoBreakpoint": 480,
+            "viewParams": {}
+          }
+        ]
+      }
+    }
+  }
+}

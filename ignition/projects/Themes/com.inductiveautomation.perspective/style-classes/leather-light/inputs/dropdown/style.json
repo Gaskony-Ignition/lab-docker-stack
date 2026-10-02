@@ -1,0 +1,15 @@
+{
+  "base": {
+    "style": {
+      "backgroundColor": "#fdfaf2",
+      "color": "#2b2620",
+      "borderWidth": "1px",
+      "borderStyle": "solid",
+      "borderColor": "#e6d6b8",
+      "borderRadius": "8px",
+      "padding": "8px 12px",
+      "fontFamily": "Inter, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+      "fontSize": "13.5px"
+    }
+  }
+}

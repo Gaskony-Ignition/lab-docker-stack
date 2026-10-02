@@ -1,0 +1,7 @@
+{
+  "title": "Themes",
+  "description": "Inheritable look-and-feel: 69 style classes for each of the nine Gaskony themes, keyed by THEME ID so one name drives both session.props.theme and every '<style>/containers/card' class binding. Carries NO stylesheet, deliberately -- a child's own stylesheet replaces its parent's wholesale, so leaving this empty is what gives every child its stylesheet back. Vendored by scripts/gen-themes.py; nothing here is hand-edited. Inheritable, so it cannot be launched on its own.",
+  "enabled": true,
+  "inheritable": true,
+  "parent": ""
+}

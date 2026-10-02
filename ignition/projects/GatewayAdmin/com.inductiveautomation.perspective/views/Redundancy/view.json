@@ -1,0 +1,3295 @@
+{
+  "custom": {
+    "summary": {},
+    "story": {},
+    "rail": {
+      "head": {
+        "name": "",
+        "state": "",
+        "badge": "badge-neutral",
+        "tip": ""
+      },
+      "banner": {
+        "text": ""
+      },
+      "notReady": "",
+      "state": "stopped",
+      "facts": [],
+      "links": []
+    },
+    "proof": {}
+  },
+  "params": {},
+  "propConfig": {
+    "custom.summary": {
+      "binding": {
+        "config": {
+          "expression": "now(2000)"
+        },
+        "transforms": [
+          {
+            "code": "\timport redundancy_demo\n\treturn redundancy_demo.summary()\n",
+            "type": "script"
+          }
+        ],
+        "type": "expr"
+      }
+    },
+    "custom.story": {
+      "binding": {
+        "config": {
+          "expression": "now(2000)"
+        },
+        "type": "expr",
+        "transforms": [
+          {
+            "code": "\timport redundancy_demo\n\treturn redundancy_demo.story()\n",
+            "type": "script"
+          }
+        ]
+      }
+    },
+    "custom.rail": {
+      "binding": {
+        "type": "expr",
+        "config": {
+          "expression": "now(3000)"
+        },
+        "transforms": [
+          {
+            "type": "script",
+            "code": "\timport demo_rail\n\treturn demo_rail.rail('redundancy')\n"
+          }
+        ]
+      }
+    },
+    "custom.proof": {
+      "binding": {
+        "type": "expr",
+        "config": {
+          "expression": "now(3000)"
+        },
+        "transforms": [
+          {
+            "type": "script",
+            "code": "\timport redundancy_demo\n\treturn redundancy_demo.proof()\n"
+          }
+        ]
+      }
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 800,
+      "width": 1280
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "type": "ia.container.flex",
+        "meta": {
+          "name": "sidebar"
+        },
+        "props": {
+          "direction": "column",
+          "alignItems": "stretch",
+          "style": {
+            "gap": "6px",
+            "minWidth": "0",
+            "padding": "14px",
+            "width": "100%"
+          }
+        },
+        "position": {
+          "basis": "260px",
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.style.classes": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.style} + '/containers/card'"
+              }
+            }
+          }
+        },
+        "children": [
+          {
+            "type": "ia.display.view",
+            "meta": {
+              "name": "head"
+            },
+            "props": {
+              "path": "RailHead",
+              "params": {},
+              "useDefaultViewHeight": true,
+              "useDefaultViewWidth": false,
+              "style": {
+                "width": "100%"
+              }
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.params": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{view.custom.rail.head}"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "ia.display.view",
+            "meta": {
+              "name": "banner"
+            },
+            "props": {
+              "path": "NotRunning",
+              "params": {},
+              "useDefaultViewHeight": false,
+              "useDefaultViewWidth": false,
+              "style": {
+                "width": "100%"
+              }
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.params": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{view.custom.rail.banner}"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "ia.display.view",
+            "meta": {
+              "name": "gStatus"
+            },
+            "props": {
+              "path": "RailGroup",
+              "params": {
+                "text": "STATUS"
+              },
+              "useDefaultViewHeight": true,
+              "useDefaultViewWidth": false,
+              "style": {
+                "width": "100%"
+              }
+            },
+            "position": {
+              "shrink": 0
+            }
+          },
+          {
+            "type": "ia.display.flex-repeater",
+            "meta": {
+              "name": "facts"
+            },
+            "props": {
+              "path": "RailFact",
+              "direction": "column",
+              "instances": [],
+              "useDefaultViewHeight": true,
+              "useDefaultViewWidth": false,
+              "elementPosition": {
+                "basis": "22px",
+                "grow": 0,
+                "shrink": 0
+              },
+              "style": {
+                "gap": "0px",
+                "width": "100%"
+              }
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.instances": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{view.custom.rail.facts}"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "ia.display.view",
+            "meta": {
+              "name": "gPlanned"
+            },
+            "props": {
+              "path": "RailGroup",
+              "params": {
+                "text": "PLANNED HANDOVER"
+              },
+              "useDefaultViewHeight": true,
+              "useDefaultViewWidth": false,
+              "style": {
+                "width": "100%"
+              }
+            },
+            "position": {
+              "shrink": 0
+            }
+          },
+          {
+            "type": "ia.display.view",
+            "meta": {
+              "name": "failover"
+            },
+            "props": {
+              "path": "RailButton",
+              "params": {
+                "key": "red.failover",
+                "action": "red.failover",
+                "icon": "material/swap_horiz",
+                "kind": "primary"
+              },
+              "useDefaultViewHeight": false,
+              "useDefaultViewWidth": false,
+              "style": {
+                "width": "100%"
+              }
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.params.can": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{view.custom.summary.can.failover}"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "ia.display.view",
+            "meta": {
+              "name": "resync"
+            },
+            "props": {
+              "path": "RailButton",
+              "params": {
+                "key": "red.resync",
+                "action": "red.resync",
+                "icon": "material/sync",
+                "kind": "chip"
+              },
+              "useDefaultViewHeight": false,
+              "useDefaultViewWidth": false,
+              "style": {
+                "width": "100%"
+              }
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.params.can": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{view.custom.summary.can.resync}"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "ia.container.flex",
+            "meta": {
+              "name": "recoveryRow"
+            },
+            "props": {
+              "direction": "row",
+              "alignItems": "center",
+              "style": {
+                "gap": "8px",
+                "width": "100%"
+              }
+            },
+            "position": {
+              "shrink": 0
+            },
+            "children": [
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "recoveryLabel"
+                },
+                "props": {
+                  "text": "Master returns",
+                  "style": {
+                    "fontSize": "11px",
+                    "lineHeight": 1.4,
+                    "whiteSpace": "nowrap"
+                  }
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{session.custom.style} + '/text/muted'"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "config": {
+                        "script": "\tself.session.custom.redRecovery = self.props.value\n\timport demo_rail\n\tdemo_rail.fire(self.session, 'red.recovery')\n"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                },
+                "meta": {
+                  "name": "recovery"
+                },
+                "position": {
+                  "basis": "0px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "propConfig": {
+                  "props.dropdownOptionStyle.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "{session.custom.style} + '/inputs/dropdown'"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.style.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "{session.custom.style} + '/inputs/dropdown'"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.value": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{view.custom.summary.recoveryMode}"
+                      }
+                    }
+                  },
+                  "props.enabled": {
+                    "binding": {
+                      "config": {
+                        "expression": "{session.custom.acting} = '' && {view.custom.summary.can.recovery.ok}"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "options": [
+                    {
+                      "label": "Automatic",
+                      "value": "Automatic"
+                    },
+                    {
+                      "label": "Manual",
+                      "value": "Manual"
+                    }
+                  ],
+                  "style": {
+                    "minWidth": "0",
+                    "width": "100%"
+                  },
+                  "value": "Automatic"
+                },
+                "type": "ia.input.dropdown"
+              }
+            ]
+          },
+          {
+            "type": "ia.display.label",
+            "meta": {
+              "name": "recoveryNote"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "props": {
+              "text": "",
+              "style": {
+                "fontSize": "10px",
+                "lineHeight": 1.35,
+                "whiteSpace": "normal"
+              }
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "if({session.custom.acting} = 'red.recovery', {session.custom.actingWhat}, if({view.custom.summary.can.recovery.note} != '', {view.custom.summary.can.recovery.note}, if({session.custom.actKey} = 'red.recovery', {session.custom.actNote}, '')))"
+                  }
+                }
+              },
+              "props.style.classes": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{session.custom.style} + '/text/muted'"
+                  }
+                }
+              },
+              "position.display": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "if({session.custom.acting} = 'red.recovery', {session.custom.actingWhat}, if({view.custom.summary.can.recovery.note} != '', {view.custom.summary.can.recovery.note}, if({session.custom.actKey} = 'red.recovery', {session.custom.actNote}, ''))) != ''"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "ia.display.view",
+            "meta": {
+              "name": "gUnplanned"
+            },
+            "props": {
+              "path": "RailGroup",
+              "params": {
+                "text": "UNPLANNED FAILURE"
+              },
+              "useDefaultViewHeight": true,
+              "useDefaultViewWidth": false,
+              "style": {
+                "width": "100%"
+              }
+            },
+            "position": {
+              "shrink": 0
+            }
+          },
+          {
+            "type": "ia.display.view",
+            "meta": {
+              "name": "stop"
+            },
+            "props": {
+              "path": "RailButton",
+              "params": {
+                "key": "red.stop",
+                "action": "red.stop",
+                "icon": "material/power_settings_new",
+                "kind": "danger"
+              },
+              "useDefaultViewHeight": false,
+              "useDefaultViewWidth": false,
+              "style": {
+                "width": "100%"
+              }
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.params.can": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{view.custom.summary.can.stop}"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "ia.display.view",
+            "meta": {
+              "name": "gGateways"
+            },
+            "props": {
+              "path": "RailGroup",
+              "params": {
+                "text": "GATEWAYS"
+              },
+              "useDefaultViewHeight": true,
+              "useDefaultViewWidth": false,
+              "style": {
+                "width": "100%"
+              }
+            },
+            "position": {
+              "shrink": 0
+            }
+          },
+          {
+            "type": "ia.display.flex-repeater",
+            "meta": {
+              "name": "links"
+            },
+            "props": {
+              "path": "RailLink",
+              "direction": "row",
+              "instances": [],
+              "wrap": "wrap",
+              "useDefaultViewHeight": true,
+              "useDefaultViewWidth": false,
+              "elementPosition": {
+                "basis": "31%",
+                "grow": 1,
+                "shrink": 1
+              },
+              "style": {
+                "gap": "4px",
+                "width": "100%"
+              }
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.instances": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{view.custom.rail.links}"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "children": [
+          {
+            "type": "ia.display.label",
+            "meta": {
+              "name": "what"
+            },
+            "props": {
+              "text": "One address, two gateways: restart the one in control and the other answers.",
+              "style": {
+                "fontSize": "13px",
+                "lineHeight": 1.4,
+                "whiteSpace": "normal"
+              }
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.style.classes": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{session.custom.style} + '/text/muted'"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "hero"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "gap": "14px",
+                "padding": "20px",
+                "width": "100%"
+              }
+            },
+            "type": "ia.container.flex",
+            "children": [
+              {
+                "meta": {
+                  "name": "heroTop"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "props": {
+                  "direction": "row",
+                  "style": {
+                    "alignItems": "center",
+                    "gap": "10px",
+                    "width": "100%"
+                  }
+                },
+                "type": "ia.container.flex",
+                "children": [
+                  {
+                    "meta": {
+                      "name": "headline"
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "props": {
+                      "style": {
+                        "fontSize": "30px",
+                        "fontWeight": "800"
+                      }
+                    },
+                    "type": "ia.display.label",
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "expression": "{view.custom.story.headline}"
+                          },
+                          "type": "expr"
+                        }
+                      },
+                      "props.style.classes": {
+                        "binding": {
+                          "config": {
+                            "expression": "{session.custom.style} + '/text/h1'"
+                          },
+                          "type": "expr"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "spacer"
+                    },
+                    "position": {
+                      "grow": 1,
+                      "shrink": 1,
+                      "basis": "0px"
+                    },
+                    "props": {
+                      "direction": "row",
+                      "style": {
+                        "minWidth": "0"
+                      }
+                    },
+                    "type": "ia.container.flex",
+                    "children": []
+                  },
+                  {
+                    "meta": {
+                      "name": "headBadge"
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "props": {
+                      "style": {
+                        "fontSize": "11px",
+                        "padding": "5px 12px",
+                        "borderRadius": "999px",
+                        "letterSpacing": "0.06em",
+                        "fontWeight": "700"
+                      }
+                    },
+                    "type": "ia.display.label",
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "expression": "{view.custom.story.badgeText}"
+                          },
+                          "type": "expr"
+                        }
+                      },
+                      "props.style.classes": {
+                        "binding": {
+                          "config": {
+                            "expression": "{session.custom.style} + '/status/' + {view.custom.story.badgeClass}"
+                          },
+                          "type": "expr"
+                        }
+                      },
+                      "position.display": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{view.custom.story.badgeText} != ''"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "meta": {
+                  "name": "road"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "props": {
+                  "direction": "row",
+                  "style": {
+                    "gap": "10px",
+                    "alignItems": "center",
+                    "width": "100%"
+                  }
+                },
+                "type": "ia.container.flex",
+                "children": [
+                  {
+                    "meta": {
+                      "name": "browserTile"
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "props": {
+                      "direction": "column",
+                      "style": {
+                        "gap": "4px",
+                        "padding": "18px 20px",
+                        "maxWidth": "none",
+                        "minWidth": "0"
+                      }
+                    },
+                    "type": "ia.container.flex",
+                    "children": [
+                      {
+                        "meta": {
+                          "name": "browserWhat"
+                        },
+                        "position": {
+                          "shrink": 0
+                        },
+                        "props": {
+                          "text": "YOUR BROWSER",
+                          "style": {
+                            "fontSize": "11px",
+                            "letterSpacing": "0.06em"
+                          }
+                        },
+                        "type": "ia.display.label",
+                        "propConfig": {
+                          "props.style.classes": {
+                            "binding": {
+                              "config": {
+                                "expression": "{session.custom.style} + '/kpi/label'"
+                              },
+                              "type": "expr"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "meta": {
+                          "name": "browserUrl"
+                        },
+                        "position": {
+                          "shrink": 0
+                        },
+                        "props": {
+                          "style": {
+                            "fontSize": "18px",
+                            "fontWeight": "600",
+                            "whiteSpace": "nowrap",
+                            "overflowWrap": "anywhere",
+                            "maxWidth": "none"
+                          }
+                        },
+                        "type": "ia.display.label",
+                        "propConfig": {
+                          "props.text": {
+                            "binding": {
+                              "config": {
+                                "expression": "{view.custom.story.address}"
+                              },
+                              "type": "expr"
+                            }
+                          },
+                          "props.style.classes": {
+                            "binding": {
+                              "config": {
+                                "expression": "{session.custom.style} + '/kpi/value'"
+                              },
+                              "type": "expr"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "meta": {
+                          "name": "browserWho"
+                        },
+                        "type": "ia.display.label",
+                        "position": {
+                          "shrink": 0
+                        },
+                        "props": {
+                          "style": {
+                            "fontSize": "10px",
+                            "letterSpacing": "0.04em",
+                            "whiteSpace": "nowrap"
+                          }
+                        },
+                        "propConfig": {
+                          "props.text": {
+                            "binding": {
+                              "config": {
+                                "expression": "'reaching ' + {view.custom.story.controlling}"
+                              },
+                              "type": "expr"
+                            }
+                          },
+                          "props.style.classes": {
+                            "binding": {
+                              "config": {
+                                "expression": "{session.custom.style} + '/text/muted'"
+                              },
+                              "type": "expr"
+                            }
+                          }
+                        }
+                      }
+                    ],
+                    "propConfig": {
+                      "props.style.classes": {
+                        "binding": {
+                          "config": {
+                            "expression": "{session.custom.style} + '/kpi/tile'"
+                          },
+                          "type": "expr"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "meta": {
+                      "name": "arrow1"
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "props": {
+                      "text": "\u25b6",
+                      "style": {
+                        "fontSize": "20px",
+                        "padding": "0 4px",
+                        "opacity": "0.7"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "masterHalf"
+                    },
+                    "type": "ia.container.flex",
+                    "position": {
+                      "basis": "0px",
+                      "grow": 1,
+                      "shrink": 1
+                    },
+                    "props": {
+                      "direction": "row",
+                      "style": {
+                        "gap": "14px",
+                        "padding": "18px 20px",
+                        "minWidth": "0",
+                        "alignItems": "center"
+                      }
+                    },
+                    "propConfig": {
+                      "props.style.classes": {
+                        "binding": {
+                          "config": {
+                            "expression": "{session.custom.style} + '/kpi/tile'"
+                          },
+                          "type": "expr"
+                        }
+                      }
+                    },
+                    "children": [
+                      {
+                        "meta": {
+                          "name": "masterIcon"
+                        },
+                        "type": "ia.display.image",
+                        "position": {
+                          "basis": "44px",
+                          "shrink": 0
+                        },
+                        "props": {
+                          "source": "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIGlkPSJMYXllcl8yIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2aWV3Qm94PSIwIDAgMjIxLjQzIDMxNC4zOSI+PGRlZnM+PHN0eWxlPi5jbHMtMSwuY2xzLTIsLmNscy0ze2ZpbGw6bm9uZTt9LmNscy0ye2NsaXAtcGF0aDp1cmwoI2NsaXBwYXRoLTEpO30uY2xzLTR7ZmlsbDojZjc5NDM1O30uY2xzLTV7ZmlsbDojZmZmO30uY2xzLTZ7ZmlsbDojYWNjY2UyO30uY2xzLTd7ZmlsbDojMzU1OTgwO30uY2xzLTh7ZmlsbDojMmY0NjY2O30uY2xzLTN7Y2xpcC1wYXRoOnVybCgjY2xpcHBhdGgpO308L3N0eWxlPjxjbGlwUGF0aCBpZD0iY2xpcHBhdGgiPjxyZWN0IGNsYXNzPSJjbHMtMSIgd2lkdGg9IjIyMS40MyIgaGVpZ2h0PSIzMTQuMzkiLz48L2NsaXBQYXRoPjxjbGlwUGF0aCBpZD0iY2xpcHBhdGgtMSI+PHJlY3QgY2xhc3M9ImNscy0xIiB3aWR0aD0iMjIxLjQzIiBoZWlnaHQ9IjMxNC4zOSIvPjwvY2xpcFBhdGg+PC9kZWZzPjxnIGlkPSJMYXllcl8xLTIiPjxnIGlkPSJTZXJ2ZXJfQmx1ZV8tX0xlZnQiPjxnIGNsYXNzPSJjbHMtMyI+PHBvbHlnb24gY2xhc3M9ImNscy03IiBwb2ludHM9IjcyLjEyIDEyNy44NSA3Mi4xMyAzMTQuMzkgMjIxLjQzIDIyOC4xOSAyMjEuNDMgNDEuNjQgNzIuMTIgMTI3Ljg1Ii8+PHBvbHlnb24gY2xhc3M9ImNscy02IiBwb2ludHM9IjE0OS4zMiAwIDAgODYuMjEgNzIuMTIgMTI3Ljg1IDIyMS40MyA0MS42NCAxNDkuMzIgMCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtOCIgcG9pbnRzPSIwIDI3Mi43NCA3Mi4xMiAzMTQuMzkgNzIuMTIgMTI3Ljg1IDAgODYuMjEgMCAyNzIuNzQiLz48ZyBjbGFzcz0iY2xzLTIiPjxwYXRoIGNsYXNzPSJjbHMtNCIgZD0ibTEzNS4xNCwyMDkuOWMxLjY1LTIuMzcsMy41MS00LjA3LDUuNTctNS4xLDIuMDctMS4wNCwzLjgyLTEuMTUsNS4yMy0uMzEsMS40Mi44MywyLjA0LDIuMzIsMS44OSw0LjQ4LS4xNiwyLjE3LTEuMDUsNC4zNS0yLjcsNi41OC0xLjYzLDIuMjItMy40OSwzLjg1LTUuNTUsNC44OC0yLjA4LDEuMDQtMy44MywxLjIyLTUuMjQuNTItMS40Mi0uNy0yLjA2LTIuMTEtMS45LTQuMjguMTYtMi4xNiwxLjA2LTQuNDMsMi43MS02Ljc4Ii8+PHBhdGggY2xhc3M9ImNscy00IiBkPSJtMTg0LjUyLDExOC4wOGMtLjctMS4xMy0xLjc5LTEuNjktMy4yOC0xLjY4LTEuNS4wMy0zLjA3LjYxLTQuNzQsMS43Ny0xLjY3LDEuMTYtMy4xLDMuMTUtNC4zMiw1Ljk3LS4yMS41Mi0uNzgsMi4wNS0xLjcyLDQuNTktLjk0LDIuNTYtMi4xMSw1Ljc5LTMuNTUsOS43LTEuNDMsMy45MS0zLjA1LDguMzEtNC44NywxMy4yMS0xLjgxLDQuODktMy42OSwxMC4wMi01LjYzLDE1LjM5LTEuOTQsNS4zNi0zLjksMTAuNzctNS44OCwxNi4yNS0xLjk0LDUuMzUtMy43OSwxMC40NC01LjUzLDE1LjI2LjgzLS4xMiwxLjYzLS4xMiwyLjM3LDAsMy42LTcuMzMsNy40NC0xNS4xNSwxMS41Mi0yMy40NSw0LjEzLTguNCw3Ljk3LTE2LjI1LDExLjUyLTIzLjU1LDMuNTUtNy4zMSw2LjU3LTEzLjUxLDkuMDUtMTguNjIsMi41LTUuMTEsMy45Mi04LjA4LDQuMjgtOC45MSwxLjIxLTIuODIsMS40Ni00LjguNzctNS45MyIvPjxwYXRoIGNsYXNzPSJjbHMtNCIgZD0ibTEzNS4wNSwyMDQuMzljLTEuMTQtMy44Ny0yLjA2LTYuOTctMi43OC05LjMyLS43MS0yLjM2LTEuMzItNC4yMy0xLjc4LTUuNTgtLjQ4LTEuMzYtLjg1LTIuMzMtMS4xMy0yLjkzLS4yNy0uNi0uNTMtMS4xLS43OS0xLjQ3LS42MS0uOTMtMS41LTEuMjQtMi42OS0uOTYtMS4xOS4zMS0yLjQ2LDEuMTctMy44LDIuNTgtMS4zNCwxLjQyLTIuMjQsMi44NS0yLjY4LDQuMjctLjQ1LDEuNDItLjM2LDIuNi4yNCwzLjUyLjI2LjM4LjU5LjgsMS4wMSwxLjI0LjQxLjQ2LDEuMTEsMS4xLDIuMDgsMS45My45Ny44MywyLjMxLDEuOTEsNC4wMywzLjIzLDEuNzEsMS4zMiwzLjk5LDMuMDUsNi44Myw1LjE3LjQ4LS41OS45Ny0xLjE1LDEuNDgtMS42OCIvPjxwYXRoIGNsYXNzPSJjbHMtNSIgZD0ibTU4LjYyLDE1Mi4yNWMtLjQ5LDAtLjk5LS4xMi0xLjQ0LS4zOWwtNDUuMjUtMjYuMTRjLTEuMzgtLjgtMS44NS0yLjU2LTEuMDYtMy45NC44LTEuMzgsMi41Ni0xLjg1LDMuOTQtMS4wNmw0NS4yNSwyNi4xNGMxLjM4LjgsMS44NSwyLjU2LDEuMDYsMy45NC0uNTMuOTMtMS41MSwxLjQ0LTIuNSwxLjQ0Ii8+PHBhdGggY2xhc3M9ImNscy01IiBkPSJtNTguNjIsMTY3LjIxYy0uNDksMC0uOTktLjEyLTEuNDQtLjM5bC00NS4yNS0yNi4xM2MtMS4zOC0uOC0xLjg1LTIuNTYtMS4wNi0zLjk0LjgtMS4zOCwyLjU2LTEuODUsMy45NC0xLjA2bDQ1LjI1LDI2LjEzYzEuMzguOCwxLjg1LDIuNTYsMS4wNiwzLjk0LS41My45My0xLjUxLDEuNDQtMi41LDEuNDQiLz48cGF0aCBjbGFzcz0iY2xzLTUiIGQ9Im01OC42MiwxODIuMTdjLS40OSwwLS45OS0uMTItMS40NC0uMzlsLTQ1LjI1LTI2LjEyYy0xLjM4LS44LTEuODUtMi41Ni0xLjA2LTMuOTQuOC0xLjM4LDIuNTYtMS44NSwzLjk0LTEuMDZsNDUuMjUsMjYuMTJjMS4zOC44LDEuODUsMi41NiwxLjA2LDMuOTQtLjUzLjkzLTEuNTEsMS40NC0yLjUsMS40NCIvPjwvZz48L2c+PC9nPjwvZz48L3N2Zz4=",
+                          "fit": {
+                            "height": 100,
+                            "mode": "contain",
+                            "scroll": false,
+                            "width": 100
+                          },
+                          "style": {
+                            "height": "60px",
+                            "width": "44px",
+                            "lineHeight": "0",
+                            "fontSize": "0"
+                          }
+                        },
+                        "propConfig": {
+                          "props.style.opacity": {
+                            "binding": {
+                              "config": {
+                                "expression": "{view.custom.story.masterDim}"
+                              },
+                              "type": "expr"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "meta": {
+                          "name": "masterWords"
+                        },
+                        "type": "ia.container.flex",
+                        "position": {
+                          "basis": "0px",
+                          "grow": 1,
+                          "shrink": 1
+                        },
+                        "props": {
+                          "direction": "column",
+                          "style": {
+                            "gap": "6px",
+                            "minWidth": "0"
+                          }
+                        },
+                        "children": [
+                          {
+                            "meta": {
+                              "name": "masterName"
+                            },
+                            "type": "ia.display.label",
+                            "position": {
+                              "shrink": 1,
+                              "basis": "auto"
+                            },
+                            "props": {
+                              "style": {
+                                "fontSize": "18px",
+                                "fontWeight": "700",
+                                "whiteSpace": "nowrap",
+                                "overflow": "hidden",
+                                "textOverflow": "ellipsis",
+                                "lineHeight": 1.35,
+                                "minWidth": "0"
+                              }
+                            },
+                            "propConfig": {
+                              "props.text": {
+                                "binding": {
+                                  "config": {
+                                    "expression": "{view.custom.story.masterName}"
+                                  },
+                                  "type": "expr"
+                                }
+                              },
+                              "props.style.classes": {
+                                "binding": {
+                                  "config": {
+                                    "expression": "{session.custom.style} + '/kpi/value'"
+                                  },
+                                  "type": "expr"
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "meta": {
+                              "name": "masterSubRow"
+                            },
+                            "type": "ia.container.flex",
+                            "position": {
+                              "shrink": 0
+                            },
+                            "props": {
+                              "direction": "row",
+                              "style": {
+                                "gap": "10px",
+                                "alignItems": "center",
+                                "minWidth": "0"
+                              }
+                            },
+                            "children": [
+                              {
+                                "meta": {
+                                  "name": "masterSub"
+                                },
+                                "type": "ia.display.label",
+                                "position": {
+                                  "shrink": 1,
+                                  "basis": "auto"
+                                },
+                                "props": {
+                                  "style": {
+                                    "fontSize": "12px",
+                                    "letterSpacing": "0.06em",
+                                    "textTransform": "uppercase"
+                                  }
+                                },
+                                "propConfig": {
+                                  "props.text": {
+                                    "binding": {
+                                      "config": {
+                                        "expression": "{view.custom.story.masterSub}"
+                                      },
+                                      "type": "expr"
+                                    }
+                                  },
+                                  "props.style.classes": {
+                                    "binding": {
+                                      "config": {
+                                        "expression": "{session.custom.style} + '/kpi/label'"
+                                      },
+                                      "type": "expr"
+                                    }
+                                  }
+                                }
+                              },
+                              {
+                                "meta": {
+                                  "name": "masterPill"
+                                },
+                                "type": "ia.display.label",
+                                "position": {
+                                  "shrink": 0
+                                },
+                                "props": {
+                                  "style": {
+                                    "fontSize": "11px",
+                                    "fontWeight": "700",
+                                    "letterSpacing": "0.08em",
+                                    "whiteSpace": "nowrap",
+                                    "padding": "2px 10px"
+                                  }
+                                },
+                                "propConfig": {
+                                  "props.text": {
+                                    "binding": {
+                                      "config": {
+                                        "expression": "{view.custom.story.masterPill}"
+                                      },
+                                      "type": "expr"
+                                    }
+                                  },
+                                  "props.style.classes": {
+                                    "binding": {
+                                      "config": {
+                                        "expression": "{session.custom.style} + '/status/' + {view.custom.story.masterPillClass}"
+                                      },
+                                      "type": "expr"
+                                    }
+                                  },
+                                  "position.display": {
+                                    "binding": {
+                                      "type": "expr",
+                                      "config": {
+                                        "expression": "{view.custom.story.masterPill} != ''"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "meta": {
+                      "name": "linkChip"
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "props": {
+                      "direction": "column",
+                      "style": {
+                        "gap": "2px",
+                        "padding": "0 6px",
+                        "alignItems": "center"
+                      }
+                    },
+                    "type": "ia.container.flex",
+                    "children": [
+                      {
+                        "meta": {
+                          "name": "linkIcon"
+                        },
+                        "position": {
+                          "shrink": 0
+                        },
+                        "props": {
+                          "text": "\u21c4",
+                          "style": {
+                            "fontSize": "18px"
+                          }
+                        },
+                        "type": "ia.display.label"
+                      },
+                      {
+                        "meta": {
+                          "name": "linkWord"
+                        },
+                        "position": {
+                          "shrink": 0
+                        },
+                        "props": {
+                          "style": {
+                            "fontSize": "10px",
+                            "letterSpacing": "0.06em"
+                          }
+                        },
+                        "type": "ia.display.label",
+                        "propConfig": {
+                          "props.text": {
+                            "binding": {
+                              "config": {
+                                "expression": "if({view.custom.story.syncing}, 'IN STEP', 'NOT IN STEP')"
+                              },
+                              "type": "expr"
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "meta": {
+                      "name": "backupHalf"
+                    },
+                    "type": "ia.container.flex",
+                    "position": {
+                      "basis": "0px",
+                      "grow": 1,
+                      "shrink": 1
+                    },
+                    "props": {
+                      "direction": "row",
+                      "style": {
+                        "gap": "14px",
+                        "padding": "18px 20px",
+                        "minWidth": "0",
+                        "alignItems": "center"
+                      }
+                    },
+                    "propConfig": {
+                      "props.style.classes": {
+                        "binding": {
+                          "config": {
+                            "expression": "{session.custom.style} + '/kpi/tile'"
+                          },
+                          "type": "expr"
+                        }
+                      }
+                    },
+                    "children": [
+                      {
+                        "meta": {
+                          "name": "backupIcon"
+                        },
+                        "type": "ia.display.image",
+                        "position": {
+                          "basis": "44px",
+                          "shrink": 0
+                        },
+                        "props": {
+                          "source": "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIGlkPSJMYXllcl8yIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2aWV3Qm94PSIwIDAgMjIxLjQzIDMxNC4zOSI+PGRlZnM+PHN0eWxlPi5jbHMtMSwuY2xzLTIsLmNscy0ze2ZpbGw6bm9uZTt9LmNscy0ye2NsaXAtcGF0aDp1cmwoI2NsaXBwYXRoLTEpO30uY2xzLTR7ZmlsbDojZjc5NDM1O30uY2xzLTV7ZmlsbDojZmZmO30uY2xzLTZ7ZmlsbDojYWNjY2UyO30uY2xzLTd7ZmlsbDojMzU1OTgwO30uY2xzLTh7ZmlsbDojMmY0NjY2O30uY2xzLTN7Y2xpcC1wYXRoOnVybCgjY2xpcHBhdGgpO308L3N0eWxlPjxjbGlwUGF0aCBpZD0iY2xpcHBhdGgiPjxyZWN0IGNsYXNzPSJjbHMtMSIgd2lkdGg9IjIyMS40MyIgaGVpZ2h0PSIzMTQuMzkiLz48L2NsaXBQYXRoPjxjbGlwUGF0aCBpZD0iY2xpcHBhdGgtMSI+PHJlY3QgY2xhc3M9ImNscy0xIiB3aWR0aD0iMjIxLjQzIiBoZWlnaHQ9IjMxNC4zOSIvPjwvY2xpcFBhdGg+PC9kZWZzPjxnIGlkPSJMYXllcl8xLTIiPjxnIGlkPSJTZXJ2ZXJfQmx1ZV8tX0xlZnQiPjxnIGNsYXNzPSJjbHMtMyI+PHBvbHlnb24gY2xhc3M9ImNscy03IiBwb2ludHM9IjcyLjEyIDEyNy44NSA3Mi4xMyAzMTQuMzkgMjIxLjQzIDIyOC4xOSAyMjEuNDMgNDEuNjQgNzIuMTIgMTI3Ljg1Ii8+PHBvbHlnb24gY2xhc3M9ImNscy02IiBwb2ludHM9IjE0OS4zMiAwIDAgODYuMjEgNzIuMTIgMTI3Ljg1IDIyMS40MyA0MS42NCAxNDkuMzIgMCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtOCIgcG9pbnRzPSIwIDI3Mi43NCA3Mi4xMiAzMTQuMzkgNzIuMTIgMTI3Ljg1IDAgODYuMjEgMCAyNzIuNzQiLz48ZyBjbGFzcz0iY2xzLTIiPjxwYXRoIGNsYXNzPSJjbHMtNCIgZD0ibTEzNS4xNCwyMDkuOWMxLjY1LTIuMzcsMy41MS00LjA3LDUuNTctNS4xLDIuMDctMS4wNCwzLjgyLTEuMTUsNS4yMy0uMzEsMS40Mi44MywyLjA0LDIuMzIsMS44OSw0LjQ4LS4xNiwyLjE3LTEuMDUsNC4zNS0yLjcsNi41OC0xLjYzLDIuMjItMy40OSwzLjg1LTUuNTUsNC44OC0yLjA4LDEuMDQtMy44MywxLjIyLTUuMjQuNTItMS40Mi0uNy0yLjA2LTIuMTEtMS45LTQuMjguMTYtMi4xNiwxLjA2LTQuNDMsMi43MS02Ljc4Ii8+PHBhdGggY2xhc3M9ImNscy00IiBkPSJtMTg0LjUyLDExOC4wOGMtLjctMS4xMy0xLjc5LTEuNjktMy4yOC0xLjY4LTEuNS4wMy0zLjA3LjYxLTQuNzQsMS43Ny0xLjY3LDEuMTYtMy4xLDMuMTUtNC4zMiw1Ljk3LS4yMS41Mi0uNzgsMi4wNS0xLjcyLDQuNTktLjk0LDIuNTYtMi4xMSw1Ljc5LTMuNTUsOS43LTEuNDMsMy45MS0zLjA1LDguMzEtNC44NywxMy4yMS0xLjgxLDQuODktMy42OSwxMC4wMi01LjYzLDE1LjM5LTEuOTQsNS4zNi0zLjksMTAuNzctNS44OCwxNi4yNS0xLjk0LDUuMzUtMy43OSwxMC40NC01LjUzLDE1LjI2LjgzLS4xMiwxLjYzLS4xMiwyLjM3LDAsMy42LTcuMzMsNy40NC0xNS4xNSwxMS41Mi0yMy40NSw0LjEzLTguNCw3Ljk3LTE2LjI1LDExLjUyLTIzLjU1LDMuNTUtNy4zMSw2LjU3LTEzLjUxLDkuMDUtMTguNjIsMi41LTUuMTEsMy45Mi04LjA4LDQuMjgtOC45MSwxLjIxLTIuODIsMS40Ni00LjguNzctNS45MyIvPjxwYXRoIGNsYXNzPSJjbHMtNCIgZD0ibTEzNS4wNSwyMDQuMzljLTEuMTQtMy44Ny0yLjA2LTYuOTctMi43OC05LjMyLS43MS0yLjM2LTEuMzItNC4yMy0xLjc4LTUuNTgtLjQ4LTEuMzYtLjg1LTIuMzMtMS4xMy0yLjkzLS4yNy0uNi0uNTMtMS4xLS43OS0xLjQ3LS42MS0uOTMtMS41LTEuMjQtMi42OS0uOTYtMS4xOS4zMS0yLjQ2LDEuMTctMy44LDIuNTgtMS4zNCwxLjQyLTIuMjQsMi44NS0yLjY4LDQuMjctLjQ1LDEuNDItLjM2LDIuNi4yNCwzLjUyLjI2LjM4LjU5LjgsMS4wMSwxLjI0LjQxLjQ2LDEuMTEsMS4xLDIuMDgsMS45My45Ny44MywyLjMxLDEuOTEsNC4wMywzLjIzLDEuNzEsMS4zMiwzLjk5LDMuMDUsNi44Myw1LjE3LjQ4LS41OS45Ny0xLjE1LDEuNDgtMS42OCIvPjxwYXRoIGNsYXNzPSJjbHMtNSIgZD0ibTU4LjYyLDE1Mi4yNWMtLjQ5LDAtLjk5LS4xMi0xLjQ0LS4zOWwtNDUuMjUtMjYuMTRjLTEuMzgtLjgtMS44NS0yLjU2LTEuMDYtMy45NC44LTEuMzgsMi41Ni0xLjg1LDMuOTQtMS4wNmw0NS4yNSwyNi4xNGMxLjM4LjgsMS44NSwyLjU2LDEuMDYsMy45NC0uNTMuOTMtMS41MSwxLjQ0LTIuNSwxLjQ0Ii8+PHBhdGggY2xhc3M9ImNscy01IiBkPSJtNTguNjIsMTY3LjIxYy0uNDksMC0uOTktLjEyLTEuNDQtLjM5bC00NS4yNS0yNi4xM2MtMS4zOC0uOC0xLjg1LTIuNTYtMS4wNi0zLjk0LjgtMS4zOCwyLjU2LTEuODUsMy45NC0xLjA2bDQ1LjI1LDI2LjEzYzEuMzguOCwxLjg1LDIuNTYsMS4wNiwzLjk0LS41My45My0xLjUxLDEuNDQtMi41LDEuNDQiLz48cGF0aCBjbGFzcz0iY2xzLTUiIGQ9Im01OC42MiwxODIuMTdjLS40OSwwLS45OS0uMTItMS40NC0uMzlsLTQ1LjI1LTI2LjEyYy0xLjM4LS44LTEuODUtMi41Ni0xLjA2LTMuOTQuOC0xLjM4LDIuNTYtMS44NSwzLjk0LTEuMDZsNDUuMjUsMjYuMTJjMS4zOC44LDEuODUsMi41NiwxLjA2LDMuOTQtLjUzLjkzLTEuNTEsMS40NC0yLjUsMS40NCIvPjwvZz48L2c+PC9nPjwvZz48L3N2Zz4=",
+                          "fit": {
+                            "height": 100,
+                            "mode": "contain",
+                            "scroll": false,
+                            "width": 100
+                          },
+                          "style": {
+                            "height": "60px",
+                            "width": "44px",
+                            "lineHeight": "0",
+                            "fontSize": "0"
+                          }
+                        },
+                        "propConfig": {
+                          "props.style.opacity": {
+                            "binding": {
+                              "config": {
+                                "expression": "{view.custom.story.backupDim}"
+                              },
+                              "type": "expr"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "meta": {
+                          "name": "backupWords"
+                        },
+                        "type": "ia.container.flex",
+                        "position": {
+                          "basis": "0px",
+                          "grow": 1,
+                          "shrink": 1
+                        },
+                        "props": {
+                          "direction": "column",
+                          "style": {
+                            "gap": "6px",
+                            "minWidth": "0"
+                          }
+                        },
+                        "children": [
+                          {
+                            "meta": {
+                              "name": "backupName"
+                            },
+                            "type": "ia.display.label",
+                            "position": {
+                              "shrink": 1,
+                              "basis": "auto"
+                            },
+                            "props": {
+                              "style": {
+                                "fontSize": "18px",
+                                "fontWeight": "700",
+                                "whiteSpace": "nowrap",
+                                "overflow": "hidden",
+                                "textOverflow": "ellipsis",
+                                "lineHeight": 1.35,
+                                "minWidth": "0"
+                              }
+                            },
+                            "propConfig": {
+                              "props.text": {
+                                "binding": {
+                                  "config": {
+                                    "expression": "{view.custom.story.backupName}"
+                                  },
+                                  "type": "expr"
+                                }
+                              },
+                              "props.style.classes": {
+                                "binding": {
+                                  "config": {
+                                    "expression": "{session.custom.style} + '/kpi/value'"
+                                  },
+                                  "type": "expr"
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "meta": {
+                              "name": "backupSubRow"
+                            },
+                            "type": "ia.container.flex",
+                            "position": {
+                              "shrink": 0
+                            },
+                            "props": {
+                              "direction": "row",
+                              "style": {
+                                "gap": "10px",
+                                "alignItems": "center",
+                                "minWidth": "0"
+                              }
+                            },
+                            "children": [
+                              {
+                                "meta": {
+                                  "name": "backupSub"
+                                },
+                                "type": "ia.display.label",
+                                "position": {
+                                  "shrink": 1,
+                                  "basis": "auto"
+                                },
+                                "props": {
+                                  "style": {
+                                    "fontSize": "12px",
+                                    "letterSpacing": "0.06em",
+                                    "textTransform": "uppercase"
+                                  }
+                                },
+                                "propConfig": {
+                                  "props.text": {
+                                    "binding": {
+                                      "config": {
+                                        "expression": "{view.custom.story.backupSub}"
+                                      },
+                                      "type": "expr"
+                                    }
+                                  },
+                                  "props.style.classes": {
+                                    "binding": {
+                                      "config": {
+                                        "expression": "{session.custom.style} + '/kpi/label'"
+                                      },
+                                      "type": "expr"
+                                    }
+                                  }
+                                }
+                              },
+                              {
+                                "meta": {
+                                  "name": "backupPill"
+                                },
+                                "type": "ia.display.label",
+                                "position": {
+                                  "shrink": 0
+                                },
+                                "props": {
+                                  "style": {
+                                    "fontSize": "11px",
+                                    "fontWeight": "700",
+                                    "letterSpacing": "0.08em",
+                                    "whiteSpace": "nowrap",
+                                    "padding": "2px 10px"
+                                  }
+                                },
+                                "propConfig": {
+                                  "props.text": {
+                                    "binding": {
+                                      "config": {
+                                        "expression": "{view.custom.story.backupPill}"
+                                      },
+                                      "type": "expr"
+                                    }
+                                  },
+                                  "props.style.classes": {
+                                    "binding": {
+                                      "config": {
+                                        "expression": "{session.custom.style} + '/status/' + {view.custom.story.backupPillClass}"
+                                      },
+                                      "type": "expr"
+                                    }
+                                  },
+                                  "position.display": {
+                                    "binding": {
+                                      "type": "expr",
+                                      "config": {
+                                        "expression": "{view.custom.story.backupPill} != ''"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "propConfig": {
+              "props.style.classes": {
+                "binding": {
+                  "config": {
+                    "expression": "{session.custom.style} + '/containers/card'"
+                  },
+                  "type": "expr"
+                }
+              }
+            }
+          },
+          {
+            "type": "ia.container.flex",
+            "meta": {
+              "name": "proof"
+            },
+            "position": {
+              "basis": "0px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "gap": "8px",
+                "padding": "12px 14px",
+                "width": "100%",
+                "minHeight": "0"
+              }
+            },
+            "children": [
+              {
+                "type": "ia.container.flex",
+                "meta": {
+                  "name": "proofHead"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "props": {
+                  "direction": "row",
+                  "style": {
+                    "gap": "12px",
+                    "alignItems": "baseline",
+                    "minWidth": "0"
+                  }
+                },
+                "children": [
+                  {
+                    "type": "ia.display.label",
+                    "meta": {
+                      "name": "proofTitle"
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "props": {
+                      "style": {
+                        "fontSize": "14px",
+                        "fontWeight": "700",
+                        "whiteSpace": "nowrap"
+                      },
+                      "text": "Last changeover"
+                    },
+                    "propConfig": {
+                      "props.style.classes": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{session.custom.style} + '/text/card-title'"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type": "ia.display.label",
+                    "meta": {
+                      "name": "proofMeta"
+                    },
+                    "position": {
+                      "basis": "0px",
+                      "grow": 1,
+                      "shrink": 1
+                    },
+                    "props": {
+                      "style": {
+                        "fontSize": "12px",
+                        "whiteSpace": "nowrap",
+                        "overflow": "hidden",
+                        "textOverflow": "ellipsis"
+                      }
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{view.custom.proof.meta}"
+                          }
+                        }
+                      },
+                      "props.style.classes": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{session.custom.style} + '/text/muted'"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "ia.container.flex",
+                "meta": {
+                  "name": "proofBody"
+                },
+                "position": {
+                  "basis": "0px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "props": {
+                  "direction": "row",
+                  "style": {
+                    "gap": "12px",
+                    "minHeight": "0"
+                  }
+                },
+                "children": [
+                  {
+                    "type": "ia.container.flex",
+                    "meta": {
+                      "name": "proofFigs"
+                    },
+                    "position": {
+                      "basis": "200px",
+                      "shrink": 0
+                    },
+                    "props": {
+                      "direction": "column",
+                      "style": {
+                        "gap": "8px"
+                      }
+                    },
+                    "children": [
+                      {
+                        "type": "ia.container.flex",
+                        "meta": {
+                          "name": "changeFig"
+                        },
+                        "position": {
+                          "shrink": 0
+                        },
+                        "props": {
+                          "direction": "column",
+                          "style": {
+                            "gap": "2px",
+                            "padding": "10px 14px",
+                            "minWidth": "0"
+                          }
+                        },
+                        "children": [
+                          {
+                            "type": "ia.display.label",
+                            "meta": {
+                              "name": "changeVal"
+                            },
+                            "position": {
+                              "shrink": 0
+                            },
+                            "props": {
+                              "style": {
+                                "fontSize": "24px",
+                                "fontWeight": "700",
+                                "whiteSpace": "nowrap"
+                              }
+                            },
+                            "propConfig": {
+                              "props.text": {
+                                "binding": {
+                                  "type": "expr",
+                                  "config": {
+                                    "expression": "{view.custom.proof.changeText}"
+                                  }
+                                }
+                              },
+                              "props.style.classes": {
+                                "binding": {
+                                  "type": "expr",
+                                  "config": {
+                                    "expression": "{session.custom.style} + '/kpi/value'"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "type": "ia.display.label",
+                            "meta": {
+                              "name": "changeLbl"
+                            },
+                            "position": {
+                              "shrink": 0
+                            },
+                            "props": {
+                              "style": {
+                                "fontSize": "11px",
+                                "letterSpacing": "0.06em",
+                                "textTransform": "uppercase",
+                                "whiteSpace": "nowrap"
+                              },
+                              "text": "Changeover"
+                            },
+                            "propConfig": {
+                              "props.style.classes": {
+                                "binding": {
+                                  "type": "expr",
+                                  "config": {
+                                    "expression": "{session.custom.style} + '/kpi/label'"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "type": "ia.display.label",
+                            "meta": {
+                              "name": "changeSub"
+                            },
+                            "position": {
+                              "shrink": 0
+                            },
+                            "props": {
+                              "style": {
+                                "fontSize": "11px",
+                                "whiteSpace": "normal",
+                                "lineHeight": 1.3
+                              }
+                            },
+                            "propConfig": {
+                              "props.text": {
+                                "binding": {
+                                  "type": "expr",
+                                  "config": {
+                                    "expression": "{view.custom.proof.changeSub}"
+                                  }
+                                }
+                              },
+                              "props.style.classes": {
+                                "binding": {
+                                  "type": "expr",
+                                  "config": {
+                                    "expression": "{session.custom.style} + '/text/muted'"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ],
+                        "propConfig": {
+                          "props.style.classes": {
+                            "binding": {
+                              "type": "expr",
+                              "config": {
+                                "expression": "{session.custom.style} + '/kpi/tile'"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "type": "ia.container.flex",
+                        "meta": {
+                          "name": "missFig"
+                        },
+                        "position": {
+                          "shrink": 0
+                        },
+                        "props": {
+                          "direction": "column",
+                          "style": {
+                            "gap": "2px",
+                            "padding": "10px 14px",
+                            "minWidth": "0"
+                          }
+                        },
+                        "children": [
+                          {
+                            "type": "ia.display.label",
+                            "meta": {
+                              "name": "missVal"
+                            },
+                            "position": {
+                              "shrink": 0
+                            },
+                            "props": {
+                              "style": {
+                                "fontSize": "24px",
+                                "fontWeight": "700",
+                                "whiteSpace": "nowrap"
+                              }
+                            },
+                            "propConfig": {
+                              "props.text": {
+                                "binding": {
+                                  "type": "expr",
+                                  "config": {
+                                    "expression": "{view.custom.proof.missingText}"
+                                  }
+                                }
+                              },
+                              "props.style.classes": {
+                                "binding": {
+                                  "type": "expr",
+                                  "config": {
+                                    "expression": "{session.custom.style} + '/kpi/value'"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "type": "ia.display.label",
+                            "meta": {
+                              "name": "missLbl"
+                            },
+                            "position": {
+                              "shrink": 0
+                            },
+                            "props": {
+                              "style": {
+                                "fontSize": "11px",
+                                "letterSpacing": "0.06em",
+                                "textTransform": "uppercase",
+                                "whiteSpace": "nowrap"
+                              },
+                              "text": "Seconds missing"
+                            },
+                            "propConfig": {
+                              "props.style.classes": {
+                                "binding": {
+                                  "type": "expr",
+                                  "config": {
+                                    "expression": "{session.custom.style} + '/kpi/label'"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "type": "ia.display.label",
+                            "meta": {
+                              "name": "missSub"
+                            },
+                            "position": {
+                              "shrink": 0
+                            },
+                            "props": {
+                              "style": {
+                                "fontSize": "11px",
+                                "whiteSpace": "normal",
+                                "lineHeight": 1.3
+                              }
+                            },
+                            "propConfig": {
+                              "props.text": {
+                                "binding": {
+                                  "type": "expr",
+                                  "config": {
+                                    "expression": "{view.custom.proof.missingLine}"
+                                  }
+                                }
+                              },
+                              "props.style.classes": {
+                                "binding": {
+                                  "type": "expr",
+                                  "config": {
+                                    "expression": "{session.custom.style} + '/text/muted'"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ],
+                        "propConfig": {
+                          "props.style.classes": {
+                            "binding": {
+                              "type": "expr",
+                              "config": {
+                                "expression": "{session.custom.style} + '/kpi/tile'"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "meta": {
+                      "name": "proofTrend"
+                    },
+                    "position": {
+                      "basis": "0px",
+                      "grow": 1,
+                      "shrink": 1
+                    },
+                    "propConfig": {
+                      "props.dataSources": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{view.custom.proof.sources}"
+                          }
+                        }
+                      },
+                      "props.legend.labels.font.color": {
+                        "binding": {
+                          "config": {
+                            "expression": "{session.custom.style}"
+                          },
+                          "transforms": [
+                            {
+                              "fallback": "#627084",
+                              "inputType": "scalar",
+                              "mappings": [
+                                {
+                                  "input": "glass-violet",
+                                  "output": "#c7c2e0"
+                                },
+                                {
+                                  "input": "glass-green",
+                                  "output": "#7b9389"
+                                },
+                                {
+                                  "input": "leather-light",
+                                  "output": "#5a4d3c"
+                                },
+                                {
+                                  "input": "leather-dark",
+                                  "output": "#ab9578"
+                                },
+                                {
+                                  "input": "finance-ledger",
+                                  "output": "#5b6b74"
+                                },
+                                {
+                                  "input": "newsprint-dark",
+                                  "output": "#a8a196"
+                                },
+                                {
+                                  "input": "nord-light",
+                                  "output": "#4c566a"
+                                },
+                                {
+                                  "input": "nord-dark",
+                                  "output": "#d8dee9"
+                                },
+                                {
+                                  "input": "industrial-light",
+                                  "output": "#666d7a"
+                                },
+                                {
+                                  "input": "industrial-dark",
+                                  "output": "#7e93a3"
+                                },
+                                {
+                                  "input": "light",
+                                  "output": "#323232"
+                                },
+                                {
+                                  "input": "dark",
+                                  "output": "#F4F4F4"
+                                },
+                                {
+                                  "input": "light-cool",
+                                  "output": "#21272A"
+                                },
+                                {
+                                  "input": "dark-cool",
+                                  "output": "#DDE1E6"
+                                },
+                                {
+                                  "input": "light-warm",
+                                  "output": "#272525"
+                                },
+                                {
+                                  "input": "dark-warm",
+                                  "output": "#E5E0DF"
+                                }
+                              ],
+                              "outputType": "scalar",
+                              "type": "map"
+                            }
+                          ],
+                          "type": "expr"
+                        }
+                      },
+                      "props.series[0].line.appearance.stroke.color": {
+                        "binding": {
+                          "config": {
+                            "expression": "{session.custom.style}"
+                          },
+                          "transforms": [
+                            {
+                              "fallback": "#2563eb",
+                              "inputType": "scalar",
+                              "mappings": [
+                                {
+                                  "input": "glass-violet",
+                                  "output": "#9170db"
+                                },
+                                {
+                                  "input": "glass-green",
+                                  "output": "#70dbce"
+                                },
+                                {
+                                  "input": "leather-light",
+                                  "output": "#bc752f"
+                                },
+                                {
+                                  "input": "leather-dark",
+                                  "output": "#dbaa70"
+                                },
+                                {
+                                  "input": "finance-ledger",
+                                  "output": "#2f86bc"
+                                },
+                                {
+                                  "input": "newsprint-dark",
+                                  "output": "#db7c70"
+                                },
+                                {
+                                  "input": "nord-light",
+                                  "output": "#2f6dbc"
+                                },
+                                {
+                                  "input": "nord-dark",
+                                  "output": "#70a0db"
+                                },
+                                {
+                                  "input": "industrial-light",
+                                  "output": "#2f80bc"
+                                },
+                                {
+                                  "input": "industrial-dark",
+                                  "output": "#70c5db"
+                                },
+                                {
+                                  "input": "light",
+                                  "output": "#0C7BB3"
+                                },
+                                {
+                                  "input": "dark",
+                                  "output": "#229AD6"
+                                },
+                                {
+                                  "input": "light-cool",
+                                  "output": "#0C7BB3"
+                                },
+                                {
+                                  "input": "dark-cool",
+                                  "output": "#229AD6"
+                                },
+                                {
+                                  "input": "light-warm",
+                                  "output": "#0C7BB3"
+                                },
+                                {
+                                  "input": "dark-warm",
+                                  "output": "#229AD6"
+                                }
+                              ],
+                              "outputType": "scalar",
+                              "type": "map"
+                            }
+                          ],
+                          "type": "expr"
+                        }
+                      },
+                      "props.series[0].name": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{view.custom.proof.names.master}"
+                          }
+                        }
+                      },
+                      "props.series[1].line.appearance.stroke.color": {
+                        "binding": {
+                          "config": {
+                            "expression": "{session.custom.style}"
+                          },
+                          "transforms": [
+                            {
+                              "fallback": "#0ea5e9",
+                              "inputType": "scalar",
+                              "mappings": [
+                                {
+                                  "input": "glass-violet",
+                                  "output": "#d170db"
+                                },
+                                {
+                                  "input": "glass-green",
+                                  "output": "#70a9db"
+                                },
+                                {
+                                  "input": "leather-light",
+                                  "output": "#aebc2f"
+                                },
+                                {
+                                  "input": "leather-dark",
+                                  "output": "#ccdb70"
+                                },
+                                {
+                                  "input": "finance-ledger",
+                                  "output": "#2f31bc"
+                                },
+                                {
+                                  "input": "newsprint-dark",
+                                  "output": "#dbbc70"
+                                },
+                                {
+                                  "input": "nord-light",
+                                  "output": "#452fbc"
+                                },
+                                {
+                                  "input": "nord-dark",
+                                  "output": "#8170db"
+                                },
+                                {
+                                  "input": "industrial-light",
+                                  "output": "#322fbc"
+                                },
+                                {
+                                  "input": "industrial-dark",
+                                  "output": "#7085db"
+                                },
+                                {
+                                  "input": "light",
+                                  "output": "#323232"
+                                },
+                                {
+                                  "input": "dark",
+                                  "output": "#F4F4F4"
+                                },
+                                {
+                                  "input": "light-cool",
+                                  "output": "#21272A"
+                                },
+                                {
+                                  "input": "dark-cool",
+                                  "output": "#DDE1E6"
+                                },
+                                {
+                                  "input": "light-warm",
+                                  "output": "#272525"
+                                },
+                                {
+                                  "input": "dark-warm",
+                                  "output": "#E5E0DF"
+                                }
+                              ],
+                              "outputType": "scalar",
+                              "type": "map"
+                            }
+                          ],
+                          "type": "expr"
+                        }
+                      },
+                      "props.series[1].name": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{view.custom.proof.names.backup}"
+                          }
+                        }
+                      },
+                      "props.xAxes[0].appearance.grid.color": {
+                        "binding": {
+                          "config": {
+                            "expression": "{session.custom.style}"
+                          },
+                          "transforms": [
+                            {
+                              "fallback": "#e5e7eb",
+                              "inputType": "scalar",
+                              "mappings": [
+                                {
+                                  "input": "glass-violet",
+                                  "output": "1px solid #5e596f"
+                                },
+                                {
+                                  "input": "glass-green",
+                                  "output": "1px solid #555a59"
+                                },
+                                {
+                                  "input": "leather-light",
+                                  "output": "1px solid #e6d6b8"
+                                },
+                                {
+                                  "input": "leather-dark",
+                                  "output": "1px solid #3d2c1e"
+                                },
+                                {
+                                  "input": "finance-ledger",
+                                  "output": "1px solid #d3dbd8"
+                                },
+                                {
+                                  "input": "newsprint-dark",
+                                  "output": "1px solid #3a3630"
+                                },
+                                {
+                                  "input": "nord-light",
+                                  "output": "1px solid #d8dee9"
+                                },
+                                {
+                                  "input": "nord-dark",
+                                  "output": "1px solid #4c566a"
+                                },
+                                {
+                                  "input": "industrial-light",
+                                  "output": "1px solid #b0b8c4"
+                                },
+                                {
+                                  "input": "industrial-dark",
+                                  "output": "1px solid #26333f"
+                                },
+                                {
+                                  "input": "light",
+                                  "output": "#323232"
+                                },
+                                {
+                                  "input": "dark",
+                                  "output": "#F4F4F4"
+                                },
+                                {
+                                  "input": "light-cool",
+                                  "output": "#21272A"
+                                },
+                                {
+                                  "input": "dark-cool",
+                                  "output": "#DDE1E6"
+                                },
+                                {
+                                  "input": "light-warm",
+                                  "output": "#272525"
+                                },
+                                {
+                                  "input": "dark-warm",
+                                  "output": "#E5E0DF"
+                                }
+                              ],
+                              "outputType": "scalar",
+                              "type": "map"
+                            }
+                          ],
+                          "type": "expr"
+                        }
+                      },
+                      "props.xAxes[0].appearance.labels.color": {
+                        "binding": {
+                          "config": {
+                            "expression": "{session.custom.style}"
+                          },
+                          "transforms": [
+                            {
+                              "fallback": "#627084",
+                              "inputType": "scalar",
+                              "mappings": [
+                                {
+                                  "input": "glass-violet",
+                                  "output": "#c7c2e0"
+                                },
+                                {
+                                  "input": "glass-green",
+                                  "output": "#7b9389"
+                                },
+                                {
+                                  "input": "leather-light",
+                                  "output": "#5a4d3c"
+                                },
+                                {
+                                  "input": "leather-dark",
+                                  "output": "#ab9578"
+                                },
+                                {
+                                  "input": "finance-ledger",
+                                  "output": "#5b6b74"
+                                },
+                                {
+                                  "input": "newsprint-dark",
+                                  "output": "#a8a196"
+                                },
+                                {
+                                  "input": "nord-light",
+                                  "output": "#4c566a"
+                                },
+                                {
+                                  "input": "nord-dark",
+                                  "output": "#d8dee9"
+                                },
+                                {
+                                  "input": "industrial-light",
+                                  "output": "#666d7a"
+                                },
+                                {
+                                  "input": "industrial-dark",
+                                  "output": "#7e93a3"
+                                },
+                                {
+                                  "input": "light",
+                                  "output": "#323232"
+                                },
+                                {
+                                  "input": "dark",
+                                  "output": "#F4F4F4"
+                                },
+                                {
+                                  "input": "light-cool",
+                                  "output": "#21272A"
+                                },
+                                {
+                                  "input": "dark-cool",
+                                  "output": "#DDE1E6"
+                                },
+                                {
+                                  "input": "light-warm",
+                                  "output": "#272525"
+                                },
+                                {
+                                  "input": "dark-warm",
+                                  "output": "#E5E0DF"
+                                }
+                              ],
+                              "outputType": "scalar",
+                              "type": "map"
+                            }
+                          ],
+                          "type": "expr"
+                        }
+                      },
+                      "props.yAxes[0].appearance.grid.color": {
+                        "binding": {
+                          "config": {
+                            "expression": "{session.custom.style}"
+                          },
+                          "transforms": [
+                            {
+                              "fallback": "#e5e7eb",
+                              "inputType": "scalar",
+                              "mappings": [
+                                {
+                                  "input": "glass-violet",
+                                  "output": "1px solid #5e596f"
+                                },
+                                {
+                                  "input": "glass-green",
+                                  "output": "1px solid #555a59"
+                                },
+                                {
+                                  "input": "leather-light",
+                                  "output": "1px solid #e6d6b8"
+                                },
+                                {
+                                  "input": "leather-dark",
+                                  "output": "1px solid #3d2c1e"
+                                },
+                                {
+                                  "input": "finance-ledger",
+                                  "output": "1px solid #d3dbd8"
+                                },
+                                {
+                                  "input": "newsprint-dark",
+                                  "output": "1px solid #3a3630"
+                                },
+                                {
+                                  "input": "nord-light",
+                                  "output": "1px solid #d8dee9"
+                                },
+                                {
+                                  "input": "nord-dark",
+                                  "output": "1px solid #4c566a"
+                                },
+                                {
+                                  "input": "industrial-light",
+                                  "output": "1px solid #b0b8c4"
+                                },
+                                {
+                                  "input": "industrial-dark",
+                                  "output": "1px solid #26333f"
+                                },
+                                {
+                                  "input": "light",
+                                  "output": "#323232"
+                                },
+                                {
+                                  "input": "dark",
+                                  "output": "#F4F4F4"
+                                },
+                                {
+                                  "input": "light-cool",
+                                  "output": "#21272A"
+                                },
+                                {
+                                  "input": "dark-cool",
+                                  "output": "#DDE1E6"
+                                },
+                                {
+                                  "input": "light-warm",
+                                  "output": "#272525"
+                                },
+                                {
+                                  "input": "dark-warm",
+                                  "output": "#E5E0DF"
+                                }
+                              ],
+                              "outputType": "scalar",
+                              "type": "map"
+                            }
+                          ],
+                          "type": "expr"
+                        }
+                      },
+                      "props.yAxes[0].appearance.labels.color": {
+                        "binding": {
+                          "config": {
+                            "expression": "{session.custom.style}"
+                          },
+                          "transforms": [
+                            {
+                              "fallback": "#627084",
+                              "inputType": "scalar",
+                              "mappings": [
+                                {
+                                  "input": "glass-violet",
+                                  "output": "#c7c2e0"
+                                },
+                                {
+                                  "input": "glass-green",
+                                  "output": "#7b9389"
+                                },
+                                {
+                                  "input": "leather-light",
+                                  "output": "#5a4d3c"
+                                },
+                                {
+                                  "input": "leather-dark",
+                                  "output": "#ab9578"
+                                },
+                                {
+                                  "input": "finance-ledger",
+                                  "output": "#5b6b74"
+                                },
+                                {
+                                  "input": "newsprint-dark",
+                                  "output": "#a8a196"
+                                },
+                                {
+                                  "input": "nord-light",
+                                  "output": "#4c566a"
+                                },
+                                {
+                                  "input": "nord-dark",
+                                  "output": "#d8dee9"
+                                },
+                                {
+                                  "input": "industrial-light",
+                                  "output": "#666d7a"
+                                },
+                                {
+                                  "input": "industrial-dark",
+                                  "output": "#7e93a3"
+                                },
+                                {
+                                  "input": "light",
+                                  "output": "#323232"
+                                },
+                                {
+                                  "input": "dark",
+                                  "output": "#F4F4F4"
+                                },
+                                {
+                                  "input": "light-cool",
+                                  "output": "#21272A"
+                                },
+                                {
+                                  "input": "dark-cool",
+                                  "output": "#DDE1E6"
+                                },
+                                {
+                                  "input": "light-warm",
+                                  "output": "#272525"
+                                },
+                                {
+                                  "input": "dark-warm",
+                                  "output": "#E5E0DF"
+                                }
+                              ],
+                              "outputType": "scalar",
+                              "type": "map"
+                            }
+                          ],
+                          "type": "expr"
+                        }
+                      },
+                      "position.display": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "len({view.custom.proof.chartNote}) = 0"
+                          }
+                        }
+                      }
+                    },
+                    "props": {
+                      "background": {
+                        "color": "transparent",
+                        "gradient": {
+                          "colors": [],
+                          "direction": "linear",
+                          "rotation": 0
+                        },
+                        "opacity": 0,
+                        "render": "color"
+                      },
+                      "cursor": {
+                        "enabled": false,
+                        "lineY": {
+                          "disabled": true
+                        }
+                      },
+                      "dataSources": {
+                        "master": [],
+                        "backup": [],
+                        "shade": []
+                      },
+                      "legend": {
+                        "enabled": true,
+                        "labels": {
+                          "font": {
+                            "color": "#627084",
+                            "size": 11,
+                            "weight": 400
+                          },
+                          "text": "{name}"
+                        },
+                        "markers": {
+                          "enabled": true,
+                          "height": 8,
+                          "mirrorLookOfSeries": true,
+                          "width": 8
+                        },
+                        "position": "bottom"
+                      },
+                      "series": [
+                        {
+                          "data": {
+                            "source": "master",
+                            "x": "t",
+                            "y": "v"
+                          },
+                          "hiddenInLegend": false,
+                          "label": {
+                            "text": ""
+                          },
+                          "line": {
+                            "appearance": {
+                              "connect": false,
+                              "fill": {
+                                "color": "#2563eb",
+                                "opacity": 0
+                              },
+                              "stroke": {
+                                "color": "#2563eb",
+                                "dashArray": "",
+                                "opacity": 1,
+                                "width": 3
+                              },
+                              "tensionX": 1,
+                              "tensionY": 1
+                            }
+                          },
+                          "name": "Master",
+                          "render": "line",
+                          "tooltip": {
+                            "cornerRadius": 3,
+                            "enabled": true,
+                            "pointerLength": 4,
+                            "text": "{name}: second [bold]{valueY}[/]"
+                          },
+                          "visible": true,
+                          "xAxis": "t",
+                          "yAxis": "sec",
+                          "zIndex": 0
+                        },
+                        {
+                          "data": {
+                            "source": "backup",
+                            "x": "t",
+                            "y": "v"
+                          },
+                          "hiddenInLegend": false,
+                          "label": {
+                            "text": ""
+                          },
+                          "line": {
+                            "appearance": {
+                              "connect": false,
+                              "fill": {
+                                "color": "#2563eb",
+                                "opacity": 0
+                              },
+                              "stroke": {
+                                "color": "#2563eb",
+                                "dashArray": "6 3",
+                                "opacity": 1,
+                                "width": 3
+                              },
+                              "tensionX": 1,
+                              "tensionY": 1
+                            }
+                          },
+                          "name": "Backup",
+                          "render": "line",
+                          "tooltip": {
+                            "cornerRadius": 3,
+                            "enabled": true,
+                            "pointerLength": 4,
+                            "text": "{name}: second [bold]{valueY}[/]"
+                          },
+                          "visible": true,
+                          "xAxis": "t",
+                          "yAxis": "sec",
+                          "zIndex": 0
+                        },
+                        {
+                          "data": {
+                            "source": "shade",
+                            "x": "t",
+                            "y": "v"
+                          },
+                          "hiddenInLegend": false,
+                          "label": {
+                            "text": ""
+                          },
+                          "name": "Changeover",
+                          "render": "column",
+                          "tooltip": {
+                            "cornerRadius": 3,
+                            "enabled": false,
+                            "pointerLength": 4,
+                            "text": ""
+                          },
+                          "visible": true,
+                          "xAxis": "t",
+                          "yAxis": "sec",
+                          "zIndex": -1,
+                          "column": {
+                            "open": {
+                              "x": "t0",
+                              "y": ""
+                            },
+                            "appearance": {
+                              "fill": {
+                                "color": "#888888",
+                                "opacity": 0.25
+                              },
+                              "stroke": {
+                                "color": "#888888",
+                                "opacity": 0,
+                                "width": 0
+                              },
+                              "width": 100,
+                              "height": null,
+                              "stacked": false,
+                              "deriveFieldsFromData": {
+                                "fill": {
+                                  "color": "",
+                                  "opacity": ""
+                                },
+                                "stroke": {
+                                  "color": "",
+                                  "opacity": "",
+                                  "width": ""
+                                }
+                              },
+                              "heatRules": {
+                                "enabled": false,
+                                "max": "",
+                                "min": "",
+                                "dataField": ""
+                              }
+                            }
+                          }
+                        }
+                      ],
+                      "style": {
+                        "minHeight": "0",
+                        "width": "100%"
+                      },
+                      "title": {
+                        "text": ""
+                      },
+                      "xAxes": [
+                        {
+                          "appearance": {
+                            "font": {
+                              "size": "10px",
+                              "weight": 500
+                            },
+                            "grid": {
+                              "color": "#e5e7eb",
+                              "dashArray": "3 3",
+                              "minDistance": 40,
+                              "opacity": 1
+                            },
+                            "inside": false,
+                            "labels": {
+                              "color": "#627084",
+                              "opacity": 1,
+                              "rotation": 0
+                            },
+                            "opposite": false
+                          },
+                          "date": {
+                            "baseInterval": {
+                              "count": 1,
+                              "enabled": false,
+                              "skipEmptyPeriods": false,
+                              "timeUnit": "second"
+                            },
+                            "break": {
+                              "enabled": false,
+                              "endDate": "",
+                              "size": 0.05,
+                              "startDate": ""
+                            },
+                            "format": "HH:mm:ss",
+                            "inputFormat": "yyyy-MM-dd HH:mm:ss",
+                            "range": {
+                              "max": "",
+                              "min": "",
+                              "useStrict": false
+                            }
+                          },
+                          "label": {
+                            "color": "",
+                            "enabled": true,
+                            "text": "seconds from the changeover"
+                          },
+                          "name": "t",
+                          "render": "value",
+                          "visible": true,
+                          "value": {
+                            "break": {
+                              "enabled": false,
+                              "endValue": 0,
+                              "size": 0.05,
+                              "startValue": 0
+                            },
+                            "format": "#",
+                            "logarithmic": false,
+                            "range": {
+                              "max": "",
+                              "min": "",
+                              "useStrict": false
+                            }
+                          }
+                        }
+                      ],
+                      "yAxes": [
+                        {
+                          "appearance": {
+                            "font": {
+                              "size": "10px",
+                              "weight": 500
+                            },
+                            "grid": {
+                              "color": "#e5e7eb",
+                              "dashArray": "3 3",
+                              "minDistance": 40,
+                              "opacity": 1
+                            },
+                            "inside": false,
+                            "labels": {
+                              "color": "#627084",
+                              "opacity": 1,
+                              "rotation": 0
+                            },
+                            "opposite": false
+                          },
+                          "label": {
+                            "color": "",
+                            "enabled": false,
+                            "text": ""
+                          },
+                          "name": "sec",
+                          "render": "value",
+                          "value": {
+                            "break": {
+                              "enabled": false,
+                              "endValue": 0,
+                              "size": 0.05,
+                              "startValue": 0
+                            },
+                            "format": "#",
+                            "logarithmic": false,
+                            "range": {
+                              "max": "",
+                              "min": "",
+                              "useStrict": false
+                            }
+                          },
+                          "visible": true
+                        }
+                      ]
+                    },
+                    "type": "ia.chart.xy"
+                  },
+                  {
+                    "type": "ia.display.label",
+                    "meta": {
+                      "name": "proofChartNote"
+                    },
+                    "position": {
+                      "basis": "0px",
+                      "grow": 1,
+                      "shrink": 1
+                    },
+                    "props": {
+                      "style": {
+                        "fontSize": "13px",
+                        "justifyContent": "center",
+                        "lineHeight": 1.4,
+                        "textAlign": "center",
+                        "minWidth": "0"
+                      }
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{view.custom.proof.chartNote}"
+                          }
+                        }
+                      },
+                      "props.style.classes": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{session.custom.style} + '/text/muted'"
+                          }
+                        }
+                      },
+                      "position.display": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "len({view.custom.proof.chartNote}) > 0"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "ia.container.flex",
+                "meta": {
+                  "name": "proofRows"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "props": {
+                  "direction": "column",
+                  "style": {
+                    "gap": "2px"
+                  }
+                },
+                "children": [
+                  {
+                    "type": "ia.container.flex",
+                    "meta": {
+                      "name": "proofRow0"
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "props": {
+                      "direction": "row",
+                      "style": {
+                        "gap": "10px",
+                        "alignItems": "center",
+                        "minWidth": "0"
+                      }
+                    },
+                    "children": [
+                      {
+                        "type": "ia.display.label",
+                        "meta": {
+                          "name": "rowWhen0"
+                        },
+                        "position": {
+                          "shrink": 0
+                        },
+                        "props": {
+                          "style": {
+                            "fontSize": "12px",
+                            "width": "64px"
+                          }
+                        },
+                        "propConfig": {
+                          "props.text": {
+                            "binding": {
+                              "type": "expr",
+                              "config": {
+                                "expression": "{view.custom.proof.rows[0].when}"
+                              }
+                            }
+                          },
+                          "props.style.classes": {
+                            "binding": {
+                              "type": "expr",
+                              "config": {
+                                "expression": "{session.custom.style} + '/text/muted'"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "type": "ia.display.label",
+                        "meta": {
+                          "name": "rowWhat0"
+                        },
+                        "position": {
+                          "basis": "0px",
+                          "grow": 1,
+                          "shrink": 1
+                        },
+                        "props": {
+                          "style": {
+                            "fontSize": "13px",
+                            "whiteSpace": "nowrap",
+                            "overflow": "hidden",
+                            "textOverflow": "ellipsis"
+                          }
+                        },
+                        "propConfig": {
+                          "props.text": {
+                            "binding": {
+                              "type": "expr",
+                              "config": {
+                                "expression": "{view.custom.proof.rows[0].what}"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "type": "ia.display.label",
+                        "meta": {
+                          "name": "rowTook0"
+                        },
+                        "position": {
+                          "shrink": 0
+                        },
+                        "props": {
+                          "style": {
+                            "fontSize": "13px",
+                            "whiteSpace": "nowrap",
+                            "textAlign": "right",
+                            "width": "64px"
+                          }
+                        },
+                        "propConfig": {
+                          "props.text": {
+                            "binding": {
+                              "type": "expr",
+                              "config": {
+                                "expression": "{view.custom.proof.rows[0].took}"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "type": "ia.display.label",
+                        "meta": {
+                          "name": "rowLost0"
+                        },
+                        "position": {
+                          "shrink": 0
+                        },
+                        "props": {
+                          "style": {
+                            "fontSize": "12px",
+                            "whiteSpace": "nowrap",
+                            "textAlign": "right",
+                            "width": "84px"
+                          }
+                        },
+                        "propConfig": {
+                          "props.text": {
+                            "binding": {
+                              "type": "expr",
+                              "config": {
+                                "expression": "{view.custom.proof.rows[0].lost}"
+                              }
+                            }
+                          },
+                          "props.style.classes": {
+                            "binding": {
+                              "type": "expr",
+                              "config": {
+                                "expression": "{session.custom.style} + '/text/muted'"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "ia.container.flex",
+                    "meta": {
+                      "name": "proofRow1"
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "props": {
+                      "direction": "row",
+                      "style": {
+                        "gap": "10px",
+                        "alignItems": "center",
+                        "minWidth": "0"
+                      }
+                    },
+                    "children": [
+                      {
+                        "type": "ia.display.label",
+                        "meta": {
+                          "name": "rowWhen1"
+                        },
+                        "position": {
+                          "shrink": 0
+                        },
+                        "props": {
+                          "style": {
+                            "fontSize": "12px",
+                            "width": "64px"
+                          }
+                        },
+                        "propConfig": {
+                          "props.text": {
+                            "binding": {
+                              "type": "expr",
+                              "config": {
+                                "expression": "{view.custom.proof.rows[1].when}"
+                              }
+                            }
+                          },
+                          "props.style.classes": {
+                            "binding": {
+                              "type": "expr",
+                              "config": {
+                                "expression": "{session.custom.style} + '/text/muted'"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "type": "ia.display.label",
+                        "meta": {
+                          "name": "rowWhat1"
+                        },
+                        "position": {
+                          "basis": "0px",
+                          "grow": 1,
+                          "shrink": 1
+                        },
+                        "props": {
+                          "style": {
+                            "fontSize": "13px",
+                            "whiteSpace": "nowrap",
+                            "overflow": "hidden",
+                            "textOverflow": "ellipsis"
+                          }
+                        },
+                        "propConfig": {
+                          "props.text": {
+                            "binding": {
+                              "type": "expr",
+                              "config": {
+                                "expression": "{view.custom.proof.rows[1].what}"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "type": "ia.display.label",
+                        "meta": {
+                          "name": "rowTook1"
+                        },
+                        "position": {
+                          "shrink": 0
+                        },
+                        "props": {
+                          "style": {
+                            "fontSize": "13px",
+                            "whiteSpace": "nowrap",
+                            "textAlign": "right",
+                            "width": "64px"
+                          }
+                        },
+                        "propConfig": {
+                          "props.text": {
+                            "binding": {
+                              "type": "expr",
+                              "config": {
+                                "expression": "{view.custom.proof.rows[1].took}"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "type": "ia.display.label",
+                        "meta": {
+                          "name": "rowLost1"
+                        },
+                        "position": {
+                          "shrink": 0
+                        },
+                        "props": {
+                          "style": {
+                            "fontSize": "12px",
+                            "whiteSpace": "nowrap",
+                            "textAlign": "right",
+                            "width": "84px"
+                          }
+                        },
+                        "propConfig": {
+                          "props.text": {
+                            "binding": {
+                              "type": "expr",
+                              "config": {
+                                "expression": "{view.custom.proof.rows[1].lost}"
+                              }
+                            }
+                          },
+                          "props.style.classes": {
+                            "binding": {
+                              "type": "expr",
+                              "config": {
+                                "expression": "{session.custom.style} + '/text/muted'"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "ia.container.flex",
+                    "meta": {
+                      "name": "proofRow2"
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "props": {
+                      "direction": "row",
+                      "style": {
+                        "gap": "10px",
+                        "alignItems": "center",
+                        "minWidth": "0"
+                      }
+                    },
+                    "children": [
+                      {
+                        "type": "ia.display.label",
+                        "meta": {
+                          "name": "rowWhen2"
+                        },
+                        "position": {
+                          "shrink": 0
+                        },
+                        "props": {
+                          "style": {
+                            "fontSize": "12px",
+                            "width": "64px"
+                          }
+                        },
+                        "propConfig": {
+                          "props.text": {
+                            "binding": {
+                              "type": "expr",
+                              "config": {
+                                "expression": "{view.custom.proof.rows[2].when}"
+                              }
+                            }
+                          },
+                          "props.style.classes": {
+                            "binding": {
+                              "type": "expr",
+                              "config": {
+                                "expression": "{session.custom.style} + '/text/muted'"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "type": "ia.display.label",
+                        "meta": {
+                          "name": "rowWhat2"
+                        },
+                        "position": {
+                          "basis": "0px",
+                          "grow": 1,
+                          "shrink": 1
+                        },
+                        "props": {
+                          "style": {
+                            "fontSize": "13px",
+                            "whiteSpace": "nowrap",
+                            "overflow": "hidden",
+                            "textOverflow": "ellipsis"
+                          }
+                        },
+                        "propConfig": {
+                          "props.text": {
+                            "binding": {
+                              "type": "expr",
+                              "config": {
+                                "expression": "{view.custom.proof.rows[2].what}"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "type": "ia.display.label",
+                        "meta": {
+                          "name": "rowTook2"
+                        },
+                        "position": {
+                          "shrink": 0
+                        },
+                        "props": {
+                          "style": {
+                            "fontSize": "13px",
+                            "whiteSpace": "nowrap",
+                            "textAlign": "right",
+                            "width": "64px"
+                          }
+                        },
+                        "propConfig": {
+                          "props.text": {
+                            "binding": {
+                              "type": "expr",
+                              "config": {
+                                "expression": "{view.custom.proof.rows[2].took}"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "type": "ia.display.label",
+                        "meta": {
+                          "name": "rowLost2"
+                        },
+                        "position": {
+                          "shrink": 0
+                        },
+                        "props": {
+                          "style": {
+                            "fontSize": "12px",
+                            "whiteSpace": "nowrap",
+                            "textAlign": "right",
+                            "width": "84px"
+                          }
+                        },
+                        "propConfig": {
+                          "props.text": {
+                            "binding": {
+                              "type": "expr",
+                              "config": {
+                                "expression": "{view.custom.proof.rows[2].lost}"
+                              }
+                            }
+                          },
+                          "props.style.classes": {
+                            "binding": {
+                              "type": "expr",
+                              "config": {
+                                "expression": "{session.custom.style} + '/text/muted'"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "propConfig": {
+              "props.style.classes": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{session.custom.style} + '/containers/card'"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "meta": {
+          "name": "main"
+        },
+        "position": {
+          "basis": "0px",
+          "grow": 1,
+          "shrink": 1
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "gap": "12px",
+            "minHeight": "0",
+            "minWidth": "0"
+          }
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "position": {
+      "shrink": 0
+    },
+    "props": {
+      "direction": "row",
+      "style": {
+        "gap": "16px",
+        "minHeight": "100%",
+        "padding": "16px",
+        "width": "100%"
+      },
+      "alignItems": "stretch"
+    },
+    "type": "ia.container.flex",
+    "propConfig": {
+      "props.style.classes": {
+        "binding": {
+          "type": "expr",
+          "config": {
+            "expression": "{session.custom.style} + '/containers/content'"
+          }
+        }
+      }
+    }
+  }
+}

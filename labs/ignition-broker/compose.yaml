@@ -1,0 +1,88 @@
+name: ignition-broker
+
+# PARKED UNDER labs/, NOT stacks/, until it has a place in demos.json: `make
+# validate` requires every stack under stacks/ to be startable from the console.
+# Start it by hand meanwhile (the repo's scripts still find it by name):
+#
+#   docker compose -f labs/ignition-broker/compose.yaml up -d
+#   ./wd -- scripts/ign-modules.sh --yes ignition-broker   (Distributor, then
+#   ./wd -- node scripts/ign-gw.js commission --gateway local-broker)
+#   ./wd -- scripts/distributor-setup.sh --network ignition-broker
+#
+# To promote it: `git mv labs/ignition-broker stacks/`, add it to demos.json,
+# add broker.test to the npm stack's backbone aliases, then `make env hosts`.
+
+# A small standalone Ignition gateway whose only job is MQTT Distributor -- the
+# broker the Sparkplug edges and the hub's MQTT Engine both dial. Measured
+# against the broker-inside-the-hub shape in docs/MQTT-DISTRIBUTOR.md (T2).
+#
+# EDGE EDITION, deliberately: a broker gateway needs no Perspective, no
+# database and no Gateway Network, and Ignition Edge is the licence a customer
+# buys for a box like this. Distributor is NOT part of Edge IIoT (that is
+# Transmission only) -- it is licensed on top, per Inductive Automation; on the
+# trial it runs (docs/MQTT-DISTRIBUTOR.md T-D11).
+#
+# TWO NETWORKS. `backbone` is how the toolbox and the console reach its web
+# port; `wd-mqtt` carries MQTT and nothing else, and on it this gateway answers
+# to `mqtt-broker`, the name in its TLS certificate. Cutting an edge off the
+# broker is `docker network disconnect wd-mqtt <edge>`, which leaves the edge
+# on backbone -- so the console's observer still sees the edge while the
+# broker cannot (T-D12).
+
+services:
+  ignition-broker:
+    image: inductiveautomation/ignition:${IGNITION_VERSION:-8.3.9}
+    container_name: ignition-broker
+    restart: "no"
+    environment:
+      TZ: ${TZ}
+      ACCEPT_IGNITION_EULA: "Y"
+      IGNITION_EDITION: edge
+      GATEWAY_ADMIN_USERNAME: ${GATEWAY_ADMIN_USERNAME}
+      GATEWAY_ADMIN_PASSWORD: ${GATEWAY_ADMIN_PASSWORD}
+      GATEWAY_HTTP_PORT: 8088
+      GATEWAY_HTTPS_PORT: 8043
+      GATEWAY_GAN_PORT: 8060
+      MALLOC_ARENA_MAX: "2"
+    command: >
+      -n Ignition-Broker
+      -m 512
+      --
+      -XX:ParallelGCThreads=2
+      -XX:ConcGCThreads=1
+      -XX:G1PeriodicGCInterval=300000
+      -XX:G1PeriodicGCSystemLoadThreshold=0
+      gateway.useProxyForwardedHeader=true
+    ports:
+      - "${BROKER_HTTP_HOST_PORT:-29788}:8088"   # HTTP  - http://localhost:29788
+      - "${BROKER_HTTPS_HOST_PORT:-29743}:8043"  # HTTPS - https://localhost:29743
+    volumes:
+      - broker_data:/usr/local/bin/ignition/data
+    networks:
+      backbone: {}
+      mqtt:
+        aliases:
+          - mqtt-broker
+    stop_grace_period: 30s
+    healthcheck:
+      test: ["CMD", "/usr/local/bin/health-check.sh", "-s", "RUNNING",
+             "http://localhost:8088/StatusPing"]
+      interval: 15s
+      timeout: 10s
+      retries: 20
+      start_period: 180s
+    labels:
+      au.gaskony.wd.stack: "ignition-broker"
+
+volumes:
+  broker_data:
+
+networks:
+  backbone:
+    external: true
+  # Shared, not owned: scripts/lib.sh:ensure_mqtt_net creates it and the hub
+  # pair and the MQTT edges join it in their own compose files (the demo runs
+  # the broker on the hub pair, T1 -- docs/MQTT-DISTRIBUTOR.md).
+  mqtt:
+    name: wd-mqtt
+    external: true

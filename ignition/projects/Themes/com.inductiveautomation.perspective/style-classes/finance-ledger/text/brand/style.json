@@ -1,0 +1,16 @@
+{
+  "base": {
+    "style": {
+      "color": "#ffffff",
+      "borderBottomWidth": "1px",
+      "borderBottomStyle": "solid",
+      "borderBottomColor": "rgba(255,255,255,.18)",
+      "marginBottom": "6px",
+      "padding": "8px 8px 16px 8px",
+      "fontFamily": "Georgia, \"Times New Roman\", \"Segoe UI\", ui-serif, serif",
+      "fontSize": "16px",
+      "fontWeight": "700",
+      "letterSpacing": "0.01em"
+    }
+  }
+}

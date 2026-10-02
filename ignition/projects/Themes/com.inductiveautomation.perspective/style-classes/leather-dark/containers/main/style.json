@@ -1,0 +1,9 @@
+{
+  "base": {
+    "style": {
+      "backgroundColor": "#1c1410",
+      "color": "#ece0cb",
+      "overflow": "hidden"
+    }
+  }
+}

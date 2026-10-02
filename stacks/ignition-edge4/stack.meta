@@ -1,0 +1,19 @@
+# See stacks/postgres/stack.meta for what this file is and who reads it.
+# Second edge of the Sparkplug alarms demo -- see ignition-edge3/stack.meta
+# for the full explanation of ROLE=edge-isolated. docs/SPARKPLUG.md (a later
+# commit) is the demo's own doc.
+ORDER=100
+KIND=gateway
+ROLE=edge-isolated
+STANZA=local-edge4
+PORT_VAR=EDGE4_HTTP_HOST_PORT
+PORT_DEFAULT=29688
+STATUS_NOTE="isolated edge, MQTT only"
+TEST_HOST=edge4.test
+TEST_FORWARD_PORT=8088
+MQTT_MODULE=transmission
+
+# The address this gateway tells a BROWSER to use -- see ignition-edge2's
+# stack.meta for why this matters. Here: its own proxy name, same as every
+# other edge.
+PUBLIC_HOST=edge4.test

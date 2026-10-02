@@ -1,0 +1,221 @@
+{
+  "custom": {},
+  "params": {
+    "action": "",
+    "can": {
+      "busy": "",
+      "label": "",
+      "note": "",
+      "ok": false,
+      "why": ""
+    },
+    "icon": "",
+    "key": "",
+    "kind": "chip",
+    "quiet": false
+  },
+  "propConfig": {
+    "params.action": {
+      "paramDirection": "input"
+    },
+    "params.can": {
+      "paramDirection": "input"
+    },
+    "params.icon": {
+      "paramDirection": "input"
+    },
+    "params.key": {
+      "paramDirection": "input"
+    },
+    "params.kind": {
+      "paramDirection": "input"
+    },
+    "params.quiet": {
+      "paramDirection": "input"
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 30,
+      "width": 260
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": {
+              "config": {
+                "script": "\timport demo_rail\n\tdemo_rail.fire(self.session, self.view.params.action)\n"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "btn",
+          "tooltip": {
+            "enabled": true,
+            "text": ""
+          }
+        },
+        "position": {
+          "shrink": 0
+        },
+        "propConfig": {
+          "meta.tooltip.text": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.can.why}"
+              },
+              "type": "expr"
+            }
+          },
+          "props.enabled": {
+            "binding": {
+              "config": {
+                "expression": "{session.custom.acting} = '' && {view.params.can.ok}"
+              },
+              "type": "expr"
+            }
+          },
+          "props.image.icon.path": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.icon}"
+              },
+              "type": "expr"
+            }
+          },
+          "props.image.width": {
+            "binding": {
+              "config": {
+                "expression": "if({view.params.icon} = '', 0, 16)"
+              },
+              "type": "expr"
+            }
+          },
+          "props.style.classes": {
+            "binding": {
+              "config": {
+                "expression": "{session.custom.style} + '/buttons/' + {view.params.kind}"
+              },
+              "type": "expr"
+            }
+          },
+          "props.style.cursor": {
+            "binding": {
+              "config": {
+                "expression": "if({session.custom.acting} = '' && {view.params.can.ok}, 'pointer', 'not-allowed')"
+              },
+              "type": "expr"
+            }
+          },
+          "props.style.opacity": {
+            "binding": {
+              "config": {
+                "expression": "if({session.custom.acting} = '' && {view.params.can.ok}, 1, 0.45)"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "if({session.custom.acting} = {view.params.key}, {view.params.can.busy}, if({session.custom.armKey} = {view.params.key}, 'Click again to confirm', {view.params.can.label}))"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "align": "center",
+          "image": {
+            "height": 16,
+            "icon": {
+              "color": "",
+              "path": ""
+            },
+            "position": "left",
+            "source": "",
+            "style": {
+              "classes": ""
+            },
+            "width": 16
+          },
+          "justify": "flex-start",
+          "style": {
+            "fontSize": "12px",
+            "gap": "8px",
+            "height": "30px",
+            "minHeight": "30px",
+            "padding": "0 10px",
+            "whiteSpace": "nowrap",
+            "width": "100%"
+          },
+          "text": "",
+          "tooltip": {
+            "enabled": true
+          }
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "meta": {
+          "name": "note"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "propConfig": {
+          "position.display": {
+            "binding": {
+              "config": {
+                "expression": "!{view.params.quiet} && if({session.custom.acting} = {view.params.key}, {session.custom.actingWhat}, if({view.params.can.note} != '', {view.params.can.note}, if({session.custom.actKey} = {view.params.key}, {session.custom.actNote}, ''))) != ''"
+              },
+              "type": "expr"
+            }
+          },
+          "props.style.classes": {
+            "binding": {
+              "config": {
+                "expression": "{session.custom.style} + '/text/muted'"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "if({session.custom.acting} = {view.params.key}, {session.custom.actingWhat}, if({view.params.can.note} != '', {view.params.can.note}, if({session.custom.actKey} = {view.params.key}, {session.custom.actNote}, '')))"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "fontSize": "10px",
+            "lineHeight": 1.35,
+            "whiteSpace": "normal"
+          },
+          "text": ""
+        },
+        "type": "ia.display.label"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "gap": "2px",
+        "width": "100%"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

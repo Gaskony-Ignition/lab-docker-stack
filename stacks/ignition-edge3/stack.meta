@@ -1,0 +1,30 @@
+# See stacks/postgres/stack.meta for what this file is and who reads it.
+# The Sparkplug alarms demo's edge -- see docs/SPARKPLUG.md (a later commit).
+ORDER=90
+KIND=gateway
+ROLE=edge-isolated
+STANZA=local-edge3
+PORT_VAR=EDGE3_HTTP_HOST_PORT
+PORT_DEFAULT=29588
+STATUS_NOTE="isolated edge, MQTT only"
+TEST_HOST=edge3.test
+TEST_FORWARD_PORT=8088
+MQTT_MODULE=transmission
+
+# ROLE=edge-isolated, not ROLE=edge. An edge-isolated gateway gets every
+# per-gateway treatment ROLE=edge would (modules, edge-visual, public address,
+# trial reset, sign-in door, proxy host, hosts entry, themes) but is left OUT
+# of gateways_with_role edge -- so bootstrap's Gateway Network step, its EAM
+# step, eam-push.sh and sf-gan-history.sh's security-zone grant all skip it by
+# construction, with no per-gateway exception anywhere. It also carries no
+# EAM_AGENT/SITE_PROJECT/SF_TRANSPORT, which validate.py requires only for
+# ROLE=edge -- this gateway is never pushed to over EAM (it runs its own
+# `Edge` project, deployed directly) and never carries store-and-forward.
+# scripts/ign-edge-visual.sh is the one script that has to name both roles
+# explicitly, because it is the one "must still get" treatment that already
+# keyed off ROLE=edge before this stack existed.
+
+# The address this gateway tells a BROWSER to use -- see ignition-edge2's
+# stack.meta for why this matters. Here: its own proxy name, same as every
+# other edge.
+PUBLIC_HOST=edge3.test

@@ -1,0 +1,10 @@
+# The demo console's control plane -- see demos.json and docs/DEMO-CONSOLE.md.
+#
+# CORE. It starts with the front door and the hub gateway and stays up: it is
+# what the Demos page calls to start everything else. ORDER puts it before the
+# gateways so the page has something to talk to as soon as one is serving.
+ORDER=25
+KIND=service
+PORT_VAR=WD_CONTROL_HTTP_HOST_PORT
+PORT_DEFAULT=29485
+STATUS_NOTE="demo console control plane"

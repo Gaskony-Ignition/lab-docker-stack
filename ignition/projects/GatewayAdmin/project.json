@@ -1,0 +1,7 @@
+{
+  "title": "Gateway Admin v1.2.2",
+  "description": "Hub-only operations console: drive the stack from Perspective instead of the Designer. Inherits Themes for look-and-feel. Deliberately NOT pushed to the edges -- the EAM tasks only send Site1/Site2, and system.eam.* is Controller-only anyway. \u00b7 v1.2.2",
+  "enabled": true,
+  "inheritable": false,
+  "parent": "Themes"
+}

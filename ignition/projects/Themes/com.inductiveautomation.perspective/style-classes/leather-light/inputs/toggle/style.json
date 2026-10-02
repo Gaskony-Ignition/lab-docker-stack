@@ -1,0 +1,9 @@
+{
+  "base": {
+    "style": {
+      "backgroundColor": "#8a5a2b",
+      "color": "#fdf6e8",
+      "fontSize": "13px"
+    }
+  }
+}

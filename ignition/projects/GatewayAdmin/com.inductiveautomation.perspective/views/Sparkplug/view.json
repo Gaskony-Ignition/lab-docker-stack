@@ -1,0 +1,1232 @@
+{
+  "custom": {
+    "scenario": 0,
+    "strip": {
+      "n0": {
+        "name": "Edge 3",
+        "state": "",
+        "badge": "badge-neutral",
+        "line": "",
+        "tip": ""
+      },
+      "n1": {
+        "name": "Edge 4",
+        "state": "",
+        "badge": "badge-neutral",
+        "line": "",
+        "tip": ""
+      },
+      "brokerNode": {
+        "name": "MQTT broker",
+        "state": "",
+        "badge": "badge-neutral",
+        "line": "",
+        "tip": ""
+      },
+      "cloudNode": {
+        "name": "Cloud gateway (hub)",
+        "state": "",
+        "badge": "badge-neutral",
+        "line": "",
+        "tip": ""
+      },
+      "dataLane": {
+        "text": "",
+        "badge": "badge-neutral",
+        "why": ""
+      },
+      "cmdLane": {
+        "text": "",
+        "badge": "badge-neutral",
+        "why": ""
+      },
+      "notReady": ""
+    },
+    "rail": {
+      "head": {
+        "name": "",
+        "state": "",
+        "badge": "badge-neutral",
+        "tip": ""
+      },
+      "banner": {
+        "text": ""
+      },
+      "notReady": "",
+      "state": "stopped",
+      "facts": [],
+      "links": []
+    }
+  },
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "width": 1366,
+      "height": 594
+    }
+  },
+  "root": {
+    "type": "ia.container.flex",
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "row",
+      "style": {
+        "height": "100%",
+        "width": "100%",
+        "overflow": "hidden",
+        "padding": "16px",
+        "gap": "16px",
+        "boxSizing": "border-box"
+      },
+      "alignItems": "stretch"
+    },
+    "position": {
+      "basis": "auto",
+      "shrink": 0
+    },
+    "propConfig": {
+      "props.style.classes": {
+        "binding": {
+          "type": "expr",
+          "config": {
+            "expression": "{session.custom.style} + '/containers/content'"
+          }
+        }
+      }
+    },
+    "children": [
+      {
+        "type": "ia.container.flex",
+        "meta": {
+          "name": "sidebar"
+        },
+        "props": {
+          "direction": "column",
+          "alignItems": "stretch",
+          "style": {
+            "gap": "6px",
+            "minWidth": "0",
+            "padding": "14px",
+            "width": "100%"
+          }
+        },
+        "position": {
+          "basis": "260px",
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.style.classes": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.style} + '/containers/card'"
+              }
+            }
+          }
+        },
+        "children": [
+          {
+            "type": "ia.display.view",
+            "meta": {
+              "name": "head"
+            },
+            "props": {
+              "path": "RailHead",
+              "params": {},
+              "useDefaultViewHeight": true,
+              "useDefaultViewWidth": false,
+              "style": {
+                "width": "100%"
+              }
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.params": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{view.custom.rail.head}"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "ia.display.view",
+            "meta": {
+              "name": "banner"
+            },
+            "props": {
+              "path": "NotRunning",
+              "params": {},
+              "useDefaultViewHeight": false,
+              "useDefaultViewWidth": false,
+              "style": {
+                "width": "100%"
+              }
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.params": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{view.custom.rail.banner}"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "ia.display.view",
+            "meta": {
+              "name": "gStatus"
+            },
+            "props": {
+              "path": "RailGroup",
+              "params": {
+                "text": "STATUS"
+              },
+              "useDefaultViewHeight": true,
+              "useDefaultViewWidth": false,
+              "style": {
+                "width": "100%"
+              }
+            },
+            "position": {
+              "shrink": 0
+            }
+          },
+          {
+            "type": "ia.display.flex-repeater",
+            "meta": {
+              "name": "facts"
+            },
+            "props": {
+              "path": "RailFact",
+              "direction": "column",
+              "instances": [],
+              "useDefaultViewHeight": true,
+              "useDefaultViewWidth": false,
+              "elementPosition": {
+                "basis": "22px",
+                "grow": 0,
+                "shrink": 0
+              },
+              "style": {
+                "gap": "0px",
+                "width": "100%"
+              }
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.instances": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{view.custom.rail.facts}"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "ia.display.view",
+            "meta": {
+              "name": "gControls"
+            },
+            "props": {
+              "path": "RailGroup",
+              "params": {
+                "text": "CONTROLS"
+              },
+              "useDefaultViewHeight": true,
+              "useDefaultViewWidth": false,
+              "style": {
+                "width": "100%"
+              }
+            },
+            "position": {
+              "shrink": 0
+            }
+          },
+          {
+            "type": "ia.container.flex",
+            "meta": {
+              "name": "scenarios"
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "gap": "2px",
+                "width": "100%"
+              }
+            },
+            "position": {
+              "shrink": 0
+            },
+            "children": [
+              {
+                "type": "ia.input.button",
+                "meta": {
+                  "name": "s1"
+                },
+                "props": {
+                  "text": "1 Live data",
+                  "style": {
+                    "height": "22px",
+                    "minHeight": "22px",
+                    "padding": "0 10px",
+                    "whiteSpace": "nowrap",
+                    "lineHeight": "1",
+                    "fontSize": "12px",
+                    "fontWeight": "600",
+                    "letterSpacing": "0",
+                    "boxShadow": "none",
+                    "fontFamily": "inherit",
+                    "width": "100%"
+                  },
+                  "justify": "flex-start"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{session.custom.style} + if({view.custom.scenario} = 0, '/buttons/primary', '/buttons/chip')"
+                      }
+                    }
+                  }
+                },
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "type": "script",
+                      "scope": "G",
+                      "config": {
+                        "script": "\tself.view.custom.scenario = 0\n"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "ia.input.button",
+                "meta": {
+                  "name": "s2"
+                },
+                "props": {
+                  "text": "2 Alarms",
+                  "style": {
+                    "height": "22px",
+                    "minHeight": "22px",
+                    "padding": "0 10px",
+                    "whiteSpace": "nowrap",
+                    "lineHeight": "1",
+                    "fontSize": "12px",
+                    "fontWeight": "600",
+                    "letterSpacing": "0",
+                    "boxShadow": "none",
+                    "fontFamily": "inherit",
+                    "width": "100%"
+                  },
+                  "justify": "flex-start"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{session.custom.style} + if({view.custom.scenario} = 1, '/buttons/primary', '/buttons/chip')"
+                      }
+                    }
+                  }
+                },
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "type": "script",
+                      "scope": "G",
+                      "config": {
+                        "script": "\tself.view.custom.scenario = 1\n"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "ia.input.button",
+                "meta": {
+                  "name": "s3"
+                },
+                "props": {
+                  "text": "3 Cloud to edge",
+                  "style": {
+                    "height": "22px",
+                    "minHeight": "22px",
+                    "padding": "0 10px",
+                    "whiteSpace": "nowrap",
+                    "lineHeight": "1",
+                    "fontSize": "12px",
+                    "fontWeight": "600",
+                    "letterSpacing": "0",
+                    "boxShadow": "none",
+                    "fontFamily": "inherit",
+                    "width": "100%"
+                  },
+                  "justify": "flex-start"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{session.custom.style} + if({view.custom.scenario} = 2, '/buttons/primary', '/buttons/chip')"
+                      }
+                    }
+                  }
+                },
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "type": "script",
+                      "scope": "G",
+                      "config": {
+                        "script": "\tself.view.custom.scenario = 2\n"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "ia.input.button",
+                "meta": {
+                  "name": "s4"
+                },
+                "props": {
+                  "text": "4 Outages",
+                  "style": {
+                    "height": "22px",
+                    "minHeight": "22px",
+                    "padding": "0 10px",
+                    "whiteSpace": "nowrap",
+                    "lineHeight": "1",
+                    "fontSize": "12px",
+                    "fontWeight": "600",
+                    "letterSpacing": "0",
+                    "boxShadow": "none",
+                    "fontFamily": "inherit",
+                    "width": "100%"
+                  },
+                  "justify": "flex-start"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{session.custom.style} + if({view.custom.scenario} = 3, '/buttons/primary', '/buttons/chip')"
+                      }
+                    }
+                  }
+                },
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "type": "script",
+                      "scope": "G",
+                      "config": {
+                        "script": "\tself.view.custom.scenario = 3\n"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "ia.input.button",
+                "meta": {
+                  "name": "s5"
+                },
+                "props": {
+                  "text": "5 UDT changes",
+                  "style": {
+                    "height": "22px",
+                    "minHeight": "22px",
+                    "padding": "0 10px",
+                    "whiteSpace": "nowrap",
+                    "lineHeight": "1",
+                    "fontSize": "12px",
+                    "fontWeight": "600",
+                    "letterSpacing": "0",
+                    "boxShadow": "none",
+                    "fontFamily": "inherit",
+                    "width": "100%"
+                  },
+                  "justify": "flex-start"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{session.custom.style} + if({view.custom.scenario} = 4, '/buttons/primary', '/buttons/chip')"
+                      }
+                    }
+                  }
+                },
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "type": "script",
+                      "scope": "G",
+                      "config": {
+                        "script": "\tself.view.custom.scenario = 4\n"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "ia.input.button",
+                "meta": {
+                  "name": "s6"
+                },
+                "props": {
+                  "text": "6 Notifications",
+                  "style": {
+                    "height": "22px",
+                    "minHeight": "22px",
+                    "padding": "0 10px",
+                    "whiteSpace": "nowrap",
+                    "lineHeight": "1",
+                    "fontSize": "12px",
+                    "fontWeight": "600",
+                    "letterSpacing": "0",
+                    "boxShadow": "none",
+                    "fontFamily": "inherit",
+                    "width": "100%"
+                  },
+                  "justify": "flex-start"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{session.custom.style} + if({view.custom.scenario} = 5, '/buttons/primary', '/buttons/chip')"
+                      }
+                    }
+                  }
+                },
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "type": "script",
+                      "scope": "G",
+                      "config": {
+                        "script": "\tself.view.custom.scenario = 5\n"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "type": "ia.display.view",
+            "meta": {
+              "name": "ctl"
+            },
+            "props": {
+              "path": "SparkplugCtlLive",
+              "useDefaultViewHeight": false,
+              "useDefaultViewWidth": false,
+              "style": {
+                "width": "100%"
+              }
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.path": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "case({view.custom.scenario}, 0, 'SparkplugCtlLive', 1, 'SparkplugCtlAlarms', 2, 'SparkplugCtlCommands', 3, 'SparkplugCtlOutage', 4, 'SparkplugCtlUdt', 5, 'SparkplugCtlNotify', 'SparkplugCtlLive')"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "ia.display.view",
+            "meta": {
+              "name": "gGateways"
+            },
+            "props": {
+              "path": "RailGroup",
+              "params": {
+                "text": "GATEWAYS"
+              },
+              "useDefaultViewHeight": true,
+              "useDefaultViewWidth": false,
+              "style": {
+                "width": "100%"
+              }
+            },
+            "position": {
+              "shrink": 0
+            }
+          },
+          {
+            "type": "ia.display.flex-repeater",
+            "meta": {
+              "name": "links"
+            },
+            "props": {
+              "path": "RailLink",
+              "direction": "row",
+              "instances": [],
+              "useDefaultViewHeight": true,
+              "useDefaultViewWidth": false,
+              "elementPosition": {
+                "basis": "31%",
+                "grow": 1,
+                "shrink": 1
+              },
+              "style": {
+                "gap": "4px",
+                "width": "100%"
+              },
+              "wrap": "wrap"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.instances": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{view.custom.rail.links}"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "type": "ia.container.flex",
+        "meta": {
+          "name": "main"
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "gap": "8px",
+            "minHeight": "0",
+            "minWidth": "0",
+            "overflow": "hidden",
+            "classes": "sparkplug-scope"
+          }
+        },
+        "position": {
+          "basis": "0px",
+          "grow": 1,
+          "shrink": 1
+        },
+        "children": [
+          {
+            "type": "ia.container.flex",
+            "meta": {
+              "name": "header"
+            },
+            "props": {
+              "direction": "row",
+              "style": {
+                "gap": "8px"
+              },
+              "alignItems": "center"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "children": [
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "what",
+                  "tooltip": {
+                    "enabled": true
+                  }
+                },
+                "props": {
+                  "text": "Two edges with no Gateway Network send tags and alarms to the cloud over MQTT; the cloud sends commands back.",
+                  "style": {
+                    "lineHeight": "1.35",
+                    "whiteSpace": "nowrap",
+                    "minWidth": "0",
+                    "fontSize": "13px"
+                  }
+                },
+                "position": {
+                  "basis": "0px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{session.custom.style} + '/text/muted' + ' sp-ellipsis'"
+                      }
+                    }
+                  },
+                  "meta.tooltip.text": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "'Two edges with no Gateway Network send tags and alarms to the cloud over MQTT; the cloud sends commands back.'"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "ia.input.button",
+                "meta": {
+                  "name": "traffic"
+                },
+                "props": {
+                  "text": "MQTT traffic",
+                  "style": {
+                    "height": "30px",
+                    "minHeight": "30px",
+                    "padding": "0 14px",
+                    "whiteSpace": "nowrap",
+                    "lineHeight": "1"
+                  }
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{session.custom.style} + '/buttons/chip'"
+                      }
+                    }
+                  }
+                },
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "type": "script",
+                      "scope": "G",
+                      "config": {
+                        "script": "\ttry:\n\t\tvp = self.page.props.dimensions.viewport\n\t\tw, h = int(vp.width), int(vp.height)\n\texcept:\n\t\tw, h = 1366, 640\n\t# Top of the drawer = just below the scenario's one line, which stays visible.\n\ttry:\n\t\tsystem.perspective.alterDock('sp-traffic', {'size': max(240, h - 236)})\n\texcept:\n\t\tpass\n\tsystem.perspective.toggleDock('sp-traffic')\n"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "type": "ia.container.flex",
+            "meta": {
+              "name": "strip"
+            },
+            "props": {
+              "direction": "row",
+              "style": {
+                "gap": "0px",
+                "minWidth": "0"
+              },
+              "alignItems": "stretch"
+            },
+            "position": {
+              "basis": "96px",
+              "shrink": 0
+            },
+            "children": [
+              {
+                "type": "ia.container.flex",
+                "meta": {
+                  "name": "edges"
+                },
+                "props": {
+                  "direction": "column",
+                  "style": {
+                    "gap": "6px",
+                    "minWidth": "0"
+                  }
+                },
+                "position": {
+                  "basis": "29%",
+                  "shrink": 0
+                },
+                "children": [
+                  {
+                    "type": "ia.display.view",
+                    "meta": {
+                      "name": "edge3"
+                    },
+                    "props": {
+                      "path": "StripNode",
+                      "useDefaultViewHeight": false,
+                      "useDefaultViewWidth": false,
+                      "style": {
+                        "minWidth": "0",
+                        "width": "100%"
+                      }
+                    },
+                    "position": {
+                      "basis": "0px",
+                      "grow": 1,
+                      "shrink": 1
+                    },
+                    "propConfig": {
+                      "props.params": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{view.custom.strip.n0}"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type": "ia.display.view",
+                    "meta": {
+                      "name": "edge4"
+                    },
+                    "props": {
+                      "path": "StripNode",
+                      "useDefaultViewHeight": false,
+                      "useDefaultViewWidth": false,
+                      "style": {
+                        "minWidth": "0",
+                        "width": "100%"
+                      }
+                    },
+                    "position": {
+                      "basis": "0px",
+                      "grow": 1,
+                      "shrink": 1
+                    },
+                    "propConfig": {
+                      "props.params": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{view.custom.strip.n1}"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "ia.container.flex",
+                "meta": {
+                  "name": "laneIn"
+                },
+                "props": {
+                  "direction": "column",
+                  "style": {
+                    "gap": "6px",
+                    "padding": "0 10px",
+                    "minWidth": "72px",
+                    "overflow": "hidden"
+                  },
+                  "alignItems": "center",
+                  "justify": "center"
+                },
+                "position": {
+                  "basis": "0px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "type": "ia.display.label",
+                    "meta": {
+                      "name": "data",
+                      "tooltip": {
+                        "enabled": true
+                      }
+                    },
+                    "props": {
+                      "text": "",
+                      "style": {
+                        "lineHeight": "1.35",
+                        "whiteSpace": "nowrap"
+                      }
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.style.classes": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{session.custom.style} + '/status/' + {view.custom.strip.dataLane.badge}"
+                          }
+                        }
+                      },
+                      "props.text": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{view.custom.strip.dataLane.text}"
+                          }
+                        }
+                      },
+                      "meta.tooltip.text": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{view.custom.strip.dataLane.why}"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type": "ia.display.label",
+                    "meta": {
+                      "name": "cmd",
+                      "tooltip": {
+                        "enabled": true
+                      }
+                    },
+                    "props": {
+                      "text": "",
+                      "style": {
+                        "lineHeight": "1.35",
+                        "whiteSpace": "nowrap"
+                      }
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.style.classes": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{session.custom.style} + '/status/' + {view.custom.strip.cmdLane.badge}"
+                          }
+                        }
+                      },
+                      "props.text": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{view.custom.strip.cmdLane.text}"
+                          }
+                        }
+                      },
+                      "meta.tooltip.text": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{view.custom.strip.cmdLane.why}"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "ia.container.flex",
+                "meta": {
+                  "name": "broker"
+                },
+                "props": {
+                  "direction": "column",
+                  "style": {
+                    "minWidth": "0"
+                  },
+                  "justify": "center"
+                },
+                "position": {
+                  "basis": "15%",
+                  "shrink": 0
+                },
+                "children": [
+                  {
+                    "type": "ia.display.view",
+                    "meta": {
+                      "name": "box"
+                    },
+                    "props": {
+                      "path": "StripNode",
+                      "useDefaultViewHeight": false,
+                      "useDefaultViewWidth": false,
+                      "style": {
+                        "minWidth": "0",
+                        "width": "100%"
+                      }
+                    },
+                    "position": {
+                      "basis": "52px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.params": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{view.custom.strip.brokerNode}"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "ia.container.flex",
+                "meta": {
+                  "name": "laneOut"
+                },
+                "props": {
+                  "direction": "column",
+                  "style": {
+                    "gap": "6px",
+                    "padding": "0 10px",
+                    "minWidth": "72px",
+                    "overflow": "hidden"
+                  },
+                  "alignItems": "center",
+                  "justify": "center"
+                },
+                "position": {
+                  "basis": "0px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "children": [
+                  {
+                    "type": "ia.display.label",
+                    "meta": {
+                      "name": "data",
+                      "tooltip": {
+                        "enabled": true
+                      }
+                    },
+                    "props": {
+                      "text": "",
+                      "style": {
+                        "lineHeight": "1.35",
+                        "whiteSpace": "nowrap"
+                      }
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.style.classes": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{session.custom.style} + '/status/' + {view.custom.strip.dataLane.badge}"
+                          }
+                        }
+                      },
+                      "props.text": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{view.custom.strip.dataLane.text}"
+                          }
+                        }
+                      },
+                      "meta.tooltip.text": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{view.custom.strip.dataLane.why}"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type": "ia.display.label",
+                    "meta": {
+                      "name": "cmd",
+                      "tooltip": {
+                        "enabled": true
+                      }
+                    },
+                    "props": {
+                      "text": "",
+                      "style": {
+                        "lineHeight": "1.35",
+                        "whiteSpace": "nowrap"
+                      }
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.style.classes": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{session.custom.style} + '/status/' + {view.custom.strip.cmdLane.badge}"
+                          }
+                        }
+                      },
+                      "props.text": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{view.custom.strip.cmdLane.text}"
+                          }
+                        }
+                      },
+                      "meta.tooltip.text": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{view.custom.strip.cmdLane.why}"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "ia.display.view",
+                "meta": {
+                  "name": "cloud"
+                },
+                "props": {
+                  "path": "StripNode",
+                  "useDefaultViewHeight": false,
+                  "useDefaultViewWidth": false,
+                  "style": {
+                    "minWidth": "0",
+                    "width": "100%"
+                  }
+                },
+                "position": {
+                  "basis": "23%",
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.params": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{view.custom.strip.cloudNode}"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "type": "ia.display.view",
+            "meta": {
+              "name": "panel"
+            },
+            "props": {
+              "path": "SparkplugLive",
+              "style": {
+                "minHeight": "0",
+                "width": "100%"
+              }
+            },
+            "position": {
+              "basis": "0px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "propConfig": {
+              "props.path": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "case({view.custom.scenario}, 0, 'SparkplugLive', 1, 'SparkplugAlarms', 2, 'SparkplugCommands', 3, 'SparkplugOutage', 4, 'SparkplugUdt', 5, 'SparkplugNotify', 'SparkplugLive')"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "propConfig": {
+    "custom.strip": {
+      "binding": {
+        "type": "expr",
+        "config": {
+          "expression": "now(2000)"
+        },
+        "transforms": [
+          {
+            "type": "script",
+            "code": "\timport sparkplug_demo\n\treturn sparkplug_demo.page_strip()\n"
+          }
+        ]
+      }
+    },
+    "custom.rail": {
+      "binding": {
+        "type": "expr",
+        "config": {
+          "expression": "now(3000)"
+        },
+        "transforms": [
+          {
+            "type": "script",
+            "code": "\timport demo_rail\n\treturn demo_rail.rail('sparkplug')\n"
+          }
+        ]
+      }
+    }
+  }
+}

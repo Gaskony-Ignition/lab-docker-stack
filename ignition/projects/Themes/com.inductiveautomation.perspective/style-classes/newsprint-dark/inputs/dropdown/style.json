@@ -1,0 +1,15 @@
+{
+  "base": {
+    "style": {
+      "backgroundColor": "#2a2723",
+      "color": "#e8e2d6",
+      "borderWidth": "1px",
+      "borderStyle": "solid",
+      "borderColor": "#3a3630",
+      "borderRadius": "0",
+      "padding": "7px 10px",
+      "fontFamily": "Georgia, \"Source Serif Pro\", \"Source Serif 4\", serif",
+      "fontSize": "13px"
+    }
+  }
+}

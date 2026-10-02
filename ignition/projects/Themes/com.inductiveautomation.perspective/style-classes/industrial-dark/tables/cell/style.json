@@ -1,0 +1,13 @@
+{
+  "base": {
+    "style": {
+      "color": "#B7C6D3",
+      "borderBottomWidth": "1px",
+      "borderBottomStyle": "solid",
+      "borderBottomColor": "#26333F",
+      "padding": "0 12px",
+      "fontFamily": "\"Roboto Mono\", \"Consolas\", \"SF Mono\", monospace",
+      "fontSize": "13px"
+    }
+  }
+}

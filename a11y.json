@@ -1,0 +1,31 @@
+{
+  "projects": [
+    {
+      "name": "GatewayAdmin",
+      "pageConfig": "ignition/projects/GatewayAdmin/com.inductiveautomation.perspective/page-config/config.json",
+      "gateway": "demos-stack-hub"
+    },
+    {
+      "name": "Site1",
+      "pageConfig": "ignition/projects/Site1/com.inductiveautomation.perspective/page-config/config.json",
+      "gateway": "demos-stack-hub"
+    },
+    {
+      "name": "Site2",
+      "pageConfig": "ignition/projects/Site2/com.inductiveautomation.perspective/page-config/config.json",
+      "gateway": "demos-stack-hub"
+    },
+    {
+      "name": "Edge",
+      "pageConfig": "ignition/edge-projects/SparkplugEdge/com.inductiveautomation.perspective/page-config/config.json",
+      "gateway": "demos-stack-edge3"
+    }
+  ],
+  "exceptions": [
+    {
+      "rule": "scrollable-region-focusable",
+      "component": "ia.display.table",
+      "reason": "Table's own internal grid scrollport, drawn by the component -- same category the tool already excepts for the Table's other rules (aria-required-children, unreachable-click-target)"
+    }
+  ]
+}

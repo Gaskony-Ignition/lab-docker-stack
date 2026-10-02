@@ -1,0 +1,351 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "height": 260,
+      "width": 380
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "lbl"
+                },
+                "position": {
+                  "basis": "0px",
+                  "grow": 1
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "{session.custom.style} + '/text/muted'"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "text": "Show grid"
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "config": {
+                        "script": "\tself.session.custom.archGrid = not self.session.custom.archGrid\n"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                },
+                "meta": {
+                  "name": "sw"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.selected": {
+                    "binding": {
+                      "config": {
+                        "expression": "{session.custom.archGrid}"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {},
+                "type": "ia.input.toggle-switch"
+              }
+            ],
+            "meta": {
+              "name": "t1"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "props": {
+              "direction": "row",
+              "style": {
+                "alignItems": "center",
+                "gap": "12px",
+                "width": "100%"
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "lbl"
+                },
+                "position": {
+                  "basis": "0px",
+                  "grow": 1
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "{session.custom.style} + '/text/muted'"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "text": "Snap to grid"
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "config": {
+                        "script": "\tself.session.custom.archSnap = not self.session.custom.archSnap\n"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                },
+                "meta": {
+                  "name": "sw"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.selected": {
+                    "binding": {
+                      "config": {
+                        "expression": "{session.custom.archSnap}"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {},
+                "type": "ia.input.toggle-switch"
+              }
+            ],
+            "meta": {
+              "name": "t2"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "props": {
+              "direction": "row",
+              "style": {
+                "alignItems": "center",
+                "gap": "12px",
+                "width": "100%"
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "lbl"
+                },
+                "position": {
+                  "basis": "0px",
+                  "grow": 1
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "{session.custom.style} + '/text/muted'"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "text": "Hide handles"
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "config": {
+                        "script": "\tself.session.custom.archHandles = not self.session.custom.archHandles\n"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                },
+                "meta": {
+                  "name": "sw"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.selected": {
+                    "binding": {
+                      "config": {
+                        "expression": "{session.custom.archHandles}"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {},
+                "type": "ia.input.toggle-switch"
+              }
+            ],
+            "meta": {
+              "name": "t3"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "props": {
+              "direction": "row",
+              "style": {
+                "alignItems": "center",
+                "gap": "12px",
+                "width": "100%"
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "lbl"
+                },
+                "position": {
+                  "basis": "0px",
+                  "grow": 1
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "{session.custom.style} + '/text/muted'"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "text": "Read only"
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "config": {
+                        "script": "\tself.session.custom.archReadOnly = not self.session.custom.archReadOnly\n"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                },
+                "meta": {
+                  "name": "sw"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.selected": {
+                    "binding": {
+                      "config": {
+                        "expression": "{session.custom.archReadOnly}"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {},
+                "type": "ia.input.toggle-switch"
+              }
+            ],
+            "meta": {
+              "name": "t4"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "props": {
+              "direction": "row",
+              "style": {
+                "alignItems": "center",
+                "gap": "12px",
+                "width": "100%"
+              }
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "shell"
+        },
+        "position": {
+          "basis": "0px",
+          "grow": 1
+        },
+        "propConfig": {
+          "props.style.classes": {
+            "binding": {
+              "config": {
+                "expression": "{session.custom.style} + '/containers/page'"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "gap": "14px",
+            "height": "100%",
+            "padding": "18px"
+          }
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "position": {
+      "basis": "auto",
+      "shrink": 0
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "height": "100%",
+        "width": "100%"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

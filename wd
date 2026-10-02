@@ -1,0 +1,164 @@
+#!/bin/sh
+#
+# Ignition-Demos-Stack, from anywhere: macOS, Linux, or Windows under Git Bash.
+#
+#   ./wd bootstrap                 first run on a new machine, start to finish
+#   ./wd status                    what is running
+#   ./wd deploy PROJECT=Site1      the ordinary work loop
+#   ./wd bash                      a shell inside the toolbox
+#   ./wd -- node scripts/x.js      run something the Makefile does not cover
+#
+# Everything runs inside the toolbox image (tools/toolbox/Dockerfile), so the
+# only things this machine needs are Docker and git. No node, no python, no
+# particular bash version, no Playwright install, no GNU coreutils.
+#
+# Windows users: `wd.cmd` beside this file does the same thing from cmd or
+# PowerShell. This script works there too under Git Bash.
+#
+# POSIX sh on purpose -- no arrays, no [[ ]], no `local`. This is the one file
+# that must run before the toolbox exists, so it can assume nothing at all
+# about the shell it lands in beyond POSIX.
+
+set -eu
+
+IMAGE=wd-toolbox
+# Bump when tools/toolbox/* changes in a way that needs a rebuild. The launcher
+# rebuilds automatically when the tag is missing, so a bump on a teammate's
+# machine costs them one build and nothing else.
+TAG=2
+
+# Resolve the repo directory from this script's own location, so `./wd`,
+# `../Ignition-Demos-Stack/wd` and a symlink on $PATH all behave the same.
+REPO=$(CDPATH='' cd -- "$(dirname -- "$0")" && pwd)
+
+# --- Git Bash ------------------------------------------------------------
+#
+# MSYS rewrites anything that looks like a Unix path in a command line into a
+# Windows path before the program sees it, so `-v /repo:/work` arrives as
+# `-v C:\repo:C:/Program Files/Git/work` and the mount is silently wrong. There
+# is no error; the container simply has an empty /work and every command fails
+# as if the repo were empty. Turning it off for this one process is the fix.
+MSYS_NO_PATHCONV=1
+MSYS2_ARG_CONV_EXCL='*'
+export MSYS_NO_PATHCONV MSYS2_ARG_CONV_EXCL
+
+# ...but that switch is indiscriminate: it also stops MSYS converting the HOST
+# side, and $REPO under Git Bash is `/c/Users/...`, which the Windows `docker`
+# binary cannot resolve. So the build context failed with
+#
+#     unable to prepare context: path "/c/Users/.../tools/toolbox" not found
+#
+# and `-v /c/Users/...:/work` is wrong for the same reason. Both sides were
+# broken by the one fix for one of them, which is why `./wd` under Git Bash --
+# documented as supported since the toolbox landed -- had in fact never worked
+# on Windows at all. wd.cmd was always the path anyone actually used there.
+#
+# `cygpath -m` gives `C:/Users/...`: a Windows path with forward slashes, which
+# Docker accepts and MSYS will not mangle again. Absent off MSYS, where $REPO is
+# already right.
+if command -v cygpath >/dev/null 2>&1; then
+  REPO_HOST=$(cygpath -m -- "$REPO")
+else
+  REPO_HOST=$REPO
+fi
+
+if ! command -v docker >/dev/null 2>&1; then
+  echo "wd: docker is not on PATH." >&2
+  echo "    Install Docker Desktop (macOS, Windows) or Docker Engine (Linux)." >&2
+  exit 1
+fi
+
+if ! docker info >/dev/null 2>&1; then
+  echo "wd: cannot talk to the Docker daemon. Is Docker Desktop running?" >&2
+  exit 1
+fi
+
+# --- the shared network ---------------------------------------------------
+#
+# Created here, before the toolbox starts, because the toolbox JOINS it -- it
+# cannot create the network it is about to be attached to. Every stack declares
+# it external for the same reason: one network, owned by nobody in particular.
+if ! docker network inspect backbone >/dev/null 2>&1; then
+  docker network create backbone >/dev/null
+  echo "wd: created the shared 'backbone' network"
+fi
+
+# --- the toolbox image ----------------------------------------------------
+if ! docker image inspect "$IMAGE:$TAG" >/dev/null 2>&1; then
+  echo "wd: building the toolbox image (first run only, a few minutes)..."
+  docker build -t "$IMAGE:$TAG" "$REPO_HOST/tools/toolbox"
+fi
+
+# --- the .test names ------------------------------------------------------
+#
+# Here for the same reason as the network and the image above: it is a host-side
+# prerequisite the toolbox cannot satisfy for itself. The hosts file belongs to
+# the machine; the container has its own.
+#
+# `bootstrap` fixes it (and may prompt for sudo). Every other command only
+# CHECKS, and warns -- asking for a password on every `./wd status` would be
+# intolerable, and the stack is still perfectly usable by host port without it.
+# The warning matters because nothing else reports this: every service answers
+# on its port, so the stack looks entirely healthy while every .test name fails
+# to resolve.
+case " $* " in
+  *" bootstrap "*)
+    "$REPO/scripts/hosts-setup.sh" || echo "wd: continuing without the .test names"
+    ;;
+  *)
+    if ! "$REPO/scripts/hosts-setup.sh" --check >/dev/null 2>&1; then
+      echo "wd: the .test names are not in your hosts file -- https://ignition.test"
+      echo "    will not resolve. Fix with: scripts/hosts-setup.sh"
+    fi
+    ;;
+esac
+
+# --- how to run it --------------------------------------------------------
+RUN_OPTS="--rm -i"
+
+# -t only with a real terminal. In CI, or under a pipe, `docker run -t` either
+# fails outright or produces output full of escape sequences.
+if [ -t 0 ] && [ -t 1 ]; then
+  RUN_OPTS="$RUN_OPTS -t"
+fi
+
+# On Linux, run as the invoking user so files written into the bind-mounted
+# repo are not owned by root -- a root-owned .env or deployed project is a
+# problem that outlives the container. Then add the socket's group, or the
+# docker CLI inside cannot open it.
+#
+# On Docker Desktop this is neither needed nor correct: the VM maps ownership
+# already, and `id -u` on the host means nothing inside the Linux VM.
+case "$(uname -s)" in
+  Linux)
+    RUN_OPTS="$RUN_OPTS --user $(id -u):$(id -g)"
+    SOCK_GID=$(stat -c %g /var/run/docker.sock 2>/dev/null || echo '')
+    [ -n "$SOCK_GID" ] && RUN_OPTS="$RUN_OPTS --group-add $SOCK_GID"
+    ;;
+esac
+
+# COMPOSE_PROJECT_NAME and friends are read from stacks/*/.env by compose
+# itself; nothing needs forwarding here.
+#
+# TZ IS FORWARDED ONLY IF THE HOST ACTUALLY HAS ONE, and the empty case is the
+# whole point. Compose gives the SHELL ENVIRONMENT precedence over .env, and
+# every stack sets `TZ: ${TZ}` -- so a TZ invented here does not just timestamp
+# this container's output, it overrides `TZ=Australia/Adelaide` in nine .env
+# files and starts the gateways in the wrong timezone. `${TZ:-UTC}` did exactly
+# that on Linux, where TZ is normally unset and the clock comes from
+# /etc/localtime; wd.cmd's `%TZ%` did the same on Windows, landing an EMPTY TZ
+# which glibc and the JVM both read as UTC. Verified 05/08/2026: the hub and
+# both edges on the Windows host were running UTC while the repo said Adelaide.
+#
+# Unset here means unset for compose too, which is precisely what a native
+# `make up` on the same machine does -- so the two front doors agree, and the
+# .env files stay the one place the stack's timezone is decided.
+[ -n "${TZ:-}" ] && RUN_OPTS="$RUN_OPTS -e TZ=$TZ"
+
+exec docker run $RUN_OPTS \
+  -v "$REPO_HOST":/work \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  --network backbone \
+  -e "MODULES_MIRROR=${MODULES_MIRROR:-}" \
+  -w /work \
+  "$IMAGE:$TAG" "$@"

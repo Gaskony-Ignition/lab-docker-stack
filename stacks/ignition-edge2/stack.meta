@@ -1,0 +1,23 @@
+# See stacks/postgres/stack.meta for what this file is and who reads it.
+# The MQTT half of the store-and-forward pair -- see edge1 for the GAN half.
+ORDER=80
+KIND=gateway
+ROLE=edge
+STANZA=local-edge2
+PORT_VAR=EDGE2_HTTP_HOST_PORT
+PORT_DEFAULT=29288
+STATUS_NOTE="spoke, edge"
+TEST_HOST=edge2.test
+TEST_FORWARD_PORT=8088
+MQTT_MODULE=transmission
+EAM_AGENT=Ignition-Edge2
+SITE_PROJECT=Site2
+SF_TRANSPORT=mqtt
+
+# The address this gateway tells a BROWSER to use -- what the gateway home
+# page's Launch Perspective button is built from, and what a redundant peer
+# redirects to. With auto-detect on, a gateway advertises the address it sees
+# itself at, which in a container is a docker-internal one no browser can
+# reach: the button then leads to an error rather than to a session.
+# Here: its own proxy name: an edge is not behind the HA front door.
+PUBLIC_HOST=edge2.test

@@ -1,0 +1,154 @@
+[
+  {
+    "dark": true,
+    "family": "glass",
+    "id": "glass-violet",
+    "label": "Glass Violet",
+    "pair": null,
+    "source_pack": "aurora-violet"
+  },
+  {
+    "dark": true,
+    "family": "glass",
+    "id": "glass-green",
+    "label": "Glass Green",
+    "pair": null,
+    "source_pack": "aurora-teal"
+  },
+  {
+    "dark": false,
+    "family": "leather",
+    "id": "leather-light",
+    "label": "Leather Light",
+    "pair": "leather-dark",
+    "source_pack": "leather-parchment-tan"
+  },
+  {
+    "dark": true,
+    "family": "leather",
+    "id": "leather-dark",
+    "label": "Leather Dark",
+    "pair": "leather-light",
+    "source_pack": "leather-night-tan"
+  },
+  {
+    "dark": false,
+    "family": "finance",
+    "id": "finance-ledger",
+    "label": "Finance Ledger",
+    "pair": "newsprint-dark",
+    "source_pack": "finance-ledger"
+  },
+  {
+    "dark": true,
+    "family": "finance",
+    "id": "newsprint-dark",
+    "label": "Newsprint Dark",
+    "pair": "finance-ledger",
+    "source_pack": "newsprint-night"
+  },
+  {
+    "dark": false,
+    "family": "nord",
+    "id": "nord-light",
+    "label": "Nord Light",
+    "pair": "nord-dark",
+    "source_pack": "nord-light-frost"
+  },
+  {
+    "dark": true,
+    "family": "nord",
+    "id": "nord-dark",
+    "label": "Nord Dark",
+    "pair": "nord-light",
+    "source_pack": "nord-dark-frost"
+  },
+  {
+    "dark": false,
+    "family": "industrial",
+    "id": "industrial-light",
+    "label": "Industrial Light",
+    "pair": "industrial-dark",
+    "source_pack": "industrial-day-cyan"
+  },
+  {
+    "dark": true,
+    "family": "industrial",
+    "id": "industrial-dark",
+    "label": "Industrial Dark",
+    "pair": "industrial-light",
+    "source_pack": "industrial-control-cyan"
+  },
+  {
+    "builtin": true,
+    "dark": false,
+    "id": "light",
+    "label": "Ignition Light",
+    "source_pack": null,
+    "swatch": [
+      "#F4F4F4",
+      "#323232",
+      "#0C7BB3"
+    ]
+  },
+  {
+    "builtin": true,
+    "dark": true,
+    "id": "dark",
+    "label": "Ignition Dark",
+    "source_pack": null,
+    "swatch": [
+      "#323232",
+      "#F4F4F4",
+      "#229AD6"
+    ]
+  },
+  {
+    "builtin": true,
+    "dark": false,
+    "id": "light-cool",
+    "label": "Ignition Light Cool",
+    "source_pack": null,
+    "swatch": [
+      "#DDE1E6",
+      "#21272A",
+      "#0C7BB3"
+    ]
+  },
+  {
+    "builtin": true,
+    "dark": true,
+    "id": "dark-cool",
+    "label": "Ignition Dark Cool",
+    "source_pack": null,
+    "swatch": [
+      "#21272A",
+      "#DDE1E6",
+      "#229AD6"
+    ]
+  },
+  {
+    "builtin": true,
+    "dark": false,
+    "id": "light-warm",
+    "label": "Ignition Light Warm",
+    "source_pack": null,
+    "swatch": [
+      "#E5E0DF",
+      "#272525",
+      "#0C7BB3"
+    ]
+  },
+  {
+    "builtin": true,
+    "dark": true,
+    "id": "dark-warm",
+    "label": "Ignition Dark Warm",
+    "source_pack": null,
+    "swatch": [
+      "#272525",
+      "#E5E0DF",
+      "#229AD6"
+    ]
+  }
+]

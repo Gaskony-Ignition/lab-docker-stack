@@ -1,0 +1,511 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "height": 800,
+      "width": 1280
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "glyph"
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.color": {
+                        "binding": {
+                          "config": {
+                            "expression": "'currentColor'"
+                          },
+                          "type": "expr"
+                        }
+                      }
+                    },
+                    "props": {
+                      "path": "material/cloud_upload",
+                      "style": {
+                        "cursor": "pointer",
+                        "height": "20px",
+                        "width": "20px"
+                      }
+                    },
+                    "type": "ia.display.icon"
+                  }
+                ],
+                "events": {
+                  "dom": {
+                    "onClick": {
+                      "config": {
+                        "script": "\tsystem.perspective.openPopup('arch-import', 'ArchImport',\n\t\ttitle='Import architecture', modal=True, overlayDismiss=True,\n\t\tviewportBound=True)\n"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                },
+                "meta": {
+                  "name": "upload"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "props": {
+                  "alignItems": "center",
+                  "direction": "row",
+                  "justify": "center",
+                  "style": {
+                    "borderRadius": "6px",
+                    "cursor": "pointer",
+                    "height": "34px",
+                    "width": "34px"
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "events": {
+                  "component": {
+                    "onItemClicked": {
+                      "config": {
+                        "script": "\t# The builder is NOT a sibling of this menu. The menu lives in `header`,\n\t# the builder is a child of `content`, so getSibling('builder') returns\n\t# None and every item below it died with\n\t#   AttributeError: 'NoneType' object has no attribute 'props'\n\t# Clear canvas and Export JSON therefore never worked at all -- the\n\t# click registered, the menu closed, and nothing happened. The error\n\t# does reach the gateway log, which is the only reason it is findable;\n\t# nothing surfaces in the browser. Found 07/08/2026 while testing\n\t# canvas persistence, which is the first thing that ever asserted the\n\t# canvas had actually changed.\n\t# Canvas options live on the session so the settings popup and this menu\n\t# cannot disagree -- the builder binds to them.\n\tbuilder = self.parent.parent.getChild('builder')\n\titem = event.label\n\tsc = self.session.custom\n\n\tif item == 'Export JSON':\n\t\tpayload = system.util.jsonEncode(\n\t\t\t{'nodes': system.util.jsonDecode(system.util.jsonEncode(builder.props.nodes)),\n\t\t\t 'edges': system.util.jsonDecode(system.util.jsonEncode(builder.props.edges))}, 2)\n\t\tsystem.perspective.download('architecture.json', payload)\n\n\telif item == 'Import JSON':\n\t\tsystem.perspective.openPopup('arch-import', 'ArchImport',\n\t\t\ttitle='Import architecture', modal=True, overlayDismiss=True,\n\t\tviewportBound=True)\n\n\telif item == 'Clear canvas':\n\t\t# Leaves the module's own undo history intact, so Ctrl+Z reverses it.\n\t\tbuilder.props.nodes = {}\n\t\tbuilder.props.edges = {}\n\n\telif item == 'Show grid':\n\t\tsc.archGrid = not sc.archGrid\n\telif item == 'Snap to grid':\n\t\tsc.archSnap = not sc.archSnap\n\telif item == 'Hide handles':\n\t\tsc.archHandles = not sc.archHandles\n\telif item == 'Read only':\n\t\tsc.archReadOnly = not sc.archReadOnly\n"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                },
+                "meta": {
+                  "name": "menu"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "{session.custom.style} + '/containers/topbar'"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "enabled": true,
+                  "itemStyle": {
+                    "classes": ""
+                  },
+                  "items": [
+                    {
+                      "enabled": true,
+                      "icon": {
+                        "path": ""
+                      },
+                      "items": [
+                        {
+                          "enabled": true,
+                          "icon": {
+                            "path": ""
+                          },
+                          "items": [],
+                          "label": "Import JSON",
+                          "style": {
+                            "classes": ""
+                          },
+                          "target": ""
+                        },
+                        {
+                          "enabled": true,
+                          "icon": {
+                            "path": ""
+                          },
+                          "items": [],
+                          "label": "Export JSON",
+                          "style": {
+                            "classes": ""
+                          },
+                          "target": ""
+                        },
+                        {
+                          "enabled": true,
+                          "icon": {
+                            "path": ""
+                          },
+                          "items": [],
+                          "label": "Clear canvas",
+                          "style": {
+                            "classes": ""
+                          },
+                          "target": ""
+                        }
+                      ],
+                      "label": "File",
+                      "style": {
+                        "classes": ""
+                      },
+                      "target": ""
+                    },
+                    {
+                      "enabled": true,
+                      "icon": {
+                        "path": ""
+                      },
+                      "items": [
+                        {
+                          "enabled": true,
+                          "icon": {
+                            "path": ""
+                          },
+                          "items": [],
+                          "label": "Show grid",
+                          "style": {
+                            "classes": ""
+                          },
+                          "target": ""
+                        },
+                        {
+                          "enabled": true,
+                          "icon": {
+                            "path": ""
+                          },
+                          "items": [],
+                          "label": "Snap to grid",
+                          "style": {
+                            "classes": ""
+                          },
+                          "target": ""
+                        },
+                        {
+                          "enabled": true,
+                          "icon": {
+                            "path": ""
+                          },
+                          "items": [],
+                          "label": "Hide handles",
+                          "style": {
+                            "classes": ""
+                          },
+                          "target": ""
+                        },
+                        {
+                          "enabled": true,
+                          "icon": {
+                            "path": ""
+                          },
+                          "items": [],
+                          "label": "Read only",
+                          "style": {
+                            "classes": ""
+                          },
+                          "target": ""
+                        }
+                      ],
+                      "label": "Canvas",
+                      "style": {
+                        "classes": ""
+                      },
+                      "target": ""
+                    }
+                  ],
+                  "style": {
+                    "flex": "0 0 auto",
+                    "width": "auto"
+                  }
+                },
+                "type": "ia.navigation.horizontalmenu"
+              },
+              {
+                "meta": {
+                  "name": "title"
+                },
+                "position": {
+                  "basis": "0px",
+                  "grow": 1
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "{session.custom.style} + '/text/card-title'"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "fontSize": "14px",
+                    "fontWeight": "700",
+                    "textAlign": "center"
+                  },
+                  "text": "Ignition Architecture Builder"
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "glyph"
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.color": {
+                        "binding": {
+                          "config": {
+                            "expression": "'currentColor'"
+                          },
+                          "type": "expr"
+                        }
+                      }
+                    },
+                    "props": {
+                      "path": "material/settings",
+                      "style": {
+                        "cursor": "pointer",
+                        "height": "20px",
+                        "width": "20px"
+                      }
+                    },
+                    "type": "ia.display.icon"
+                  }
+                ],
+                "events": {
+                  "dom": {
+                    "onClick": {
+                      "config": {
+                        "script": "\tsystem.perspective.openPopup('arch-settings', 'ArchSettings',\n\t\ttitle='Canvas settings', modal=True, overlayDismiss=True,\n\t\tviewportBound=True)\n"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                },
+                "meta": {
+                  "name": "settings"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "props": {
+                  "alignItems": "center",
+                  "direction": "row",
+                  "justify": "center",
+                  "style": {
+                    "borderRadius": "6px",
+                    "cursor": "pointer",
+                    "height": "34px",
+                    "width": "34px"
+                  }
+                },
+                "type": "ia.container.flex"
+              }
+            ],
+            "meta": {
+              "name": "header"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.style.classes": {
+                "binding": {
+                  "config": {
+                    "expression": "{session.custom.style} + '/containers/topbar'"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "alignItems": "center",
+              "direction": "row",
+              "style": {
+                "gap": "6px",
+                "padding": "0 10px",
+                "width": "100%"
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "meta": {
+              "name": "importSink"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "{session.custom.archImport}"
+                  },
+                  "type": "expr"
+                },
+                "onChange": {
+                  "enabled": true,
+                  "script": "\tpayload = currentValue.value\n\tif not payload:\n\t\treturn\n\ttry:\n\t\tdata = system.util.jsonDecode(payload)\n\texcept Exception, e:\n\t\tself.session.custom.status = 'Import failed: %s' % e\n\t\tself.session.custom.archImport = ''\n\t\treturn\n\tbuilder = self.parent.getChild('builder')\n\tbuilder.props.nodes = data.get('nodes', {})\n\tbuilder.props.edges = data.get('edges', {})\n\tself.session.custom.archImport = ''\n\tself.session.custom.status = 'Architecture imported.'\n"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "display": "none"
+              },
+              "text": ""
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "builder"
+            },
+            "position": {
+              "basis": "0px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.edges": {
+                "onChange": {
+                  "scope": "G",
+                  "script": "\timport arch_store\n\tarch_store.save(self.props.nodes, self.props.edges)\n"
+                }
+              },
+              "props.enabled": {
+                "binding": {
+                  "config": {
+                    "expression": "if({session.custom.archReadOnly} = true, false, true)"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.hideHandles": {
+                "binding": {
+                  "config": {
+                    "expression": "{session.custom.archHandles}"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.nodes": {
+                "onChange": {
+                  "scope": "G",
+                  "script": "\timport arch_store\n\tarch_store.save(self.props.nodes, self.props.edges)\n"
+                }
+              },
+              "props.showGrid": {
+                "binding": {
+                  "config": {
+                    "expression": "{session.custom.archGrid}"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.snapEnabled": {
+                "binding": {
+                  "config": {
+                    "expression": "{session.custom.archSnap}"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "edgeWidth": 2,
+              "edges": {},
+              "enableOnClickEvents": true,
+              "enabled": true,
+              "handleCount": 1,
+              "hideHandles": false,
+              "nodes": {},
+              "showGrid": true,
+              "snapEnabled": true,
+              "snapPixels": 16,
+              "style": {
+                "height": "100%",
+                "width": "100%"
+              }
+            },
+            "type": "com.wargoetz.reactflow.architecturebuilder"
+          }
+        ],
+        "meta": {
+          "name": "content"
+        },
+        "position": {
+          "basis": "0px",
+          "grow": 1
+        },
+        "propConfig": {
+          "props.style.classes": {
+            "binding": {
+              "config": {
+                "expression": "{session.custom.style} + '/containers/content'"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "gap": "0",
+            "minHeight": "0",
+            "padding": "0"
+          }
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "events": {
+      "system": {
+        "onStartup": {
+          "config": {
+            "script": "\timport arch_store\n\t# Restore the last canvas. (None, None) means nothing was ever stored,\n\t# which must NOT be written back as empty -- that would wipe a drawing\n\t# on the first load after the tag is created.\n\tnodes, edges = arch_store.load()\n\tif nodes is not None:\n\t\tbuilder = self.getChild('content').getChild('builder')\n\t\tbuilder.props.nodes = nodes\n\t\tbuilder.props.edges = edges if edges is not None else {}\n"
+          },
+          "scope": "G",
+          "type": "script"
+        }
+      }
+    },
+    "meta": {
+      "name": "root"
+    },
+    "position": {
+      "basis": "auto",
+      "shrink": 0
+    },
+    "propConfig": {
+      "props.style.classes": {
+        "binding": {
+          "config": {
+            "expression": "{session.custom.style} + '/containers/content'"
+          },
+          "type": "expr"
+        }
+      }
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "minHeight": "100%",
+        "width": "100%"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

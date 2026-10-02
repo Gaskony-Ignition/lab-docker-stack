@@ -1,0 +1,80 @@
+name: npm
+
+# Nginx Proxy Manager -- the single front door for every other stack.
+#
+# Because it sits on `backbone`, it reaches the other containers by their
+# container name on their INTERNAL ports. Those internal ports are not the
+# host ports you use today: a service may listen on 80 inside the container even
+# though it is published as 5050, and each Ignition gateway listens on 8088
+# inside the container regardless of its 8088/8188/8288 host mapping.
+#
+#   Proxy host             ->  Forward hostname / port
+#   console.test           ->  ignition          : 8088   the hub, always up
+#   ignition.test          ->  ignition-ha       : 8088   the redundant PAIR
+#   edge1.test             ->  ignition-edge1    : 8088
+#   edge2.test             ->  ignition-edge2    : 8088
+
+services:
+  npm:
+    image: jc21/nginx-proxy-manager:2.15.1
+    container_name: npm
+    # "no", quoted -- bare no is YAML false. A DEMO stack must never come back on
+    # its own: unless-stopped resurrects whatever was running when the daemon
+    # restarts, which on 07/08/2026 silently returned all eleven stacks for three
+    # days. Start with `make up`, stop with `make down`.
+    restart: "no"
+    environment:
+      TZ: ${TZ}
+      # Creates the admin account on first run, ONLY while the database has no
+      # users. Without these you get the setup wizard and the old
+      # admin@example.com / changeme default instead.
+      INITIAL_ADMIN_EMAIL: ${INITIAL_ADMIN_EMAIL}
+      INITIAL_ADMIN_PASSWORD: ${INITIAL_ADMIN_PASSWORD}
+    ports:
+      - "${NPM_HTTP_HOST_PORT:-80}:80"     # HTTP  - proxied traffic
+      - "${NPM_HTTPS_HOST_PORT:-443}:443"   # HTTPS - proxied traffic
+      - "${NPM_ADMIN_HOST_PORT:-29081}:81"     # Admin UI - http://localhost:29081
+    volumes:
+      # Named volumes rather than the ./data + ./letsencrypt bind mounts the
+      # upstream docs show, matching the rest of this folder: bind mounts on
+      # macOS cross the VirtioFS boundary and are noticeably slower.
+      # SQLite is the default database, and it lives in here.
+      - npm_data:/data
+      - npm_letsencrypt:/etc/letsencrypt
+    # Carries every .test name as a network alias.
+    #
+    # The aliases are what make a .test name mean the same thing to a
+    # CONTAINER as it does to a browser. Without them the hosts file points a
+    # browser here while Docker's DNS cannot resolve the name at all -- which
+    # breaks anything that follows a redirect server-side, the control plane's
+    # gateway sign-in included: it logs in through the front door precisely
+    # because an Ignition session is bound to the origin it was minted on.
+    #
+    # Every name here is a TEST_HOST in some stack's stack.meta, and
+    # `make validate` fails if one is declared there and missing here.
+    networks:
+      backbone:
+        aliases:
+          - backup.test
+          - console.test
+          - edge1.test
+          - edge2.test
+          - edge3.test
+          - edge4.test
+          - ignition.test
+    healthcheck:
+      test: ["CMD", "/usr/bin/check-health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    labels:
+      au.gaskony.wd.stack: "npm"
+
+volumes:
+  npm_data:
+  npm_letsencrypt:
+
+networks:
+  backbone:
+    external: true

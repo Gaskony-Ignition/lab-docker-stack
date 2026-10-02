@@ -1,0 +1,87 @@
+name: ignition-edge3
+
+# The Sparkplug alarms demo's edge -- an Edge gateway that is NEVER on the
+# Gateway Network and NEVER an EAM agent. That is the whole claim of the
+# demonstration: tags, alarms, acknowledgements and notifications only ever
+# reach the hub as Sparkplug B over MQTT, so a Gateway Network link from here
+# to anything would itself be the defect. stack.meta carries
+# ROLE=edge-isolated rather than ROLE=edge for exactly this reason -- see the
+# comment there. Otherwise identical in shape to ignition-edge1/edge2: same
+# image, same memory trim, same restart policy.
+
+services:
+  ignition-edge3:
+    # The version is a VARIABLE with the repo's declared version as its default
+    # -- see ignition-edge2/compose.yaml for the full explanation. All four (now
+    # six) gateways must move together.
+    image: inductiveautomation/ignition:${IGNITION_VERSION:-8.3.9}
+    container_name: ignition-edge3
+    # "no", quoted -- bare no is YAML false. See ignition-edge2/compose.yaml.
+    restart: "no"
+    environment:
+      TZ: ${TZ}
+      # Unattended commissioning -- applies only on an empty data volume.
+      ACCEPT_IGNITION_EULA: "Y"
+      IGNITION_EDITION: edge
+      GATEWAY_ADMIN_USERNAME: ${GATEWAY_ADMIN_USERNAME}
+      GATEWAY_ADMIN_PASSWORD: ${GATEWAY_ADMIN_PASSWORD}
+      GATEWAY_HTTP_PORT: 8088
+      GATEWAY_HTTPS_PORT: 8043
+      GATEWAY_GAN_PORT: 8060
+      # Publishing the GAN port costs nothing even though this edge never dials
+      # anywhere with it -- the port simply never gets used, which is a safer
+      # way to be isolated than depending on the port being absent.
+      MALLOC_ARENA_MAX: "2"
+    # -n re-applies on EVERY container start -- see ignition-edge2. The extra
+    # --add-opens after the -XX args is Cirrus Link's: their Alarm Event
+    # Propagation docs require it on the Transmission gateway as well as the
+    # Engine one (symptom without it, per the vendor: AgentAlarmListener
+    # JsonIOException). A JVM arg, so it lives here, not in the module. Measured
+    # with it: zero such log lines and alarms crossing both ways (11/09/2026,
+    # docs/SPARKPLUG.md T7); the failure without it was not measured here.
+    # Same arg on the hub and the redundant backup (MQTT Engine, the other end).
+    command: >
+      -n Ignition-Edge3
+      -m 512
+      --
+      -XX:ParallelGCThreads=2
+      -XX:ConcGCThreads=1
+      -XX:G1PeriodicGCInterval=300000
+      -XX:G1PeriodicGCSystemLoadThreshold=0
+      --add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED
+      gateway.useProxyForwardedHeader=true
+    ports:
+      - "${EDGE3_HTTP_HOST_PORT:-29588}:8088"   # HTTP  - http://localhost:29588
+      - "${EDGE3_HTTPS_HOST_PORT:-29543}:8043"   # HTTPS - https://localhost:29543
+      - "${EDGE3_OPCUA_HOST_PORT:-29541}:62541"   # OPC UA server - opc.tcp://localhost:29541
+    volumes:
+      - edge3_data:/usr/local/bin/ignition/data
+    networks:
+      backbone: {}
+      # wd-mqtt: this edge's Transmission dials the hub pair's Distributor as
+      # mqtt-master / mqtt-backup, names that exist only on it -- so
+      # `docker network disconnect wd-mqtt <edge>` is the cut, and backbone stays.
+      mqtt: {}
+    stop_grace_period: 30s
+    healthcheck:
+      test: ["CMD", "/usr/local/bin/health-check.sh", "-s", "RUNNING",
+             "http://localhost:8088/StatusPing"]
+      interval: 15s
+      timeout: 10s
+      # See ignition-edge2/compose.yaml -- a 2-core machine's cold start is
+      # CPU-bound and routinely needs longer than two minutes.
+      retries: 20
+      start_period: 180s
+    labels:
+      au.gaskony.wd.stack: "ignition-edge3"
+
+volumes:
+  edge3_data:
+
+networks:
+  backbone:
+    external: true
+  # wd-mqtt: created by scripts/lib.sh:ensure_mqtt_net, like backbone.
+  mqtt:
+    name: wd-mqtt
+    external: true

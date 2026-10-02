@@ -1,0 +1,491 @@
+{
+  "custom": {
+    "d": {
+      "tags": [],
+      "ready": false
+    }
+  },
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "width": 1200,
+      "height": 400
+    }
+  },
+  "root": {
+    "type": "ia.container.flex",
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "height": "100%",
+        "width": "100%",
+        "gap": "8px",
+        "overflow": "hidden",
+        "paddingBottom": "4px",
+        "boxSizing": "border-box"
+      }
+    },
+    "position": {
+      "basis": "auto",
+      "shrink": 0
+    },
+    "children": [
+      {
+        "type": "ia.container.flex",
+        "meta": {
+          "name": "tryWatch"
+        },
+        "props": {
+          "direction": "row",
+          "style": {
+            "gap": "8px",
+            "classes": "sp-try"
+          },
+          "alignItems": "center"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "children": [
+          {
+            "type": "ia.display.label",
+            "meta": {
+              "name": "tryText",
+              "tooltip": {
+                "enabled": true
+              }
+            },
+            "props": {
+              "text": "Compare each tag at the edge and in the cloud: the cloud copy follows within about a second.",
+              "style": {
+                "lineHeight": "1.35",
+                "whiteSpace": "nowrap",
+                "minWidth": "0",
+                "classes": "sp-ellipsis"
+              }
+            },
+            "position": {
+              "basis": "0px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "propConfig": {
+              "meta.tooltip.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "'Compare each tag at the edge and in the cloud: the cloud copy follows within about a second.'"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "type": "ia.container.flex",
+        "meta": {
+          "name": "values"
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "gap": "0px",
+            "minWidth": "0",
+            "overflow": "hidden",
+            "padding": "6px 14px",
+            "classes": "sp-card"
+          }
+        },
+        "position": {
+          "basis": "auto",
+          "grow": 0,
+          "shrink": 0
+        },
+        "children": [
+          {
+            "type": "ia.container.flex",
+            "meta": {
+              "name": "edges"
+            },
+            "props": {
+              "direction": "row",
+              "style": {
+                "gap": "10px",
+                "padding": "0 4px"
+              },
+              "alignItems": "center"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "children": [
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "spacer"
+                },
+                "props": {
+                  "text": "",
+                  "style": {
+                    "lineHeight": "1.35",
+                    "whiteSpace": "nowrap"
+                  }
+                },
+                "position": {
+                  "basis": "160px",
+                  "shrink": 0
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "e3"
+                },
+                "props": {
+                  "text": "Edge 3",
+                  "style": {
+                    "lineHeight": "1.35",
+                    "whiteSpace": "nowrap",
+                    "fontSize": "14px",
+                    "minWidth": "0"
+                  }
+                },
+                "position": {
+                  "basis": "0px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{session.custom.style} + '/text/card-title'"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "e4"
+                },
+                "props": {
+                  "text": "Edge 4",
+                  "style": {
+                    "lineHeight": "1.35",
+                    "whiteSpace": "nowrap",
+                    "fontSize": "14px",
+                    "minWidth": "0"
+                  }
+                },
+                "position": {
+                  "basis": "0px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{session.custom.style} + '/text/card-title'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "type": "ia.container.flex",
+            "meta": {
+              "name": "thead"
+            },
+            "props": {
+              "direction": "row",
+              "style": {
+                "gap": "10px",
+                "padding": "0 4px"
+              },
+              "alignItems": "center"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "children": [
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "tag"
+                },
+                "props": {
+                  "text": "Tag",
+                  "style": {
+                    "lineHeight": "1.35",
+                    "whiteSpace": "nowrap",
+                    "classes": "sp-th-plain"
+                  }
+                },
+                "position": {
+                  "basis": "160px",
+                  "shrink": 0
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "h1",
+                  "tooltip": {
+                    "enabled": true
+                  }
+                },
+                "props": {
+                  "text": "At the edge",
+                  "style": {
+                    "lineHeight": "1.35",
+                    "whiteSpace": "nowrap",
+                    "minWidth": "0",
+                    "classes": "sp-th-plain sp-ellipsis"
+                  }
+                },
+                "position": {
+                  "basis": "0px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "propConfig": {
+                  "meta.tooltip.text": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "'At the edge'"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "h2",
+                  "tooltip": {
+                    "enabled": true
+                  }
+                },
+                "props": {
+                  "text": "In the cloud",
+                  "style": {
+                    "lineHeight": "1.35",
+                    "whiteSpace": "nowrap",
+                    "minWidth": "0",
+                    "classes": "sp-th-plain sp-ellipsis"
+                  }
+                },
+                "position": {
+                  "basis": "0px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "propConfig": {
+                  "meta.tooltip.text": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "'In the cloud'"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "h3",
+                  "tooltip": {
+                    "enabled": true
+                  }
+                },
+                "props": {
+                  "text": "Delay",
+                  "style": {
+                    "lineHeight": "1.35",
+                    "whiteSpace": "nowrap",
+                    "classes": "sp-th-plain"
+                  }
+                },
+                "position": {
+                  "basis": "78px",
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "meta.tooltip.text": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "'How far behind the edge the cloud copy is, measured by MQTT Engine'"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "h4",
+                  "tooltip": {
+                    "enabled": true
+                  }
+                },
+                "props": {
+                  "text": "At the edge",
+                  "style": {
+                    "lineHeight": "1.35",
+                    "whiteSpace": "nowrap",
+                    "minWidth": "0",
+                    "classes": "sp-th-plain sp-ellipsis"
+                  }
+                },
+                "position": {
+                  "basis": "0px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "propConfig": {
+                  "meta.tooltip.text": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "'At the edge'"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "h5",
+                  "tooltip": {
+                    "enabled": true
+                  }
+                },
+                "props": {
+                  "text": "In the cloud",
+                  "style": {
+                    "lineHeight": "1.35",
+                    "whiteSpace": "nowrap",
+                    "minWidth": "0",
+                    "classes": "sp-th-plain sp-ellipsis"
+                  }
+                },
+                "position": {
+                  "basis": "0px",
+                  "grow": 1,
+                  "shrink": 1
+                },
+                "propConfig": {
+                  "meta.tooltip.text": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "'In the cloud'"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "h6",
+                  "tooltip": {
+                    "enabled": true
+                  }
+                },
+                "props": {
+                  "text": "Delay",
+                  "style": {
+                    "lineHeight": "1.35",
+                    "whiteSpace": "nowrap",
+                    "classes": "sp-th-plain"
+                  }
+                },
+                "position": {
+                  "basis": "78px",
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "meta.tooltip.text": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "'How far behind the edge the cloud copy is, measured by MQTT Engine'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "type": "ia.display.flex-repeater",
+            "meta": {
+              "name": "rows"
+            },
+            "props": {
+              "path": "SparkplugLiveRow",
+              "direction": "column",
+              "instances": [],
+              "useDefaultViewHeight": true,
+              "useDefaultViewWidth": false,
+              "elementPosition": {
+                "basis": "20px",
+                "grow": 0,
+                "shrink": 0
+              },
+              "style": {
+                "width": "100%",
+                "gap": "0px"
+              }
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.instances": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{view.custom.d.tags}"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "propConfig": {
+    "custom.d": {
+      "binding": {
+        "type": "expr",
+        "config": {
+          "expression": "now(2000)"
+        },
+        "transforms": [
+          {
+            "type": "script",
+            "code": "\timport sparkplug_demo\n\treturn sparkplug_demo.page_live()\n"
+          }
+        ]
+      }
+    }
+  }
+}

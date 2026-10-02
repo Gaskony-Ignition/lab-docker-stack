@@ -1,0 +1,28 @@
+# See stacks/postgres/stack.meta for what this file is and who reads it.
+# EAM_AGENT must equal the -n name in this stack's compose command -- validate
+# checks. SF_TRANSPORT names the store-and-forward road this edge demonstrates;
+# the two edges deliberately differ so the demo tells the story both ways.
+# GAN_PROVIDER is what the HUB mounts this edge's tags as -- sf_demo reads
+# "[Edge1]MQTT Tags/Demo", and validate checks the two agree.
+ORDER=70
+KIND=gateway
+ROLE=edge
+STANZA=local-edge1
+PORT_VAR=EDGE1_HTTP_HOST_PORT
+PORT_DEFAULT=29188
+STATUS_NOTE="spoke, edge"
+TEST_HOST=edge1.test
+TEST_FORWARD_PORT=8088
+MQTT_MODULE=transmission
+EAM_AGENT=Ignition-Edge1
+SITE_PROJECT=Site1
+SF_TRANSPORT=gan
+GAN_PROVIDER=Edge1
+
+# The address this gateway tells a BROWSER to use -- what the gateway home
+# page's Launch Perspective button is built from, and what a redundant peer
+# redirects to. With auto-detect on, a gateway advertises the address it sees
+# itself at, which in a container is a docker-internal one no browser can
+# reach: the button then leads to an error rather than to a session.
+# Here: its own proxy name: an edge is not behind the HA front door.
+PUBLIC_HOST=edge1.test

@@ -1,0 +1,11 @@
+{
+  "base": {
+    "style": {
+      "color": "#E8EFF5",
+      "fontSize": "13px",
+      "whiteSpace": "nowrap",
+      "overflow": "hidden",
+      "textOverflow": "ellipsis"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "base": {
+    "style": {
+      "backgroundColor": "#1a1233",
+      "backgroundImage": "radial-gradient(1100px 700px at 8% -10%, #4c1d95 0%, transparent 55%), radial-gradient(900px 650px at 88% 8%, #1e3a8a 0%, transparent 55%), radial-gradient(1000px 700px at 30% 115%, #065f46 0%, transparent 55%), radial-gradient(800px 600px at 95% 100%, #831843 0%, transparent 55%)",
+      "color": "#f5f3ff",
+      "fontFamily": "ui-sans-serif, Inter, system-ui, \"Segoe UI\", sans-serif",
+      "fontSize": "13.5px",
+      "overflow": "hidden"
+    }
+  }
+}

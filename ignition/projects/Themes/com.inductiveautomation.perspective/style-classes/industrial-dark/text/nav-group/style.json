@@ -1,0 +1,12 @@
+{
+  "base": {
+    "style": {
+      "color": "#7E93A3",
+      "padding": "18px 18px 6px",
+      "fontSize": "10px",
+      "fontWeight": "600",
+      "letterSpacing": ".16em",
+      "textTransform": "uppercase"
+    }
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "custom": {},
+  "params": {
+    "demo": {}
+  },
+  "propConfig": {
+    "params.demo": {
+      "paramDirection": "input"
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 260,
+      "width": 400
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "above"
+        },
+        "position": {
+          "basis": "0px",
+          "grow": 1,
+          "shrink": 1
+        },
+        "props": {},
+        "type": "ia.container.flex"
+      },
+      {
+        "meta": {
+          "name": "plus"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "props": {
+          "style": {
+            "classes": "wd-slot-plus",
+            "fontSize": "38px",
+            "fontWeight": "300",
+            "lineHeight": 1.4,
+            "textAlign": "center",
+            "width": "100%"
+          },
+          "text": "+"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "caption"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "props": {
+          "style": {
+            "classes": "wd-slot-caption",
+            "fontSize": "13px",
+            "lineHeight": 1.4,
+            "textAlign": "center",
+            "width": "100%"
+          },
+          "text": "Room for another demonstration"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "below"
+        },
+        "position": {
+          "basis": "0px",
+          "grow": 1,
+          "shrink": 1
+        },
+        "props": {},
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "propConfig": {
+      "props.style.classes": {
+        "binding": {
+          "config": {
+            "expression": "{session.custom.style} + '/containers/card wd-slot'"
+          },
+          "type": "expr"
+        }
+      }
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "gap": "2px",
+        "height": "100%",
+        "padding": "16px"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

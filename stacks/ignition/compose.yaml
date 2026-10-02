@@ -1,0 +1,137 @@
+name: ignition
+
+# The HUB of the hub-and-spoke Gateway Network.
+# Spokes: ignition-edge1, ignition-edge2 (separate Compose projects, same
+# `backbone` network). They dial IN to this gateway on GAN port 8060.
+
+services:
+  ignition:
+    # The version is a VARIABLE with the repo's declared version as its default,
+    # and the default is what `make validate` and `scripts/watch-upstream.sh`
+    # both read -- so bumping it here is what "this repo runs 8.3.x" means.
+    # Override per machine in this stack's gitignored .env, which is what
+    # `make ignition-version SET=<v>` writes to all four gateways at once.
+    # THEY MUST MATCH: a redundant pair on two versions does not sync, and an
+    # EAM push to a mismatched edge is a gamble. ign-version.sh writes all four
+    # together, and validate refuses a set that disagrees.
+    image: inductiveautomation/ignition:${IGNITION_VERSION:-8.3.9}
+    container_name: ignition
+    # "no", quoted -- bare no is YAML false. A DEMO stack must never come back on
+    # its own: unless-stopped resurrects whatever was running when the daemon
+    # restarts, which on 07/08/2026 silently returned all eleven stacks for three
+    # days. Start with `make up`, stop with `make down`.
+    restart: "no"
+    environment:
+      TZ: ${TZ}
+      # --- Commissioning -------------------------------------------------
+      # These are read by the 8.3 gateway itself (NOT by docker-entrypoint.sh,
+      # which is why grepping the entrypoint for them turns up nothing).
+      # Verified working on 8.3.8: a fresh volume commissions unattended in
+      # ~10s with no browser wizard.
+      #
+      # They apply ONLY while data/commissioning.json is absent, i.e. on an
+      # empty volume. This volume is already commissioned, so editing them
+      # changes nothing until you `docker compose down -v`.
+      ACCEPT_IGNITION_EULA: "Y"
+      IGNITION_EDITION: standard
+      GATEWAY_ADMIN_USERNAME: ${GATEWAY_ADMIN_USERNAME}
+      GATEWAY_ADMIN_PASSWORD: ${GATEWAY_ADMIN_PASSWORD}
+      # --- Ports ---------------------------------------------------------
+      # Read by docker-entrypoint.sh and written into data/gateway.xml.
+      GATEWAY_HTTP_PORT: 8088
+      GATEWAY_HTTPS_PORT: 8043
+      # Gateway Area Network. Deliberately NOT published to the host: the two
+      # Edge spokes reach it as `ignition:8060` over `backbone`.
+      GATEWAY_GAN_PORT: 8060
+      # glibc gives a process up to 8 x cores malloc arenas (128 on a 16-core
+      # host) and Ignition's ~220 threads spread allocations across all of them.
+      # Capping it is where the RSS saving is -- NOT in -Xmx, which controls the
+      # heap, and the heap was never the bulk. Measured -33% on an edge, with no
+      # cost through a real store-and-forward outage. See docs/ARCHITECTURE.md.
+      MALLOC_ARENA_MAX: "2"
+    # Args after `--` of the form gateway.<key>=<value> are written straight
+    # into data/gateway.xml by docker-entrypoint.sh on EVERY start, so unlike
+    # the commissioning vars above these stay authoritative.
+    #
+    # useProxyForwardedHeader lets the gateway honour the X-Forwarded-Proto /
+    # -Host headers Nginx Proxy Manager sends, so redirects and Perspective
+    # session URLs come back as https://ignition.test instead of
+    # http://ignition:8088. Without it, logging in through the proxy bounces
+    # you to an unreachable internal URL.
+    # -n re-applies on EVERY container start, not just commissioning -- an API
+    # rename of a running gateway is overwritten on its next boot unless this
+    # arg matches. Verified 03/08/2026 when a docker restart quietly reverted
+    # both edges to their old names. Compose is the source of truth for the
+    # system name; change it here and RECREATE (up -d), not restart.
+    # publicAddress is deliberately NOT set here. It is gateway state (rule 4) --
+    # per machine, and the work machine needs its own values. It used to carry
+    # gateway.publicAddress.autoDetect=true, which silently undid the explicit
+    # public address on every boot: the address and ports survived (they are not
+    # args) but auto-detect flipped back on, and the Perspective launch page went
+    # back to MissingGatewayAddressException. Anything listed here wins over the
+    # UI on EVERY start -- so only put a setting here if compose really is the
+    # source of truth for it. Verified 03/08/2026 (the edges never had this arg,
+    # and their public addresses came through the same restart intact).
+    # --add-opens is the Sparkplug demo's: this hub runs MQTT Engine, and Cirrus
+    # Link's Alarm Event Propagation docs require this flag on every gateway at
+    # either end of it (their troubleshooting names AgentAlarmListener
+    # JsonIOException as the symptom without it). It is a JVM arg, so it lives
+    # here -- a module cannot open a java.base package for itself. With it,
+    # alarms and acks crossed both ways with zero such log lines (measured
+    # 11/09/2026, docs/SPARKPLUG.md T7); what breaks WITHOUT it was not
+    # measured here, so do not read more into it than the vendor says. Same arg
+    # on ignition-backup (it inherits Engine on failover) and on the isolated
+    # edges (Transmission, the other end).
+    command: >
+      -n Ignition-Standard
+      -m 768
+      --
+      -XX:ParallelGCThreads=2
+      -XX:ConcGCThreads=1
+      -XX:G1PeriodicGCInterval=300000
+      -XX:G1PeriodicGCSystemLoadThreshold=0
+      --add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED
+      gateway.useProxyForwardedHeader=true
+    ports:
+      - "${IGNITION_HTTP_HOST_PORT:-29088}:8088"   # HTTP  - gateway web UI
+      - "${IGNITION_HTTPS_HOST_PORT:-29043}:8043"   # HTTPS - gateway web UI
+      - "${IGNITION_OPCUA_HOST_PORT:-29041}:62541"   # OPC UA server - opc.tcp://localhost:29041
+    volumes:
+      - ignition_data:/usr/local/bin/ignition/data
+    networks:
+      backbone: {}
+      # wd-mqtt carries MQTT only. On it this half's MQTT Distributor answers as
+      # mqtt-master, a name no other network has, so an edge cut off wd-mqtt is
+      # cut off the broker while backbone still reaches it (docs/MQTT-DISTRIBUTOR.md).
+      mqtt:
+        aliases:
+          - mqtt-master
+    stop_grace_period: 30s
+    healthcheck:
+      test: ["CMD", "/usr/local/bin/health-check.sh", "-s", "RUNNING",
+             "http://localhost:8088/StatusPing"]
+      interval: 15s
+      timeout: 10s
+      # 20 and 180s, not 10 and 120s. A gateway's start is CPU-bound
+      # (classloading, then the project scan), so on the 2-core machines this
+      # stack is meant to run on it routinely needs longer than two minutes --
+      # and a gateway marked unhealthy is not a cosmetic wrong answer: the
+      # console's reconcile loop waits on health before starting the next
+      # stack, so a window that is too tight starts two JVMs at once on the
+      # machine that could least afford one. The cost is that a genuinely dead
+      # gateway takes longer to be called dead, which is the right way round.
+      retries: 20
+      start_period: 180s
+    labels:
+      au.gaskony.wd.stack: "ignition"
+
+volumes:
+  ignition_data:
+
+networks:
+  backbone:
+    external: true
+  # wd-mqtt: created by scripts/lib.sh:ensure_mqtt_net, like backbone.
+  mqtt:
+    name: wd-mqtt
+    external: true

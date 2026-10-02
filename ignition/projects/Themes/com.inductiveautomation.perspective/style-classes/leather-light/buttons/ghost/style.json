@@ -1,0 +1,26 @@
+{
+  "base": {
+    "style": {
+      "backgroundColor": "#ffffff",
+      "color": "#5a4d3c",
+      "borderWidth": "1px",
+      "borderStyle": "solid",
+      "borderColor": "#e6d6b8",
+      "borderRadius": "8px",
+      "padding": "8px 16px",
+      "fontFamily": "Inter, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+      "fontSize": "13.5px",
+      "fontWeight": "600",
+      "whiteSpace": "nowrap",
+      "cursor": "pointer"
+    }
+  },
+  "variants": [
+    {
+      "pseudo": "hover",
+      "style": {
+        "backgroundColor": "rgba(138, 90, 43, 0.08)"
+      }
+    }
+  ]
+}

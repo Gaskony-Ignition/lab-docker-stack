@@ -1,0 +1,83 @@
+{
+  "custom": {},
+  "params": {
+    "row": {}
+  },
+  "propConfig": {
+    "params.row": {
+      "paramDirection": "input"
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 34,
+      "width": 300
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": {
+              "config": {
+                "script": "\tself.session.custom.ignPick = self.view.params.row['version']\n"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "pick"
+        },
+        "position": {
+          "basis": "0px",
+          "grow": 1,
+          "shrink": 1
+        },
+        "propConfig": {
+          "props.style.classes": {
+            "binding": {
+              "config": {
+                "expression": "{session.custom.style} + if({session.custom.ignPick} = {view.params.row.version}, '/buttons/primary', '/buttons/ghost')"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.row.version} + if({view.params.row.note} = '', '', '   -- ' + {view.params.row.note})"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "height": "30px",
+            "justifyContent": "flex-start",
+            "minHeight": "30px",
+            "textAlign": "left",
+            "whiteSpace": "nowrap",
+            "lineHeight": 1.35
+          }
+        },
+        "type": "ia.input.button"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "alignItems": "center",
+      "direction": "row",
+      "style": {
+        "gap": "6px",
+        "height": "100%"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

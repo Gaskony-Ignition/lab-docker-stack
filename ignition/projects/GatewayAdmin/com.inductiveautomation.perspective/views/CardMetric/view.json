@@ -1,0 +1,176 @@
+{
+ "custom": {},
+ "params": {
+  "level": "",
+  "name": "",
+  "unit": "",
+  "value": ""
+ },
+ "propConfig": {
+  "params.level": {
+   "paramDirection": "input"
+  },
+  "params.name": {
+   "paramDirection": "input"
+  },
+  "params.unit": {
+   "paramDirection": "input"
+  },
+  "params.value": {
+   "paramDirection": "input"
+  }
+ },
+ "props": {
+  "defaultSize": {
+   "height": 76,
+   "width": 100
+  }
+ },
+ "root": {
+  "children": [
+   {
+    "meta": {
+     "name": "mvalue"
+    },
+    "position": {
+     "shrink": 0
+    },
+    "propConfig": {
+     "props.style.classes": {
+      "binding": {
+       "config": {
+        "expression": "{session.custom.style} + '/text/card-title'"
+       },
+       "type": "expr"
+      }
+     },
+     "props.style.color": {
+      "binding": {
+       "config": {
+        "expression": "if({view.params.level} = 'bad', '#ef4444', if({view.params.level} = 'warn', '#f59e0b', ''))"
+       },
+       "type": "expr"
+      }
+     },
+     "props.style.fontSize": {
+      "binding": {
+       "config": {
+        "expression": "if(len({view.params.value}) > 12, '12px', if(len({view.params.value}) > 7, '15px', '20px'))"
+       },
+       "type": "expr"
+      }
+     },
+     "props.text": {
+      "binding": {
+       "config": {
+        "expression": "{view.params.value}"
+       },
+       "type": "expr"
+      }
+     }
+    },
+    "props": {
+     "style": {
+      "lineHeight": "1.35",
+      "minWidth": "0",
+      "overflow": "hidden",
+      "textOverflow": "ellipsis",
+      "whiteSpace": "nowrap"
+     },
+     "text": ""
+    },
+    "type": "ia.display.label"
+   },
+   {
+    "meta": {
+     "name": "mname"
+    },
+    "position": {
+     "shrink": 0
+    },
+    "propConfig": {
+     "props.text": {
+      "binding": {
+       "config": {
+        "expression": "{view.params.name}"
+       },
+       "type": "expr"
+      }
+     }
+    },
+    "props": {
+     "style": {
+      "fontSize": "10px",
+      "fontWeight": "600",
+      "letterSpacing": "0.08em",
+      "marginTop": "2px",
+      "opacity": "0.75",
+      "whiteSpace": "nowrap",
+      "overflow": "hidden",
+      "textOverflow": "ellipsis"
+     },
+     "text": ""
+    },
+    "type": "ia.display.label"
+   },
+   {
+    "meta": {
+     "name": "munit"
+    },
+    "position": {
+     "shrink": 0
+    },
+    "propConfig": {
+     "props.style.classes": {
+      "binding": {
+       "config": {
+        "expression": "{session.custom.style} + '/text/muted'"
+       },
+       "type": "expr"
+      }
+     },
+     "props.text": {
+      "binding": {
+       "config": {
+        "expression": "{view.params.unit}"
+       },
+       "type": "expr"
+      }
+     }
+    },
+    "props": {
+     "style": {
+      "fontSize": "10px",
+      "minWidth": "0",
+      "overflow": "hidden",
+      "textOverflow": "ellipsis",
+      "whiteSpace": "nowrap"
+     },
+     "text": ""
+    },
+    "type": "ia.display.label"
+   }
+  ],
+  "meta": {
+   "name": "root"
+  },
+  "position": {
+   "basis": "auto",
+   "shrink": 0
+  },
+  "props": {
+   "direction": "column",
+   "style": {
+    "backgroundColor": "rgba(148,163,184,0.12)",
+    "borderRadius": "6px",
+    "gap": "0px",
+    "height": "100%",
+    "minWidth": "84px",
+    "padding": "8px 10px",
+    "width": "100%",
+    "overflow": "hidden"
+   }
+  },
+  "type": "ia.container.flex"
+ }
+}

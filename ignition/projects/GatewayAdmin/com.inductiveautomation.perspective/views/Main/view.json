@@ -1,0 +1,1202 @@
+{
+  "custom": {
+    "tab": 4,
+    "tabs": {},
+    "trial": {}
+  },
+  "params": {},
+  "propConfig": {
+    "custom.tabs": {
+      "binding": {
+        "config": {
+          "expression": "now(3000)"
+        },
+        "transforms": [
+          {
+            "code": "\timport demo_control\n\treturn demo_control.tab_state()\n",
+            "type": "script"
+          }
+        ],
+        "type": "expr"
+      }
+    },
+    "custom.trial": {
+      "binding": {
+        "config": {
+          "expression": "now(15000)"
+        },
+        "type": "expr",
+        "transforms": [
+          {
+            "code": "\timport demo_control\n\treturn demo_control.trial_line()\n",
+            "type": "script"
+          }
+        ]
+      }
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 800,
+      "width": 1280
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "config": {
+                        "script": "\tself.view.custom.tab = 4\n"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                },
+                "meta": {
+                  "name": "demosButton"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "{session.custom.style} + if({view.custom.tab} = 4, '/buttons/primary', '/buttons/chip')"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "image": {
+                    "height": 16,
+                    "icon": {
+                      "color": "currentColor",
+                      "path": "material/dashboard"
+                    },
+                    "position": "left",
+                    "width": 16
+                  },
+                  "style": {
+                    "height": "30px",
+                    "lineHeight": "1",
+                    "minHeight": "30px",
+                    "padding": "0 14px",
+                    "whiteSpace": "nowrap"
+                  },
+                  "text": "Demos"
+                },
+                "type": "ia.input.button"
+              },
+              {
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "config": {
+                        "script": "\tself.view.custom.tab = 0\n"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                },
+                "meta": {
+                  "name": "eamButton"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.enabled": {
+                    "binding": {
+                      "config": {
+                        "expression": "{view.custom.tabs.eam.enabled}"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.style.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "{session.custom.style} + if({view.custom.tab} = 0, '/buttons/primary', '/buttons/chip')"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.style.cursor": {
+                    "binding": {
+                      "config": {
+                        "expression": "if({view.custom.tabs.eam.enabled}, 'pointer', 'not-allowed')"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.style.opacity": {
+                    "binding": {
+                      "config": {
+                        "expression": "if({view.custom.tabs.eam.enabled}, 1, 0.4)"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.tooltip.text": {
+                    "binding": {
+                      "config": {
+                        "expression": "{view.custom.tabs.eam.reason}"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "image": {
+                    "height": 16,
+                    "icon": {
+                      "color": "currentColor",
+                      "path": "material/device_hub"
+                    },
+                    "position": "left",
+                    "width": 16
+                  },
+                  "style": {
+                    "height": "30px",
+                    "lineHeight": "1",
+                    "minHeight": "30px",
+                    "padding": "0 14px",
+                    "whiteSpace": "nowrap"
+                  },
+                  "text": "EAM",
+                  "tooltip": {
+                    "enabled": true
+                  }
+                },
+                "type": "ia.input.button"
+              },
+              {
+                "type": "ia.display.icon",
+                "meta": {
+                  "name": "eamDot"
+                },
+                "position": {
+                  "shrink": 0,
+                  "basis": "10px",
+                  "display": false
+                },
+                "props": {
+                  "path": "material/fiber_manual_record",
+                  "color": "currentColor",
+                  "style": {
+                    "width": "10px",
+                    "height": "10px",
+                    "minWidth": "10px",
+                    "marginLeft": "-18px",
+                    "alignSelf": "flex-start",
+                    "marginTop": "3px",
+                    "pointerEvents": "none",
+                    "zIndex": "2",
+                    "maxHeight": "10px",
+                    "position": "relative"
+                  }
+                },
+                "propConfig": {
+                  "props.color": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "if({view.custom.tabs.eam.dot} = 'badge-ok', '#22c55e', '#f59e0b')"
+                      }
+                    }
+                  },
+                  "position.display": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "len({view.custom.tabs.eam.dot}) > 0"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "config": {
+                        "script": "\tself.view.custom.tab = 1\n"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                },
+                "meta": {
+                  "name": "storeForwardButton"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.enabled": {
+                    "binding": {
+                      "config": {
+                        "expression": "{view.custom.tabs.storeforward.enabled}"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.style.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "{session.custom.style} + if({view.custom.tab} = 1, '/buttons/primary', '/buttons/chip')"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.style.cursor": {
+                    "binding": {
+                      "config": {
+                        "expression": "if({view.custom.tabs.storeforward.enabled}, 'pointer', 'not-allowed')"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.style.opacity": {
+                    "binding": {
+                      "config": {
+                        "expression": "if({view.custom.tabs.storeforward.enabled}, 1, 0.4)"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.tooltip.text": {
+                    "binding": {
+                      "config": {
+                        "expression": "{view.custom.tabs.storeforward.reason}"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "image": {
+                    "height": 16,
+                    "icon": {
+                      "color": "currentColor",
+                      "path": "material/sync"
+                    },
+                    "position": "left",
+                    "width": 16
+                  },
+                  "style": {
+                    "height": "30px",
+                    "lineHeight": "1",
+                    "minHeight": "30px",
+                    "padding": "0 14px",
+                    "whiteSpace": "nowrap"
+                  },
+                  "text": "Store & Forward",
+                  "tooltip": {
+                    "enabled": true
+                  }
+                },
+                "type": "ia.input.button"
+              },
+              {
+                "type": "ia.display.icon",
+                "meta": {
+                  "name": "storeforwardDot"
+                },
+                "position": {
+                  "shrink": 0,
+                  "basis": "10px",
+                  "display": false
+                },
+                "props": {
+                  "path": "material/fiber_manual_record",
+                  "color": "currentColor",
+                  "style": {
+                    "width": "10px",
+                    "height": "10px",
+                    "minWidth": "10px",
+                    "marginLeft": "-18px",
+                    "alignSelf": "flex-start",
+                    "marginTop": "3px",
+                    "pointerEvents": "none",
+                    "zIndex": "2",
+                    "maxHeight": "10px",
+                    "position": "relative"
+                  }
+                },
+                "propConfig": {
+                  "props.color": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "if({view.custom.tabs.storeforward.dot} = 'badge-ok', '#22c55e', '#f59e0b')"
+                      }
+                    }
+                  },
+                  "position.display": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "len({view.custom.tabs.storeforward.dot}) > 0"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "config": {
+                        "script": "\tself.view.custom.tab = 3\n"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                },
+                "meta": {
+                  "name": "redundancyButton"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.enabled": {
+                    "binding": {
+                      "config": {
+                        "expression": "{view.custom.tabs.redundancy.enabled}"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.style.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "{session.custom.style} + if({view.custom.tab} = 3, '/buttons/primary', '/buttons/chip')"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.style.cursor": {
+                    "binding": {
+                      "config": {
+                        "expression": "if({view.custom.tabs.redundancy.enabled}, 'pointer', 'not-allowed')"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.style.opacity": {
+                    "binding": {
+                      "config": {
+                        "expression": "if({view.custom.tabs.redundancy.enabled}, 1, 0.4)"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.tooltip.text": {
+                    "binding": {
+                      "config": {
+                        "expression": "{view.custom.tabs.redundancy.reason}"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "image": {
+                    "height": 16,
+                    "icon": {
+                      "color": "currentColor",
+                      "path": "material/swap_horiz"
+                    },
+                    "position": "left",
+                    "width": 16
+                  },
+                  "style": {
+                    "height": "30px",
+                    "lineHeight": "1",
+                    "minHeight": "30px",
+                    "padding": "0 14px",
+                    "whiteSpace": "nowrap"
+                  },
+                  "text": "Redundancy",
+                  "tooltip": {
+                    "enabled": true
+                  }
+                },
+                "type": "ia.input.button"
+              },
+              {
+                "type": "ia.display.icon",
+                "meta": {
+                  "name": "redundancyDot"
+                },
+                "position": {
+                  "shrink": 0,
+                  "basis": "10px",
+                  "display": false
+                },
+                "props": {
+                  "path": "material/fiber_manual_record",
+                  "color": "currentColor",
+                  "style": {
+                    "width": "10px",
+                    "height": "10px",
+                    "minWidth": "10px",
+                    "marginLeft": "-18px",
+                    "alignSelf": "flex-start",
+                    "marginTop": "3px",
+                    "pointerEvents": "none",
+                    "zIndex": "2",
+                    "maxHeight": "10px",
+                    "position": "relative"
+                  }
+                },
+                "propConfig": {
+                  "props.color": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "if({view.custom.tabs.redundancy.dot} = 'badge-ok', '#22c55e', '#f59e0b')"
+                      }
+                    }
+                  },
+                  "position.display": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "len({view.custom.tabs.redundancy.dot}) > 0"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "config": {
+                        "script": "\tself.view.custom.tab = 5\n"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                },
+                "meta": {
+                  "name": "sparkplugButton"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.enabled": {
+                    "binding": {
+                      "config": {
+                        "expression": "{view.custom.tabs.sparkplug.enabled}"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.style.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "{session.custom.style} + if({view.custom.tab} = 5, '/buttons/primary', '/buttons/chip')"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.style.cursor": {
+                    "binding": {
+                      "config": {
+                        "expression": "if({view.custom.tabs.sparkplug.enabled}, 'pointer', 'not-allowed')"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.style.opacity": {
+                    "binding": {
+                      "config": {
+                        "expression": "if({view.custom.tabs.sparkplug.enabled}, 1, 0.4)"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.tooltip.text": {
+                    "binding": {
+                      "config": {
+                        "expression": "{view.custom.tabs.sparkplug.reason}"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "image": {
+                    "height": 16,
+                    "icon": {
+                      "color": "currentColor",
+                      "path": "material/link"
+                    },
+                    "position": "left",
+                    "width": 16
+                  },
+                  "style": {
+                    "height": "30px",
+                    "lineHeight": "1",
+                    "minHeight": "30px",
+                    "padding": "0 14px",
+                    "whiteSpace": "nowrap"
+                  },
+                  "text": "MQTT",
+                  "tooltip": {
+                    "enabled": true
+                  }
+                },
+                "type": "ia.input.button"
+              },
+              {
+                "type": "ia.display.icon",
+                "meta": {
+                  "name": "sparkplugDot"
+                },
+                "position": {
+                  "shrink": 0,
+                  "basis": "10px",
+                  "display": false
+                },
+                "props": {
+                  "path": "material/fiber_manual_record",
+                  "color": "currentColor",
+                  "style": {
+                    "width": "10px",
+                    "height": "10px",
+                    "minWidth": "10px",
+                    "marginLeft": "-18px",
+                    "alignSelf": "flex-start",
+                    "marginTop": "3px",
+                    "pointerEvents": "none",
+                    "zIndex": "2",
+                    "maxHeight": "10px",
+                    "position": "relative"
+                  }
+                },
+                "propConfig": {
+                  "props.color": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "if({view.custom.tabs.sparkplug.dot} = 'badge-ok', '#22c55e', '#f59e0b')"
+                      }
+                    }
+                  },
+                  "position.display": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "len({view.custom.tabs.sparkplug.dot}) > 0"
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "meta": {
+              "name": "demoButtons"
+            },
+            "position": {
+              "basis": "auto",
+              "grow": 1
+            },
+            "props": {
+              "alignItems": "center",
+              "direction": "row",
+              "style": {
+                "gap": "8px"
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "trialPill",
+                  "tooltip": {
+                    "enabled": true,
+                    "text": ""
+                  }
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "meta.visible": {
+                    "binding": {
+                      "config": {
+                        "expression": "{view.custom.trial.known}"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "meta.tooltip.text": {
+                    "binding": {
+                      "config": {
+                        "expression": "'The hub runs Perspective on a rolling two-hour trial. When a gateway lapses, reset it at console.test/_wd/trials.'"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.style.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "{session.custom.style} + if({view.custom.trial.low}, '/status/badge-warn', '/status/badge-neutral')"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "expression": "{view.custom.trial.text}"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "fontSize": "11px",
+                    "lineHeight": 1.4,
+                    "padding": "3px 9px",
+                    "whiteSpace": "nowrap"
+                  }
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "config": {
+                        "script": "\timport demo_guide\n\ttopic = demo_guide.topic_for_tab(self.view.custom.tab)\n\tif topic:\n\t\tsystem.perspective.openPopup(\n\t\t\t'demo-guide', 'Guide/Panel',\n\t\t\tparams={'topic': topic},\n\t\t\tposition=demo_guide.popup_size(topic),\n\t\t\ttitle='How to show this', modal=True, draggable=True,\n\t\t\tresizable=True, overlayDismiss=True, viewportBound=True)\n"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                },
+                "meta": {
+                  "name": "guide"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "meta.visible": {
+                    "binding": {
+                      "config": {
+                        "expression": "{view.custom.tab}"
+                      },
+                      "transforms": [
+                        {
+                          "code": "\timport demo_guide\n\treturn demo_guide.has_guide(value)\n",
+                          "type": "script"
+                        }
+                      ],
+                      "type": "expr"
+                    }
+                  },
+                  "props.style.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "{session.custom.style} + '/buttons/chip'"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "image": {
+                    "height": 16,
+                    "icon": {
+                      "color": "currentColor",
+                      "path": "material/help_outline"
+                    },
+                    "position": "left",
+                    "width": 16
+                  },
+                  "style": {
+                    "height": "30px",
+                    "lineHeight": "1",
+                    "minHeight": "30px",
+                    "padding": "0 14px",
+                    "whiteSpace": "nowrap"
+                  },
+                  "text": "Guide"
+                },
+                "type": "ia.input.button"
+              },
+              {
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "config": {
+                        "script": "\tself.view.custom.tab = 2\n"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                },
+                "meta": {
+                  "name": "architectureButton"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "{session.custom.style} + if({view.custom.tab} = 2, '/buttons/primary', '/buttons/chip')"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "image": {
+                    "height": 16,
+                    "icon": {
+                      "color": "currentColor",
+                      "path": "material/account_tree"
+                    },
+                    "position": "left",
+                    "width": 16
+                  },
+                  "style": {
+                    "height": "30px",
+                    "lineHeight": "1",
+                    "minHeight": "30px",
+                    "padding": "0 14px",
+                    "whiteSpace": "nowrap"
+                  },
+                  "text": "Architecture"
+                },
+                "type": "ia.input.button"
+              },
+              {
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "config": {
+                        "script": "\tsystem.perspective.openPopup(\n\t\t'styles-template-switcher',\n\t\t'Appearance/Switcher',\n\t\t# THIS REPO'S OWN VIEW, generated by scripts/gen-themes.py. It was\n\t\t# upstream's inherited switcher until the themes cutover; the comment\n\t\t# that used to sit here still said so, and said the size came from\n\t\t# upstream's own min() sizing, months after both stopped being true.\n\t\t#\n\t\t# It writes session.custom.styleOverride rather than\n\t\t# session.custom.style, because style is BOUND (it prefers the override,\n\t\t# else the committed theme, on a 5s poll) and a bound property swallows\n\t\t# a write in silence. Committing to every project -- the only form that\n\t\t# travels over EAM -- is the separate 'Apply everywhere' button.\n\t\t#\n\t\t# SIZE COMES FROM THE VIEW'S OWN props.defaultSize (560x460), not from\n\t\t# here. openPopup HAS NO width OR height ARGUMENT -- see\n\t\t# gen-themes.py:gen_switcher for the reflection and the measurements.\n\t\t# Unknown kwargs are swallowed in silence, so a size passed here reads\n\t\t# as working and does nothing at all. A per-call override is\n\t\t# position={'width': N, 'height': N} -- integers, pixels, no CSS.\n\t\ttitle='Theme',\n\t\tmodal=True,\n\t\tdraggable=True,\n\t\tresizable=False,\n\t\toverlayDismiss=True,\n\t\tviewportBound=True)\n"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                },
+                "meta": {
+                  "name": "appearance"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "{session.custom.style} + if({view.custom.tab} = -1, '/buttons/primary', '/buttons/chip')"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "image": {
+                    "height": 16,
+                    "icon": {
+                      "color": "currentColor",
+                      "path": "material/palette"
+                    },
+                    "position": "left",
+                    "width": 16
+                  },
+                  "style": {
+                    "height": "30px",
+                    "lineHeight": "1",
+                    "minHeight": "30px",
+                    "padding": "0 14px",
+                    "whiteSpace": "nowrap"
+                  },
+                  "text": "Theme"
+                },
+                "type": "ia.input.button"
+              },
+              {
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "config": {
+                        "script": "\timport demo_styles\n\tpack = self.session.custom.style\n\tself.session.custom.styleOverride = ''\n\tself.session.custom.status = demo_styles.commit_pack(pack)\n"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                },
+                "meta": {
+                  "name": "applyTheme"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "meta.visible": {
+                    "binding": {
+                      "config": {
+                        "expression": "runScript('demo_styles.preview_pack', 5000, {session.custom.styleOverride}) != ''"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.style.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "{session.custom.style} + '/status/badge-warn'"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.style.padding": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(runScript('demo_styles.preview_pack', 5000, {session.custom.styleOverride}) != '', '0 12px', '0px')"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.style.width": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(runScript('demo_styles.preview_pack', 5000, {session.custom.styleOverride}) != '', 'auto', '0px')"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "expression": "'Apply ' + runScript('demo_styles.preview_pack', 5000, {session.custom.styleOverride}) + ' everywhere'"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.tooltip.text": {
+                    "binding": {
+                      "config": {
+                        "expression": "runScript('demo_styles.preview_warning', 5000, {session.custom.styleOverride})"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "fontSize": "12px",
+                    "height": "30px",
+                    "minHeight": "30px",
+                    "overflow": "hidden",
+                    "whiteSpace": "nowrap"
+                  }
+                },
+                "type": "ia.input.button"
+              }
+            ],
+            "meta": {
+              "name": "toolButtons"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "props": {
+              "alignItems": "center",
+              "direction": "row",
+              "style": {
+                "gap": "8px"
+              }
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "header"
+        },
+        "position": {
+          "basis": "auto",
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.style.classes": {
+            "binding": {
+              "config": {
+                "expression": "{session.custom.style} + '/containers/topbar'"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "alignItems": "center",
+          "direction": "row",
+          "style": {
+            "height": "46px",
+            "minHeight": "46px",
+            "padding": "0 16px",
+            "width": "100%"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "eam"
+            },
+            "position": {
+              "tabIndex": 0
+            },
+            "props": {
+              "path": "EAM",
+              "style": {
+                "height": "100%",
+                "width": "100%"
+              }
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "storeforward"
+            },
+            "position": {
+              "tabIndex": 1
+            },
+            "props": {
+              "path": "StoreForward",
+              "style": {
+                "height": "100%",
+                "width": "100%"
+              }
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "architecture"
+            },
+            "position": {
+              "tabIndex": 2
+            },
+            "props": {
+              "path": "Architecture",
+              "style": {
+                "height": "100%",
+                "width": "100%"
+              }
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "redundancy"
+            },
+            "position": {
+              "tabIndex": 3
+            },
+            "props": {
+              "path": "Redundancy",
+              "style": {
+                "height": "100%",
+                "width": "100%"
+              }
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "demos"
+            },
+            "position": {
+              "tabIndex": 4
+            },
+            "props": {
+              "path": "Demos",
+              "style": {
+                "height": "100%",
+                "width": "100%"
+              }
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "sparkplug"
+            },
+            "position": {
+              "tabIndex": 5
+            },
+            "props": {
+              "path": "Sparkplug",
+              "style": {
+                "height": "100%",
+                "width": "100%"
+              }
+            },
+            "type": "ia.display.view"
+          }
+        ],
+        "meta": {
+          "name": "tabs"
+        },
+        "position": {
+          "basis": "0px",
+          "grow": 1
+        },
+        "propConfig": {
+          "props.contentStyle.classes": {
+            "binding": {
+              "config": {
+                "expression": "{session.custom.style} + '/containers/page'"
+              },
+              "type": "expr"
+            }
+          },
+          "props.currentTabIndex": {
+            "binding": {
+              "config": {
+                "expression": "if({view.custom.tab} = 0, if({view.custom.tabs.eam.enabled}, 0, 4),\n if({view.custom.tab} = 1, if({view.custom.tabs.storeforward.enabled}, 1, 4),\n  if({view.custom.tab} = 3, if({view.custom.tabs.redundancy.enabled}, 3, 4),\n   if({view.custom.tab} = 5, if({view.custom.tabs.sparkplug.enabled}, 5, 4),\n    {view.custom.tab}))))"
+              },
+              "type": "expr"
+            }
+          },
+          "props.menuStyle.classes": {
+            "binding": {
+              "config": {
+                "expression": "{session.custom.style} + '/containers/topbar'"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "contentStyle": {
+            "classes": "",
+            "display": "flex",
+            "flexDirection": "column",
+            "flexGrow": 1,
+            "minHeight": "0"
+          },
+          "currentTabIndex": 0,
+          "menuStyle": {
+            "classes": ""
+          },
+          "menuType": "modern",
+          "style": {
+            "height": "100%",
+            "width": "100%"
+          },
+          "tabSize": {
+            "height": 40,
+            "width": 120
+          },
+          "tabStyle": {
+            "active": {
+              "classes": ""
+            },
+            "disabled": {
+              "classes": ""
+            },
+            "inactive": {
+              "classes": ""
+            }
+          },
+          "tabs": [
+            {
+              "disabled": false,
+              "runWhileHidden": true,
+              "text": "EAM"
+            },
+            {
+              "disabled": false,
+              "runWhileHidden": true,
+              "text": "Store & Forward"
+            },
+            {
+              "disabled": false,
+              "runWhileHidden": true,
+              "text": "Architecture"
+            },
+            {
+              "disabled": false,
+              "runWhileHidden": true,
+              "text": "Redundancy"
+            },
+            {
+              "disabled": false,
+              "runWhileHidden": true,
+              "text": "Demos"
+            },
+            {
+              "disabled": false,
+              "runWhileHidden": true,
+              "text": "MQTT"
+            }
+          ]
+        },
+        "type": "ia.container.tab"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "position": {
+      "basis": "auto",
+      "shrink": 0
+    },
+    "propConfig": {
+      "props.style.classes": {
+        "binding": {
+          "config": {
+            "expression": "{session.custom.style} + '/containers/page'"
+          },
+          "type": "expr"
+        }
+      }
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "height": "100%",
+        "position": "relative",
+        "width": "100%"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

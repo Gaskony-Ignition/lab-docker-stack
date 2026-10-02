@@ -1,0 +1,1219 @@
+{
+  "custom": {
+    "guard": {},
+    "rail": {
+      "head": {
+        "name": "",
+        "state": "",
+        "badge": "badge-neutral",
+        "tip": ""
+      },
+      "banner": {
+        "text": ""
+      },
+      "notReady": "",
+      "state": "stopped",
+      "facts": [],
+      "links": []
+    }
+  },
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "height": 760,
+      "width": 1280
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "type": "ia.container.flex",
+        "meta": {
+          "name": "sidebar"
+        },
+        "props": {
+          "direction": "column",
+          "alignItems": "stretch",
+          "style": {
+            "gap": "6px",
+            "minWidth": "0",
+            "padding": "14px",
+            "width": "100%"
+          }
+        },
+        "position": {
+          "basis": "260px",
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.style.classes": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.style} + '/containers/card'"
+              }
+            }
+          }
+        },
+        "children": [
+          {
+            "type": "ia.display.view",
+            "meta": {
+              "name": "head"
+            },
+            "props": {
+              "path": "RailHead",
+              "params": {},
+              "useDefaultViewHeight": true,
+              "useDefaultViewWidth": false,
+              "style": {
+                "width": "100%"
+              }
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.params": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{view.custom.rail.head}"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "ia.display.view",
+            "meta": {
+              "name": "banner"
+            },
+            "props": {
+              "path": "NotRunning",
+              "params": {},
+              "useDefaultViewHeight": false,
+              "useDefaultViewWidth": false,
+              "style": {
+                "width": "100%"
+              }
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.params": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{view.custom.rail.banner}"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "ia.display.view",
+            "meta": {
+              "name": "gStatus"
+            },
+            "props": {
+              "path": "RailGroup",
+              "params": {
+                "text": "STATUS"
+              },
+              "useDefaultViewHeight": true,
+              "useDefaultViewWidth": false,
+              "style": {
+                "width": "100%"
+              }
+            },
+            "position": {
+              "shrink": 0
+            }
+          },
+          {
+            "type": "ia.display.flex-repeater",
+            "meta": {
+              "name": "facts"
+            },
+            "props": {
+              "path": "RailFact",
+              "direction": "column",
+              "instances": [],
+              "useDefaultViewHeight": true,
+              "useDefaultViewWidth": false,
+              "elementPosition": {
+                "basis": "22px",
+                "grow": 0,
+                "shrink": 0
+              },
+              "style": {
+                "gap": "0px",
+                "width": "100%"
+              }
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.instances": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{view.custom.rail.facts}"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "ia.display.view",
+            "meta": {
+              "name": "gControls"
+            },
+            "props": {
+              "path": "RailGroup",
+              "params": {
+                "text": "CONTROLS"
+              },
+              "useDefaultViewHeight": true,
+              "useDefaultViewWidth": false,
+              "style": {
+                "width": "100%"
+              }
+            },
+            "position": {
+              "shrink": 0
+            }
+          },
+          {
+            "type": "ia.display.view",
+            "meta": {
+              "name": "pushBoth"
+            },
+            "props": {
+              "path": "RailButton",
+              "params": {
+                "key": "eam.pushBoth",
+                "action": "eam.pushBoth",
+                "icon": "material/publish",
+                "kind": "primary"
+              },
+              "useDefaultViewHeight": false,
+              "useDefaultViewWidth": false,
+              "style": {
+                "width": "100%"
+              }
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.params.can": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{view.custom.guard.can.pushBoth}"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "ia.display.view",
+            "meta": {
+              "name": "pushE1"
+            },
+            "props": {
+              "path": "RailButton",
+              "params": {
+                "key": "eam.pushE1",
+                "action": "eam.pushE1",
+                "icon": "material/arrow_upward",
+                "kind": "chip"
+              },
+              "useDefaultViewHeight": false,
+              "useDefaultViewWidth": false,
+              "style": {
+                "width": "100%"
+              }
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.params.can": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{view.custom.guard.can.pushE1}"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "ia.display.view",
+            "meta": {
+              "name": "pushE2"
+            },
+            "props": {
+              "path": "RailButton",
+              "params": {
+                "key": "eam.pushE2",
+                "action": "eam.pushE2",
+                "icon": "material/arrow_upward",
+                "kind": "chip"
+              },
+              "useDefaultViewHeight": false,
+              "useDefaultViewWidth": false,
+              "style": {
+                "width": "100%"
+              }
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.params.can": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{view.custom.guard.can.pushE2}"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "ia.display.view",
+            "meta": {
+              "name": "commitTheme"
+            },
+            "props": {
+              "path": "RailButton",
+              "params": {
+                "key": "eam.commitTheme",
+                "action": "eam.commitTheme",
+                "icon": "material/palette",
+                "kind": "chip"
+              },
+              "useDefaultViewHeight": false,
+              "useDefaultViewWidth": false,
+              "style": {
+                "width": "100%"
+              }
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.params.can": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{view.custom.guard.can.commitTheme}"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "ia.display.view",
+            "meta": {
+              "name": "resetTrials"
+            },
+            "props": {
+              "path": "RailButton",
+              "params": {
+                "key": "eam.resetTrials",
+                "action": "eam.resetTrials",
+                "icon": "material/replay",
+                "kind": "chip"
+              },
+              "useDefaultViewHeight": false,
+              "useDefaultViewWidth": false,
+              "style": {
+                "width": "100%"
+              }
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.params.can": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{view.custom.guard.can.resetTrials}"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "ia.display.view",
+            "meta": {
+              "name": "gGateways"
+            },
+            "props": {
+              "path": "RailGroup",
+              "params": {
+                "text": "GATEWAYS"
+              },
+              "useDefaultViewHeight": true,
+              "useDefaultViewWidth": false,
+              "style": {
+                "width": "100%"
+              }
+            },
+            "position": {
+              "shrink": 0
+            }
+          },
+          {
+            "type": "ia.display.flex-repeater",
+            "meta": {
+              "name": "links"
+            },
+            "props": {
+              "path": "RailLink",
+              "direction": "row",
+              "instances": [],
+              "wrap": "wrap",
+              "useDefaultViewHeight": true,
+              "useDefaultViewWidth": false,
+              "elementPosition": {
+                "basis": "31%",
+                "grow": 1,
+                "shrink": 1
+              },
+              "style": {
+                "gap": "4px",
+                "width": "100%"
+              }
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.instances": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{view.custom.rail.links}"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "children": [
+          {
+            "type": "ia.display.label",
+            "meta": {
+              "name": "what"
+            },
+            "props": {
+              "text": "The hub pushes one project to both edges; each reports what it wears.",
+              "style": {
+                "fontSize": "13px",
+                "lineHeight": 1.4,
+                "whiteSpace": "normal"
+              }
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.style.classes": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{session.custom.style} + '/text/muted'"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "children": [],
+            "meta": {
+              "name": "padTop"
+            },
+            "position": {
+              "basis": "0px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "props": {
+              "direction": "column"
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "children": [],
+                    "meta": {
+                      "name": "hs1"
+                    },
+                    "position": {
+                      "basis": "0px",
+                      "grow": 0,
+                      "shrink": 1
+                    },
+                    "props": {
+                      "direction": "row"
+                    },
+                    "type": "ia.container.flex"
+                  },
+                  {
+                    "meta": {
+                      "name": "hub"
+                    },
+                    "position": {
+                      "basis": "0px",
+                      "grow": 2,
+                      "shrink": 1
+                    },
+                    "propConfig": {
+                      "props.params": {
+                        "binding": {
+                          "config": {
+                            "expression": "now(3000)"
+                          },
+                          "transforms": [
+                            {
+                              "code": "\timport gateway_admin\n\treturn gateway_admin.card('hub')\n",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "expr"
+                        }
+                      }
+                    },
+                    "props": {
+                      "path": "GatewayCard",
+                      "style": {
+                        "margin": "0 12px",
+                        "minWidth": "0"
+                      }
+                    },
+                    "type": "ia.display.view"
+                  },
+                  {
+                    "children": [],
+                    "meta": {
+                      "name": "pairGap"
+                    },
+                    "position": {
+                      "basis": "230px",
+                      "shrink": 0
+                    },
+                    "props": {
+                      "direction": "row"
+                    },
+                    "type": "ia.container.flex"
+                  },
+                  {
+                    "meta": {
+                      "name": "backup"
+                    },
+                    "position": {
+                      "basis": "0px",
+                      "grow": 2,
+                      "shrink": 1
+                    },
+                    "propConfig": {
+                      "props.params": {
+                        "binding": {
+                          "config": {
+                            "expression": "now(3000)"
+                          },
+                          "transforms": [
+                            {
+                              "code": "\timport redundancy_demo\n\treturn redundancy_demo.backup_card()\n",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "expr"
+                        }
+                      }
+                    },
+                    "props": {
+                      "path": "GatewayCard",
+                      "style": {
+                        "margin": "0 12px",
+                        "minWidth": "0"
+                      }
+                    },
+                    "type": "ia.display.view"
+                  },
+                  {
+                    "children": [],
+                    "meta": {
+                      "name": "hs2"
+                    },
+                    "position": {
+                      "basis": "0px",
+                      "grow": 0,
+                      "shrink": 1
+                    },
+                    "props": {
+                      "direction": "row"
+                    },
+                    "type": "ia.container.flex"
+                  },
+                  {
+                    "children": [
+                      {
+                        "meta": {
+                          "name": "pairRuleL"
+                        },
+                        "position": {
+                          "shrink": 0
+                        },
+                        "propConfig": {
+                          "props.style.classes": {
+                            "binding": {
+                              "config": {
+                                "expression": "now(3000)"
+                              },
+                              "transforms": [
+                                {
+                                  "code": "\timport redundancy_demo\n\treturn redundancy_demo.pair_classes()\n",
+                                  "type": "script"
+                                }
+                              ],
+                              "type": "expr"
+                            }
+                          }
+                        },
+                        "props": {
+                          "style": {
+                            "height": "3px",
+                            "left": "calc(50% - 127px)",
+                            "marginTop": "-1px",
+                            "position": "absolute",
+                            "right": "calc(50% + 93px)",
+                            "top": "50%",
+                            "zIndex": "1"
+                          }
+                        },
+                        "type": "ia.container.flex"
+                      },
+                      {
+                        "meta": {
+                          "name": "pairRuleR"
+                        },
+                        "position": {
+                          "shrink": 0
+                        },
+                        "propConfig": {
+                          "props.style.classes": {
+                            "binding": {
+                              "config": {
+                                "expression": "now(3000)"
+                              },
+                              "transforms": [
+                                {
+                                  "code": "\timport redundancy_demo\n\treturn redundancy_demo.pair_classes()\n",
+                                  "type": "script"
+                                }
+                              ],
+                              "type": "expr"
+                            }
+                          }
+                        },
+                        "props": {
+                          "style": {
+                            "height": "3px",
+                            "left": "calc(50% + 93px)",
+                            "marginTop": "-1px",
+                            "position": "absolute",
+                            "right": "calc(50% - 127px)",
+                            "top": "50%",
+                            "zIndex": "1"
+                          }
+                        },
+                        "type": "ia.container.flex"
+                      },
+                      {
+                        "meta": {
+                          "name": "pairDrop"
+                        },
+                        "position": {
+                          "shrink": 0
+                        },
+                        "propConfig": {
+                          "props.style.classes": {
+                            "binding": {
+                              "config": {
+                                "expression": "now(3000)"
+                              },
+                              "transforms": [
+                                {
+                                  "code": "\timport redundancy_demo\n\treturn redundancy_demo.pair_classes()\n",
+                                  "type": "script"
+                                }
+                              ],
+                              "type": "expr"
+                            }
+                          }
+                        },
+                        "props": {
+                          "style": {
+                            "bottom": "-16px",
+                            "height": "auto",
+                            "left": "50%",
+                            "marginLeft": "-1px",
+                            "position": "absolute",
+                            "top": "calc(50% + 21px)",
+                            "width": "3px",
+                            "zIndex": "1"
+                          }
+                        },
+                        "type": "ia.container.flex"
+                      },
+                      {
+                        "children": [
+                          {
+                            "meta": {
+                              "name": "pairRole"
+                            },
+                            "position": {
+                              "shrink": 0
+                            },
+                            "propConfig": {
+                              "props.text": {
+                                "binding": {
+                                  "config": {
+                                    "expression": "now(3000)"
+                                  },
+                                  "transforms": [
+                                    {
+                                      "code": "\timport redundancy_demo\n\treturn redundancy_demo.pair_text('label')\n",
+                                      "type": "script"
+                                    }
+                                  ],
+                                  "type": "expr"
+                                }
+                              }
+                            },
+                            "props": {
+                              "style": {
+                                "fontSize": "11px",
+                                "fontWeight": "700",
+                                "letterSpacing": "0.06em",
+                                "lineHeight": "1.25",
+                                "textAlign": "center",
+                                "whiteSpace": "nowrap"
+                              }
+                            },
+                            "type": "ia.display.label"
+                          },
+                          {
+                            "meta": {
+                              "name": "pairDetail"
+                            },
+                            "position": {
+                              "shrink": 0
+                            },
+                            "propConfig": {
+                              "props.text": {
+                                "binding": {
+                                  "config": {
+                                    "expression": "now(3000)"
+                                  },
+                                  "transforms": [
+                                    {
+                                      "code": "\timport redundancy_demo\n\treturn redundancy_demo.pair_text('detail')\n",
+                                      "type": "script"
+                                    }
+                                  ],
+                                  "type": "expr"
+                                }
+                              }
+                            },
+                            "props": {
+                              "style": {
+                                "classes": "wd-conn-sub",
+                                "fontSize": "10px",
+                                "lineHeight": "1.25",
+                                "textAlign": "center",
+                                "whiteSpace": "nowrap"
+                              }
+                            },
+                            "type": "ia.display.label"
+                          }
+                        ],
+                        "meta": {
+                          "name": "pairChip"
+                        },
+                        "position": {
+                          "shrink": 0
+                        },
+                        "propConfig": {
+                          "props.style.classes": {
+                            "binding": {
+                              "config": {
+                                "expression": "now(3000)"
+                              },
+                              "transforms": [
+                                {
+                                  "code": "\timport redundancy_demo\n\treturn redundancy_demo.pair_chip_classes()\n",
+                                  "type": "script"
+                                }
+                              ],
+                              "type": "expr"
+                            }
+                          }
+                        },
+                        "props": {
+                          "alignItems": "center",
+                          "direction": "column",
+                          "style": {
+                            "boxSizing": "border-box",
+                            "gap": "1px",
+                            "height": "42px",
+                            "justifyContent": "center",
+                            "left": "50%",
+                            "overflow": "hidden",
+                            "padding": "5px 10px",
+                            "pointerEvents": "auto",
+                            "position": "absolute",
+                            "top": "50%",
+                            "transform": "translate(-50%, -50%)",
+                            "width": "196px",
+                            "zIndex": "3"
+                          }
+                        },
+                        "type": "ia.container.flex"
+                      }
+                    ],
+                    "meta": {
+                      "name": "pairOverlay"
+                    },
+                    "position": {
+                      "basis": "0px",
+                      "grow": 0,
+                      "shrink": 0
+                    },
+                    "props": {
+                      "direction": "row",
+                      "style": {
+                        "bottom": "0px",
+                        "left": "0px",
+                        "overflow": "visible",
+                        "pointerEvents": "none",
+                        "position": "absolute",
+                        "right": "0px",
+                        "top": "0px",
+                        "zIndex": "2"
+                      }
+                    },
+                    "type": "ia.container.flex"
+                  }
+                ],
+                "meta": {
+                  "name": "hubrow"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "props": {
+                  "alignItems": "stretch",
+                  "direction": "row",
+                  "style": {
+                    "overflow": "visible",
+                    "position": "relative",
+                    "width": "100%"
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [],
+                "meta": {
+                  "name": "stem"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "props": {
+                  "direction": "row",
+                  "style": {
+                    "height": "16px",
+                    "width": "100%"
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "children": [],
+                    "meta": {
+                      "name": "bs1"
+                    },
+                    "position": {
+                      "basis": "0px",
+                      "grow": 1
+                    },
+                    "props": {
+                      "direction": "row"
+                    },
+                    "type": "ia.container.flex"
+                  },
+                  {
+                    "children": [],
+                    "meta": {
+                      "name": "barline"
+                    },
+                    "position": {
+                      "basis": "0px",
+                      "grow": 2
+                    },
+                    "props": {
+                      "direction": "row",
+                      "style": {
+                        "backgroundColor": "rgba(148,163,184,0.45)",
+                        "height": "2px"
+                      }
+                    },
+                    "type": "ia.container.flex"
+                  },
+                  {
+                    "children": [],
+                    "meta": {
+                      "name": "bs2"
+                    },
+                    "position": {
+                      "basis": "0px",
+                      "grow": 1
+                    },
+                    "props": {
+                      "direction": "row"
+                    },
+                    "type": "ia.container.flex"
+                  }
+                ],
+                "meta": {
+                  "name": "bar"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "props": {
+                  "alignItems": "center",
+                  "direction": "row",
+                  "style": {
+                    "height": "2px",
+                    "overflow": "hidden",
+                    "width": "100%"
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "children": [],
+                        "meta": {
+                          "name": "dl"
+                        },
+                        "position": {
+                          "shrink": 0
+                        },
+                        "props": {
+                          "direction": "row",
+                          "style": {
+                            "backgroundColor": "rgba(148,163,184,0.45)",
+                            "height": "18px",
+                            "width": "2px"
+                          }
+                        },
+                        "type": "ia.container.flex"
+                      }
+                    ],
+                    "meta": {
+                      "name": "dropL"
+                    },
+                    "position": {
+                      "basis": "0px",
+                      "grow": 1
+                    },
+                    "props": {
+                      "direction": "row",
+                      "justify": "center",
+                      "style": {
+                        "overflow": "hidden"
+                      }
+                    },
+                    "type": "ia.container.flex"
+                  },
+                  {
+                    "children": [
+                      {
+                        "children": [],
+                        "meta": {
+                          "name": "dr"
+                        },
+                        "position": {
+                          "shrink": 0
+                        },
+                        "props": {
+                          "direction": "row",
+                          "style": {
+                            "backgroundColor": "rgba(148,163,184,0.45)",
+                            "height": "18px",
+                            "width": "2px"
+                          }
+                        },
+                        "type": "ia.container.flex"
+                      }
+                    ],
+                    "meta": {
+                      "name": "dropR"
+                    },
+                    "position": {
+                      "basis": "0px",
+                      "grow": 1
+                    },
+                    "props": {
+                      "direction": "row",
+                      "justify": "center",
+                      "style": {
+                        "overflow": "hidden"
+                      }
+                    },
+                    "type": "ia.container.flex"
+                  }
+                ],
+                "meta": {
+                  "name": "drops"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "props": {
+                  "direction": "row",
+                  "style": {
+                    "overflow": "hidden",
+                    "width": "100%"
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "edge1"
+                    },
+                    "position": {
+                      "basis": "0px",
+                      "grow": 1,
+                      "shrink": 1
+                    },
+                    "propConfig": {
+                      "props.params": {
+                        "binding": {
+                          "config": {
+                            "expression": "now(3000)"
+                          },
+                          "transforms": [
+                            {
+                              "code": "\timport gateway_admin\n\treturn gateway_admin.card(0)\n",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "expr"
+                        }
+                      }
+                    },
+                    "props": {
+                      "path": "GatewayCard",
+                      "style": {
+                        "margin": "0 12px",
+                        "minWidth": "0"
+                      }
+                    },
+                    "type": "ia.display.view"
+                  },
+                  {
+                    "meta": {
+                      "name": "edge2"
+                    },
+                    "position": {
+                      "basis": "0px",
+                      "grow": 1,
+                      "shrink": 1
+                    },
+                    "propConfig": {
+                      "props.params": {
+                        "binding": {
+                          "config": {
+                            "expression": "now(3000)"
+                          },
+                          "transforms": [
+                            {
+                              "code": "\timport gateway_admin\n\treturn gateway_admin.card(1)\n",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "expr"
+                        }
+                      }
+                    },
+                    "props": {
+                      "path": "GatewayCard",
+                      "style": {
+                        "margin": "0 12px",
+                        "minWidth": "0"
+                      }
+                    },
+                    "type": "ia.display.view"
+                  }
+                ],
+                "meta": {
+                  "name": "edgerow"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "props": {
+                  "alignItems": "stretch",
+                  "direction": "row",
+                  "style": {
+                    "overflow": "hidden",
+                    "width": "100%"
+                  }
+                },
+                "type": "ia.container.flex"
+              }
+            ],
+            "meta": {
+              "name": "tree"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "gap": "0px",
+                "margin": "0 auto",
+                "maxWidth": "1400px",
+                "minHeight": "0",
+                "overflow": "hidden",
+                "paddingTop": "4px",
+                "width": "100%"
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [],
+            "meta": {
+              "name": "padBottom"
+            },
+            "position": {
+              "basis": "0px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "props": {
+              "direction": "column"
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "main"
+        },
+        "position": {
+          "basis": "0px",
+          "grow": 1,
+          "shrink": 1
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "gap": "12px",
+            "minHeight": "0",
+            "minWidth": "0",
+            "width": "100%"
+          }
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "position": {
+      "basis": "auto",
+      "shrink": 0
+    },
+    "propConfig": {
+      "props.style.classes": {
+        "binding": {
+          "config": {
+            "expression": "{session.custom.style} + '/containers/content'"
+          },
+          "type": "expr"
+        }
+      }
+    },
+    "props": {
+      "alignItems": "stretch",
+      "direction": "row",
+      "style": {
+        "gap": "16px",
+        "minHeight": "100%",
+        "padding": "16px",
+        "width": "100%"
+      }
+    },
+    "type": "ia.container.flex"
+  },
+  "propConfig": {
+    "custom.guard": {
+      "binding": {
+        "config": {
+          "expression": "now(3000)"
+        },
+        "type": "expr",
+        "transforms": [
+          {
+            "code": "\timport gateway_admin\n\treturn gateway_admin.summary()\n",
+            "type": "script"
+          }
+        ]
+      }
+    },
+    "custom.rail": {
+      "binding": {
+        "type": "expr",
+        "config": {
+          "expression": "now(3000)"
+        },
+        "transforms": [
+          {
+            "type": "script",
+            "code": "\timport demo_rail\n\treturn demo_rail.rail('eam')\n"
+          }
+        ]
+      }
+    }
+  }
+}

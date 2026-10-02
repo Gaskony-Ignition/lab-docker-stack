@@ -1,0 +1,181 @@
+{
+  "custom": {},
+  "params": {
+    "badge": "",
+    "label": "",
+    "tip": "",
+    "value": ""
+  },
+  "propConfig": {
+    "params.badge": {
+      "paramDirection": "input"
+    },
+    "params.label": {
+      "paramDirection": "input"
+    },
+    "params.tip": {
+      "paramDirection": "input"
+    },
+    "params.value": {
+      "paramDirection": "input"
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 22,
+      "width": 260
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "label"
+        },
+        "position": {
+          "basis": "auto",
+          "grow": 1,
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.style.classes": {
+            "binding": {
+              "config": {
+                "expression": "{session.custom.style} + '/text/muted'"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.label}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "fontSize": "11px",
+            "lineHeight": 1.4,
+            "whiteSpace": "nowrap"
+          },
+          "text": ""
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "value"
+        },
+        "position": {
+          "basis": "auto",
+          "shrink": 1
+        },
+        "propConfig": {
+          "position.display": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.badge} = ''"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.value}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "fontSize": "11px",
+            "fontWeight": "600",
+            "lineHeight": 1.4,
+            "minWidth": "0",
+            "overflow": "hidden",
+            "textOverflow": "ellipsis",
+            "whiteSpace": "nowrap"
+          },
+          "text": ""
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "badged"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "propConfig": {
+          "position.display": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.badge} != ''"
+              },
+              "type": "expr"
+            }
+          },
+          "props.style.classes": {
+            "binding": {
+              "config": {
+                "expression": "{session.custom.style} + '/status/' + {view.params.badge}"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.value}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "fontSize": "10px",
+            "lineHeight": 1.4,
+            "padding": "0 8px",
+            "whiteSpace": "nowrap"
+          },
+          "text": ""
+        },
+        "type": "ia.display.label"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "propConfig": {
+      "props.tooltip.text": {
+        "binding": {
+          "config": {
+            "expression": "{view.params.tip}"
+          },
+          "type": "expr"
+        }
+      }
+    },
+    "props": {
+      "alignItems": "center",
+      "direction": "row",
+      "justify": "space-between",
+      "style": {
+        "gap": "8px",
+        "minWidth": "0",
+        "width": "100%"
+      },
+      "tooltip": {
+        "enabled": true
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

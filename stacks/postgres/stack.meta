@@ -1,0 +1,14 @@
+# What this stack IS, machine-readably -- the single source every list in
+# scripts/ derives from (start order, status table, .gateways.env, proxy hosts,
+# hosts-file names, seeding, bootstrap targeting). Grammar in docs/PORTABLE.md:
+# flat KEY=VALUE, LF only, no empty values, closed keyword set -- parsed by a
+# line regex from bash 3.2 sed AND PowerShell 5, so nothing clever fits here,
+# and that is the point. `make validate` enforces all of it.
+ORDER=10
+KIND=service
+PORT_VAR=POSTGRES_HOST_PORT
+PORT_DEFAULT=29432
+STATUS_SCHEME=none
+STATUS_NOTE="loopback only"
+SEED_VOLUME=wd-postgres-initdb
+SEED_SRC=initdb

@@ -1,0 +1,77 @@
+name: ignition-edge4
+
+# Second MQTT-only edge for the Sparkplug alarms demo, exactly parallel to
+# ignition-edge3 -- see that stack's compose.yaml and stack.meta for the full
+# explanation of why this gateway carries ROLE=edge-isolated instead of
+# ROLE=edge. Two isolated edges rather than one because the demo needs to show
+# more than one Sparkplug edge node under the same broker/group without either
+# of them ever touching the Gateway Network.
+
+services:
+  ignition-edge4:
+    # The version is a VARIABLE with the repo's declared version as its default
+    # -- see ignition-edge2/compose.yaml for the full explanation. All six
+    # gateways must move together.
+    image: inductiveautomation/ignition:${IGNITION_VERSION:-8.3.9}
+    container_name: ignition-edge4
+    # "no", quoted -- bare no is YAML false. See ignition-edge2/compose.yaml.
+    restart: "no"
+    environment:
+      TZ: ${TZ}
+      # Unattended commissioning -- applies only on an empty data volume.
+      ACCEPT_IGNITION_EULA: "Y"
+      IGNITION_EDITION: edge
+      GATEWAY_ADMIN_USERNAME: ${GATEWAY_ADMIN_USERNAME}
+      GATEWAY_ADMIN_PASSWORD: ${GATEWAY_ADMIN_PASSWORD}
+      GATEWAY_HTTP_PORT: 8088
+      GATEWAY_HTTPS_PORT: 8043
+      GATEWAY_GAN_PORT: 8060
+      MALLOC_ARENA_MAX: "2"
+    # -n re-applies on EVERY container start -- see ignition-edge2. The
+    # --add-opens after the -XX args is Cirrus Link's -- see ignition-edge3's
+    # compose.yaml for why (the vendor requires it for alarm propagation).
+    command: >
+      -n Ignition-Edge4
+      -m 512
+      --
+      -XX:ParallelGCThreads=2
+      -XX:ConcGCThreads=1
+      -XX:G1PeriodicGCInterval=300000
+      -XX:G1PeriodicGCSystemLoadThreshold=0
+      --add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED
+      gateway.useProxyForwardedHeader=true
+    ports:
+      - "${EDGE4_HTTP_HOST_PORT:-29688}:8088"   # HTTP  - http://localhost:29688
+      - "${EDGE4_HTTPS_HOST_PORT:-29643}:8043"   # HTTPS - https://localhost:29643
+      - "${EDGE4_OPCUA_HOST_PORT:-29641}:62541"   # OPC UA server - opc.tcp://localhost:29641
+    volumes:
+      - edge4_data:/usr/local/bin/ignition/data
+    networks:
+      backbone: {}
+      # wd-mqtt: this edge's Transmission dials the hub pair's Distributor as
+      # mqtt-master / mqtt-backup, names that exist only on it -- so
+      # `docker network disconnect wd-mqtt <edge>` is the cut, and backbone stays.
+      mqtt: {}
+    stop_grace_period: 30s
+    healthcheck:
+      test: ["CMD", "/usr/local/bin/health-check.sh", "-s", "RUNNING",
+             "http://localhost:8088/StatusPing"]
+      interval: 15s
+      timeout: 10s
+      # See ignition-edge2/compose.yaml -- a 2-core machine's cold start is
+      # CPU-bound and routinely needs longer than two minutes.
+      retries: 20
+      start_period: 180s
+    labels:
+      au.gaskony.wd.stack: "ignition-edge4"
+
+volumes:
+  edge4_data:
+
+networks:
+  backbone:
+    external: true
+  # wd-mqtt: created by scripts/lib.sh:ensure_mqtt_net, like backbone.
+  mqtt:
+    name: wd-mqtt
+    external: true

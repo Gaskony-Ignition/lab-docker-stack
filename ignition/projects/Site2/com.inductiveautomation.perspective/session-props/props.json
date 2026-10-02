@@ -1,0 +1,233 @@
+{
+  "custom": {
+    "alarms": {
+      "a1": {
+        "cls": "pri-urgent",
+        "pri": "URGENT",
+        "row": "row-urgent",
+        "text": "Palletizer E-stop pressed \u2014 zone 3",
+        "time": "14:12"
+      },
+      "a2": {
+        "cls": "pri-urgent",
+        "pri": "URGENT",
+        "row": "row-urgent",
+        "text": "Capper torque below limit \u2014 head 4",
+        "time": "14:26"
+      },
+      "a3": {
+        "cls": "pri-high",
+        "pri": "HIGH",
+        "row": "row-high",
+        "text": "Labeller fault \u2014 reel change overdue",
+        "time": "13:47"
+      },
+      "a4": {
+        "cls": "pri-med",
+        "pri": "MED",
+        "row": "row-med",
+        "text": "Rinser water temperature low",
+        "time": "12:55"
+      },
+      "count": "6"
+    },
+    "banner": {
+      "count": "3 ACTIVE",
+      "text": "Capper torque low \u00b7 Palletizer E-stop \u00b7 Labeller fault"
+    },
+    "batches": [
+      [
+        "3312-A",
+        "Ginger 375 ml",
+        "7,400",
+        "88.2%",
+        "Slow",
+        "badge-warn"
+      ],
+      [
+        "3311-D",
+        "Tonic 300 ml",
+        "9,900",
+        "92.6%",
+        "Complete",
+        "badge-ok"
+      ],
+      [
+        "3311-C",
+        "Tonic 300 ml",
+        "4,150",
+        "79.8%",
+        "Aborted",
+        "badge-alarm"
+      ],
+      [
+        "3311-B",
+        "Soda 600 ml",
+        "15,600",
+        "95.1%",
+        "Complete",
+        "badge-ok"
+      ],
+      [
+        "3311-A",
+        "Ginger 375 ml",
+        "6,280",
+        "84.3%",
+        "Short",
+        "badge-warn"
+      ]
+    ],
+    "filler": {
+      "batch": "Batch 3312-A \u00b7 31% complete",
+      "buffer": "22",
+      "cipTemp": "66.8",
+      "headPressure": "2.1",
+      "pct": 48,
+      "progress": "31%",
+      "speed": "415",
+      "state": "Slow run"
+    },
+    "kpi": {
+      "downtime": "47",
+      "downtimeDelta": "\u25b2 19",
+      "oee": "71.2%",
+      "oeeDelta": "\u25bc 3.4%",
+      "rejects": "2.6%",
+      "rejectsDelta": "\u25b2 0.9%",
+      "throughput": "940",
+      "throughputDelta": "\u25bc 85"
+    },
+    "line": "Line 2",
+    "pushStatus": "Ready.",
+    "site": "Site 2 - Southern Plant",
+    "styleOverride": "",
+    "trend": {
+      "max": 1100,
+      "min": 800,
+      "points": [
+        {
+          "t": "07:00",
+          "v": 1010
+        },
+        {
+          "t": "08:00",
+          "v": 985
+        },
+        {
+          "t": "09:00",
+          "v": 940
+        },
+        {
+          "t": "10:00",
+          "v": 902
+        },
+        {
+          "t": "11:00",
+          "v": 868
+        },
+        {
+          "t": "12:00",
+          "v": 915
+        },
+        {
+          "t": "13:00",
+          "v": 890
+        },
+        {
+          "t": "14:00",
+          "v": 940
+        }
+      ],
+      "target": 1000
+    }
+  },
+  "propConfig": {
+    "custom.style": {
+      "binding": {
+        "config": {
+          "expression": "if({session.custom.styleOverride} = '', runScript('demo_styles.chosen_pack()', 5000), {session.custom.styleOverride})"
+        },
+        "type": "expr"
+      }
+    },
+    "props.auth": {
+      "access": "PRIVATE",
+      "persistent": false
+    },
+    "props.device.accelerometer": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.device.identifier": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.device.timezone": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.device.type": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.device.userAgent": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.gateway": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.geolocation.data": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.geolocation.permissionGranted": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.host": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.id": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.lastActivity": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.offline.capable": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.offline.enabled": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.offline.lastSynced": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.theme": {
+      "binding": {
+        "config": {
+          "expression": "{session.custom.style}"
+        },
+        "type": "expr"
+      }
+    }
+  },
+  "props": {
+    "address": "172.17.0.1",
+    "appBar": {
+      "togglePosition": "hidden"
+    },
+    "device": {},
+    "geolocation": {},
+    "locale": "en-US",
+    "offline": {},
+    "timeZoneId": "Etc/UTC"
+  }
+}

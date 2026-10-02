@@ -1,0 +1,28 @@
+{
+  "base": {
+    "style": {
+      "backgroundColor": "#2BB3D6",
+      "color": "#04141B",
+      "borderWidth": "1px",
+      "borderStyle": "solid",
+      "borderColor": "#2BB3D6",
+      "borderRadius": "6px",
+      "padding": "0 16px",
+      "fontFamily": "\"Inter\", \"Roboto\", \"Segoe UI\", Helvetica, Arial, sans-serif",
+      "fontSize": "13px",
+      "fontWeight": "600",
+      "letterSpacing": ".03em",
+      "whiteSpace": "nowrap",
+      "boxShadow": "0 0 10px rgba(43, 179, 214, .30)",
+      "cursor": "pointer"
+    }
+  },
+  "variants": [
+    {
+      "pseudo": "hover",
+      "style": {
+        "backgroundColor": "#46C6E6"
+      }
+    }
+  ]
+}

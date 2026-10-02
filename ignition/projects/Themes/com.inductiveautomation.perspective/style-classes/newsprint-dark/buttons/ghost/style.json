@@ -1,0 +1,26 @@
+{
+  "base": {
+    "style": {
+      "backgroundColor": "transparent",
+      "color": "#e8e2d6",
+      "borderWidth": "1px",
+      "borderStyle": "solid",
+      "borderColor": "#3a3630",
+      "borderRadius": "0",
+      "padding": "7px 14px",
+      "fontFamily": "Georgia, \"Source Serif Pro\", \"Source Serif 4\", serif",
+      "fontSize": "13px",
+      "fontWeight": "600",
+      "whiteSpace": "nowrap",
+      "cursor": "pointer"
+    }
+  },
+  "variants": [
+    {
+      "pseudo": "hover",
+      "style": {
+        "backgroundColor": "#332f29"
+      }
+    }
+  ]
+}

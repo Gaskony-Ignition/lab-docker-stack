@@ -1,0 +1,152 @@
+{
+  "custom": {},
+  "params": {
+    "chip": {}
+  },
+  "propConfig": {
+    "params.chip": {
+      "paramDirection": "input"
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 26,
+      "width": 150
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "dot"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.style.classes": {
+            "binding": {
+              "config": {
+                "expression": "{session.custom.style} + {view.params.chip.dot}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "borderRadius": "50%",
+            "fontSize": "0px",
+            "height": "8px",
+            "lineHeight": 0,
+            "minWidth": "8px",
+            "padding": "0px",
+            "width": "8px"
+          },
+          "text": ""
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "name"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.chip.stack}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "fontSize": "12px",
+            "lineHeight": 1.4,
+            "whiteSpace": "nowrap"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "mem"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.chip.mem} != ''"
+              },
+              "type": "expr"
+            }
+          },
+          "props.style.classes": {
+            "binding": {
+              "config": {
+                "expression": "{session.custom.style} + '/text/muted'"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.chip.mem}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "fontSize": "11px",
+            "lineHeight": 1.4,
+            "whiteSpace": "nowrap"
+          }
+        },
+        "type": "ia.display.label"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "propConfig": {
+      "props.style.classes": {
+        "binding": {
+          "config": {
+            "expression": "{session.custom.style} + '/status/pill'"
+          },
+          "type": "expr"
+        }
+      },
+      "props.style.opacity": {
+        "binding": {
+          "config": {
+            "expression": "if({view.params.chip.dim}, 0.42, 1)"
+          },
+          "type": "expr"
+        }
+      }
+    },
+    "props": {
+      "alignItems": "center",
+      "direction": "row",
+      "style": {
+        "gap": "6px",
+        "height": "100%",
+        "padding": "0 9px",
+        "whiteSpace": "nowrap"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

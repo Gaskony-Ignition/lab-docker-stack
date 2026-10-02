@@ -1,0 +1,25 @@
+{
+  "base": {
+    "style": {
+      "color": "#c7c2e0",
+      "borderWidth": "1px",
+      "borderStyle": "solid",
+      "borderColor": "transparent",
+      "borderRadius": "8px",
+      "marginBottom": "2px",
+      "padding": "8px 10px",
+      "fontSize": "13px",
+      "fontWeight": "500",
+      "textDecoration": "none",
+      "cursor": "pointer"
+    }
+  },
+  "variants": [
+    {
+      "pseudo": "hover",
+      "style": {
+        "backgroundColor": "rgba(255,255,255,0.08)"
+      }
+    }
+  ]
+}

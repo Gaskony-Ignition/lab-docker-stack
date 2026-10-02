@@ -1,0 +1,519 @@
+{
+  "custom": {
+    "c": {
+      "ready": false,
+      "can": {}
+    }
+  },
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "width": 232,
+      "height": 60
+    }
+  },
+  "root": {
+    "type": "ia.container.flex",
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "gap": "4px",
+        "width": "100%",
+        "paddingTop": "2px"
+      }
+    },
+    "position": {
+      "shrink": 0
+    },
+    "children": [
+      {
+        "type": "ia.container.flex",
+        "meta": {
+          "name": "spRow"
+        },
+        "props": {
+          "direction": "row",
+          "style": {
+            "gap": "8px",
+            "width": "100%"
+          },
+          "alignItems": "center"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "children": [
+          {
+            "type": "ia.display.label",
+            "meta": {
+              "name": "caption"
+            },
+            "props": {
+              "text": "Setpoint",
+              "style": {
+                "lineHeight": "1.35",
+                "whiteSpace": "nowrap",
+                "fontSize": "11px"
+              }
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.style.classes": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{session.custom.style} + '/text/muted'"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "ia.input.numeric-entry-field",
+            "meta": {
+              "name": "setpoint"
+            },
+            "props": {
+              "value": 50,
+              "style": {
+                "height": "28px",
+                "fontSize": "12px"
+              }
+            },
+            "position": {
+              "basis": "0px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "propConfig": {
+              "props.value": {
+                "binding": {
+                  "type": "property",
+                  "config": {
+                    "path": "session.custom.mqttSetpoint",
+                    "bidirectional": true
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "type": "ia.container.flex",
+        "meta": {
+          "name": "heads"
+        },
+        "props": {
+          "direction": "row",
+          "style": {
+            "gap": "4px",
+            "width": "100%",
+            "height": "14px"
+          }
+        },
+        "position": {
+          "shrink": 0
+        },
+        "children": [
+          {
+            "type": "ia.display.label",
+            "meta": {
+              "name": "h3"
+            },
+            "props": {
+              "text": "EDGE 3",
+              "style": {
+                "lineHeight": "1.35",
+                "whiteSpace": "nowrap",
+                "fontSize": "10px",
+                "fontWeight": "600",
+                "letterSpacing": "0.06em",
+                "opacity": "0.7",
+                "textAlign": "center",
+                "justifyContent": "center"
+              }
+            },
+            "position": {
+              "basis": "0px",
+              "grow": 1,
+              "shrink": 1
+            }
+          },
+          {
+            "type": "ia.display.label",
+            "meta": {
+              "name": "h4"
+            },
+            "props": {
+              "text": "EDGE 4",
+              "style": {
+                "lineHeight": "1.35",
+                "whiteSpace": "nowrap",
+                "fontSize": "10px",
+                "fontWeight": "600",
+                "letterSpacing": "0.06em",
+                "opacity": "0.7",
+                "textAlign": "center",
+                "justifyContent": "center"
+              }
+            },
+            "position": {
+              "basis": "0px",
+              "grow": 1,
+              "shrink": 1
+            }
+          }
+        ]
+      },
+      {
+        "type": "ia.container.flex",
+        "meta": {
+          "name": "send"
+        },
+        "props": {
+          "direction": "row",
+          "style": {
+            "gap": "4px",
+            "width": "100%"
+          }
+        },
+        "position": {
+          "shrink": 0
+        },
+        "children": [
+          {
+            "type": "ia.display.view",
+            "meta": {
+              "name": "send0"
+            },
+            "props": {
+              "path": "RailButton",
+              "params": {
+                "key": "mqtt.cmd.send0",
+                "action": "mqtt.cmd.send0",
+                "icon": "material/send",
+                "kind": "chip",
+                "quiet": true
+              },
+              "useDefaultViewHeight": false,
+              "useDefaultViewWidth": false,
+              "style": {
+                "width": "100%"
+              }
+            },
+            "position": {
+              "basis": "0px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "propConfig": {
+              "props.params.can": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{view.custom.c.can.send0}"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "ia.display.view",
+            "meta": {
+              "name": "send1"
+            },
+            "props": {
+              "path": "RailButton",
+              "params": {
+                "key": "mqtt.cmd.send1",
+                "action": "mqtt.cmd.send1",
+                "icon": "material/send",
+                "kind": "chip",
+                "quiet": true
+              },
+              "useDefaultViewHeight": false,
+              "useDefaultViewWidth": false,
+              "style": {
+                "width": "100%"
+              }
+            },
+            "position": {
+              "basis": "0px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "propConfig": {
+              "props.params.can": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{view.custom.c.can.send1}"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "type": "ia.container.flex",
+        "meta": {
+          "name": "auto"
+        },
+        "props": {
+          "direction": "row",
+          "style": {
+            "gap": "4px",
+            "width": "100%"
+          }
+        },
+        "position": {
+          "shrink": 0
+        },
+        "children": [
+          {
+            "type": "ia.display.view",
+            "meta": {
+              "name": "auto0"
+            },
+            "props": {
+              "path": "RailButton",
+              "params": {
+                "key": "mqtt.cmd.auto0",
+                "action": "mqtt.cmd.auto0",
+                "icon": "material/autorenew",
+                "kind": "chip",
+                "quiet": true
+              },
+              "useDefaultViewHeight": false,
+              "useDefaultViewWidth": false,
+              "style": {
+                "width": "100%"
+              }
+            },
+            "position": {
+              "basis": "0px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "propConfig": {
+              "props.params.can": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{view.custom.c.can.auto0}"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "ia.display.view",
+            "meta": {
+              "name": "auto1"
+            },
+            "props": {
+              "path": "RailButton",
+              "params": {
+                "key": "mqtt.cmd.auto1",
+                "action": "mqtt.cmd.auto1",
+                "icon": "material/autorenew",
+                "kind": "chip",
+                "quiet": true
+              },
+              "useDefaultViewHeight": false,
+              "useDefaultViewWidth": false,
+              "style": {
+                "width": "100%"
+              }
+            },
+            "position": {
+              "basis": "0px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "propConfig": {
+              "props.params.can": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{view.custom.c.can.auto1}"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "type": "ia.container.flex",
+        "meta": {
+          "name": "manual"
+        },
+        "props": {
+          "direction": "row",
+          "style": {
+            "gap": "4px",
+            "width": "100%"
+          }
+        },
+        "position": {
+          "shrink": 0
+        },
+        "children": [
+          {
+            "type": "ia.display.view",
+            "meta": {
+              "name": "manual0"
+            },
+            "props": {
+              "path": "RailButton",
+              "params": {
+                "key": "mqtt.cmd.manual0",
+                "action": "mqtt.cmd.manual0",
+                "icon": "material/pan_tool",
+                "kind": "chip",
+                "quiet": true
+              },
+              "useDefaultViewHeight": false,
+              "useDefaultViewWidth": false,
+              "style": {
+                "width": "100%"
+              }
+            },
+            "position": {
+              "basis": "0px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "propConfig": {
+              "props.params.can": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{view.custom.c.can.manual0}"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "ia.display.view",
+            "meta": {
+              "name": "manual1"
+            },
+            "props": {
+              "path": "RailButton",
+              "params": {
+                "key": "mqtt.cmd.manual1",
+                "action": "mqtt.cmd.manual1",
+                "icon": "material/pan_tool",
+                "kind": "chip",
+                "quiet": true
+              },
+              "useDefaultViewHeight": false,
+              "useDefaultViewWidth": false,
+              "style": {
+                "width": "100%"
+              }
+            },
+            "position": {
+              "basis": "0px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "propConfig": {
+              "props.params.can": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{view.custom.c.can.manual1}"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "note"
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "fontSize": "10px",
+            "lineHeight": 1.35,
+            "minWidth": "0",
+            "overflow": "hidden",
+            "textOverflow": "ellipsis",
+            "whiteSpace": "nowrap"
+          },
+          "tooltip": {
+            "enabled": true
+          }
+        },
+        "position": {
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if(indexOf({session.custom.acting}, 'mqtt.cmd.') = 0, {session.custom.actingWhat}, if(indexOf({session.custom.actKey}, 'mqtt.cmd.') = 0, {session.custom.actNote}, ''))"
+              }
+            }
+          },
+          "props.tooltip.text": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if(indexOf({session.custom.acting}, 'mqtt.cmd.') = 0, {session.custom.actingWhat}, if(indexOf({session.custom.actKey}, 'mqtt.cmd.') = 0, {session.custom.actNote}, ''))"
+              }
+            }
+          },
+          "props.style.classes": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.style} + '/text/muted'"
+              }
+            }
+          },
+          "position.display": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.custom.c.ready} && if(indexOf({session.custom.acting}, 'mqtt.cmd.') = 0, {session.custom.actingWhat}, if(indexOf({session.custom.actKey}, 'mqtt.cmd.') = 0, {session.custom.actNote}, '')) != ''"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "propConfig": {
+    "custom.c": {
+      "binding": {
+        "type": "expr",
+        "config": {
+          "expression": "now(2000)"
+        },
+        "transforms": [
+          {
+            "type": "script",
+            "code": "\timport sparkplug_demo\n\treturn sparkplug_demo.ctl('commands')\n"
+          }
+        ]
+      }
+    }
+  }
+}

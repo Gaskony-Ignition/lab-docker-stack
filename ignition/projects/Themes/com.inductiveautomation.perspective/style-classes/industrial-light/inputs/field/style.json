@@ -1,0 +1,16 @@
+{
+  "base": {
+    "style": {
+      "backgroundColor": "#FFFFFF",
+      "color": "#1F2937",
+      "borderWidth": "1px",
+      "borderStyle": "solid",
+      "borderColor": "#B0B8C4",
+      "borderRadius": "2px",
+      "padding": "0 8px",
+      "fontFamily": "\"Roboto\", \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+      "fontSize": "13px",
+      "fontWeight": "400"
+    }
+  }
+}

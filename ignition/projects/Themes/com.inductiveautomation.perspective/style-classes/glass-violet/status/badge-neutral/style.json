@@ -1,0 +1,15 @@
+{
+  "base": {
+    "style": {
+      "backgroundColor": "rgba(255,255,255,0.14)",
+      "color": "#c7c2e0",
+      "borderWidth": "1px",
+      "borderStyle": "solid",
+      "borderColor": "rgba(255,255,255,0.22)",
+      "borderRadius": "999px",
+      "padding": "3px 10px",
+      "fontSize": "11px",
+      "fontWeight": "700"
+    }
+  }
+}

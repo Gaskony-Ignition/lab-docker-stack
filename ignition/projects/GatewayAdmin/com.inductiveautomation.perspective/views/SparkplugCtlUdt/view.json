@@ -1,0 +1,377 @@
+{
+  "custom": {
+    "c": {
+      "ready": false,
+      "can": {}
+    }
+  },
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "width": 232,
+      "height": 60
+    }
+  },
+  "root": {
+    "type": "ia.container.flex",
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "gap": "4px",
+        "width": "100%",
+        "paddingTop": "2px"
+      }
+    },
+    "position": {
+      "shrink": 0
+    },
+    "children": [
+      {
+        "type": "ia.container.flex",
+        "meta": {
+          "name": "problem"
+        },
+        "props": {
+          "direction": "row",
+          "style": {
+            "gap": "4px",
+            "width": "100%"
+          }
+        },
+        "position": {
+          "shrink": 0
+        },
+        "children": [
+          {
+            "type": "ia.display.view",
+            "meta": {
+              "name": "diverge"
+            },
+            "props": {
+              "path": "RailButton",
+              "params": {
+                "key": "mqtt.udt.diverge",
+                "action": "mqtt.udt.diverge",
+                "icon": "material/call_split",
+                "kind": "chip",
+                "quiet": true
+              },
+              "useDefaultViewHeight": false,
+              "useDefaultViewWidth": false,
+              "style": {
+                "width": "100%"
+              }
+            },
+            "position": {
+              "basis": "0px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "propConfig": {
+              "props.params.can": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{view.custom.c.can.diverge}"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "ia.display.view",
+            "meta": {
+              "name": "putback"
+            },
+            "props": {
+              "path": "RailButton",
+              "params": {
+                "key": "mqtt.udt.putback",
+                "action": "mqtt.udt.putback",
+                "icon": "material/undo",
+                "kind": "chip",
+                "quiet": true
+              },
+              "useDefaultViewHeight": false,
+              "useDefaultViewWidth": false,
+              "style": {
+                "width": "100%"
+              }
+            },
+            "position": {
+              "basis": "0px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "propConfig": {
+              "props.params.can": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{view.custom.c.can.putback}"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "type": "ia.container.flex",
+        "meta": {
+          "name": "fix"
+        },
+        "props": {
+          "direction": "row",
+          "style": {
+            "gap": "4px",
+            "width": "100%"
+          }
+        },
+        "position": {
+          "shrink": 0
+        },
+        "children": [
+          {
+            "type": "ia.display.view",
+            "meta": {
+              "name": "v2edge3"
+            },
+            "props": {
+              "path": "RailButton",
+              "params": {
+                "key": "mqtt.udt.v2edge3",
+                "action": "mqtt.udt.v2edge3",
+                "icon": "material/upgrade",
+                "kind": "chip",
+                "quiet": true
+              },
+              "useDefaultViewHeight": false,
+              "useDefaultViewWidth": false,
+              "style": {
+                "width": "100%"
+              }
+            },
+            "position": {
+              "basis": "0px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "propConfig": {
+              "props.params.can": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{view.custom.c.can.v2edge3}"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "ia.display.view",
+            "meta": {
+              "name": "v2edge4"
+            },
+            "props": {
+              "path": "RailButton",
+              "params": {
+                "key": "mqtt.udt.v2edge4",
+                "action": "mqtt.udt.v2edge4",
+                "icon": "material/upgrade",
+                "kind": "chip",
+                "quiet": true
+              },
+              "useDefaultViewHeight": false,
+              "useDefaultViewWidth": false,
+              "style": {
+                "width": "100%"
+              }
+            },
+            "position": {
+              "basis": "0px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "propConfig": {
+              "props.params.can": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{view.custom.c.can.v2edge4}"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "type": "ia.container.flex",
+        "meta": {
+          "name": "end"
+        },
+        "props": {
+          "direction": "row",
+          "style": {
+            "gap": "4px",
+            "width": "100%"
+          }
+        },
+        "position": {
+          "shrink": 0
+        },
+        "children": [
+          {
+            "type": "ia.display.view",
+            "meta": {
+              "name": "retire"
+            },
+            "props": {
+              "path": "RailButton",
+              "params": {
+                "key": "mqtt.udt.retire",
+                "action": "mqtt.udt.retire",
+                "icon": "material/delete_outline",
+                "kind": "chip",
+                "quiet": true
+              },
+              "useDefaultViewHeight": false,
+              "useDefaultViewWidth": false,
+              "style": {
+                "width": "100%"
+              }
+            },
+            "position": {
+              "basis": "0px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "propConfig": {
+              "props.params.can": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{view.custom.c.can.retire}"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "ia.display.view",
+            "meta": {
+              "name": "reset"
+            },
+            "props": {
+              "path": "RailButton",
+              "params": {
+                "key": "mqtt.udt.reset",
+                "action": "mqtt.udt.reset",
+                "icon": "material/replay",
+                "kind": "chip",
+                "quiet": true
+              },
+              "useDefaultViewHeight": false,
+              "useDefaultViewWidth": false,
+              "style": {
+                "width": "100%"
+              }
+            },
+            "position": {
+              "basis": "0px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "propConfig": {
+              "props.params.can": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{view.custom.c.can.reset}"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "note"
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "fontSize": "10px",
+            "lineHeight": 1.35,
+            "minWidth": "0",
+            "overflow": "hidden",
+            "textOverflow": "ellipsis",
+            "whiteSpace": "nowrap"
+          },
+          "tooltip": {
+            "enabled": true
+          }
+        },
+        "position": {
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if(indexOf({session.custom.acting}, 'mqtt.udt.') = 0, {session.custom.actingWhat}, if(indexOf({session.custom.actKey}, 'mqtt.udt.') = 0, {session.custom.actNote}, ''))"
+              }
+            }
+          },
+          "props.tooltip.text": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if(indexOf({session.custom.acting}, 'mqtt.udt.') = 0, {session.custom.actingWhat}, if(indexOf({session.custom.actKey}, 'mqtt.udt.') = 0, {session.custom.actNote}, ''))"
+              }
+            }
+          },
+          "props.style.classes": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.style} + '/text/muted'"
+              }
+            }
+          },
+          "position.display": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.custom.c.ready} && if(indexOf({session.custom.acting}, 'mqtt.udt.') = 0, {session.custom.actingWhat}, if(indexOf({session.custom.actKey}, 'mqtt.udt.') = 0, {session.custom.actNote}, '')) != ''"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "propConfig": {
+    "custom.c": {
+      "binding": {
+        "type": "expr",
+        "config": {
+          "expression": "now(2000)"
+        },
+        "transforms": [
+          {
+            "type": "script",
+            "code": "\timport sparkplug_demo\n\treturn sparkplug_demo.ctl('udt')\n"
+          }
+        ]
+      }
+    }
+  }
+}

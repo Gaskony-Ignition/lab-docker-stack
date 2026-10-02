@@ -1,0 +1,462 @@
+{
+  "custom": {},
+  "params": {
+    "footer": "",
+    "icon": "edge",
+    "label": "",
+    "metrics": [],
+    "state": "",
+    "state2": "",
+    "state2Level": "good",
+    "stateLevel": "warn",
+    "sublabel": ""
+  },
+  "propConfig": {
+    "params.footer": {
+      "paramDirection": "input"
+    },
+    "params.icon": {
+      "paramDirection": "input"
+    },
+    "params.label": {
+      "paramDirection": "input"
+    },
+    "params.metrics": {
+      "paramDirection": "input"
+    },
+    "params.state": {
+      "paramDirection": "input"
+    },
+    "params.state2": {
+      "paramDirection": "input"
+    },
+    "params.state2Level": {
+      "paramDirection": "input"
+    },
+    "params.stateLevel": {
+      "paramDirection": "input"
+    },
+    "params.sublabel": {
+      "paramDirection": "input"
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 168,
+      "width": 380
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "icon"
+            },
+            "position": {
+              "basis": "52px",
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.source": {
+                "binding": {
+                  "config": {
+                    "expression": "if({view.params.icon} = 'standard', 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIGlkPSJMYXllcl8yIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2aWV3Qm94PSIwIDAgMjIxLjQzIDMxNC4zOSI+PGRlZnM+PHN0eWxlPi5jbHMtMSwuY2xzLTIsLmNscy0ze2ZpbGw6bm9uZTt9LmNscy0ye2NsaXAtcGF0aDp1cmwoI2NsaXBwYXRoLTEpO30uY2xzLTR7ZmlsbDojZjc5NDM1O30uY2xzLTV7ZmlsbDojZmZmO30uY2xzLTZ7ZmlsbDojYWNjY2UyO30uY2xzLTd7ZmlsbDojMzU1OTgwO30uY2xzLTh7ZmlsbDojMmY0NjY2O30uY2xzLTN7Y2xpcC1wYXRoOnVybCgjY2xpcHBhdGgpO308L3N0eWxlPjxjbGlwUGF0aCBpZD0iY2xpcHBhdGgiPjxyZWN0IGNsYXNzPSJjbHMtMSIgd2lkdGg9IjIyMS40MyIgaGVpZ2h0PSIzMTQuMzkiLz48L2NsaXBQYXRoPjxjbGlwUGF0aCBpZD0iY2xpcHBhdGgtMSI+PHJlY3QgY2xhc3M9ImNscy0xIiB3aWR0aD0iMjIxLjQzIiBoZWlnaHQ9IjMxNC4zOSIvPjwvY2xpcFBhdGg+PC9kZWZzPjxnIGlkPSJMYXllcl8xLTIiPjxnIGlkPSJTZXJ2ZXJfQmx1ZV8tX0xlZnQiPjxnIGNsYXNzPSJjbHMtMyI+PHBvbHlnb24gY2xhc3M9ImNscy03IiBwb2ludHM9IjcyLjEyIDEyNy44NSA3Mi4xMyAzMTQuMzkgMjIxLjQzIDIyOC4xOSAyMjEuNDMgNDEuNjQgNzIuMTIgMTI3Ljg1Ii8+PHBvbHlnb24gY2xhc3M9ImNscy02IiBwb2ludHM9IjE0OS4zMiAwIDAgODYuMjEgNzIuMTIgMTI3Ljg1IDIyMS40MyA0MS42NCAxNDkuMzIgMCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtOCIgcG9pbnRzPSIwIDI3Mi43NCA3Mi4xMiAzMTQuMzkgNzIuMTIgMTI3Ljg1IDAgODYuMjEgMCAyNzIuNzQiLz48ZyBjbGFzcz0iY2xzLTIiPjxwYXRoIGNsYXNzPSJjbHMtNCIgZD0ibTEzNS4xNCwyMDkuOWMxLjY1LTIuMzcsMy41MS00LjA3LDUuNTctNS4xLDIuMDctMS4wNCwzLjgyLTEuMTUsNS4yMy0uMzEsMS40Mi44MywyLjA0LDIuMzIsMS44OSw0LjQ4LS4xNiwyLjE3LTEuMDUsNC4zNS0yLjcsNi41OC0xLjYzLDIuMjItMy40OSwzLjg1LTUuNTUsNC44OC0yLjA4LDEuMDQtMy44MywxLjIyLTUuMjQuNTItMS40Mi0uNy0yLjA2LTIuMTEtMS45LTQuMjguMTYtMi4xNiwxLjA2LTQuNDMsMi43MS02Ljc4Ii8+PHBhdGggY2xhc3M9ImNscy00IiBkPSJtMTg0LjUyLDExOC4wOGMtLjctMS4xMy0xLjc5LTEuNjktMy4yOC0xLjY4LTEuNS4wMy0zLjA3LjYxLTQuNzQsMS43Ny0xLjY3LDEuMTYtMy4xLDMuMTUtNC4zMiw1Ljk3LS4yMS41Mi0uNzgsMi4wNS0xLjcyLDQuNTktLjk0LDIuNTYtMi4xMSw1Ljc5LTMuNTUsOS43LTEuNDMsMy45MS0zLjA1LDguMzEtNC44NywxMy4yMS0xLjgxLDQuODktMy42OSwxMC4wMi01LjYzLDE1LjM5LTEuOTQsNS4zNi0zLjksMTAuNzctNS44OCwxNi4yNS0xLjk0LDUuMzUtMy43OSwxMC40NC01LjUzLDE1LjI2LjgzLS4xMiwxLjYzLS4xMiwyLjM3LDAsMy42LTcuMzMsNy40NC0xNS4xNSwxMS41Mi0yMy40NSw0LjEzLTguNCw3Ljk3LTE2LjI1LDExLjUyLTIzLjU1LDMuNTUtNy4zMSw2LjU3LTEzLjUxLDkuMDUtMTguNjIsMi41LTUuMTEsMy45Mi04LjA4LDQuMjgtOC45MSwxLjIxLTIuODIsMS40Ni00LjguNzctNS45MyIvPjxwYXRoIGNsYXNzPSJjbHMtNCIgZD0ibTEzNS4wNSwyMDQuMzljLTEuMTQtMy44Ny0yLjA2LTYuOTctMi43OC05LjMyLS43MS0yLjM2LTEuMzItNC4yMy0xLjc4LTUuNTgtLjQ4LTEuMzYtLjg1LTIuMzMtMS4xMy0yLjkzLS4yNy0uNi0uNTMtMS4xLS43OS0xLjQ3LS42MS0uOTMtMS41LTEuMjQtMi42OS0uOTYtMS4xOS4zMS0yLjQ2LDEuMTctMy44LDIuNTgtMS4zNCwxLjQyLTIuMjQsMi44NS0yLjY4LDQuMjctLjQ1LDEuNDItLjM2LDIuNi4yNCwzLjUyLjI2LjM4LjU5LjgsMS4wMSwxLjI0LjQxLjQ2LDEuMTEsMS4xLDIuMDgsMS45My45Ny44MywyLjMxLDEuOTEsNC4wMywzLjIzLDEuNzEsMS4zMiwzLjk5LDMuMDUsNi44Myw1LjE3LjQ4LS41OS45Ny0xLjE1LDEuNDgtMS42OCIvPjxwYXRoIGNsYXNzPSJjbHMtNSIgZD0ibTU4LjYyLDE1Mi4yNWMtLjQ5LDAtLjk5LS4xMi0xLjQ0LS4zOWwtNDUuMjUtMjYuMTRjLTEuMzgtLjgtMS44NS0yLjU2LTEuMDYtMy45NC44LTEuMzgsMi41Ni0xLjg1LDMuOTQtMS4wNmw0NS4yNSwyNi4xNGMxLjM4LjgsMS44NSwyLjU2LDEuMDYsMy45NC0uNTMuOTMtMS41MSwxLjQ0LTIuNSwxLjQ0Ii8+PHBhdGggY2xhc3M9ImNscy01IiBkPSJtNTguNjIsMTY3LjIxYy0uNDksMC0uOTktLjEyLTEuNDQtLjM5bC00NS4yNS0yNi4xM2MtMS4zOC0uOC0xLjg1LTIuNTYtMS4wNi0zLjk0LjgtMS4zOCwyLjU2LTEuODUsMy45NC0xLjA2bDQ1LjI1LDI2LjEzYzEuMzguOCwxLjg1LDIuNTYsMS4wNiwzLjk0LS41My45My0xLjUxLDEuNDQtMi41LDEuNDQiLz48cGF0aCBjbGFzcz0iY2xzLTUiIGQ9Im01OC42MiwxODIuMTdjLS40OSwwLS45OS0uMTItMS40NC0uMzlsLTQ1LjI1LTI2LjEyYy0xLjM4LS44LTEuODUtMi41Ni0xLjA2LTMuOTQuOC0xLjM4LDIuNTYtMS44NSwzLjk0LTEuMDZsNDUuMjUsMjYuMTJjMS4zOC44LDEuODUsMi41NiwxLjA2LDMuOTQtLjUzLjkzLTEuNTEsMS40NC0yLjUsMS40NCIvPjwvZz48L2c+PC9nPjwvZz48L3N2Zz4=', 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIGlkPSJMYXllcl8yIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2aWV3Qm94PSIwIDAgMTE1LjE3IDE3OC4zNiI+PGRlZnM+PHN0eWxlPi5jbHMtMSwuY2xzLTIsLmNscy0zLC5jbHMtNCwuY2xzLTUsLmNscy02e2ZpbGw6bm9uZTt9LmNscy0ye2NsaXAtcGF0aDp1cmwoI2NsaXBwYXRoLTMpO30uY2xzLTN7Y2xpcC1wYXRoOnVybCgjY2xpcHBhdGgtMik7fS5jbHMtNHtjbGlwLXBhdGg6dXJsKCNjbGlwcGF0aC0xKTt9LmNscy01e2lzb2xhdGlvbjppc29sYXRlO30uY2xzLTd7ZmlsbDojOTA5Mjk1O30uY2xzLTh7ZmlsbDojYmNiY2JlO30uY2xzLTl7ZmlsbDojMjgzNDM5O30uY2xzLTEwe2ZpbGw6IzVhNTk1Yzt9LmNscy0xMXtmaWxsOiM3OGQxNzU7fS5jbHMtNntjbGlwLXBhdGg6dXJsKCNjbGlwcGF0aCk7fTwvc3R5bGU+PGNsaXBQYXRoIGlkPSJjbGlwcGF0aCI+PHJlY3QgY2xhc3M9ImNscy0xIiB3aWR0aD0iMTE1LjE3IiBoZWlnaHQ9IjE3OC4zNiIvPjwvY2xpcFBhdGg+PGNsaXBQYXRoIGlkPSJjbGlwcGF0aC0xIj48cmVjdCBjbGFzcz0iY2xzLTEiIHdpZHRoPSIxMTUuMTciIGhlaWdodD0iMTc4LjM2Ii8+PC9jbGlwUGF0aD48Y2xpcFBhdGggaWQ9ImNsaXBwYXRoLTIiPjxyZWN0IGNsYXNzPSJjbHMtMSIgeD0iMjYuMzkiIHk9IjQzLjQ1IiB3aWR0aD0iNjguNjYiIGhlaWdodD0iOTQuMzYiLz48L2NsaXBQYXRoPjxjbGlwUGF0aCBpZD0iY2xpcHBhdGgtMyI+PHBvbHlnb24gY2xhc3M9ImNscy0xIiBwb2ludHM9IjI2LjM5IDEzNy44IDI2LjY4IDc5LjE3IDk0LjgyIDQzLjQ1IDk0LjUyIDEwMi4wOCAyNi4zOSAxMzcuOCIvPjwvY2xpcFBhdGg+PC9kZWZzPjxnIGlkPSJMYXllcl8xLTIiPjxnIGlkPSJFZGdlX1RvdWNoX1BhbmVsXy1fTGVmdCI+PGcgY2xhc3M9ImNscy02Ij48cG9seWdvbiBjbGFzcz0iY2xzLTgiIHBvaW50cz0iMTA4LjkgMCAuMDUgNjIuODUgLjAxIDE3NC44NSA2LjI5IDE3OC4zNiA2LjI5IDE3OC4zNiAxMTUuMTcgMTE1LjM5IDExNS4xNyAzLjYyIDEwOC45IDAiLz48cG9seWdvbiBjbGFzcz0iY2xzLTciIHBvaW50cz0iNi4yOSA2Ni40OCA2LjI5IDE3OC4zNiA2LjI5IDE3OC4zNiAxMTUuMTcgMTE1LjM5IDExNS4xNyAzLjYyIDYuMjkgNjYuNDgiLz48cG9seWdvbiBjbGFzcz0iY2xzLTkiIHBvaW50cz0iMTA4LjAyIDE1Ljk1IDEzLjUzIDcwLjUgMTMuNTMgMTY1LjMgMTA4LjAyIDExMC43OCAxMDguMDIgMTUuOTUiLz48cG9seWdvbiBjbGFzcz0iY2xzLTEwIiBwb2ludHM9Ii4wMSAxNzQuODUgNi4yOSAxNzguMzYgNi4yOSAxNzguMzYgNi4yOSA2Ni40OCAwIDYyLjg1IC4wMSAxNzQuODUiLz48ZyBjbGFzcz0iY2xzLTQiPjxnIGNsYXNzPSJjbHMtNSI+PGcgY2xhc3M9ImNscy0zIj48ZyBjbGFzcz0iY2xzLTIiPjxwYXRoIGNsYXNzPSJjbHMtMTEiIGQ9Im01Mi44OSw2Ni4wOWMtMTEuNDcsNi4wMS0yMS43NSwxOC41Mi0yNi4xOSwzMS44Ni0uMzMsMSwuMDQsMS43NS44MywxLjY3LjItLjAzLjQtLjA5LjU5LS4xOS42MS0uMzIsMS4xOS0xLDEuNDQtMS43NSwzLjk1LTExLjg4LDEzLjEtMjMsMjMuMzEtMjguMzYsMi40My0xLjI3LDQuODItMi4xNyw3LjEyLTIuNjcuMTUtLjAzLjI5LS4wOS40NC0uMTcuNjctLjM1LDEuMjktMS4xMywxLjQ5LTEuOTQuMjUtLjk4LS4yMi0xLjYzLTEuMDQtMS40NS0yLjU4LjU2LTUuMjgsMS41Ny04LDMiLz48cGF0aCBjbGFzcz0iY2xzLTExIiBkPSJtNTIuODEsODIuMjRjLTUuMTcsMi43MS05LjgsOC4zNC0xMS44LDE0LjM0LS4zMywxLC4wNCwxLjc0LjgzLDEuNjcuMi0uMDIuNC0uMDguNTktLjE4LjYxLS4zMiwxLjE5LTEsMS40NC0xLjc1LDEuNTEtNC41NCw1LjAyLTguODEsOC45Mi0xMC44NS45NC0uNDksMS44Ny0uODQsMi43Ni0xLjAzLjE1LS4wMy4zLS4wOS40NS0uMTcuNjYtLjM1LDEuMjgtMS4xMywxLjQ4LTEuOTMuMjUtLjk4LS4yMS0xLjY0LTEuMDMtMS40Ny0xLjE4LjI1LTIuNDEuNzEtMy42NSwxLjM2Ii8+PHBhdGggY2xhc3M9ImNscy0xMSIgZD0ibTUyLjg1LDc0LjE3Yy04LjMyLDQuMzYtMTUuNzcsMTMuNDMtMTguOTksMjMuMS0uMzMsMSwuMDQsMS43NC44MywxLjY2LjE5LS4wMS40LS4wOC41OS0uMTguNjEtLjMyLDEuMTgtMSwxLjQ0LTEuNzUsMi43My04LjIsOS4wNi0xNS45LDE2LjExLTE5LjYsMS42OC0uODgsMy4zNC0xLjUsNC45NC0xLjg1LjE1LS4wMy4yOS0uMDkuNDQtLjE2LjY3LS4zNSwxLjI5LTEuMTMsMS41LTEuOTQuMjQtLjk4LS4yMi0xLjYzLTEuMDQtMS40NS0xLjg4LjQxLTMuODQsMS4xNC01LjgyLDIuMTgiLz48cGF0aCBjbGFzcz0iY2xzLTExIiBkPSJtODkuOSw0Ni4wM2MtLjIxLjExLS40My4yNC0uNjUuMzgtMS4xNi43NS0yLjE2LDIuMTEtMyw0LjA4LS4xNi4zNy0uNTYsMS40NC0xLjIxLDMuMjQtLjY2LDEuOC0xLjQ5LDQuMDctMi41LDYuODItMSwyLjc0LTIuMTUsNS44NS0zLjQyLDkuMjktMS4yOCwzLjQ1LTIuNiw3LjA3LTMuOTYsMTAuODQtMS4zNiwzLjc4LTIuNzMsNy41OS00LjEzLDExLjQ0LTEuMzcsMy43OC0yLjY2LDcuMzctMy44OSwxMC43NS41OS0uMDQsMS4xMywwLDEuNjUuMTMsMi41MS01LjEyLDUuMi0xMC41Nyw4LjA2LTE2LjM2LDIuODktNS44Niw1LjU4LTExLjMzLDguMDYtMTYuNDMsMi40OC01LjEsNC42LTkuNDIsNi4zNC0xMi45OSwxLjc1LTMuNTYsMi43NC01LjY0LDIuOTktNi4yMi44NS0xLjk4LDEuMDMtMy4zOS41Ni00LjI1LS40OC0uODUtMS4yMy0xLjMyLTIuMjYtMS4zOS0uODUtLjA1LTEuNzIuMTYtMi42NC42NCIvPjxwYXRoIGNsYXNzPSJjbHMtMTEiIGQ9Im01Mi45OCw5MS43N2MtLjU0LjI4LTEuMS43Mi0xLjY4LDEuMzItLjk0Ljk1LTEuNTcsMS45NC0xLjg3LDIuOTQtLjMyLDEuMDEtLjI2LDEuODcuMTUsMi41Ny4xOC4yOS40MS42MS43Ljk1LjI5LjM1Ljc3Ljg1LDEuNDQsMS41LjY2LjY1LDEuNTksMS41LDIuNzcsMi41NXMyLjc1LDIuNDEsNC43Miw0LjFjLjM0LS4zOS42OC0uNzgsMS4wMy0xLjEzLS43Ny0yLjg2LTEuNC01LjE2LTEuODktNi44OS0uNDktMS43Ni0uOS0zLjE0LTEuMjItNC4xNC0uMzItMS0uNTctMS43My0uNzYtMi4xNy0uMTktLjQ1LS4zOC0uODItLjU1LTEuMTItLjQyLS43LTEuMDQtLjk4LTEuODYtLjgyLS4zMS4wNi0uNjMuMTctLjk1LjM0Ii8+PHBhdGggY2xhc3M9ImNscy0xMSIgZD0ibTYzLjc0LDEwNy4zN2MtMi44OCwxLjUxLTUuMjMsNS4xOC01LjI1LDguMTgtLjAxLDMsMi4zMSw0LjIxLDUuMTksMi43LDIuODktMS41MSw1LjIzLTUuMTcsNS4yNS04LjE3LjAyLTMuMDEtMi4zMS00LjIyLTUuMTktMi43MSIvPjwvZz48L2c+PC9nPjwvZz48L2c+PC9nPjwvZz48L3N2Zz4=')"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "fit": {
+                "height": 100,
+                "mode": "contain",
+                "scroll": false,
+                "width": 100
+              },
+              "style": {
+                "height": "72px",
+                "width": "52px",
+                "lineHeight": "0",
+                "fontSize": "0"
+              }
+            },
+            "type": "ia.display.image"
+          },
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "meta": {
+                          "name": "gname"
+                        },
+                        "position": {
+                          "shrink": 0
+                        },
+                        "propConfig": {
+                          "props.style.classes": {
+                            "binding": {
+                              "config": {
+                                "expression": "{session.custom.style} + '/text/card-title'"
+                              },
+                              "type": "expr"
+                            }
+                          },
+                          "props.text": {
+                            "binding": {
+                              "config": {
+                                "expression": "{view.params.label}"
+                              },
+                              "type": "expr"
+                            }
+                          }
+                        },
+                        "props": {
+                          "style": {
+                            "minWidth": "0",
+                            "overflow": "hidden",
+                            "textOverflow": "ellipsis",
+                            "whiteSpace": "nowrap",
+                            "lineHeight": "1.35"
+                          },
+                          "text": ""
+                        },
+                        "type": "ia.display.label"
+                      },
+                      {
+                        "meta": {
+                          "name": "grole"
+                        },
+                        "position": {
+                          "shrink": 0
+                        },
+                        "propConfig": {
+                          "props.style.classes": {
+                            "binding": {
+                              "config": {
+                                "expression": "{session.custom.style} + '/text/muted'"
+                              },
+                              "type": "expr"
+                            }
+                          },
+                          "props.text": {
+                            "binding": {
+                              "config": {
+                                "expression": "{view.params.sublabel}"
+                              },
+                              "type": "expr"
+                            }
+                          }
+                        },
+                        "props": {
+                          "style": {
+                            "fontSize": "11px",
+                            "marginTop": "-2px",
+                            "minWidth": "0",
+                            "overflow": "hidden",
+                            "textOverflow": "ellipsis",
+                            "whiteSpace": "nowrap"
+                          },
+                          "text": ""
+                        },
+                        "type": "ia.display.label"
+                      }
+                    ],
+                    "meta": {
+                      "name": "titles"
+                    },
+                    "position": {
+                      "basis": "auto",
+                      "grow": 1,
+                      "shrink": 1
+                    },
+                    "props": {
+                      "direction": "column",
+                      "style": {
+                        "gap": "0px",
+                        "minWidth": "0",
+                        "overflow": "hidden"
+                      }
+                    },
+                    "type": "ia.container.flex"
+                  },
+                  {
+                    "children": [
+                      {
+                        "meta": {
+                          "name": "state"
+                        },
+                        "position": {
+                          "shrink": 0
+                        },
+                        "propConfig": {
+                          "props.style.classes": {
+                            "binding": {
+                              "config": {
+                                "expression": "{session.custom.style} + '/status/' + if({view.params.stateLevel} = 'good', 'badge-ok', if({view.params.stateLevel} = 'bad', 'badge-alarm', if({view.params.stateLevel} = 'neutral', 'badge-neutral', 'badge-warn')))"
+                              },
+                              "type": "expr"
+                            }
+                          },
+                          "props.text": {
+                            "binding": {
+                              "config": {
+                                "expression": "{view.params.state}"
+                              },
+                              "type": "expr"
+                            }
+                          }
+                        },
+                        "props": {
+                          "style": {
+                            "whiteSpace": "nowrap",
+                            "overflow": "hidden",
+                            "textOverflow": "ellipsis"
+                          },
+                          "text": ""
+                        },
+                        "type": "ia.display.label"
+                      },
+                      {
+                        "meta": {
+                          "name": "state2"
+                        },
+                        "position": {
+                          "shrink": 0
+                        },
+                        "propConfig": {
+                          "meta.visible": {
+                            "binding": {
+                              "config": {
+                                "expression": "{view.params.state2} != ''"
+                              },
+                              "type": "expr"
+                            }
+                          },
+                          "props.style.classes": {
+                            "binding": {
+                              "config": {
+                                "expression": "{session.custom.style} + '/status/' + if({view.params.state2Level} = 'good', 'badge-ok', if({view.params.state2Level} = 'bad', 'badge-alarm', if({view.params.state2Level} = 'neutral', 'badge-neutral', 'badge-warn')))"
+                              },
+                              "type": "expr"
+                            }
+                          },
+                          "props.text": {
+                            "binding": {
+                              "config": {
+                                "expression": "{view.params.state2}"
+                              },
+                              "type": "expr"
+                            }
+                          }
+                        },
+                        "props": {
+                          "style": {
+                            "whiteSpace": "nowrap",
+                            "overflow": "hidden",
+                            "textOverflow": "ellipsis"
+                          },
+                          "text": ""
+                        },
+                        "type": "ia.display.label"
+                      }
+                    ],
+                    "meta": {
+                      "name": "badges"
+                    },
+                    "position": {
+                      "basis": "auto",
+                      "shrink": 0
+                    },
+                    "props": {
+                      "alignItems": "center",
+                      "direction": "row",
+                      "style": {
+                        "gap": "6px",
+                        "overflow": "hidden",
+                        "justifyContent": "flex-end"
+                      },
+                      "wrap": "wrap"
+                    },
+                    "type": "ia.container.flex"
+                  }
+                ],
+                "meta": {
+                  "name": "header"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "props": {
+                  "alignItems": "stretch",
+                  "direction": "row",
+                  "style": {
+                    "gap": "8px",
+                    "width": "100%",
+                    "overflow": "hidden"
+                  },
+                  "wrap": "wrap"
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "meta": {
+                  "name": "metrics"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.instances": {
+                    "binding": {
+                      "config": {
+                        "expression": "{view.params.metrics}"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "alignItems": "stretch",
+                  "direction": "row",
+                  "elementPosition": {
+                    "basis": "0px",
+                    "grow": 1,
+                    "shrink": 1
+                  },
+                  "instances": [],
+                  "path": "CardMetric",
+                  "style": {
+                    "gap": "8px",
+                    "minWidth": "0",
+                    "width": "100%",
+                    "overflow": "hidden"
+                  },
+                  "useDefaultViewHeight": true,
+                  "useDefaultViewWidth": false
+                },
+                "type": "ia.display.flex-repeater"
+              },
+              {
+                "meta": {
+                  "name": "footer"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "{session.custom.style} + '/text/muted'"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "expression": "{view.params.footer}"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "meta.visible": {
+                    "binding": {
+                      "config": {
+                        "expression": "{view.params.footer} != ''"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "fontSize": "11px",
+                    "marginTop": "auto",
+                    "minWidth": "0",
+                    "overflow": "hidden",
+                    "textOverflow": "ellipsis",
+                    "whiteSpace": "nowrap"
+                  },
+                  "text": ""
+                },
+                "type": "ia.display.label"
+              }
+            ],
+            "meta": {
+              "name": "body"
+            },
+            "position": {
+              "basis": "0px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "gap": "8px",
+                "minWidth": "0",
+                "width": "100%",
+                "overflow": "hidden"
+              }
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "row"
+        },
+        "position": {
+          "basis": "auto",
+          "grow": 1,
+          "shrink": 1
+        },
+        "props": {
+          "alignItems": "center",
+          "direction": "row",
+          "style": {
+            "gap": "12px",
+            "height": "100%",
+            "minWidth": "0",
+            "width": "100%",
+            "overflow": "hidden"
+          }
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "position": {
+      "basis": "auto",
+      "shrink": 0
+    },
+    "propConfig": {
+      "props.style.classes": {
+        "binding": {
+          "config": {
+            "expression": "{session.custom.style} + '/containers/card'"
+          },
+          "type": "expr"
+        }
+      }
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "gap": "0px",
+        "height": "100%",
+        "minWidth": "0",
+        "width": "100%",
+        "overflow": "hidden"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

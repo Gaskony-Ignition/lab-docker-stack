@@ -1,0 +1,74 @@
+{
+  "custom": {},
+  "params": {
+    "demo": {}
+  },
+  "propConfig": {
+    "params.demo": {
+      "paramDirection": "input"
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 260,
+      "width": 400
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "tile"
+        },
+        "position": {
+          "basis": "0px",
+          "grow": 1,
+          "shrink": 1
+        },
+        "propConfig": {
+          "props.params": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.demo}"
+              },
+              "transforms": [
+                {
+                  "code": "\treturn {'demo': value}\n",
+                  "type": "script"
+                }
+              ],
+              "type": "expr"
+            }
+          },
+          "props.path": {
+            "binding": {
+              "config": {
+                "expression": "if({view.params.demo.placeholder}, 'DemoSlot', 'DemoCard')"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "height": "100%",
+            "width": "100%"
+          }
+        },
+        "type": "ia.display.view"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "height": "100%",
+        "minWidth": "300px",
+        "width": "100%"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

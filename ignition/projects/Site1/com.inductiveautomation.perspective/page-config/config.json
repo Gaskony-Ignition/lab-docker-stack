@@ -1,0 +1,13 @@
+{
+  "pages": {
+    "/": {
+      "viewPath": "StyleDemo"
+    },
+    "/admin": {
+      "viewPath": "Admin"
+    },
+    "/demo": {
+      "viewPath": "StyleDemo"
+    }
+  }
+}

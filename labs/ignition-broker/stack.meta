@@ -1,0 +1,23 @@
+# See stacks/postgres/stack.meta for what this file is and who reads it.
+# Parked under labs/ until demos.json has a place for it -- see compose.yaml.
+# The small standalone broker gateway: an Ignition gateway that runs nothing but
+# Cirrus Link's MQTT Distributor -- the "T2" topology of docs/MQTT-DISTRIBUTOR.md,
+# a broker that does not fail over with the hub, which is the shape most
+# customers buy when they take the module instead of a separate broker.
+#
+# ROLE=edge-isolated because that is what it is on the network: never on the
+# Gateway Network, never an EAM agent (verify-demos checks both). It is NOT one
+# of the Sparkplug demo's edges -- those are the edge-isolated gateways with
+# MQTT_MODULE=transmission, and sparkplug-setup.sh selects them by that.
+# No MQTT_MODULE here: Distributor is neither Engine nor Transmission, and its
+# settings are written by scripts/distributor-setup.sh.
+ORDER=85
+KIND=gateway
+ROLE=edge-isolated
+STANZA=local-broker
+PORT_VAR=BROKER_HTTP_HOST_PORT
+PORT_DEFAULT=29788
+STATUS_NOTE="MQTT broker (Distributor), edge"
+TEST_HOST=broker.test
+TEST_FORWARD_PORT=8088
+PUBLIC_HOST=broker.test

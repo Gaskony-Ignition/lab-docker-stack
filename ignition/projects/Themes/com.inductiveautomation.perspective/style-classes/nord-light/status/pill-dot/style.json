@@ -1,0 +1,8 @@
+{
+  "base": {
+    "style": {
+      "backgroundColor": "#657657",
+      "borderRadius": "50%"
+    }
+  }
+}

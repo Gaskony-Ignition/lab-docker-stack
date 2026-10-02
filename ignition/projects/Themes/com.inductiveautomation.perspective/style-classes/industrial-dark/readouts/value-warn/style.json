@@ -1,0 +1,10 @@
+{
+  "base": {
+    "style": {
+      "color": "#F6B93B",
+      "fontFamily": "\"Roboto Mono\", \"Consolas\", \"SF Mono\", monospace",
+      "fontSize": "24px",
+      "fontWeight": "500"
+    }
+  }
+}

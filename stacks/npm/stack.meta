@@ -1,0 +1,15 @@
+# See stacks/postgres/stack.meta for what this file is and who reads it.
+# NPM has no TEST_HOST of its own: it IS the proxy the .test names point at,
+# and its admin UI stays a host port on purpose -- if the proxy is broken, the
+# page that fixes it must not be behind the proxy.
+ORDER=20
+KIND=service
+PORT_VAR=NPM_ADMIN_HOST_PORT
+PORT_DEFAULT=29081
+
+# The leaf certificate ONLY, for the site proxies that serve a site's own name
+# on its own network. Seeding is directory-at-a-time and certs/ also holds the
+# CA's private key, which has no business on a box in a plant -- so
+# create-certs.sh writes this leaf-only copy separately.
+SEED_VOLUME=wd-npm-site-certs
+SEED_SRC=site-certs

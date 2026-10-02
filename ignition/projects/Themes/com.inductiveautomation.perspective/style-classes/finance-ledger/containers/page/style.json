@@ -1,0 +1,11 @@
+{
+  "base": {
+    "style": {
+      "backgroundColor": "#eef1f0",
+      "color": "#16232e",
+      "fontFamily": "\"Segoe UI\", ui-sans-serif, system-ui, -apple-system, Arial, sans-serif",
+      "fontSize": "13.5px",
+      "overflow": "hidden"
+    }
+  }
+}

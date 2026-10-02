@@ -1,0 +1,195 @@
+{
+  "custom": {},
+  "params": {
+    "error": "",
+    "label": "",
+    "lastPull": "",
+    "level": "",
+    "pending": 0
+  },
+  "propConfig": {
+    "params.error": {
+      "paramDirection": "input"
+    },
+    "params.label": {
+      "paramDirection": "input"
+    },
+    "params.lastPull": {
+      "paramDirection": "input"
+    },
+    "params.level": {
+      "paramDirection": "input"
+    },
+    "params.pending": {
+      "paramDirection": "input"
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 30,
+      "width": 260
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "dot"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.style.color": {
+            "binding": {
+              "config": {
+                "expression": "if({view.params.level} = 'bad', '#ef4444', if({view.params.level} = 'warn', '#f59e0b', '#22c55e'))"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "'●'"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "fontSize": "11px",
+            "width": "14px"
+          },
+          "text": ""
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "what"
+        },
+        "position": {
+          "basis": "0px",
+          "grow": 1,
+          "shrink": 1
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.label}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "fontSize": "12px",
+            "minWidth": "0",
+            "overflow": "hidden",
+            "textOverflow": "ellipsis",
+            "whiteSpace": "nowrap"
+          },
+          "text": ""
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "pending"
+        },
+        "position": {
+          "basis": "auto",
+          "grow": 0,
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.style.classes": {
+            "binding": {
+              "config": {
+                "expression": "{session.custom.style} + '/text/muted'"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "if({view.params.error} != '', {view.params.error}, if({view.params.pending} = 0, 'in step', {view.params.pending} + ' pending'))"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "fontSize": "11px",
+            "minWidth": "0",
+            "overflow": "hidden",
+            "textOverflow": "ellipsis",
+            "whiteSpace": "nowrap"
+          },
+          "text": ""
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "pulled"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.style.classes": {
+            "binding": {
+              "config": {
+                "expression": "{session.custom.style} + '/text/muted'"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.lastPull}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "fontSize": "11px",
+            "textAlign": "right",
+            "width": "52px"
+          },
+          "text": ""
+        },
+        "type": "ia.display.label"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "position": {
+      "shrink": 0
+    },
+    "props": {
+      "alignItems": "center",
+      "direction": "row",
+      "style": {
+        "alignItems": "center",
+        "gap": "8px",
+        "height": "30px",
+        "minHeight": "30px",
+        "overflow": "hidden",
+        "width": "100%"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

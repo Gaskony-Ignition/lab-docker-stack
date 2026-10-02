@@ -1,0 +1,1470 @@
+{
+  "custom": {
+    "base": "",
+    "device": "",
+    "headline": "",
+    "note": ""
+  },
+  "params": {},
+  "propConfig": {
+    "custom.base": {
+      "binding": {
+        "type": "expr",
+        "config": {
+          "expression": "runScript('sp_site.instance_path()', 0)"
+        }
+      }
+    },
+    "custom.device": {
+      "binding": {
+        "type": "expr",
+        "config": {
+          "expression": "runScript('sp_site.device_path()', 0)"
+        }
+      }
+    },
+    "custom.headline": {
+      "binding": {
+        "type": "expr",
+        "config": {
+          "expression": "runScript('sp_site.headline()', 0)"
+        }
+      }
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "width": 1280,
+      "height": 860
+    }
+  },
+  "root": {
+    "type": "ia.container.flex",
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "padding": "16px 20px",
+        "gap": "12px",
+        "overflowY": "auto",
+        "backgroundColor": "var(--containerRoot)",
+        "color": "var(--label)"
+      }
+    },
+    "children": [
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "title"
+        },
+        "position": {
+          "basis": "auto",
+          "grow": 0,
+          "shrink": 0
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "fontSize": "22px",
+            "fontWeight": "700"
+          }
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.custom.headline}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "road"
+        },
+        "position": {
+          "basis": "auto",
+          "grow": 0,
+          "shrink": 0
+        },
+        "props": {
+          "text": "This is the EDGE's own screen. Nothing on it reaches the cloud except as Sparkplug B over MQTT: acknowledge an alarm here and the cloud shows it acknowledged; acknowledge it in the cloud and this table shows it.",
+          "style": {
+            "fontSize": "13px",
+            "opacity": "0.8",
+            "whiteSpace": "normal"
+          }
+        }
+      },
+      {
+        "type": "ia.container.flex",
+        "meta": {
+          "name": "tiles"
+        },
+        "position": {
+          "basis": "auto",
+          "grow": 0,
+          "shrink": 0
+        },
+        "props": {
+          "direction": "row",
+          "wrap": "wrap",
+          "style": {
+            "gap": "10px"
+          }
+        },
+        "children": [
+          {
+            "type": "ia.container.flex",
+            "meta": {
+              "name": "tile_Level"
+            },
+            "position": {
+              "basis": "150px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "padding": "10px 12px",
+                "gap": "2px",
+                "borderRadius": "6px",
+                "backgroundColor": "var(--container)",
+                "border": "1px solid var(--containerBorder)"
+              }
+            },
+            "children": [
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "name"
+                },
+                "position": {
+                  "basis": "auto",
+                  "grow": 0,
+                  "shrink": 0
+                },
+                "props": {
+                  "text": "Level",
+                  "style": {
+                    "fontSize": "12px",
+                    "opacity": "0.75"
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "value"
+                },
+                "position": {
+                  "basis": "auto",
+                  "grow": 0,
+                  "shrink": 0
+                },
+                "props": {
+                  "text": "",
+                  "style": {
+                    "fontSize": "24px",
+                    "fontWeight": "700"
+                  }
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "type": "tag",
+                      "config": {
+                        "mode": "indirect",
+                        "tagPath": "{1}/Level",
+                        "references": {
+                          "1": "{view.custom.base}"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "unit"
+                },
+                "position": {
+                  "basis": "auto",
+                  "grow": 0,
+                  "shrink": 0
+                },
+                "props": {
+                  "text": "%",
+                  "style": {
+                    "fontSize": "12px",
+                    "opacity": "0.75"
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "quality"
+                },
+                "position": {
+                  "basis": "auto",
+                  "grow": 0,
+                  "shrink": 0
+                },
+                "props": {
+                  "text": "",
+                  "style": {
+                    "fontSize": "11px",
+                    "opacity": "0.6"
+                  }
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "type": "tag",
+                      "config": {
+                        "mode": "indirect",
+                        "tagPath": "{1}/Level.Quality",
+                        "references": {
+                          "1": "{view.custom.base}"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "type": "ia.container.flex",
+            "meta": {
+              "name": "tile_Inflow"
+            },
+            "position": {
+              "basis": "150px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "padding": "10px 12px",
+                "gap": "2px",
+                "borderRadius": "6px",
+                "backgroundColor": "var(--container)",
+                "border": "1px solid var(--containerBorder)"
+              }
+            },
+            "children": [
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "name"
+                },
+                "position": {
+                  "basis": "auto",
+                  "grow": 0,
+                  "shrink": 0
+                },
+                "props": {
+                  "text": "Inflow",
+                  "style": {
+                    "fontSize": "12px",
+                    "opacity": "0.75"
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "value"
+                },
+                "position": {
+                  "basis": "auto",
+                  "grow": 0,
+                  "shrink": 0
+                },
+                "props": {
+                  "text": "",
+                  "style": {
+                    "fontSize": "24px",
+                    "fontWeight": "700"
+                  }
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "type": "tag",
+                      "config": {
+                        "mode": "indirect",
+                        "tagPath": "{1}/Inflow",
+                        "references": {
+                          "1": "{view.custom.base}"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "unit"
+                },
+                "position": {
+                  "basis": "auto",
+                  "grow": 0,
+                  "shrink": 0
+                },
+                "props": {
+                  "text": "L/s",
+                  "style": {
+                    "fontSize": "12px",
+                    "opacity": "0.75"
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "quality"
+                },
+                "position": {
+                  "basis": "auto",
+                  "grow": 0,
+                  "shrink": 0
+                },
+                "props": {
+                  "text": "",
+                  "style": {
+                    "fontSize": "11px",
+                    "opacity": "0.6"
+                  }
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "type": "tag",
+                      "config": {
+                        "mode": "indirect",
+                        "tagPath": "{1}/Inflow.Quality",
+                        "references": {
+                          "1": "{view.custom.base}"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "type": "ia.container.flex",
+            "meta": {
+              "name": "tile_PumpRunning"
+            },
+            "position": {
+              "basis": "150px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "padding": "10px 12px",
+                "gap": "2px",
+                "borderRadius": "6px",
+                "backgroundColor": "var(--container)",
+                "border": "1px solid var(--containerBorder)"
+              }
+            },
+            "children": [
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "name"
+                },
+                "position": {
+                  "basis": "auto",
+                  "grow": 0,
+                  "shrink": 0
+                },
+                "props": {
+                  "text": "Pump running",
+                  "style": {
+                    "fontSize": "12px",
+                    "opacity": "0.75"
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "value"
+                },
+                "position": {
+                  "basis": "auto",
+                  "grow": 0,
+                  "shrink": 0
+                },
+                "props": {
+                  "text": "",
+                  "style": {
+                    "fontSize": "24px",
+                    "fontWeight": "700"
+                  }
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "type": "tag",
+                      "config": {
+                        "mode": "indirect",
+                        "tagPath": "{1}/PumpRunning",
+                        "references": {
+                          "1": "{view.custom.base}"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "unit"
+                },
+                "position": {
+                  "basis": "auto",
+                  "grow": 0,
+                  "shrink": 0
+                },
+                "props": {
+                  "text": "",
+                  "style": {
+                    "fontSize": "12px",
+                    "opacity": "0.75"
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "quality"
+                },
+                "position": {
+                  "basis": "auto",
+                  "grow": 0,
+                  "shrink": 0
+                },
+                "props": {
+                  "text": "",
+                  "style": {
+                    "fontSize": "11px",
+                    "opacity": "0.6"
+                  }
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "type": "tag",
+                      "config": {
+                        "mode": "indirect",
+                        "tagPath": "{1}/PumpRunning.Quality",
+                        "references": {
+                          "1": "{view.custom.base}"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "type": "ia.container.flex",
+            "meta": {
+              "name": "tile_PumpFault"
+            },
+            "position": {
+              "basis": "150px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "padding": "10px 12px",
+                "gap": "2px",
+                "borderRadius": "6px",
+                "backgroundColor": "var(--container)",
+                "border": "1px solid var(--containerBorder)"
+              }
+            },
+            "children": [
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "name"
+                },
+                "position": {
+                  "basis": "auto",
+                  "grow": 0,
+                  "shrink": 0
+                },
+                "props": {
+                  "text": "Pump fault",
+                  "style": {
+                    "fontSize": "12px",
+                    "opacity": "0.75"
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "value"
+                },
+                "position": {
+                  "basis": "auto",
+                  "grow": 0,
+                  "shrink": 0
+                },
+                "props": {
+                  "text": "",
+                  "style": {
+                    "fontSize": "24px",
+                    "fontWeight": "700"
+                  }
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "type": "tag",
+                      "config": {
+                        "mode": "indirect",
+                        "tagPath": "{1}/PumpFault",
+                        "references": {
+                          "1": "{view.custom.base}"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "unit"
+                },
+                "position": {
+                  "basis": "auto",
+                  "grow": 0,
+                  "shrink": 0
+                },
+                "props": {
+                  "text": "",
+                  "style": {
+                    "fontSize": "12px",
+                    "opacity": "0.75"
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "quality"
+                },
+                "position": {
+                  "basis": "auto",
+                  "grow": 0,
+                  "shrink": 0
+                },
+                "props": {
+                  "text": "",
+                  "style": {
+                    "fontSize": "11px",
+                    "opacity": "0.6"
+                  }
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "type": "tag",
+                      "config": {
+                        "mode": "indirect",
+                        "tagPath": "{1}/PumpFault.Quality",
+                        "references": {
+                          "1": "{view.custom.base}"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "type": "ia.container.flex",
+            "meta": {
+              "name": "tile_DischargePressure"
+            },
+            "position": {
+              "basis": "150px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "padding": "10px 12px",
+                "gap": "2px",
+                "borderRadius": "6px",
+                "backgroundColor": "var(--container)",
+                "border": "1px solid var(--containerBorder)"
+              }
+            },
+            "children": [
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "name"
+                },
+                "position": {
+                  "basis": "auto",
+                  "grow": 0,
+                  "shrink": 0
+                },
+                "props": {
+                  "text": "Discharge pressure",
+                  "style": {
+                    "fontSize": "12px",
+                    "opacity": "0.75"
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "value"
+                },
+                "position": {
+                  "basis": "auto",
+                  "grow": 0,
+                  "shrink": 0
+                },
+                "props": {
+                  "text": "",
+                  "style": {
+                    "fontSize": "24px",
+                    "fontWeight": "700"
+                  }
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "type": "tag",
+                      "config": {
+                        "mode": "indirect",
+                        "tagPath": "{1}/DischargePressure",
+                        "references": {
+                          "1": "{view.custom.base}"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "unit"
+                },
+                "position": {
+                  "basis": "auto",
+                  "grow": 0,
+                  "shrink": 0
+                },
+                "props": {
+                  "text": "bar",
+                  "style": {
+                    "fontSize": "12px",
+                    "opacity": "0.75"
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "quality"
+                },
+                "position": {
+                  "basis": "auto",
+                  "grow": 0,
+                  "shrink": 0
+                },
+                "props": {
+                  "text": "",
+                  "style": {
+                    "fontSize": "11px",
+                    "opacity": "0.6"
+                  }
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "type": "tag",
+                      "config": {
+                        "mode": "indirect",
+                        "tagPath": "{1}/DischargePressure.Quality",
+                        "references": {
+                          "1": "{view.custom.base}"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "type": "ia.container.flex",
+            "meta": {
+              "name": "tile_LevelSetpoint"
+            },
+            "position": {
+              "basis": "150px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "padding": "10px 12px",
+                "gap": "2px",
+                "borderRadius": "6px",
+                "backgroundColor": "var(--container)",
+                "border": "1px solid var(--containerBorder)"
+              }
+            },
+            "children": [
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "name"
+                },
+                "position": {
+                  "basis": "auto",
+                  "grow": 0,
+                  "shrink": 0
+                },
+                "props": {
+                  "text": "Level setpoint",
+                  "style": {
+                    "fontSize": "12px",
+                    "opacity": "0.75"
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "value"
+                },
+                "position": {
+                  "basis": "auto",
+                  "grow": 0,
+                  "shrink": 0
+                },
+                "props": {
+                  "text": "",
+                  "style": {
+                    "fontSize": "24px",
+                    "fontWeight": "700"
+                  }
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "type": "tag",
+                      "config": {
+                        "mode": "indirect",
+                        "tagPath": "{1}/LevelSetpoint",
+                        "references": {
+                          "1": "{view.custom.base}"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "unit"
+                },
+                "position": {
+                  "basis": "auto",
+                  "grow": 0,
+                  "shrink": 0
+                },
+                "props": {
+                  "text": "%",
+                  "style": {
+                    "fontSize": "12px",
+                    "opacity": "0.75"
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "quality"
+                },
+                "position": {
+                  "basis": "auto",
+                  "grow": 0,
+                  "shrink": 0
+                },
+                "props": {
+                  "text": "",
+                  "style": {
+                    "fontSize": "11px",
+                    "opacity": "0.6"
+                  }
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "type": "tag",
+                      "config": {
+                        "mode": "indirect",
+                        "tagPath": "{1}/LevelSetpoint.Quality",
+                        "references": {
+                          "1": "{view.custom.base}"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "type": "ia.container.flex",
+            "meta": {
+              "name": "tile_Mode"
+            },
+            "position": {
+              "basis": "150px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "padding": "10px 12px",
+                "gap": "2px",
+                "borderRadius": "6px",
+                "backgroundColor": "var(--container)",
+                "border": "1px solid var(--containerBorder)"
+              }
+            },
+            "children": [
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "name"
+                },
+                "position": {
+                  "basis": "auto",
+                  "grow": 0,
+                  "shrink": 0
+                },
+                "props": {
+                  "text": "Mode",
+                  "style": {
+                    "fontSize": "12px",
+                    "opacity": "0.75"
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "value"
+                },
+                "position": {
+                  "basis": "auto",
+                  "grow": 0,
+                  "shrink": 0
+                },
+                "props": {
+                  "text": "",
+                  "style": {
+                    "fontSize": "24px",
+                    "fontWeight": "700"
+                  }
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "type": "tag",
+                      "config": {
+                        "mode": "indirect",
+                        "tagPath": "{1}/Mode",
+                        "references": {
+                          "1": "{view.custom.base}"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "unit"
+                },
+                "position": {
+                  "basis": "auto",
+                  "grow": 0,
+                  "shrink": 0
+                },
+                "props": {
+                  "text": "",
+                  "style": {
+                    "fontSize": "12px",
+                    "opacity": "0.75"
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "quality"
+                },
+                "position": {
+                  "basis": "auto",
+                  "grow": 0,
+                  "shrink": 0
+                },
+                "props": {
+                  "text": "",
+                  "style": {
+                    "fontSize": "11px",
+                    "opacity": "0.6"
+                  }
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "type": "tag",
+                      "config": {
+                        "mode": "indirect",
+                        "tagPath": "{1}/Mode.Quality",
+                        "references": {
+                          "1": "{view.custom.base}"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "type": "ia.container.flex",
+            "meta": {
+              "name": "tile_Heartbeat"
+            },
+            "position": {
+              "basis": "150px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "padding": "10px 12px",
+                "gap": "2px",
+                "borderRadius": "6px",
+                "backgroundColor": "var(--container)",
+                "border": "1px solid var(--containerBorder)"
+              }
+            },
+            "children": [
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "name"
+                },
+                "position": {
+                  "basis": "auto",
+                  "grow": 0,
+                  "shrink": 0
+                },
+                "props": {
+                  "text": "Heartbeat",
+                  "style": {
+                    "fontSize": "12px",
+                    "opacity": "0.75"
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "value"
+                },
+                "position": {
+                  "basis": "auto",
+                  "grow": 0,
+                  "shrink": 0
+                },
+                "props": {
+                  "text": "",
+                  "style": {
+                    "fontSize": "24px",
+                    "fontWeight": "700"
+                  }
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "type": "tag",
+                      "config": {
+                        "mode": "indirect",
+                        "tagPath": "{1}/Heartbeat",
+                        "references": {
+                          "1": "{view.custom.base}"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "unit"
+                },
+                "position": {
+                  "basis": "auto",
+                  "grow": 0,
+                  "shrink": 0
+                },
+                "props": {
+                  "text": "",
+                  "style": {
+                    "fontSize": "12px",
+                    "opacity": "0.75"
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "meta": {
+                  "name": "quality"
+                },
+                "position": {
+                  "basis": "auto",
+                  "grow": 0,
+                  "shrink": 0
+                },
+                "props": {
+                  "text": "",
+                  "style": {
+                    "fontSize": "11px",
+                    "opacity": "0.6"
+                  }
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "type": "tag",
+                      "config": {
+                        "mode": "indirect",
+                        "tagPath": "{1}/Heartbeat.Quality",
+                        "references": {
+                          "1": "{view.custom.base}"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "ia.container.flex",
+        "meta": {
+          "name": "controls"
+        },
+        "position": {
+          "basis": "auto",
+          "grow": 0,
+          "shrink": 0
+        },
+        "props": {
+          "direction": "row",
+          "wrap": "wrap",
+          "alignItems": "center",
+          "style": {
+            "gap": "8px"
+          }
+        },
+        "children": [
+          {
+            "type": "ia.input.button",
+            "meta": {
+              "name": "trip"
+            },
+            "position": {
+              "basis": "auto",
+              "grow": 0,
+              "shrink": 0
+            },
+            "props": {
+              "text": "Trip pump fault",
+              "style": {
+                "height": "36px",
+                "padding": "0 14px"
+              }
+            },
+            "events": {
+              "component": {
+                "onActionPerformed": {
+                  "config": {
+                    "script": "\tresult = sp_actions.run({'action': 'trip_fault'}, 'edge-operator')\n\tself.view.custom.note = result.get('message', '')\n"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            }
+          },
+          {
+            "type": "ia.input.button",
+            "meta": {
+              "name": "reset"
+            },
+            "position": {
+              "basis": "auto",
+              "grow": 0,
+              "shrink": 0
+            },
+            "props": {
+              "text": "Reset fault",
+              "style": {
+                "height": "36px",
+                "padding": "0 14px"
+              }
+            },
+            "events": {
+              "component": {
+                "onActionPerformed": {
+                  "config": {
+                    "script": "\tresult = sp_actions.run({'action': 'reset_fault'}, 'edge-operator')\n\tself.view.custom.note = result.get('message', '')\n"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            }
+          },
+          {
+            "type": "ia.input.button",
+            "meta": {
+              "name": "auto"
+            },
+            "position": {
+              "basis": "auto",
+              "grow": 0,
+              "shrink": 0
+            },
+            "props": {
+              "text": "AUTO",
+              "style": {
+                "height": "36px",
+                "padding": "0 14px"
+              }
+            },
+            "events": {
+              "component": {
+                "onActionPerformed": {
+                  "config": {
+                    "script": "\tresult = sp_actions.run({'action': 'set_mode', 'mode': 'AUTO'}, 'edge-operator')\n\tself.view.custom.note = result.get('message', '')\n"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            }
+          },
+          {
+            "type": "ia.input.button",
+            "meta": {
+              "name": "manual"
+            },
+            "position": {
+              "basis": "auto",
+              "grow": 0,
+              "shrink": 0
+            },
+            "props": {
+              "text": "MANUAL",
+              "style": {
+                "height": "36px",
+                "padding": "0 14px"
+              }
+            },
+            "events": {
+              "component": {
+                "onActionPerformed": {
+                  "config": {
+                    "script": "\tresult = sp_actions.run({'action': 'set_mode', 'mode': 'MANUAL'}, 'edge-operator')\n\tself.view.custom.note = result.get('message', '')\n"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            }
+          },
+          {
+            "type": "ia.display.label",
+            "meta": {
+              "name": "spLabel"
+            },
+            "position": {
+              "basis": "auto",
+              "grow": 0,
+              "shrink": 0
+            },
+            "props": {
+              "text": "Level setpoint",
+              "style": {
+                "fontSize": "13px",
+                "marginLeft": "12px"
+              }
+            }
+          },
+          {
+            "type": "ia.input.numeric-entry-field",
+            "meta": {
+              "name": "setpoint"
+            },
+            "position": {
+              "basis": "110px",
+              "grow": 0,
+              "shrink": 0
+            },
+            "props": {
+              "style": {
+                "height": "36px"
+              }
+            },
+            "propConfig": {
+              "props.value": {
+                "binding": {
+                  "type": "tag",
+                  "config": {
+                    "mode": "indirect",
+                    "tagPath": "{1}/LevelSetpoint",
+                    "references": {
+                      "1": "{view.custom.base}"
+                    },
+                    "bidirectional": true
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "ia.input.button",
+            "meta": {
+              "name": "ackAll"
+            },
+            "position": {
+              "basis": "auto",
+              "grow": 0,
+              "shrink": 0
+            },
+            "props": {
+              "text": "Acknowledge all here",
+              "style": {
+                "height": "36px",
+                "padding": "0 14px"
+              }
+            },
+            "events": {
+              "component": {
+                "onActionPerformed": {
+                  "config": {
+                    "script": "\tresult = sp_actions.run({'action': 'ack_local'}, 'edge-operator')\n\tself.view.custom.note = result.get('message', '')\n"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "note"
+        },
+        "position": {
+          "basis": "auto",
+          "grow": 0,
+          "shrink": 0
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "fontSize": "13px",
+            "minHeight": "18px"
+          }
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.custom.note}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "cloudNotice"
+        },
+        "position": {
+          "basis": "auto",
+          "grow": 0,
+          "shrink": 0
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "fontSize": "13px",
+            "minHeight": "18px",
+            "padding": "6px 10px",
+            "borderRadius": "6px",
+            "border": "1px dashed var(--containerBorder)"
+          }
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "tag",
+              "config": {
+                "mode": "indirect",
+                "tagPath": "{1}/CloudNotice",
+                "references": {
+                  "1": "{view.custom.device}"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.alarmstatustable",
+        "meta": {
+          "name": "Alarms"
+        },
+        "position": {
+          "basis": "360px",
+          "grow": 1,
+          "shrink": 0
+        },
+        "props": {
+          "refreshRate": 2000,
+          "enableAcknowledge": true,
+          "enableShelve": false,
+          "enableUnshelve": false,
+          "enableDetails": true,
+          "dateFormat": "DD/MM/YYYY HH:mm:ss",
+          "pager": {
+            "enabled": false,
+            "hide": true
+          },
+          "filters": {
+            "active": {
+              "conditions": {
+                "source": "prov:edge:/tag:*"
+              }
+            }
+          },
+          "columns": {
+            "active": {
+              "activeTime": {
+                "enabled": true,
+                "sort": "descending",
+                "width": 160,
+                "strictWidth": false
+              },
+              "displayPath": {
+                "enabled": true,
+                "sort": "none",
+                "width": 220,
+                "strictWidth": false
+              },
+              "name": {
+                "enabled": true,
+                "sort": "none",
+                "width": 130,
+                "strictWidth": false
+              },
+              "priority": {
+                "enabled": true,
+                "sort": "none",
+                "width": 90,
+                "strictWidth": false
+              },
+              "state": {
+                "enabled": true,
+                "sort": "none",
+                "width": 170,
+                "strictWidth": false
+              },
+              "ackUser": {
+                "enabled": true,
+                "sort": "none",
+                "width": 150,
+                "strictWidth": false
+              },
+              "ackTime": {
+                "enabled": true,
+                "sort": "none",
+                "width": 160,
+                "strictWidth": false
+              },
+              "source": {
+                "enabled": false,
+                "sort": "none",
+                "width": 200,
+                "strictWidth": false
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

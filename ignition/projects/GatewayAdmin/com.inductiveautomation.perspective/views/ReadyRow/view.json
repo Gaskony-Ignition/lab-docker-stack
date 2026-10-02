@@ -1,0 +1,130 @@
+{
+  "custom": {},
+  "params": {
+    "row": {}
+  },
+  "propConfig": {
+    "params.row": {
+      "paramDirection": "input"
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 22,
+      "width": 700
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "demo"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.style.classes": {
+            "binding": {
+              "config": {
+                "expression": "{session.custom.style} + '/status/badge-alarm'"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.row.demo}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "fontSize": "11px",
+            "lineHeight": 1.4,
+            "padding": "1px 7px",
+            "whiteSpace": "nowrap"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "what"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.row.what}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "fontSize": "12px",
+            "lineHeight": 1.4
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "fix"
+        },
+        "position": {
+          "shrink": 1
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.row.fix} != ''"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "'fix: ' + {view.params.row.fix}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "fontFamily": "monospace",
+            "fontSize": "11.5px",
+            "lineHeight": 1.4,
+            "opacity": 0.75
+          }
+        },
+        "type": "ia.display.label"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "alignItems": "center",
+      "direction": "row",
+      "style": {
+        "gap": "8px",
+        "height": "100%",
+        "width": "100%"
+      },
+      "wrap": "wrap"
+    },
+    "type": "ia.container.flex"
+  }
+}

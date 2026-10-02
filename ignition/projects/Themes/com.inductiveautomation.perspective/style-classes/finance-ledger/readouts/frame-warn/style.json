@@ -1,0 +1,9 @@
+{
+  "base": {
+    "style": {
+      "backgroundColor": "#f7ecdc",
+      "borderRadius": "3px",
+      "padding": "8px 10px"
+    }
+  }
+}

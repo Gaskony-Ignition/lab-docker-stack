@@ -1,0 +1,18 @@
+{
+  "base": {
+    "style": {
+      "backgroundColor": "#c23b3b",
+      "color": "#ffffff",
+      "borderWidth": "1px",
+      "borderStyle": "solid",
+      "borderColor": "transparent",
+      "borderRadius": "0",
+      "padding": "7px 14px",
+      "fontFamily": "Georgia, \"Source Serif Pro\", \"Source Serif 4\", serif",
+      "fontSize": "13px",
+      "fontWeight": "600",
+      "whiteSpace": "nowrap",
+      "cursor": "pointer"
+    }
+  }
+}

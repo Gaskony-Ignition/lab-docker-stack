@@ -1,0 +1,114 @@
+name: validate
+
+# Runs on every push and pull request. The work machine is where these files
+# actually execute, and a typo that only shows up there costs a round trip
+# through git -- so everything checkable from the file tree alone is checked
+# here first.
+#
+# No Docker, no gateway, no secrets. Deliberately: the work machine is not
+# reachable from GitHub and nothing in this repo should need it to be.
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      # A plain checkout is now the whole story. There are no submodules: the
+      # style template was one until 25/08/2026, and being PRIVATE it could not
+      # be cloned by a workflow's GITHUB_TOKEN at all (git reports that as
+      # "Repository not found", which reads like a deleted repo rather than a
+      # permission, and failed every push at checkout before a single check ran).
+      - uses: actions/checkout@v5
+
+      # NO SUBMODULE STEP, and that is the change worth noticing here.
+      #
+      # This job used to clone a PRIVATE styles-template with a SUBMODULE_TOKEN
+      # secret, and without that secret four checks were reported NOT RUN on
+      # every push -- so CI was permanently a weaker gate than a laptop. The
+      # look-and-feel is vendored now (ignition/themes and the Themes project),
+      # so every check runs here, and a green CI means the same thing it means
+      # locally.
+
+      - name: No secrets in the tree
+        # First, because everything else is moot if a password has been
+        # committed. Scans what git tracks, not what happens to be on disk.
+        run: scripts/check-secrets.sh
+
+      - name: Ignition projects and Compose stacks
+        # Project JSON parses, resource manifests match the files on disk,
+        # inheritance graph is valid and acyclic, every page route resolves to a
+        # view that exists, no committed lastModificationSignature, and every
+        # ${VAR} a compose file interpolates is declared in its .env.example.
+        run: python3 scripts/validate.py
+
+      - name: Compose files are valid
+        # `docker compose config` needs the variables to exist, so render the
+        # examples into place first. These are templates with placeholder
+        # values -- nothing here is a real credential.
+        #
+        # Guarded because these same lines get copy-pasted to reproduce a CI
+        # failure locally, where they would overwrite real .env files holding
+        # live gateway and database passwords. CI is always a fresh checkout,
+        # so the guard never trips there.
+        run: |
+          if [ -z "${CI:-}" ]; then
+            echo "Refusing to run outside CI: this overwrites stacks/*/.env." >&2
+            echo "To check compose files locally: make validate" >&2
+            exit 1
+          fi
+          for ex in stacks/*/.env.example; do
+            sed -e 's/__GEN__/placeholder-not-a-real-password/' \
+                -e 's/__SET__/placeholder@example.test/' "$ex" > "${ex%.example}"
+          done
+          # wd-control declares WD_REPO_HOST with `:?`, on purpose: inside the
+          # toolbox the repo is /work, a path the Docker daemon has never heard
+          # of, and the alternative to failing loudly is compose silently
+          # mounting an empty directory. scripts/lib.sh computes it at run time,
+          # and `docker compose config` here has no such caller -- so CI has to
+          # supply one, exactly as it supplies placeholder passwords above.
+          # Nothing is started, so the value only has to exist.
+          export WD_REPO_HOST="$GITHUB_WORKSPACE"
+          docker network create backbone >/dev/null 2>&1 || true
+          failed=0
+          err="$(mktemp)"
+          for d in stacks/*/; do
+            if ! (cd "$d" && docker compose config) >/dev/null 2>"$err"; then
+              echo "::error file=${d}compose.yaml::$(tr '\n' ' ' < "$err")"
+              failed=1
+            fi
+          done
+          exit $failed
+
+      - name: Python parses
+        # scripts/ and control/ are real Python 3 and run on this machine,
+        # in the toolbox and in the demo console's control plane -- a syntax
+        # error there is a stack that will not start, and nothing else in CI
+        # would notice.
+        #
+        # ignition/projects/ is EXCLUDED, and by PATH rather than by trying and
+        # tolerating failure. Those files are Jython 2. It used to be safe to
+        # assume python3 would simply refuse them, but 3.14 accepts
+        # `except (A, B), e:` under PEP 758 -- as an except GROUP of three
+        # types, not a bind -- so parsing them now succeeds while meaning
+        # something entirely different. A check that "passes" on those files is
+        # worse than no check.
+        run: |
+          failed=0
+          while IFS= read -r f; do
+            python3 -m py_compile "$f" \
+              || { echo "::error file=$f::syntax error"; failed=1; }
+          done < <(find scripts control -name '*.py' -not -path '*/__pycache__/*')
+          exit $failed
+
+      - name: Shell scripts parse
+        run: |
+          failed=0
+          for f in scripts/*.sh stacks/*/*.sh; do
+            bash -n "$f" || { echo "::error file=$f::syntax error"; failed=1; }
+          done
+          exit $failed

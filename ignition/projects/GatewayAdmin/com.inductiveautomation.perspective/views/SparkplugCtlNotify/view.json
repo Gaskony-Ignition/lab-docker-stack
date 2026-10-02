@@ -1,0 +1,264 @@
+{
+  "custom": {
+    "c": {
+      "ready": false,
+      "can": {}
+    }
+  },
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "width": 232,
+      "height": 60
+    }
+  },
+  "root": {
+    "type": "ia.container.flex",
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "gap": "4px",
+        "width": "100%",
+        "paddingTop": "2px"
+      }
+    },
+    "position": {
+      "shrink": 0
+    },
+    "children": [
+      {
+        "type": "ia.container.flex",
+        "meta": {
+          "name": "heads"
+        },
+        "props": {
+          "direction": "row",
+          "style": {
+            "gap": "4px",
+            "width": "100%",
+            "height": "14px"
+          }
+        },
+        "position": {
+          "shrink": 0
+        },
+        "children": [
+          {
+            "type": "ia.display.label",
+            "meta": {
+              "name": "h3"
+            },
+            "props": {
+              "text": "EDGE 3",
+              "style": {
+                "lineHeight": "1.35",
+                "whiteSpace": "nowrap",
+                "fontSize": "10px",
+                "fontWeight": "600",
+                "letterSpacing": "0.06em",
+                "opacity": "0.7",
+                "textAlign": "center",
+                "justifyContent": "center"
+              }
+            },
+            "position": {
+              "basis": "0px",
+              "grow": 1,
+              "shrink": 1
+            }
+          },
+          {
+            "type": "ia.display.label",
+            "meta": {
+              "name": "h4"
+            },
+            "props": {
+              "text": "EDGE 4",
+              "style": {
+                "lineHeight": "1.35",
+                "whiteSpace": "nowrap",
+                "fontSize": "10px",
+                "fontWeight": "600",
+                "letterSpacing": "0.06em",
+                "opacity": "0.7",
+                "textAlign": "center",
+                "justifyContent": "center"
+              }
+            },
+            "position": {
+              "basis": "0px",
+              "grow": 1,
+              "shrink": 1
+            }
+          }
+        ]
+      },
+      {
+        "type": "ia.container.flex",
+        "meta": {
+          "name": "trip"
+        },
+        "props": {
+          "direction": "row",
+          "style": {
+            "gap": "4px",
+            "width": "100%"
+          }
+        },
+        "position": {
+          "shrink": 0
+        },
+        "children": [
+          {
+            "type": "ia.display.view",
+            "meta": {
+              "name": "trip0"
+            },
+            "props": {
+              "path": "RailButton",
+              "params": {
+                "key": "mqtt.note.trip0",
+                "action": "mqtt.note.trip0",
+                "icon": "material/warning",
+                "kind": "chip",
+                "quiet": true
+              },
+              "useDefaultViewHeight": false,
+              "useDefaultViewWidth": false,
+              "style": {
+                "width": "100%"
+              }
+            },
+            "position": {
+              "basis": "0px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "propConfig": {
+              "props.params.can": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{view.custom.c.can.trip0}"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "ia.display.view",
+            "meta": {
+              "name": "trip1"
+            },
+            "props": {
+              "path": "RailButton",
+              "params": {
+                "key": "mqtt.note.trip1",
+                "action": "mqtt.note.trip1",
+                "icon": "material/warning",
+                "kind": "chip",
+                "quiet": true
+              },
+              "useDefaultViewHeight": false,
+              "useDefaultViewWidth": false,
+              "style": {
+                "width": "100%"
+              }
+            },
+            "position": {
+              "basis": "0px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "propConfig": {
+              "props.params.can": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{view.custom.c.can.trip1}"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "note"
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "fontSize": "10px",
+            "lineHeight": 1.35,
+            "minWidth": "0",
+            "overflow": "hidden",
+            "textOverflow": "ellipsis",
+            "whiteSpace": "nowrap"
+          },
+          "tooltip": {
+            "enabled": true
+          }
+        },
+        "position": {
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if(indexOf({session.custom.acting}, 'mqtt.note.') = 0, {session.custom.actingWhat}, if(indexOf({session.custom.actKey}, 'mqtt.note.') = 0, {session.custom.actNote}, ''))"
+              }
+            }
+          },
+          "props.tooltip.text": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "if(indexOf({session.custom.acting}, 'mqtt.note.') = 0, {session.custom.actingWhat}, if(indexOf({session.custom.actKey}, 'mqtt.note.') = 0, {session.custom.actNote}, ''))"
+              }
+            }
+          },
+          "props.style.classes": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.style} + '/text/muted'"
+              }
+            }
+          },
+          "position.display": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.custom.c.ready} && if(indexOf({session.custom.acting}, 'mqtt.note.') = 0, {session.custom.actingWhat}, if(indexOf({session.custom.actKey}, 'mqtt.note.') = 0, {session.custom.actNote}, '')) != ''"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "propConfig": {
+    "custom.c": {
+      "binding": {
+        "type": "expr",
+        "config": {
+          "expression": "now(2000)"
+        },
+        "transforms": [
+          {
+            "type": "script",
+            "code": "\timport sparkplug_demo\n\treturn sparkplug_demo.ctl('notify')\n"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "base": {
+    "style": {
+      "backgroundColor": "rgba(192, 138, 74, 0.08)",
+      "color": "#dfae63",
+      "borderRadius": "6px",
+      "marginBottom": "1px",
+      "padding": "8px 10px",
+      "fontSize": "14px",
+      "fontWeight": "700",
+      "textDecoration": "none",
+      "boxShadow": "inset 3px 0 0 #c08a4a",
+      "cursor": "pointer"
+    }
+  }
+}

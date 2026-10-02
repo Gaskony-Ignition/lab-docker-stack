@@ -1,0 +1,11 @@
+{
+  "base": {
+    "style": {
+      "color": "#8a5a2b",
+      "fontSize": "11.5px",
+      "fontWeight": "700",
+      "letterSpacing": "0.02em",
+      "textTransform": "uppercase"
+    }
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "custom": {},
+  "params": {
+    "row": {
+      "version": "",
+      "summary": ""
+    }
+  },
+  "propConfig": {
+    "params.row": {
+      "paramDirection": "input"
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 20,
+      "width": 600
+    }
+  },
+  "root": {
+    "type": "ia.container.flex",
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "row",
+      "alignItems": "center",
+      "style": {
+        "gap": "10px",
+        "minWidth": "0",
+        "width": "100%"
+      }
+    },
+    "children": [
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "version"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "fontSize": "11px",
+            "fontWeight": "600",
+            "lineHeight": 1.4,
+            "whiteSpace": "nowrap"
+          }
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.params.row.version}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "meta": {
+          "name": "summary"
+        },
+        "position": {
+          "basis": "0px",
+          "grow": 1,
+          "shrink": 1
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "fontSize": "11px",
+            "lineHeight": 1.4,
+            "minWidth": "0",
+            "overflow": "hidden",
+            "textOverflow": "ellipsis",
+            "whiteSpace": "nowrap"
+          }
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.params.row.summary}"
+              }
+            }
+          },
+          "props.style.classes": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{session.custom.style} + '/text/muted'"
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

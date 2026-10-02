@@ -1,0 +1,1059 @@
+{
+  "custom": {
+    "d": {
+      "headline": "",
+      "banner": "sp-banner sp-banner--neutral",
+      "ready": false,
+      "e0": {
+        "sub": "",
+        "members": [],
+        "height": "182px"
+      },
+      "e1": {
+        "sub": "",
+        "members": [],
+        "height": "182px"
+      },
+      "cloud": {
+        "sub": "",
+        "members": [],
+        "height": "182px"
+      },
+      "drift": []
+    }
+  },
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "width": 1200,
+      "height": 400
+    }
+  },
+  "root": {
+    "type": "ia.container.flex",
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "height": "100%",
+        "width": "100%",
+        "gap": "8px",
+        "overflow": "hidden",
+        "paddingBottom": "4px",
+        "boxSizing": "border-box"
+      }
+    },
+    "position": {
+      "basis": "auto",
+      "shrink": 0
+    },
+    "children": [
+      {
+        "type": "ia.container.flex",
+        "meta": {
+          "name": "tryWatch"
+        },
+        "props": {
+          "direction": "row",
+          "style": {
+            "gap": "8px",
+            "classes": "sp-try"
+          },
+          "alignItems": "center"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "children": [
+          {
+            "type": "ia.display.label",
+            "meta": {
+              "name": "tryText",
+              "tooltip": {
+                "enabled": true
+              }
+            },
+            "props": {
+              "text": "Diverge Edge 4: the cloud keeps the first layout it saw; the drift check names it, v2 fixes it.",
+              "style": {
+                "lineHeight": "1.35",
+                "whiteSpace": "nowrap",
+                "minWidth": "0",
+                "classes": "sp-ellipsis"
+              }
+            },
+            "position": {
+              "basis": "0px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "propConfig": {
+              "meta.tooltip.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "'Diverge Edge 4: the cloud keeps the first layout it saw; the drift check names it, v2 fixes it.'"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "type": "ia.container.flex",
+        "meta": {
+          "name": "banner"
+        },
+        "props": {
+          "direction": "row",
+          "style": {
+            "gap": "12px"
+          },
+          "alignItems": "center"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.style.classes": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.custom.d.banner}"
+              }
+            }
+          }
+        },
+        "children": [
+          {
+            "type": "ia.display.label",
+            "meta": {
+              "name": "headline"
+            },
+            "props": {
+              "text": "",
+              "style": {
+                "lineHeight": "1.35",
+                "whiteSpace": "normal",
+                "minWidth": "0",
+                "fontSize": "13px"
+              }
+            },
+            "position": {
+              "basis": "0px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{view.custom.d.headline}"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "type": "ia.container.flex",
+        "meta": {
+          "name": "cols"
+        },
+        "props": {
+          "direction": "row",
+          "style": {
+            "gap": "12px",
+            "minHeight": "0"
+          },
+          "alignItems": "stretch"
+        },
+        "position": {
+          "basis": "0px",
+          "grow": 1,
+          "shrink": 1
+        },
+        "children": [
+          {
+            "type": "ia.container.flex",
+            "meta": {
+              "name": "edge3"
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "gap": "4px",
+                "minWidth": "0",
+                "overflow": "hidden",
+                "padding": "8px 14px",
+                "classes": "sp-card"
+              }
+            },
+            "position": {
+              "basis": "0px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "children": [
+              {
+                "type": "ia.container.flex",
+                "meta": {
+                  "name": "head"
+                },
+                "props": {
+                  "direction": "row",
+                  "style": {
+                    "gap": "10px"
+                  },
+                  "alignItems": "baseline"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "children": [
+                  {
+                    "type": "ia.display.label",
+                    "meta": {
+                      "name": "title"
+                    },
+                    "props": {
+                      "text": "Edge 3",
+                      "style": {
+                        "lineHeight": "1.35",
+                        "whiteSpace": "nowrap"
+                      }
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.style.classes": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{session.custom.style} + '/text/card-title'"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type": "ia.display.label",
+                    "meta": {
+                      "name": "sub",
+                      "tooltip": {
+                        "enabled": true
+                      }
+                    },
+                    "props": {
+                      "text": "",
+                      "style": {
+                        "lineHeight": "1.35",
+                        "whiteSpace": "nowrap",
+                        "minWidth": "0"
+                      }
+                    },
+                    "position": {
+                      "basis": "0px",
+                      "grow": 1,
+                      "shrink": 1
+                    },
+                    "propConfig": {
+                      "props.style.classes": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{session.custom.style} + '/text/muted' + ' sp-ellipsis'"
+                          }
+                        }
+                      },
+                      "props.text": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{view.custom.d.e0.sub}"
+                          }
+                        }
+                      },
+                      "meta.tooltip.text": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{view.custom.d.e0.sub}"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "ia.display.table",
+                "meta": {
+                  "name": "members"
+                },
+                "props": {
+                  "data": [],
+                  "columns": [
+                    {
+                      "field": "member",
+                      "header": {
+                        "title": "Tag",
+                        "justify": "left",
+                        "align": "center",
+                        "style": {}
+                      },
+                      "width": 5,
+                      "strictWidth": false,
+                      "justify": "left",
+                      "align": "center",
+                      "render": "string",
+                      "sortable": false,
+                      "resizable": false,
+                      "editable": false,
+                      "visible": true,
+                      "style": {
+                        "whiteSpace": "nowrap",
+                        "overflow": "hidden",
+                        "textOverflow": "ellipsis",
+                        "padding": "0 8px"
+                      }
+                    },
+                    {
+                      "field": "type",
+                      "header": {
+                        "title": "Type",
+                        "justify": "left",
+                        "align": "center",
+                        "style": {}
+                      },
+                      "width": 2,
+                      "strictWidth": false,
+                      "justify": "left",
+                      "align": "center",
+                      "render": "string",
+                      "sortable": false,
+                      "resizable": false,
+                      "editable": false,
+                      "visible": true,
+                      "style": {
+                        "whiteSpace": "nowrap",
+                        "overflow": "hidden",
+                        "textOverflow": "ellipsis",
+                        "padding": "0 8px"
+                      }
+                    },
+                    {
+                      "field": "note",
+                      "header": {
+                        "title": "Notes",
+                        "justify": "left",
+                        "align": "center",
+                        "style": {}
+                      },
+                      "width": 3,
+                      "strictWidth": false,
+                      "justify": "left",
+                      "align": "center",
+                      "render": "string",
+                      "sortable": false,
+                      "resizable": false,
+                      "editable": false,
+                      "visible": true,
+                      "style": {
+                        "whiteSpace": "nowrap",
+                        "overflow": "hidden",
+                        "textOverflow": "ellipsis",
+                        "padding": "0 8px"
+                      }
+                    }
+                  ],
+                  "virtualized": true,
+                  "pager": {
+                    "top": false,
+                    "bottom": false
+                  },
+                  "selection": {
+                    "enableRowSelection": false,
+                    "enableColumnSelection": false
+                  },
+                  "rows": {
+                    "height": 20,
+                    "striped": {
+                      "enabled": false
+                    },
+                    "highlight": {
+                      "enabled": false
+                    }
+                  },
+                  "emptyMessage": {
+                    "noData": {
+                      "text": "Nothing yet"
+                    }
+                  },
+                  "enableHeader": false,
+                  "headerStyle": {
+                    "paddingLeft": "8px"
+                  },
+                  "style": {
+                    "classes": "sp-table"
+                  }
+                },
+                "position": {
+                  "basis": "182px",
+                  "grow": 1,
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.data": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{view.custom.d.e0.members}"
+                      }
+                    }
+                  },
+                  "position.basis": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{view.custom.d.e0.height}"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "type": "ia.container.flex",
+            "meta": {
+              "name": "edge4"
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "gap": "4px",
+                "minWidth": "0",
+                "overflow": "hidden",
+                "padding": "8px 14px",
+                "classes": "sp-card"
+              }
+            },
+            "position": {
+              "basis": "0px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "children": [
+              {
+                "type": "ia.container.flex",
+                "meta": {
+                  "name": "head"
+                },
+                "props": {
+                  "direction": "row",
+                  "style": {
+                    "gap": "10px"
+                  },
+                  "alignItems": "baseline"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "children": [
+                  {
+                    "type": "ia.display.label",
+                    "meta": {
+                      "name": "title"
+                    },
+                    "props": {
+                      "text": "Edge 4",
+                      "style": {
+                        "lineHeight": "1.35",
+                        "whiteSpace": "nowrap"
+                      }
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.style.classes": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{session.custom.style} + '/text/card-title'"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type": "ia.display.label",
+                    "meta": {
+                      "name": "sub",
+                      "tooltip": {
+                        "enabled": true
+                      }
+                    },
+                    "props": {
+                      "text": "",
+                      "style": {
+                        "lineHeight": "1.35",
+                        "whiteSpace": "nowrap",
+                        "minWidth": "0"
+                      }
+                    },
+                    "position": {
+                      "basis": "0px",
+                      "grow": 1,
+                      "shrink": 1
+                    },
+                    "propConfig": {
+                      "props.style.classes": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{session.custom.style} + '/text/muted' + ' sp-ellipsis'"
+                          }
+                        }
+                      },
+                      "props.text": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{view.custom.d.e1.sub}"
+                          }
+                        }
+                      },
+                      "meta.tooltip.text": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{view.custom.d.e1.sub}"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "ia.display.table",
+                "meta": {
+                  "name": "members"
+                },
+                "props": {
+                  "data": [],
+                  "columns": [
+                    {
+                      "field": "member",
+                      "header": {
+                        "title": "Tag",
+                        "justify": "left",
+                        "align": "center",
+                        "style": {}
+                      },
+                      "width": 5,
+                      "strictWidth": false,
+                      "justify": "left",
+                      "align": "center",
+                      "render": "string",
+                      "sortable": false,
+                      "resizable": false,
+                      "editable": false,
+                      "visible": true,
+                      "style": {
+                        "whiteSpace": "nowrap",
+                        "overflow": "hidden",
+                        "textOverflow": "ellipsis",
+                        "padding": "0 8px"
+                      }
+                    },
+                    {
+                      "field": "type",
+                      "header": {
+                        "title": "Type",
+                        "justify": "left",
+                        "align": "center",
+                        "style": {}
+                      },
+                      "width": 2,
+                      "strictWidth": false,
+                      "justify": "left",
+                      "align": "center",
+                      "render": "string",
+                      "sortable": false,
+                      "resizable": false,
+                      "editable": false,
+                      "visible": true,
+                      "style": {
+                        "whiteSpace": "nowrap",
+                        "overflow": "hidden",
+                        "textOverflow": "ellipsis",
+                        "padding": "0 8px"
+                      }
+                    },
+                    {
+                      "field": "note",
+                      "header": {
+                        "title": "Notes",
+                        "justify": "left",
+                        "align": "center",
+                        "style": {}
+                      },
+                      "width": 3,
+                      "strictWidth": false,
+                      "justify": "left",
+                      "align": "center",
+                      "render": "string",
+                      "sortable": false,
+                      "resizable": false,
+                      "editable": false,
+                      "visible": true,
+                      "style": {
+                        "whiteSpace": "nowrap",
+                        "overflow": "hidden",
+                        "textOverflow": "ellipsis",
+                        "padding": "0 8px"
+                      }
+                    }
+                  ],
+                  "virtualized": true,
+                  "pager": {
+                    "top": false,
+                    "bottom": false
+                  },
+                  "selection": {
+                    "enableRowSelection": false,
+                    "enableColumnSelection": false
+                  },
+                  "rows": {
+                    "height": 20,
+                    "striped": {
+                      "enabled": false
+                    },
+                    "highlight": {
+                      "enabled": false
+                    }
+                  },
+                  "emptyMessage": {
+                    "noData": {
+                      "text": "Nothing yet"
+                    }
+                  },
+                  "enableHeader": false,
+                  "headerStyle": {
+                    "paddingLeft": "8px"
+                  },
+                  "style": {
+                    "classes": "sp-table"
+                  }
+                },
+                "position": {
+                  "basis": "182px",
+                  "grow": 1,
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.data": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{view.custom.d.e1.members}"
+                      }
+                    }
+                  },
+                  "position.basis": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{view.custom.d.e1.height}"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "type": "ia.container.flex",
+            "meta": {
+              "name": "cloud"
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "gap": "4px",
+                "minWidth": "0",
+                "overflow": "hidden",
+                "padding": "8px 14px",
+                "classes": "sp-card"
+              }
+            },
+            "position": {
+              "basis": "0px",
+              "grow": 1,
+              "shrink": 1
+            },
+            "children": [
+              {
+                "type": "ia.container.flex",
+                "meta": {
+                  "name": "head"
+                },
+                "props": {
+                  "direction": "row",
+                  "style": {
+                    "gap": "10px"
+                  },
+                  "alignItems": "baseline"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "children": [
+                  {
+                    "type": "ia.display.label",
+                    "meta": {
+                      "name": "title"
+                    },
+                    "props": {
+                      "text": "The cloud's templates",
+                      "style": {
+                        "lineHeight": "1.35",
+                        "whiteSpace": "nowrap"
+                      }
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.style.classes": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{session.custom.style} + '/text/card-title'"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type": "ia.display.label",
+                    "meta": {
+                      "name": "sub",
+                      "tooltip": {
+                        "enabled": true
+                      }
+                    },
+                    "props": {
+                      "text": "",
+                      "style": {
+                        "lineHeight": "1.35",
+                        "whiteSpace": "nowrap",
+                        "minWidth": "0"
+                      }
+                    },
+                    "position": {
+                      "basis": "0px",
+                      "grow": 1,
+                      "shrink": 1
+                    },
+                    "propConfig": {
+                      "props.style.classes": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{session.custom.style} + '/text/muted' + ' sp-ellipsis'"
+                          }
+                        }
+                      },
+                      "props.text": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{view.custom.d.cloud.sub}"
+                          }
+                        }
+                      },
+                      "meta.tooltip.text": {
+                        "binding": {
+                          "type": "expr",
+                          "config": {
+                            "expression": "{view.custom.d.cloud.sub}"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "ia.display.table",
+                "meta": {
+                  "name": "members"
+                },
+                "props": {
+                  "data": [],
+                  "columns": [
+                    {
+                      "field": "member",
+                      "header": {
+                        "title": "Tag",
+                        "justify": "left",
+                        "align": "center",
+                        "style": {}
+                      },
+                      "width": 3,
+                      "strictWidth": false,
+                      "justify": "left",
+                      "align": "center",
+                      "render": "string",
+                      "sortable": false,
+                      "resizable": false,
+                      "editable": false,
+                      "visible": true,
+                      "style": {
+                        "whiteSpace": "nowrap",
+                        "overflow": "hidden",
+                        "textOverflow": "ellipsis",
+                        "padding": "0 8px"
+                      }
+                    },
+                    {
+                      "field": "note",
+                      "header": {
+                        "title": "Held in",
+                        "justify": "left",
+                        "align": "center",
+                        "style": {}
+                      },
+                      "width": 4,
+                      "strictWidth": false,
+                      "justify": "left",
+                      "align": "center",
+                      "render": "string",
+                      "sortable": false,
+                      "resizable": false,
+                      "editable": false,
+                      "visible": true,
+                      "style": {
+                        "whiteSpace": "nowrap",
+                        "overflow": "hidden",
+                        "textOverflow": "ellipsis",
+                        "padding": "0 8px"
+                      }
+                    }
+                  ],
+                  "virtualized": true,
+                  "pager": {
+                    "top": false,
+                    "bottom": false
+                  },
+                  "selection": {
+                    "enableRowSelection": false,
+                    "enableColumnSelection": false
+                  },
+                  "rows": {
+                    "height": 20,
+                    "striped": {
+                      "enabled": false
+                    },
+                    "highlight": {
+                      "enabled": false
+                    }
+                  },
+                  "emptyMessage": {
+                    "noData": {
+                      "text": "Nothing yet"
+                    }
+                  },
+                  "enableHeader": false,
+                  "headerStyle": {
+                    "paddingLeft": "8px"
+                  },
+                  "style": {
+                    "classes": "sp-table"
+                  }
+                },
+                "position": {
+                  "basis": "182px",
+                  "grow": 1,
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.data": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{view.custom.d.cloud.members}"
+                      }
+                    }
+                  },
+                  "position.basis": {
+                    "binding": {
+                      "type": "expr",
+                      "config": {
+                        "expression": "{view.custom.d.cloud.height}"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "ia.container.flex",
+        "meta": {
+          "name": "driftCard"
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "gap": "4px",
+            "minWidth": "0",
+            "overflow": "hidden",
+            "padding": "8px 14px",
+            "minHeight": "0",
+            "classes": "sp-card"
+          }
+        },
+        "position": {
+          "basis": "auto",
+          "grow": 0,
+          "shrink": 0
+        },
+        "children": [
+          {
+            "type": "ia.display.table",
+            "meta": {
+              "name": "drift"
+            },
+            "props": {
+              "data": [],
+              "columns": [
+                {
+                  "field": "edge",
+                  "header": {
+                    "title": "Edge",
+                    "justify": "left",
+                    "align": "center",
+                    "style": {}
+                  },
+                  "width": 100,
+                  "strictWidth": true,
+                  "justify": "left",
+                  "align": "center",
+                  "render": "string",
+                  "sortable": false,
+                  "resizable": false,
+                  "editable": false,
+                  "visible": true,
+                  "style": {
+                    "whiteSpace": "nowrap",
+                    "overflow": "hidden",
+                    "textOverflow": "ellipsis",
+                    "padding": "0 8px"
+                  }
+                },
+                {
+                  "field": "drift",
+                  "header": {
+                    "title": "Drift check",
+                    "justify": "left",
+                    "align": "center",
+                    "style": {}
+                  },
+                  "width": 1,
+                  "strictWidth": false,
+                  "justify": "left",
+                  "align": "center",
+                  "render": "string",
+                  "sortable": false,
+                  "resizable": false,
+                  "editable": false,
+                  "visible": true,
+                  "style": {
+                    "whiteSpace": "nowrap",
+                    "overflow": "hidden",
+                    "textOverflow": "ellipsis",
+                    "padding": "0 8px"
+                  }
+                }
+              ],
+              "virtualized": true,
+              "pager": {
+                "top": false,
+                "bottom": false
+              },
+              "selection": {
+                "enableRowSelection": false,
+                "enableColumnSelection": false
+              },
+              "rows": {
+                "height": 22,
+                "striped": {
+                  "enabled": false
+                },
+                "highlight": {
+                  "enabled": false
+                }
+              },
+              "emptyMessage": {
+                "noData": {
+                  "text": "Nothing yet"
+                }
+              },
+              "enableHeader": true,
+              "headerStyle": {
+                "paddingLeft": "8px"
+              },
+              "style": {
+                "classes": "sp-table"
+              }
+            },
+            "position": {
+              "basis": "78px",
+              "grow": 0,
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.data": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{view.custom.d.drift}"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "propConfig": {
+    "custom.d": {
+      "binding": {
+        "type": "expr",
+        "config": {
+          "expression": "now(3000)"
+        },
+        "transforms": [
+          {
+            "type": "script",
+            "code": "\timport sparkplug_demo\n\treturn sparkplug_demo.page_udt()\n"
+          }
+        ]
+      }
+    }
+  }
+}

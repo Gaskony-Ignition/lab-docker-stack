@@ -1,0 +1,27 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "width": 232,
+      "height": 1
+    }
+  },
+  "root": {
+    "type": "ia.container.flex",
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "gap": "0px",
+        "width": "100%"
+      }
+    },
+    "position": {
+      "shrink": 0
+    },
+    "children": []
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "base": {
+    "style": {
+      "backgroundColor": "#8b5cf6",
+      "backgroundImage": "linear-gradient(90deg, #8b5cf6, #38bdf8)",
+      "borderRadius": "999px"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "base": {
+    "style": {
+      "backgroundColor": "#211f1c",
+      "color": "#e8e2d6",
+      "fontFamily": "Georgia, \"Source Serif Pro\", \"Source Serif 4\", serif",
+      "fontSize": "13.5px",
+      "overflow": "hidden"
+    }
+  }
+}

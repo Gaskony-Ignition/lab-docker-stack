@@ -1,0 +1,22 @@
+{
+  "base": {
+    "style": {
+      "color": "#3b4252",
+      "borderRadius": "8px",
+      "marginBottom": "1px",
+      "padding": "8px 10px",
+      "fontSize": "13.5px",
+      "fontWeight": "500",
+      "textDecoration": "none",
+      "cursor": "pointer"
+    }
+  },
+  "variants": [
+    {
+      "pseudo": "hover",
+      "style": {
+        "backgroundColor": "#ecf0f5"
+      }
+    }
+  ]
+}

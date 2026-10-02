@@ -1,0 +1,86 @@
+{
+  "custom": {},
+  "params": {
+    "link": {}
+  },
+  "propConfig": {
+    "params.link": {
+      "paramDirection": "input"
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 26,
+      "width": 118
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "open"
+        },
+        "position": {
+          "basis": "0px",
+          "grow": 1,
+          "shrink": 1
+        },
+        "propConfig": {
+          "props.style.classes": {
+            "binding": {
+              "config": {
+                "expression": "{session.custom.style} + '/buttons/chip'"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.link.label} + ' ↗'"
+              },
+              "type": "expr"
+            }
+          },
+          "props.url": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.link.url}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "rel": "noopener",
+          "style": {
+            "alignItems": "center",
+            "display": "flex",
+            "fontSize": "11px",
+            "height": "26px",
+            "justifyContent": "center",
+            "minHeight": "26px",
+            "padding": "0 4px",
+            "textDecoration": "none",
+            "whiteSpace": "nowrap",
+            "width": "100%"
+          },
+          "target": "blank"
+        },
+        "type": "ia.navigation.link"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "alignItems": "stretch",
+      "direction": "row",
+      "style": {
+        "gap": "0px",
+        "width": "100%"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "base": {
+    "style": {
+      "backgroundColor": "transparent",
+      "padding": "22px",
+      "overflow": "auto"
+    }
+  }
+}

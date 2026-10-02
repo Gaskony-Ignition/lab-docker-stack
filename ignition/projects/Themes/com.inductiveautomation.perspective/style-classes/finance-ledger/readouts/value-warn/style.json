@@ -1,0 +1,11 @@
+{
+  "base": {
+    "style": {
+      "color": "#a85b00",
+      "fontFamily": "Georgia, \"Times New Roman\", \"Segoe UI\", ui-serif, serif",
+      "fontSize": "20px",
+      "fontWeight": "700",
+      "fontVariantNumeric": "tabular-nums"
+    }
+  }
+}

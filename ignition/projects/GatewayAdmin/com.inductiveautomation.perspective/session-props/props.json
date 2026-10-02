@@ -1,0 +1,111 @@
+{
+  "custom": {
+    "actId": "",
+    "actKey": "",
+    "actNote": "",
+    "acting": "",
+    "actingWhat": "",
+    "archGrid": true,
+    "archHandles": false,
+    "archImport": "",
+    "archReadOnly": false,
+    "archSnap": true,
+    "armKey": "",
+    "demoBusy": "",
+    "ignPick": "",
+    "mqttSetpoint": 50,
+    "redRecovery": "Automatic",
+    "sfCutSeconds": 60,
+    "status": "Ready.",
+    "styleOverride": ""
+  },
+  "propConfig": {
+    "custom.style": {
+      "binding": {
+        "config": {
+          "expression": "if({session.custom.styleOverride} = '', runScript('demo_styles.chosen_pack()', 5000), {session.custom.styleOverride})"
+        },
+        "type": "expr"
+      }
+    },
+    "props.auth": {
+      "access": "PRIVATE",
+      "persistent": false
+    },
+    "props.device.accelerometer": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.device.identifier": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.device.timezone": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.device.type": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.device.userAgent": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.gateway": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.geolocation.data": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.geolocation.permissionGranted": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.host": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.id": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.lastActivity": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.offline.capable": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.offline.enabled": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.offline.lastSynced": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.theme": {
+      "binding": {
+        "config": {
+          "expression": "{session.custom.style}"
+        },
+        "type": "expr"
+      }
+    }
+  },
+  "props": {
+    "address": "172.17.0.1",
+    "appBar": {
+      "togglePosition": "hidden"
+    },
+    "device": {},
+    "geolocation": {},
+    "locale": "en-US",
+    "offline": {},
+    "timeZoneId": "Etc/UTC"
+  }
+}
