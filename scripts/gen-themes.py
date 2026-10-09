@@ -55,7 +55,7 @@ Verified before any of this was written, because each one could have killed it:
 REGENERATING NEEDS TWO UPSTREAM CHECKOUTS; USING THIS REPO NEEDS NEITHER.
 
     python3 scripts/gen-themes.py \
-        --themes  <checkout of ignition-themes>              (the gateway themes)
+        --themes  <checkout of toolbox-theme-manager>        (the gateway themes)
         --classes <checkout of ignition-styles-template-v2>  (the style classes)
 
 Two, because the themes were promoted into their own repo on 26/08/2026 and the
@@ -642,7 +642,8 @@ def write_json(path, doc):
 # `die` about a missing out/themes.json, which is why the message names both
 # layouts rather than just the path it wanted.
 THEMES_LAYOUTS = [
-    ("out",),                            # ignition-themes (current)
+    ("tools", "themes", "out"),          # toolbox-theme-manager (current)
+    ("out",),                            # ignition-themes (archived 09/10/2026)
     ("experiments", "themes", "out"),    # styles-v2 before the split
 ]
 
@@ -659,7 +660,8 @@ def find_themes_out(root):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--themes", required=True, metavar="DIR",
-                    help="a checkout of ignition-themes (tag v1.1.0 or later)")
+                    help="a checkout of toolbox-theme-manager, or of the archived "
+                         "ignition-themes (tag v1.1.0 or later)")
     ap.add_argument("--classes", required=True, metavar="DIR",
                     help="a checkout of ignition-styles-template-v2 "
                          "(the style classes did not move)")
@@ -671,9 +673,9 @@ def main():
     themes_src = find_themes_out(themes_root)
     if themes_src is None:
         die("no built themes under %s\n"
-            "     Looked for out/themes.json and experiments/themes/out/themes.json.\n"
-            "     Since 26/08/2026 the themes live in their OWN repo:\n"
-            "         https://github.com/Gaskony-Ignition/ignition-themes\n"
+            "     Looked for tools/themes/out/, out/ and experiments/themes/out/themes.json.\n"
+            "     Since 09/10/2026 the themes are built in:\n"
+            "         https://github.com/Gaskony-Ignition/toolbox-theme-manager\n"
             "     --themes wants that one; --classes still wants "
             "ignition-styles-template-v2." % themes_root)
 

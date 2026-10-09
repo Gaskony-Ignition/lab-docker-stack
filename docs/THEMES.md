@@ -59,12 +59,18 @@ clone ever runs. A clone has everything already.
 
 ```bash
 python3 scripts/gen-themes.py \
-  --themes  <checkout of ignition-themes> \
+  --themes  <checkout of toolbox-theme-manager> \
   --classes <checkout of ignition-styles-template-v2>
 make validate
 make deploy PROJECT=Themes     # the style classes
 make themes                    # the gateway themes
 ```
+
+### Where the themes are built
+
+Since 09/10/2026 the ten themes are built in `Gaskony-Ignition/toolbox-theme-manager`
+(`tools/themes/`); `ignition-themes` is archived. `--themes` takes either
+checkout.
 
 ### Two repos, and only the themes moved (26/08/2026)
 
