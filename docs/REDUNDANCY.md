@@ -394,7 +394,7 @@ over deliberately.
 
 ## The proof: how fast, and was anything lost
 
-Nigel's two questions, 22/09/2026: how fast did the changeover happen, and was any
+The questions asked, 22/09/2026: how fast did the changeover happen, and was any
 data lost. Answered with a tag on the pair itself and a recorder outside it, using
 only the Redundancy demo's own stacks (core + `postgres` + `ignition-backup` +
 `ignition-ha`): no edges, no broker.

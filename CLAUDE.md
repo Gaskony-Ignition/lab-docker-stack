@@ -121,7 +121,7 @@ the count; and judge a step by its end state, not its exit code.
 
 ## Reference workspaces (read-only)
 
-- `/Home-Claude/ignition-claude-toolkit/plugins/ignition/knowledge/` — the
+- `plugins/ignition/knowledge/` in the toolkit checkout (IGNITION_TOOLKIT) — the
   accumulated Ignition reference: component quirks, binding gotchas, timer
   scripts, MQTT Engine, Postgres. Propose a new gotcha here via the
   `ignition:learn` skill rather than duplicating it in this repo.

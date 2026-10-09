@@ -10,7 +10,7 @@ install, nothing gateway-specific — are in
 
 ## Which repo, and which module
 
-Nigel's original link was
+The original link was
 [`ia-tgoetz/ReactFlowPerspectiveModule`](https://github.com/ia-tgoetz/ReactFlowPerspectiveModule).
 **The Architecture Builder is no longer in it** — that repo's README says it was
 split out, and it now ships only Database Schema, Hierarchy Chart and JSON

@@ -146,7 +146,7 @@ Docker daemon through the mounted socket, so `docker compose up` from inside
 starts containers *outside*, beside it. It joins `backbone` for the same reason
 the gateways address each other by container name: from in there the hub is
 `http://ignition:8088` on every machine, and the host port mappings — which
-differ per machine, and do on Nigel's VM — stop mattering entirely.
+differ per machine, and do on the dev VM — stop mattering entirely.
 
 ### Two addresses per gateway
 
@@ -340,7 +340,7 @@ new Ignition version, `scripts/modules.manifest` changes in the same commit.
 
 ## Running the scripts natively
 
-Still supported on Linux, and still how Nigel works day to day — the scripts are
+Still supported on Linux, and still how the maintainer works day to day — the scripts are
 unchanged, they just need node, python3, bash 4+ and a Playwright install on the
 host. `.gateways.env` carries `hosturl` for exactly this: without `WD_TOOLBOX=1`
 every script addresses the gateways by host port instead of container name.

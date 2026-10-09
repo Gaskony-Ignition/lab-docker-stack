@@ -31,8 +31,8 @@
 # unlicensed Edge grants zero Perspective sessions", supported by a controlled
 # experiment against two throwaway gateways -- which proved nothing, because
 # both inherited the same VISION default, so the thing being varied (the
-# EDITION) was never the thing that mattered. Nigel said flatly that Edge in
-# trial serves Perspective and that he had done it many times; he was right.
+# EDITION) was never the thing that mattered. it was said flatly that Edge in
+# trial serves Perspective and had been done many times; that was right.
 # Measured 31/08/2026: one PUT, no restart, and the edge rendered the full
 # dashboard, 122 components, zero errors.
 #

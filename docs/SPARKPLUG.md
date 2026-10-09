@@ -957,7 +957,7 @@ those windows.
 
 ## Notifications over MQTT (Phase C, 11/09/2026)
 
-Nigel's question: *what can we do about passing alarm pipeline notifications
+The question asked: *what can we do about passing alarm pipeline notifications
 via MQTT?* Everything below is measured on this stack.
 
 ### C1 -- pipelines on an Edge gateway

@@ -417,7 +417,7 @@ def try_line(text):
 
     It was two -- a "Do" line and a "Watch" line -- and on a 640px laptop the
     pair wrapped to four. One sentence, at most ~110 characters, is the budget
-    (Nigel, 21/09/2026: "succinct but clear"); the buttons it names are in the
+    (21/09/2026: "succinct but clear"); the buttons it names are in the
     rail, directly under the scenario list."""
     assert len(text) <= 112, (len(text), text)
     return flex("tryWatch", "row", [

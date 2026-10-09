@@ -7,9 +7,9 @@
 # before they ever reach a gateway.
 #
 # HOST ONLY, like release.sh: the toolkit's a11y-check.js lives outside this
-# repo (/Home-Claude/ignition-claude-toolkit on this machine), so it cannot be
-# a step inside the portable toolbox -- a clone on another machine has no such
-# path, same reason release.sh itself refuses to run in there.
+# repo (the checkout IGNITION_TOOLKIT points at), so it cannot be a step
+# inside the portable toolbox -- same reason release.sh itself refuses to run
+# in there.
 #
 # It checks RENDERED SOURCE, not a live wd-control: these pages return 503/502/
 # 404 by design (that is the whole point of them), and a11y-check.js treats any
@@ -22,14 +22,14 @@ set -euo pipefail
 
 if [ "${WD_TOOLBOX:-}" = "1" ]; then
   die "console-a11y runs on the HOST, not inside the toolbox.
-     The toolkit it checks against (/Home-Claude/ignition-claude-toolkit)
+     The toolkit it checks against (IGNITION_TOOLKIT)
      is not part of this repo and is not mounted in there -- same reason
      release.sh itself refuses to run in the toolbox.
 
          make console-a11y"
 fi
 
-TOOL="${A11Y_CHECK:-/Home-Claude/ignition-claude-toolkit/plugins/ignition/skills/verify-view/tool/a11y-check.js}"
+TOOL="${A11Y_CHECK:-${IGNITION_TOOLKIT:?set IGNITION_TOOLKIT to the ignition-claude-toolkit checkout}/plugins/ignition/skills/verify-view/tool/a11y-check.js}"
 [ -f "$TOOL" ] || die "a11y-check.js not found at $TOOL (set A11Y_CHECK)"
 
 WORK="$(mktemp -d)"; trap 'rm -rf "$WORK"' EXIT

@@ -40,7 +40,7 @@ RESOURCE = {
 }
 
 # One rail, one width, on all four tabs. Fixed, never grown: spare width is the
-# content's (Nigel, 21/09/2026), and a rail that widens with the window moves
+# content's (21/09/2026), and a rail that widens with the window moves
 # every measured list offset on the MQTT tab with it.
 RAIL_WIDTH = 260
 
@@ -100,7 +100,7 @@ def write(name, v):
 
 def build_group():
     """STATUS / CONTROLS / GATEWAYS. The small-caps heading Redundancy's rail
-    already used -- the visual reference Nigel pointed at."""
+    already used -- the visual reference that was pointed at."""
     root = comp("ia.display.label", "root",
                 {"text": "STATUS",
                  "style": {"fontSize": "10px", "fontWeight": "600",

@@ -5,7 +5,7 @@
 # credentials file serves it), plus this repo's own narrow exceptions.
 #
 # HOST ONLY, like release.sh and console-a11y.sh: the toolkit
-# (/Home-Claude/ignition-claude-toolkit) is not part of this repo and is not
+# (IGNITION_TOOLKIT) is not part of this repo and is not
 # mounted in the toolbox.
 #
 # It checks the LIVE gateways, unlike console-a11y.sh's rendered-from-source
@@ -24,7 +24,7 @@ if [ "${WD_TOOLBOX:-}" = "1" ]; then
          make perspective-a11y"
 fi
 
-TOOL="${A11Y_CHECK:-/Home-Claude/ignition-claude-toolkit/plugins/ignition/skills/verify-view/tool/a11y-check.js}"
+TOOL="${A11Y_CHECK:-${IGNITION_TOOLKIT:?set IGNITION_TOOLKIT to the ignition-claude-toolkit checkout}/plugins/ignition/skills/verify-view/tool/a11y-check.js}"
 [ -f "$TOOL" ] || die "a11y-check.js not found at $TOOL (set A11Y_CHECK)"
 
 CFG="$REPO_ROOT/a11y.json"

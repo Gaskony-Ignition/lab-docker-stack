@@ -1,6 +1,6 @@
 """Alarm notifications across an MQTT-only architecture -- the demo's second question.
 
-Nigel's question: "what can we do with regards to passing alarm pipeline
+The question asked: "what can we do with regards to passing alarm pipeline
 notifications via MQTT". An Edge gateway runs alarm notification pipelines
 like any other; what it cannot do is hand the notification to the cloud,
 because nothing but the broker connects them. So the edge's pipeline Script

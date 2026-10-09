@@ -307,7 +307,7 @@ def tab_state():
     running, on the grounds that a page of dashes reads as broken. It also made
     the console un-explorable: you could not look at what a demo shows before
     deciding to spend ten minutes and a gigabyte starting it, which is exactly
-    what somebody meeting the stack wants to do first (Nigel, 21/09/2026).
+    what somebody meeting the stack wants to do first (21/09/2026).
 
     `ready` is what the action buttons gate on, through `ready_note()`, and
     `reason` is the words -- on the header's tooltip, on the demo's card, and in
@@ -347,7 +347,7 @@ def tab_state():
         # stack another demo shares (postgres), not this demo starting.
         # Only for a demo somebody started: one that is up because another
         # demo's gateways cover it reads "Shared" on the Demos page, and a
-        # green dot beside it said it had been started (Nigel, 30/09/2026).
+        # green dot beside it said it had been started (30/09/2026).
         dot = {"running": "badge-ok", "starting": "badge-warn",
                "unhealthy": "badge-warn"}.get(live, "") if d.get("wanted") else ""
         out[key] = {"enabled": True, "ready": ready, "reason": why, "dot": dot}
