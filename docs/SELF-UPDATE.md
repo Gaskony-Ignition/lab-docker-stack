@@ -334,7 +334,7 @@ Host github.com
   IdentityFile ~/.ssh/wd_deploy
   IdentitiesOnly yes
 EOF
-git -C ~/Ignition-Demos-Stack remote set-url origin git@github.com:Gaskony-Ignition/demo-docker-stack.git
+git -C ~/Ignition-Demos-Stack remote set-url origin git@github.com:Gaskony-Ignition/lab-docker-stack.git
 ssh -T git@github.com          # expect: "...successfully authenticated..."
 ```
 

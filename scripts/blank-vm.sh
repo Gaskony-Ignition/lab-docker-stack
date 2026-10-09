@@ -34,7 +34,7 @@
 
 set -euo pipefail
 
-REPO_SLUG="${REPO_SLUG:-Gaskony-Ignition/demo-docker-stack}"
+REPO_SLUG="${REPO_SLUG:-Gaskony-Ignition/lab-docker-stack}"
 TARGET="${TARGET:-$HOME/Ignition-Demos-Stack}"
 
 # ---------------------------------------------------------------------------

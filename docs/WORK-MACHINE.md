@@ -13,7 +13,7 @@ The demo machine needs nothing but a git checkout and `make`.
 ## First-time setup
 
 ```bash
-git clone https://github.com/Gaskony-Ignition/demo-docker-stack.git ~/Ignition-Demos-Stack
+git clone https://github.com/Gaskony-Ignition/lab-docker-stack.git ~/Ignition-Demos-Stack
 cd ~/Ignition-Demos-Stack
 ```
 
